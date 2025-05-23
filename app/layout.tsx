@@ -9,6 +9,7 @@ import { fontVariables } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { Footer } from "@/components/footer";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -80,6 +81,7 @@ export default async function RootLayout({
             </main>
             <Footer />
             <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+            <Toaster />
           </ActiveThemeProvider>
         </ThemeProvider>
       </body>

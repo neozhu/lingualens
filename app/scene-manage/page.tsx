@@ -5,6 +5,7 @@ import { SCENES, Scene } from "@/lib/scenes"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "sonner"
 
 const LOCAL_KEY = "customScenes"
 
@@ -43,12 +44,16 @@ export default function SceneManagePage() {
     setScenes(next)
     setLocalScenes(next)
     setEditingIdx(null)
+    toast.success("场景已删除")
+    setForm({})
   }
 
   const handleReset = () => {
     setScenes(SCENES)
     setLocalScenes(SCENES)
     setEditingIdx(null)
+    toast.success("已重置为默认场景")
+    setForm({})
   }
 
   const handleChange = (key: keyof Scene, value: string) => {
@@ -60,8 +65,10 @@ export default function SceneManagePage() {
     let next = [...scenes]
     if (editingIdx !== null && editingIdx >= 0) {
       next[editingIdx] = form as Scene
+      toast.success("场景已更新")
     } else {
       next.push(form as Scene)
+      toast.success("场景已新增")
     }
     setScenes(next)
     setLocalScenes(next)
