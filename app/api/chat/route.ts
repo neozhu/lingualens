@@ -4,10 +4,6 @@ import { SCENES, Scene } from "@/lib/scenes";
 import { google } from '@ai-sdk/google'; // Import Google Gemini provider
 import { openai } from '@ai-sdk/openai';
 
-
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
-
 // const LLAMA_MODEL = "llama-3.3-70b-versatile"
 const QWEN_MODEL = "qwen-qwq-32b"
 const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20"

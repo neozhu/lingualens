@@ -228,21 +228,10 @@ export default function SceneManagePage() {
       }
 
       // Get the response as text - now it comes directly as a streamable response
-      let responseText = await response.text()
-      console.log("Generated prompt raw:", responseText)
-
-
-
-      // Handle escaped newlines and clean up the text
-      const cleanedText = responseText
-        .replace(/\\n/g, '\n')  // Replace escaped newlines with actual newlines
-        .replace(/\r\n/g, '\n') // Normalize line endings
-        .trim()
-
-      console.log("Final cleaned text for display:", cleanedText)
+      const responseText = await response.text()
 
       // Update the form with the generated prompt
-      setForm(prev => ({ ...prev, prompt: cleanedText }))
+      setForm(prev => ({ ...prev, prompt: responseText }))
       toast.success("已成功生成提示词")
     } catch (error) {
       console.error("Error generating prompt:", error)
