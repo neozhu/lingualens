@@ -8,6 +8,7 @@
 
 * **Bidirectional Translation**: Automatically translates Chinese to English and any non-Chinese language (e.g., English, French, German) to Chinese.
 * **Scene-based Context**: Tailors translations based on the context of specific work-related scenarios like online meetings, emails, Teams chats, and technical support.
+* **Custom Scene Management**: Create, edit, delete, and reorder your own custom translation scenes with a user-friendly interface. All custom scenes are saved in your browser's localStorage.
 * **Multilingual Support**: Currently supports translations between Chinese and several other languages, including English, French, German, etc.
 * **Customizable User Interface**: Easily switch between different scenes for translations, ensuring the tone and style fit the specific use case.
 * **User-Friendly Design**: Built with **Next.js** and **ShadCN UI**, making the interface simple and intuitive.
@@ -27,7 +28,8 @@
 
 1. **Language Detection**: The AI detects the language of the input text. If the input is in **Chinese**, it translates it into **English**. If the input is in any other language (e.g., **English**, **French**, **German**), it translates it into **Chinese**.
 2. **Scene Selection**: Users can select the translation scene (e.g., **Email**, **Online Meeting**, **Technical Support**). The AI adjusts the tone and formality of the translation based on the selected scene.
-3. **Real-Time Translation**: The translation process takes place in real-time, providing instant feedback for quick and accurate translations.
+3. **Custom Scene Creation**: Users can create their own custom translation scenes by clicking the "自定义场景" (Custom Scene) button and using the scene management interface.
+4. **Real-Time Translation**: The translation process takes place in real-time, providing instant feedback for quick and accurate translations.
 
 ## **Scenes**
 
@@ -142,9 +144,21 @@ Visit `http://localhost:4010` in your browser to access the app running in Docke
 
 ## **Usage**
 
-1. **Select a Scene**: Choose the context for the translation (e.g., **Online Meeting**, **Email**).
+1. **Select a Scene**: Choose the context for the translation (e.g., **Online Meeting**, **Email**) or create your own custom scenes.
 2. **Input Text**: Type or paste the text you want to translate in either **Chinese** or another language.
 3. **Receive Translation**: The AI will process the translation and output the result in the target language (English for Chinese input, or Chinese for other language inputs).
+
+## **Custom Scene Management**
+
+The new custom scene management feature allows you to:
+
+1. **Create Custom Scenes**: Create your own translation scenes with specific prompts, names, and descriptions.
+2. **Edit Existing Scenes**: Modify any custom scene to fine-tune the translation style and context.
+3. **Delete Scenes**: Remove any custom scenes you no longer need.
+4. **Reorder Scenes**: Drag and drop to reorder your scenes according to your preference.
+5. **Reset to Default**: Return to the default set of scenes at any time.
+
+All custom scenes are automatically saved in your browser's localStorage and will be available when you return to the application.
 
 ## **Contributing**
 

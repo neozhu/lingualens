@@ -34,11 +34,20 @@ export const metadata: Metadata = {
     url: 'https://lingualens.blazorserver.com',
     siteName: 'LinguaLens',
     type: 'website',
+    images: [
+      {
+        url: '/screen.png',
+        width: 1200,
+        height: 630,
+        alt: 'LinguaLens 翻译助手界面预览',
+      }
+    ],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'LinguaLens 翻译助手',
     description: '智能双向翻译助手，支持多场景风格切换',
+    images: ['/screen.png'],
   }
 };
 

@@ -125,12 +125,11 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
         isGenerating={status==="streaming"}
         stop={stop}
         append={append}
-        setMessages={setMessages}
-        transcribeAudio={transcribeAudio}
+        setMessages={setMessages}        transcribeAudio={transcribeAudio}
         suggestions={[
-          "你好，今天的会议在哪里举行？",
-          "Please confirm your availability for the upcoming meeting.",
-          "Können Sie mir bitte den Fehlercode senden?",
+          "生活就像一盒巧克力，你永远不知道下一颗是什么味道。",
+          "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+          "Das Leben ist wie ein Fahrrad. Man muss sich vorwärts bewegen, um das Gleichgewicht zu halten.",
         ]}
       />
         <SceneSelector 
