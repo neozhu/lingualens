@@ -83,10 +83,16 @@ Please create a translation prompt for the above scene that will guide an AI mod
         // Return a proper Response object with the streamable value
         // When working with streamableValue, we need to create a ReadableStream
         const encoder = new TextEncoder();
+        // Define a type for the streamable value
+        type StreamableValue = {
+            diff?: [number, string];
+            curr?: string;
+            next?: Promise<StreamableValue>;
+        };
         const stream = new ReadableStream({
             async start(controller) {
                 // Function to process the streamable value
-                const processStreamable = async (value: any) => {
+                const processStreamable = async (value: StreamableValue) => {
                     // If there's a diff property with a string to append
                     if (value.diff) {
                         controller.enqueue(encoder.encode(value.diff[1]));
@@ -95,7 +101,6 @@ Please create a translation prompt for the above scene that will guide an AI mod
                     else if (value.curr !== undefined) {
                         controller.enqueue(encoder.encode(value.curr));
                     }
-                    
                     // If there's more content coming, wait for it recursively
                     if (value.next) {
                         const nextValue = await value.next;
@@ -105,10 +110,9 @@ Please create a translation prompt for the above scene that will guide an AI mod
                         controller.close();
                     }
                 };
-                
                 // Start processing the streamable value
                 try {
-                    await processStreamable(streamablePrompt.value);
+                    await processStreamable(streamablePrompt.value as StreamableValue);
                 } catch (error) {
                     console.error('Error processing streamable value:', error);
                     controller.error(error);
