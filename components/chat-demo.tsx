@@ -12,23 +12,35 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { SCENES } from "@/lib/scenes";
+import { SCENES as DEFAULT_SCENES } from "@/lib/scenes";
 import { Message } from "@/components/ui/chat-message"
 import { Carousel, CarouselContent, CarouselItem,CarouselPrevious,CarouselNext  } from "@/components/ui/carousel"
 import { type CarouselApi } from "@/components/ui/carousel"
 import { Badge } from "@/components/ui/badge"
 import { MODELS } from "@/lib/models"
-
- 
+import { useRouter } from "next/navigation"
 
 type ChatDemoProps = {
   initialMessages?: UseChatOptions["initialMessages"]
 }
 
+function getCustomScenes() {
+  if (typeof window === "undefined") return null;
+  const raw = localStorage.getItem("customScenes");
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
 export default function ChatDemo(props: ChatDemoProps) {
+  const router = useRouter();
   const [api, setApi] = useState<CarouselApi>()
   const [selectedModel, setSelectedModel] = useState(MODELS[0].id)
-  const [selectedScene, setSelectedScene] = useState(SCENES[0].name);
+  const [scenes, setScenes] = useState(DEFAULT_SCENES);
+  const [selectedScene, setSelectedScene] = useState(scenes[0]?.name || "");
   const [count, setCount] = useState(0);
   const [current, setCurrent] = useState(0);
   useEffect(() => {
@@ -79,6 +91,24 @@ export default function ChatDemo(props: ChatDemoProps) {
     },
   })
 
+  // 初始化时和每次 scenes 变化时都尝试从 localStorage 读取自定义场景
+  useEffect(() => {
+    const custom = getCustomScenes();
+    setScenes(custom || DEFAULT_SCENES);
+  }, []);
+
+  // 监听页面可见性变化，自动刷新自定义场景
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        const custom = getCustomScenes();
+        setScenes(custom || DEFAULT_SCENES);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
+
   return (
     <div className={cn("flex","flex-col", "w-full")}>
       <div className={cn("flex", "justify-end", "mb-2")}>
@@ -123,16 +153,25 @@ export default function ChatDemo(props: ChatDemoProps) {
           dragFree:true
           }} className="w-full px-12 h-12 flex items-center">
           <CarouselContent className="-ml-1">
-          {SCENES.map((scene, idx) => (
+          {scenes.map((scene, idx) => (
             <CarouselItem key={idx} className="pl-3 basis-auto flex items-center" onClick={() => handleSceneClick(scene.name)} >
                <Badge variant={selectedScene === scene.name ? "default" : "secondary"} 
                       className="cursor-pointer counded-lg px-3 py-1 white-space-nowrap"
                >
                 {scene.name}
                </Badge>
-             
             </CarouselItem>
           ))}
+          {/* 新增自定义场景按钮 */}
+          <CarouselItem key="custom-scene" className="pl-3 basis-auto flex items-center">
+            <Badge
+              variant="outline"
+              className="cursor-pointer rounded-lg px-3 py-1 whitespace-nowrap border-dashed border-2"
+              onClick={() => window.location.href = '/scene-manage'}
+            >
+              自定义场景
+            </Badge>
+          </CarouselItem>
           </CarouselContent>
           <CarouselPrevious className="left-0 z-20" />
           <CarouselNext className="right-0 z-20"/>
