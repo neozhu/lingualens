@@ -1,6 +1,6 @@
 import { createGroq } from "@ai-sdk/groq"
 import { streamText  } from "ai"
-import { SCENES } from "@/lib/scenes";
+import { SCENES, Scene } from "@/lib/scenes";
 import { google } from '@ai-sdk/google'; // Import Google Gemini provider
 import { openai } from '@ai-sdk/openai';
 
@@ -28,9 +28,7 @@ const groq = createGroq({
   },
 })
 
-function createSystemPrompt(scene: string): string {
-  const sceneObj = SCENES.find((s) => s.name === scene);
-
+function createSystemPrompt(scene: Scene): string {
   // General translation instructions
   const baseInstructions = `
 You are a highly reliable, professional translation assistant. Always identify the primary language of the input text based on comprehensive analysis of syntax, vocabulary, and linguistic patterns. Follow these strict rules:
@@ -41,19 +39,33 @@ You are a highly reliable, professional translation assistant. Always identify t
 - If a specific structure or style is required by the scenario, strictly follow those requirements.
 `;
 
-  // If no matching scene, use general translation
-  if (!sceneObj) {
+  // If no scene provided or invalid format, use general translation
+  if (!scene || typeof scene === 'string' || !scene.name_en || !scene.description || !scene.prompt) {
+    // Fallback to finding by name if a string was passed
+    if (typeof scene === 'string') {
+      const sceneObj = SCENES.find((s) => s.name === scene);
+      if (sceneObj) {
+        return `
+${baseInstructions}
+Context: ${sceneObj.name_en} - ${sceneObj.description}
+Special Instructions: ${sceneObj.prompt}
+
+Translate the following text according to these requirements:
+`;
+      }
+    }
+    
     return `
 ${baseInstructions}
 Translate the following text according to these rules:
 `;
   }
 
-  // If a matching scene is found, add context and special instructions
+  // If a valid scene object is provided, use it directly
   return `
 ${baseInstructions}
-Context: ${sceneObj.name_en} - ${sceneObj.description}
-Special Instructions: ${sceneObj.prompt}
+Context: ${scene.name_en} - ${scene.description}
+Special Instructions: ${scene.prompt}
 
 Translate the following text according to these requirements:
 `;
@@ -62,6 +74,7 @@ Translate the following text according to these requirements:
 
 export async function POST(req: Request) {
   const { messages, model = GEMINI_MODEL, scene } = await req.json();
+  console.log(messages, model, scene);
   const systemPrompt = createSystemPrompt(scene);
   //console.log(messages, model, systemPrompt);
 

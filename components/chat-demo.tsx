@@ -12,13 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { SCENES as DEFAULT_SCENES } from "@/lib/scenes";
+import { SCENES as DEFAULT_SCENES, Scene } from "@/lib/scenes"
 import { Message } from "@/components/ui/chat-message"
-import { Carousel, CarouselContent, CarouselItem,CarouselPrevious,CarouselNext  } from "@/components/ui/carousel"
-import { type CarouselApi } from "@/components/ui/carousel"
-import { Badge } from "@/components/ui/badge"
 import { MODELS } from "@/lib/models"
-import { useRouter } from "next/navigation"
+import { SceneSelector } from "@/components/scene-selector"
 
 type ChatDemoProps = {
   initialMessages?: UseChatOptions["initialMessages"]
@@ -35,44 +32,37 @@ function getCustomScenes() {
   }
 }
 
-export default function ChatDemo(props: ChatDemoProps) {
-  const router = useRouter();
-  const [api, setApi] = useState<CarouselApi>()
-  const [selectedModel, setSelectedModel] = useState(MODELS[0].id)
+export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, setSelectedModel] = useState(MODELS[0].id)
   const [scenes, setScenes] = useState(DEFAULT_SCENES);
-  const [selectedScene, setSelectedScene] = useState(scenes[0]?.name || "");
-  const [count, setCount] = useState(0);
-  const [current, setCurrent] = useState(0);
+  const [selectedScene, setSelectedScene] = useState(scenes[0]);
+  
   useEffect(() => {
     const storedModel = localStorage.getItem("selectedModel")
-    const storedScene = localStorage.getItem("selectedScene")
+    const storedSceneName = localStorage.getItem("selectedScene")
+    
     if (storedModel) setSelectedModel(storedModel)
-    if (storedScene) setSelectedScene(storedScene)
+    
+    // Find scene by name if stored
+    if (storedSceneName) {      const customScenes = getCustomScenes() || DEFAULT_SCENES;
+      const foundScene = customScenes.find((s: Scene) => s.name === storedSceneName);
+      if (foundScene) {
+        setSelectedScene(foundScene);
+      }
+    }
   }, [])
-
 
   useEffect(() => {
     localStorage.setItem("selectedModel", selectedModel)
   }, [selectedModel])
 
-
   useEffect(() => {
-    localStorage.setItem("selectedScene", selectedScene)
+    // Store just the name as string for backward compatibility
+    localStorage.setItem("selectedScene", selectedScene.name)
   }, [selectedScene])
-
-  useEffect(() => {
-    if (!api) return;
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap()+1);
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap()+1);
-    })
-   
-  }, [api])
-  const handleSceneClick = (sceneName: string) => {
-    setSelectedScene(sceneName)
+  
+  const handleSceneClick = (scene: Scene) => {
+    setSelectedScene(scene)
   }
-
   const {
     messages,
     input,
@@ -91,13 +81,13 @@ export default function ChatDemo(props: ChatDemoProps) {
     },
   })
 
-  // 初始化时和每次 scenes 变化时都尝试从 localStorage 读取自定义场景
+  // Load custom scenes from localStorage
   useEffect(() => {
     const custom = getCustomScenes();
     setScenes(custom || DEFAULT_SCENES);
   }, []);
 
-  // 监听页面可见性变化，自动刷新自定义场景
+  // Listen for visibility changes to sync scene changes
   useEffect(() => {
     const handleVisibility = () => {
       if (document.visibilityState === "visible") {
@@ -143,44 +133,11 @@ export default function ChatDemo(props: ChatDemoProps) {
           "Können Sie mir bitte den Fehlercode senden?",
         ]}
       />
-      <div className="mb-2 relative w-full">
-        {/* left fade */}
-        <div className={cn("absolute left-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-background to-transparent pointer-events-none",
-          current==1 && "hidden")} />
-    
-        <Carousel setApi={setApi} opts={{
-          align: "start", 
-          dragFree:true
-          }} className="w-full px-12 h-12 flex items-center">
-          <CarouselContent className="-ml-1">
-          {scenes.map((scene, idx) => (
-            <CarouselItem key={idx} className="pl-3 basis-auto flex items-center" onClick={() => handleSceneClick(scene.name)} >
-               <Badge variant={selectedScene === scene.name ? "default" : "secondary"} 
-                      className="cursor-pointer counded-lg px-3 py-1 white-space-nowrap"
-               >
-                {scene.name}
-               </Badge>
-            </CarouselItem>
-          ))}
-          {/* 新增自定义场景按钮 */}
-          <CarouselItem key="custom-scene" className="pl-3 basis-auto flex items-center">
-            <Badge
-              variant="outline"
-              className="cursor-pointer rounded-lg px-3 py-1 whitespace-nowrap border-dashed border-2"
-              onClick={() => window.location.href = '/scene-manage'}
-            >
-              自定义场景
-            </Badge>
-          </CarouselItem>
-          </CarouselContent>
-          <CarouselPrevious className="left-0 z-20" />
-          <CarouselNext className="right-0 z-20"/>
-          {/* right fade */}
-          <div className={cn("absolute right-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-background to-transparent pointer-events-none",
-            current==count && "hidden")} />
-          </Carousel>
-       
-      </div>
+        <SceneSelector 
+        scenes={scenes} 
+        selectedScene={selectedScene}
+        onSelectScene={handleSceneClick} 
+      />
     </div>
   )
 }
