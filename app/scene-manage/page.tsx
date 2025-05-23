@@ -10,7 +10,7 @@ import { DndContext, closestCenter, DragEndEvent, PointerSensor, useSensor, useS
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { cn } from "@/lib/utils"
-import { GripVertical } from "lucide-react"
+import { GripVertical, Pencil, Trash2, Plus, Settings, Save, X } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 
 const LOCAL_KEY = "customScenes"
@@ -72,10 +72,13 @@ function SortableItem({ scene, idx, handleEdit, handleDelete }: {
             <GripVertical className="h-4 w-4" />
           </span>
           <div className="font-semibold">{scene.name} ({scene.name_en})</div>
-        </div>
-        <div className="flex gap-2">
-          <Button size="sm" onClick={() => handleEdit(idx)}>编辑</Button>
-          <Button size="sm" variant="destructive" onClick={() => handleDelete(idx)}>删除</Button>
+        </div>        <div className="flex gap-2">
+          <Button size="sm" variant="ghost" onClick={() => handleEdit(idx)}>
+            <Pencil className="h-4 w-4" />
+          </Button>
+          <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive hover:bg-destructive/10" onClick={() => handleDelete(idx)}>
+            <Trash2 className="h-4 w-4" />
+          </Button>
         </div>
       </div>
       <div className="text-sm text-muted-foreground mb-1">{scene.description}</div>
@@ -203,14 +206,20 @@ export default function SceneManagePage() {
       <p className="mb-6 text-muted-foreground text-sm">
         Manage your custom translation scenes here. You can add, edit, delete, or reorder scenes to tailor the translation experience to your needs. All changes are saved in your browser and can be reset to the default at any time.
       </p>      <div className="mb-4 flex gap-2">
-        <Button onClick={handleAdd}>新增场景</Button>
-        <Button variant="destructive" onClick={() => {
+        <Button onClick={handleAdd} variant="outline" title="Add New Scene">
+          <Plus className="h-4 w-4" />
+          <span className="sr-only">Add New Scene</span>
+        </Button>        
+        <Button variant="outline" onClick={() => {
           setScenes(SCENES)
           setLocalScenes(SCENES)
           setEditingIdx(null)
           toast.success("已重置为默认场景")
           setForm({})
-        }}>重置为默认</Button>
+        }} title="Reset to Default">
+          <Settings className="h-4 w-4" />
+          <span className="sr-only">Reset to Default</span>
+        </Button>
       </div>
       
       {loading ? (
@@ -252,10 +261,19 @@ export default function SceneManagePage() {
               <Input placeholder="英文名称" value={form.name_en || ''} onChange={e => handleChange('name_en', e.target.value)} />
               <Input placeholder="描述" value={form.description || ''} onChange={e => handleChange('description', e.target.value)} />
               <Textarea placeholder="Prompt" rows={4} value={form.prompt || ''} onChange={e => handleChange('prompt', e.target.value)} />
-            </div>
-            <div className="flex gap-2 mt-4 justify-end">
-              <Button onClick={() => { setEditingIdx(null); setForm({}) }}>取消</Button>
-              <Button onClick={handleSave} disabled={!form.name || !form.name_en || !form.description || !form.prompt}>保存</Button>
+            </div>            <div className="flex gap-2 mt-4 justify-end">
+              <Button variant="outline" onClick={() => { setEditingIdx(null); setForm({}) }} title="Cancel">
+                <X className="h-4 w-4" />
+                <span className="sr-only">Cancel</span>
+              </Button>
+              <Button variant="outline"
+                onClick={handleSave} 
+                disabled={!form.name || !form.name_en || !form.description || !form.prompt}
+                title="Save"
+              >
+                <Save className="h-4 w-4" />
+                <span className="sr-only">Save</span>
+              </Button>
             </div>
           </div>
         </div>
