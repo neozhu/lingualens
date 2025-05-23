@@ -51,6 +51,16 @@ Only output the requested content, nothing else.
     prompt: "Translate as a news article. Use clear, objective, and neutral language, faithfully preserving the original structure and all factual information. Follow journalistic writing conventions. Do not add opinions or commentary."
   },
   {
+    name: "谚语",
+    name_en: "Proverbs",
+    description: "Translate proverbs across cultures, preserving their wisdom and poetic essence.",
+    prompt: `**Translate proverbs bidirectionally.**
+      **Style:** Poetic, culturally evocative.
+      **Tone:** Elegant yet approachable.
+      **Nuance:** Capture equivalent meaning over literal wording; maintain cultural depth.
+      **Format:** Concise and impactful.\n**Strictly no explanations or interpretations.**`.trim()
+  },
+  {
     name: "技术文档",
     name_en: "Technical Documentation",
     description: "For translating technical documentation",
