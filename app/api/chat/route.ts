@@ -24,7 +24,7 @@ const groq = createGroq({
   },
 })
 
-function createSystemPrompt(scene: Scene): string {
+function createSystemPrompt(scene: Scene, locale:string): string {
   // General translation instructions
   const baseInstructions = `
 You are a highly reliable, professional translation assistant. Always identify the primary language of the input text based on comprehensive analysis of syntax, vocabulary, and linguistic patterns. Follow these strict rules:
@@ -69,9 +69,9 @@ Translate the following text according to these requirements:
 
 
 export async function POST(req: Request) {
-  const { messages, model = GEMINI_MODEL, scene,locale='zh' } = await req.json();
+  const { messages, model = GEMINI_MODEL, scene,locale='en' } = await req.json();
   console.log(messages, model, scene);
-  const systemPrompt = createSystemPrompt(scene);
+  const systemPrompt = createSystemPrompt(scene,locale);
   //console.log(messages, model, systemPrompt);
 
   // Select provider based on model

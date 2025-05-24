@@ -1,0 +1,82 @@
+{
+    "app": {
+        "title": "LinguaLens",
+        "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+    },
+    "nav": {
+        "home": "Accueil",
+        "scenes": "Scènes",
+        "manage": "Gérer",
+        "privacy": "Confidentialité",
+        "terms": "Conditions",
+        "features": "Fonctionnalités",
+        "translation": "Traduction",
+        "support": "Support",
+        "faq": "FAQ",
+        "contact": "Contactez-moi",
+        "about": "À propos"
+    },
+    "footer": {
+        "rights": "Tous droits réservés",
+        "madewith": "Fait avec"
+    },
+    "common": {
+        "loading": "Chargement...",
+        "error": "Une erreur s'est produite",
+        "retry": "Réessayer",
+        "copy": "Copier",
+        "copied": "Copié",
+        "download": "Télécharger",
+        "upload": "Téléverser",
+        "cancel": "Annuler",
+        "submit": "Soumettre",
+        "save": "Enregistrer",
+        "delete": "Supprimer",
+        "edit": "Éditer",
+        "create": "Créer"
+    },
+    "scene": {
+        "title": "Générateur d'instructions système et descriptions de scènes",
+        "systemPrompt": "Instructions système",
+        "promptDescription": "La fonction createSystemPrompt génère dynamiquement des invites de traduction en fonction de la scène sélectionnée.",
+        "configInfo": "Le contenu de l'invite est configuré dans api/chat/route.ts ; mettez à jour ce fichier pour ajuster les invites.",
+        "availableScenes": "Scènes disponibles"
+    },
+    "chat": {
+        "inputPlaceholder": "Entrez le contenu à traduire...",
+        "trySuggestions": "Essayez ces invites ✨",
+        "copyMessage": "Réponse copiée dans le presse-papiers !"
+    },
+    "sceneSelector": {
+        "customScene": "Scènes personnalisées"
+    },
+    "sceneManage": {
+        "title": "Gestion des scènes personnalisées",
+        "description": "Gérez vos scènes de traduction personnalisées ici. Vous pouvez ajouter, éditer, supprimer ou réorganiser les scènes pour adapter l'expérience de traduction à vos besoins. Toutes les modifications sont enregistrées dans votre navigateur et peuvent être réinitialisées à tout moment.",
+        "addScene": "Ajouter une nouvelle scène",
+        "resetToDefault": "Réinitialiser par défaut",
+        "editScene": "Éditer la scène",
+        "newScene": "Nouvelle scène",
+        "name": "Nom",
+        "englishName": "Nom anglais",
+        "sceneDescription": "Description de la scène",
+        "descriptionForPrompt": "(utilisé pour la génération d'invites)",
+        "translationPrompt": "Invite de traduction",
+        "promptPlaceholder": "Entrez l'invite ou cliquez sur la baguette magique pour générer automatiquement (prend en charge le format Markdown)",
+        "aiGenerating": "Génération IA...",
+        "characters": "caractères",
+        "lengthSuggestion": "(recommandé entre 150-350 caractères)",
+        "generatePrompt": "Utiliser l'IA pour générer une invite basée sur le nom et la description",
+        "fillNameDescription": "Veuillez d'abord remplir le nom anglais et la description",
+        "nameDescriptionRequired": "⚠️ Le nom anglais et la description sont requis pour utiliser l'IA pour la génération d'invites",
+        "sceneDeleted": "Scène supprimée",
+        "sceneUpdated": "Scène mise à jour",
+        "newSceneAdded": "Nouvelle scène ajoutée",
+        "sceneOrderUpdated": "Ordre des scènes mis à jour",
+        "resetToDefaultDone": "Scènes par défaut réinitialisées",
+        "needNameDescForPrompt": "Le nom anglais et la description sont requis pour générer une invite",
+        "aiGeneratingPrompt": "L'IA génère une invite...",
+        "promptGeneratedSuccess": "Invite générée avec succès",
+        "promptGenerationFailed": "Échec de la génération de l'invite, veuillez réessayer"
+    }
+}

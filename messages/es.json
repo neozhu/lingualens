@@ -1,0 +1,82 @@
+{
+    "app": {
+        "title": "LinguaLens",
+        "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+    },
+    "nav": {
+        "home": "Inicio",
+        "scenes": "Escenas",
+        "manage": "Gestionar",
+        "privacy": "Privacidad",
+        "terms": "Términos",
+        "features": "Características",
+        "translation": "Traducción",
+        "support": "Soporte",
+        "faq": "FAQ",
+        "contact": "Contáctame",
+        "about": "Acerca de"
+    },
+    "footer": {
+        "rights": "Todos los derechos reservados",
+        "madewith": "Hecho con"
+    },
+    "common": {
+        "loading": "Cargando...",
+        "error": "Ocurrió un error",
+        "retry": "Reintentar",
+        "copy": "Copiar",
+        "copied": "Copiado",
+        "download": "Descargar",
+        "upload": "Subir",
+        "cancel": "Cancelar",
+        "submit": "Enviar",
+        "save": "Guardar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "create": "Crear"
+    },
+    "scene": {
+        "title": "Generador de instrucciones del sistema y descripciones de escenas",
+        "systemPrompt": "Instrucciones del sistema",
+        "promptDescription": "La función createSystemPrompt genera dinámicamente indicaciones de traducción según la escena seleccionada.",
+        "configInfo": "El contenido de la indicación se configura en api/chat/route.ts; actualice ese archivo para ajustar las indicaciones.",
+        "availableScenes": "Escenas disponibles"
+    },
+    "chat": {
+        "inputPlaceholder": "Ingrese el contenido a traducir...",
+        "trySuggestions": "Prueba estas indicaciones ✨",
+        "copyMessage": "¡Respuesta copiada al portapapeles!"
+    },
+    "sceneSelector": {
+        "customScene": "Escenas personalizadas"
+    },
+    "sceneManage": {
+        "title": "Gestión de escenas personalizadas",
+        "description": "Administre sus escenas de traducción personalizadas aquí. Puede agregar, editar, eliminar o reordenar escenas para adaptar la experiencia de traducción a sus necesidades. Todos los cambios se guardan en su navegador y se pueden restablecer a los valores predeterminados en cualquier momento.",
+        "addScene": "Agregar nueva escena",
+        "resetToDefault": "Restablecer a predeterminado",
+        "editScene": "Editar escena",
+        "newScene": "Nueva escena",
+        "name": "Nombre",
+        "englishName": "Nombre en inglés",
+        "sceneDescription": "Descripción de la escena",
+        "descriptionForPrompt": "(utilizado para la generación de indicaciones)",
+        "translationPrompt": "Indicación de traducción",
+        "promptPlaceholder": "Ingrese la indicación o haga clic en la varita mágica para generar automáticamente (admite formato Markdown)",
+        "aiGenerating": "Generando IA...",
+        "characters": "caracteres",
+        "lengthSuggestion": "(se recomienda mantener entre 150-350 caracteres)",
+        "generatePrompt": "Usar IA para generar indicación basada en el nombre y la descripción",
+        "fillNameDescription": "Por favor complete primero el nombre y la descripción en inglés",
+        "nameDescriptionRequired": "⚠️ Se requieren el nombre y la descripción en inglés para usar IA en la generación de indicaciones",
+        "sceneDeleted": "Escena eliminada",
+        "sceneUpdated": "Escena actualizada",
+        "newSceneAdded": "Nueva escena agregada",
+        "sceneOrderUpdated": "Orden de escenas actualizado",
+        "resetToDefaultDone": "Escenas predeterminadas restablecidas",
+        "needNameDescForPrompt": "Se requieren el nombre y la descripción en inglés para generar la indicación",
+        "aiGeneratingPrompt": "La IA está generando la indicación...",
+        "promptGeneratedSuccess": "Indicación generada con éxito",
+        "promptGenerationFailed": "No se pudo generar la indicación, inténtelo de nuevo"
+    }
+}

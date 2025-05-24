@@ -1,0 +1,82 @@
+{
+    "app": {
+        "title": "LinguaLens",
+        "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+    },
+    "nav": {
+        "home": "Beranda",
+        "scenes": "Adegan",
+        "manage": "Kelola",
+        "privacy": "Privasi",
+        "terms": "Ketentuan",
+        "features": "Fitur",
+        "translation": "Terjemahan",
+        "support": "Dukungan",
+        "faq": "FAQ",
+        "contact": "Hubungi Saya",
+        "about": "Tentang"
+    },
+    "footer": {
+        "rights": "Hak cipta dilindungi undang-undang",
+        "madewith": "Dibuat dengan"
+    },
+    "common": {
+        "loading": "Memuat...",
+        "error": "Terjadi kesalahan",
+        "retry": "Coba lagi",
+        "copy": "Salin",
+        "copied": "Disalin",
+        "download": "Unduh",
+        "upload": "Unggah",
+        "cancel": "Batal",
+        "submit": "Kirim",
+        "save": "Simpan",
+        "delete": "Hapus",
+        "edit": "Edit",
+        "create": "Buat"
+    },
+    "scene": {
+        "title": "Generator Prompt Sistem dan Deskripsi Adegan",
+        "systemPrompt": "Instruksi sistem",
+        "promptDescription": "Fungsi createSystemPrompt secara dinamis menghasilkan prompt terjemahan berdasarkan adegan yang dipilih.",
+        "configInfo": "Konten prompt dikonfigurasi di api/chat/route.ts; perbarui file itu untuk menyesuaikan prompt.",
+        "availableScenes": "Adegan yang tersedia"
+    },
+    "chat": {
+        "inputPlaceholder": "Masukkan konten untuk diterjemahkan...",
+        "trySuggestions": "Coba prompt ini ✨",
+        "copyMessage": "Respons disalin ke clipboard!"
+    },
+    "sceneSelector": {
+        "customScene": "Adegan Kustom"
+    },
+    "sceneManage": {
+        "title": "Manajemen Adegan Kustom",
+        "description": "Kelola adegan terjemahan kustom Anda di sini. Anda dapat menambah, mengedit, menghapus, atau mengurutkan ulang adegan untuk menyesuaikan pengalaman terjemahan sesuai kebutuhan Anda. Semua perubahan disimpan di browser Anda dan dapat direset ke default kapan saja.",
+        "addScene": "Tambah Adegan Baru",
+        "resetToDefault": "Reset ke Default",
+        "editScene": "Edit Adegan",
+        "newScene": "Adegan Baru",
+        "name": "Nama",
+        "englishName": "Nama Inggris",
+        "sceneDescription": "Deskripsi Adegan",
+        "descriptionForPrompt": "(digunakan untuk pembuatan prompt)",
+        "translationPrompt": "Prompt Terjemahan",
+        "promptPlaceholder": "Masukkan prompt atau klik tongkat ajaib untuk menghasilkan secara otomatis (mendukung format Markdown)",
+        "aiGenerating": "AI sedang membuat...",
+        "characters": "karakter",
+        "lengthSuggestion": "(disarankan antara 150-350 karakter)",
+        "generatePrompt": "Gunakan AI untuk membuat prompt berdasarkan nama dan deskripsi",
+        "fillNameDescription": "Silakan isi nama dan deskripsi dalam bahasa Inggris terlebih dahulu",
+        "nameDescriptionRequired": "⚠️ Nama dan deskripsi dalam bahasa Inggris diperlukan untuk menggunakan AI dalam pembuatan prompt",
+        "sceneDeleted": "Adegan dihapus",
+        "sceneUpdated": "Adegan diperbarui",
+        "newSceneAdded": "Adegan baru ditambahkan",
+        "sceneOrderUpdated": "Urutan adegan diperbarui",
+        "resetToDefaultDone": "Adegan default direset",
+        "needNameDescForPrompt": "Nama dan deskripsi dalam bahasa Inggris diperlukan untuk membuat prompt",
+        "aiGeneratingPrompt": "AI sedang membuat prompt...",
+        "promptGeneratedSuccess": "Prompt berhasil dibuat",
+        "promptGenerationFailed": "Gagal membuat prompt, silakan coba lagi"
+    }
+}

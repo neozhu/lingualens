@@ -14,6 +14,14 @@ const languages = [
   { code: 'zh', name: '简体中文' },
   { code: 'en', name: 'English' },
   { code: 'de', name: 'Deutsch' },
+  { code: 'fr', name: 'Français' },
+  { code: 'es', name: 'Español' },
+  { code: 'nl', name: 'Nederlands' },
+  { code: 'id', name: 'Bahasa Indonesia' },
+  { code: 'th', name: 'ไทย' },
+  { code: 'vi', name: 'Tiếng Việt' },
+  { code: 'my', name: 'မြန်မာ' },
+  { code: 'ms', name: 'Bahasa Melayu' },
 ];
 
 export function LanguageSwitcher() {

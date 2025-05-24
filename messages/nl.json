@@ -1,0 +1,82 @@
+{
+    "app": {
+        "title": "LinguaLens",
+        "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+    },
+    "nav": {
+        "home": "Startpagina",
+        "scenes": "Scènes",
+        "manage": "Beheren",
+        "privacy": "Privacy",
+        "terms": "Voorwaarden",
+        "features": "Functies",
+        "translation": "Vertaling",
+        "support": "Ondersteuning",
+        "faq": "FAQ",
+        "contact": "Contact opnemen",
+        "about": "Over"
+    },
+    "footer": {
+        "rights": "Alle rechten voorbehouden",
+        "madewith": "Gemaakt met"
+    },
+    "common": {
+        "loading": "Laden...",
+        "error": "Er is een fout opgetreden",
+        "retry": "Opnieuw proberen",
+        "copy": "Kopiëren",
+        "copied": "Gekopieerd",
+        "download": "Downloaden",
+        "upload": "Uploaden",
+        "cancel": "Annuleren",
+        "submit": "Verzenden",
+        "save": "Opslaan",
+        "delete": "Verwijderen",
+        "edit": "Bewerken",
+        "create": "Aanmaken"
+    },
+    "scene": {
+        "title": "Systeempromptgenerator en scènebeschrijvingen",
+        "systemPrompt": "Systeeminstructies",
+        "promptDescription": "De functie createSystemPrompt genereert dynamisch vertaalprompts op basis van de geselecteerde scène.",
+        "configInfo": "Promptinhoud wordt geconfigureerd in api/chat/route.ts; werk dat bestand bij om de prompts aan te passen.",
+        "availableScenes": "Beschikbare scènes"
+    },
+    "chat": {
+        "inputPlaceholder": "Voer inhoud in om te vertalen...",
+        "trySuggestions": "Probeer deze prompts ✨",
+        "copyMessage": "Antwoord gekopieerd naar klembord!"
+    },
+    "sceneSelector": {
+        "customScene": "Aangepaste scènes"
+    },
+    "sceneManage": {
+        "title": "Beheer van aangepaste scènes",
+        "description": "Beheer hier uw aangepaste vertaalscènes. U kunt scènes toevoegen, bewerken, verwijderen of herschikken om de vertaalervaring aan uw wensen aan te passen. Alle wijzigingen worden in uw browser opgeslagen en kunnen op elk moment worden teruggezet naar de standaardinstellingen.",
+        "addScene": "Nieuwe scène toevoegen",
+        "resetToDefault": "Terugzetten naar standaard",
+        "editScene": "Scène bewerken",
+        "newScene": "Nieuwe scène",
+        "name": "Naam",
+        "englishName": "Engelse naam",
+        "sceneDescription": "Scènebeschrijving",
+        "descriptionForPrompt": "(gebruikt voor promptgeneratie)",
+        "translationPrompt": "Vertaalprompt",
+        "promptPlaceholder": "Voer prompt in of klik op toverstaf om automatisch te genereren (ondersteunt Markdown-formaat)",
+        "aiGenerating": "AI genereert...",
+        "characters": "tekens",
+        "lengthSuggestion": "(aanbevolen tussen 150-350 tekens)",
+        "generatePrompt": "Gebruik AI om prompt te genereren op basis van naam en beschrijving",
+        "fillNameDescription": "Vul eerst Engelse naam en beschrijving in",
+        "nameDescriptionRequired": "⚠️ Engelse naam en beschrijving zijn vereist om AI te gebruiken voor promptgeneratie",
+        "sceneDeleted": "Scène verwijderd",
+        "sceneUpdated": "Scène bijgewerkt",
+        "newSceneAdded": "Nieuwe scène toegevoegd",
+        "sceneOrderUpdated": "Scènevolgorde bijgewerkt",
+        "resetToDefaultDone": "Standaardscènes teruggezet",
+        "needNameDescForPrompt": "Engelse naam en beschrijving zijn vereist om prompt te genereren",
+        "aiGeneratingPrompt": "AI genereert prompt...",
+        "promptGeneratedSuccess": "Prompt succesvol gegenereerd",
+        "promptGenerationFailed": "Promptgeneratie mislukt, probeer het opnieuw"
+    }
+}

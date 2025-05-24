@@ -3,10 +3,10 @@ import {routing} from './i18n/routing';
  
 export default createMiddleware({
   // 支持的语言
-  locales: ['zh', 'en', 'de'],
+  locales: ['zh', 'en', 'de', 'fr', 'es', 'nl', 'id', 'th', 'vi', 'my', 'ms'],
   
   // 默认语言
-  defaultLocale: 'zh',
+  defaultLocale: 'en',
   
   // 语言自动检测（基于浏览器设置）
   localeDetection: true,
