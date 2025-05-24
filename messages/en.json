@@ -1,72 +1,82 @@
 {
-  "app": {
-    "title": "LinguaLens",
-    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
-  },  "nav": {
-    "home": "Home",
-    "scenes": "Scenes",
-    "manage": "Manage",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "features": "Features",
-    "translation": "Translation",
-    "support": "Support",
-    "faq": "FAQ",
-    "contact": "Contact Me",
-    "about": "About"
-  },
-  "footer": {
-    "rights": "All rights reserved",
-    "madewith": "Made with"
-  },  "common": {
-    "loading": "Loading...",
-    "error": "An error occurred",
-    "retry": "Retry",
-    "copy": "Copy",
-    "copied": "Copied",
-    "download": "Download",
-    "upload": "Upload",
-    "cancel": "Cancel",
-    "submit": "Submit",
-    "save": "Save",
-    "delete": "Delete",
-    "edit": "Edit",
-    "create": "Create"
-  },
-  "scene": {
-    "title": "System Prompt Generator and Scene Descriptions",
-    "systemPrompt": "System instructions",
-    "promptDescription": "The createSystemPrompt function dynamically generates translation prompts based on the selected scene.",
-    "configInfo": "Prompt content is configured in api/chat/route.ts; update that file to adjust the prompts.",
-    "availableScenes": "Available Scenes"
-  },
-  "sceneManage": {
-    "title": "Custom Scene Management",
-    "description": "Manage your custom translation scenes here. You can add, edit, delete, or reorder scenes to tailor the translation experience to your needs. All changes are saved in your browser and can be reset to the default at any time.",
-    "addScene": "Add New Scene",
-    "resetToDefault": "Reset to Default",
-    "editScene": "Edit Scene",
-    "newScene": "New Scene",
-    "name": "Name",
-    "englishName": "English Name",
-    "sceneDescription": "Scene Description",
-    "descriptionForPrompt": "(used for prompt generation)",
-    "translationPrompt": "Translation Prompt",
-    "promptPlaceholder": "Enter prompt or click magic wand to generate automatically (supports Markdown format)",
-    "aiGenerating": "AI generating...",
-    "characters": "characters",
-    "lengthSuggestion": "(recommend keeping between 150-350 characters)",
-    "generatePrompt": "Use AI to generate prompt based on name and description",
-    "fillNameDescription": "Please fill in English name and description first",
-    "nameDescriptionRequired": "⚠️ English name and description are required to use AI for prompt generation",
-    "sceneDeleted": "Scene deleted",
-    "sceneUpdated": "Scene updated",
-    "newSceneAdded": "New scene added",
-    "sceneOrderUpdated": "Scene order updated",
-    "resetToDefaultDone": "Reset to default scenes",
-    "needNameDescForPrompt": "English name and description are required to generate prompt",
-    "aiGeneratingPrompt": "AI is generating prompt...",
-    "promptGeneratedSuccess": "Prompt generated successfully",
-    "promptGenerationFailed": "Failed to generate prompt, please try again"
-  }}
+    "app": {
+        "title": "LinguaLens",
+        "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+    },
+    "nav": {
+        "home": "Home",
+        "scenes": "Scenes",
+        "manage": "Manage",
+        "privacy": "Privacy",
+        "terms": "Terms",
+        "features": "Features",
+        "translation": "Translation",
+        "support": "Support",
+        "faq": "FAQ",
+        "contact": "Contact Me",
+        "about": "About"
+    },
+    "footer": {
+        "rights": "All rights reserved",
+        "madewith": "Made with"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "retry": "Retry",
+        "copy": "Copy",
+        "copied": "Copied",
+        "download": "Download",
+        "upload": "Upload",
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "create": "Create"
+    },
+    "scene": {
+        "title": "System Prompt Generator and Scene Descriptions",
+        "systemPrompt": "System instructions",
+        "promptDescription": "The createSystemPrompt function dynamically generates translation prompts based on the selected scene.",
+        "configInfo": "Prompt content is configured in api/chat/route.ts; update that file to adjust the prompts.",
+        "availableScenes": "Available Scenes"
+    },
+    "chat": {
+        "inputPlaceholder": "Enter content to translate...",
+        "trySuggestions": "Try these prompts ✨",
+        "copyMessage": "Copied response to clipboard!"
+    },
+    "sceneSelector": {
+        "customScene": "Custom Scenes"
+    },
+    "sceneManage": {
+        "title": "Custom Scene Management",
+        "description": "Manage your custom translation scenes here. You can add, edit, delete, or reorder scenes to tailor the translation experience to your needs. All changes are saved in your browser and can be reset to the default at any time.",
+        "addScene": "Add New Scene",
+        "resetToDefault": "Reset to Default",
+        "editScene": "Edit Scene",
+        "newScene": "New Scene",
+        "name": "Name",
+        "englishName": "English Name",
+        "sceneDescription": "Scene Description",
+        "descriptionForPrompt": "(used for prompt generation)",
+        "translationPrompt": "Translation Prompt",
+        "promptPlaceholder": "Enter prompt or click magic wand to generate automatically (supports Markdown format)",
+        "aiGenerating": "AI generating...",
+        "characters": "characters",
+        "lengthSuggestion": "(recommend keeping between 150-350 characters)",
+        "generatePrompt": "Use AI to generate prompt based on name and description",
+        "fillNameDescription": "Please fill in English name and description first",
+        "nameDescriptionRequired": "⚠️ English name and description are required to use AI for prompt generation",
+        "sceneDeleted": "Scene deleted",
+        "sceneUpdated": "Scene updated",
+        "newSceneAdded": "New scene added",
+        "sceneOrderUpdated": "Scene order updated",
+        "resetToDefaultDone": "Reset to default scenes",
+        "needNameDescForPrompt": "English name and description are required to generate prompt",
+        "aiGeneratingPrompt": "AI is generating prompt...",
+        "promptGeneratedSuccess": "Prompt generated successfully",
+        "promptGenerationFailed": "Failed to generate prompt, please try again"
+    }
 }

@@ -10,6 +10,7 @@ import {
   type ReactElement,
 } from "react"
 import { ArrowDown, ThumbsDown, ThumbsUp } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
 import { useAutoScroll } from "@/hooks/use-auto-scroll"
@@ -66,6 +67,7 @@ export function Chat({
   setMessages,
   transcribeAudio,
 }: ChatProps) {
+  const t = useTranslations('chat')
   const lastMessage = messages.at(-1)
   const isEmpty = messages.length === 0
   const isTyping = lastMessage?.role === "user"
@@ -161,13 +163,11 @@ export function Chat({
     (message: Message) => ({
       actions: onRateResponse ? (
         <>
-          <div className="border-r pr-1">
-
-            <CopyButton
-              value={message.content}
-              content={message.content}
-              copyMessage="Copied response to clipboard!"
-              className="
+          <div className="border-r pr-1">          <CopyButton
+            value={message.content}
+            content={message.content}
+            copyMessage={t('copyMessage')}
+            className="
             h-6 w-6
             text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
             dark:text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50
@@ -200,7 +200,7 @@ export function Chat({
           <CopyButton
             value={message.content}
             content={message.content}
-            copyMessage="Copied response to clipboard!"
+            copyMessage={t('copyMessage')}
             className="
             h-6 w-6
             text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
@@ -226,7 +226,7 @@ export function Chat({
     <ChatContainer className={className}>
       {isEmpty && append && suggestions ? (
         <PromptSuggestions
-          label="Try these prompts ✨"
+          label={t('trySuggestions')}
           append={append}
           suggestions={suggestions}
         />
@@ -251,7 +251,7 @@ export function Chat({
         {({ files, setFiles }) => (
           <MessageInput
             value={input}
-            placeholder="输入想要翻译的内容..."
+            placeholder={t('inputPlaceholder')}
             onChange={handleInputChange}
             allowAttachments={false}
             stop={handleStop}

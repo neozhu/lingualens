@@ -1,72 +1,82 @@
 {
-  "app": {
-    "title": "LinguaLens",
-    "description": "LinguaLens Intelligenter bidirektionaler Übersetzer, der mehrere Szenenformate unterstützt"
-  },  "nav": {
-    "home": "Startseite",
-    "scenes": "Szenen",
-    "manage": "Verwalten",
-    "privacy": "Datenschutz",
-    "terms": "Nutzungsbedingungen",
-    "features": "Funktionen",
-    "translation": "Übersetzung",
-    "support": "Unterstützung",
-    "faq": "FAQ",
-    "contact": "Kontaktieren Sie uns",
-    "about": "Über uns"
-  },
-  "footer": {
-    "rights": "Alle Rechte vorbehalten.",
-    "madewith": "Hergestellt mit"
-  },  "common": {
-    "loading": "Wird geladen...",
-    "error": "Ein Fehler ist aufgetreten",
-    "retry": "Wiederholen",
-    "copy": "Kopieren",
-    "copied": "Kopiert",
-    "download": "Herunterladen",
-    "upload": "Hochladen",
-    "cancel": "Abbrechen",
-    "submit": "Absenden",
-    "save": "Speichern",
-    "delete": "Löschen",
-    "edit": "Bearbeiten",
-    "create": "Erstellen"
-  },
-  "scene": {
-    "title": "System-Prompt-Generator und Szenenbeschreibungen",
-    "systemPrompt": "System instructions",
-    "promptDescription": "Die Funktion createSystemPrompt generiert dynamisch Übersetzungsaufforderungen basierend auf der ausgewählten Szene.",
-    "configInfo": "Prompt-Inhalte werden in api/chat/route.ts konfiguriert; aktualisieren Sie diese Datei, um die Prompts anzupassen.",
-    "availableScenes": "Verfügbare Szenen"
-  },
-  "sceneManage": {
-    "title": "Benutzerdefinierte Szenenverwaltung",
-    "description": "Verwalten Sie hier Ihre benutzerdefinierten Übersetzungsszenen. Sie können Szenen hinzufügen, bearbeiten, löschen oder neu anordnen, um das Übersetzungserlebnis an Ihre Bedürfnisse anzupassen. Alle Änderungen werden in Ihrem Browser gespeichert und können jederzeit auf die Standardeinstellungen zurückgesetzt werden.",
-    "addScene": "Neue Szene hinzufügen",
-    "resetToDefault": "Auf Standard zurücksetzen",
-    "editScene": "Szene bearbeiten",
-    "newScene": "Neue Szene",
-    "name": "Name",
-    "englishName": "Englischer Name",
-    "sceneDescription": "Szenenbeschreibung",
-    "descriptionForPrompt": "(für Prompt-Generierung)",
-    "translationPrompt": "Übersetzungs-Prompt",
-    "promptPlaceholder": "Prompt eingeben oder Zauberstab klicken, um automatisch zu generieren (unterstützt Markdown-Format)",
-    "aiGenerating": "KI generiert...",
-    "characters": "Zeichen",
-    "lengthSuggestion": "(empfohlen zwischen 150-350 Zeichen)",
-    "generatePrompt": "KI verwenden, um Prompt auf Basis von Name und Beschreibung zu generieren",
-    "fillNameDescription": "Bitte zuerst englischen Namen und Beschreibung ausfüllen",
-    "nameDescriptionRequired": "⚠️ Englischer Name und Beschreibung werden benötigt, um KI für die Prompt-Generierung zu nutzen",
-    "sceneDeleted": "Szene gelöscht",
-    "sceneUpdated": "Szene aktualisiert",
-    "newSceneAdded": "Neue Szene hinzugefügt",
-    "sceneOrderUpdated": "Szenenreihenfolge aktualisiert",
-    "resetToDefaultDone": "Auf Standardszenen zurückgesetzt",
-    "needNameDescForPrompt": "Englischer Name und Beschreibung werden benötigt, um Prompt zu generieren",
-    "aiGeneratingPrompt": "KI generiert Prompt...",
-    "promptGeneratedSuccess": "Prompt erfolgreich generiert",
-    "promptGenerationFailed": "Prompt-Generierung fehlgeschlagen, bitte erneut versuchen"
-  }}
+    "app": {
+        "title": "LinguaLens",
+        "description": "LinguaLens Intelligenter bidirektionaler Übersetzer, der mehrere Szenenformate unterstützt"
+    },
+    "nav": {
+        "home": "Startseite",
+        "scenes": "Szenen",
+        "manage": "Verwalten",
+        "privacy": "Datenschutz",
+        "terms": "Nutzungsbedingungen",
+        "features": "Funktionen",
+        "translation": "Übersetzung",
+        "support": "Unterstützung",
+        "faq": "FAQ",
+        "contact": "Kontaktieren Sie uns",
+        "about": "Über uns"
+    },
+    "footer": {
+        "rights": "Alle Rechte vorbehalten.",
+        "madewith": "Hergestellt mit"
+    },
+    "common": {
+        "loading": "Wird geladen...",
+        "error": "Ein Fehler ist aufgetreten",
+        "retry": "Wiederholen",
+        "copy": "Kopieren",
+        "copied": "Kopiert",
+        "download": "Herunterladen",
+        "upload": "Hochladen",
+        "cancel": "Abbrechen",
+        "submit": "Absenden",
+        "save": "Speichern",
+        "delete": "Löschen",
+        "edit": "Bearbeiten",
+        "create": "Erstellen"
+    },
+    "scene": {
+        "title": "System-Prompt-Generator und Szenenbeschreibungen",
+        "systemPrompt": "System instructions",
+        "promptDescription": "Die Funktion createSystemPrompt generiert dynamisch Übersetzungsaufforderungen basierend auf der ausgewählten Szene.",
+        "configInfo": "Prompt-Inhalte werden in api/chat/route.ts konfiguriert; aktualisieren Sie diese Datei, um die Prompts anzupassen.",
+        "availableScenes": "Verfügbare Szenen"
+    },
+    "chat": {
+        "inputPlaceholder": "Geben Sie Inhalte zum Übersetzen ein...",
+        "trySuggestions": "Versuchen Sie diese Vorschläge ✨",
+        "copyMessage": "Antwort in die Zwischenablage kopiert!" 
+    },
+    "sceneSelector": {
+        "customScene": "Benutzerdefinierte Szenen"
+    },
+    "sceneManage": {
+        "title": "Benutzerdefinierte Szenenverwaltung",
+        "description": "Verwalten Sie hier Ihre benutzerdefinierten Übersetzungsszenen. Sie können Szenen hinzufügen, bearbeiten, löschen oder neu anordnen, um das Übersetzungserlebnis an Ihre Bedürfnisse anzupassen. Alle Änderungen werden in Ihrem Browser gespeichert und können jederzeit auf die Standardeinstellungen zurückgesetzt werden.",
+        "addScene": "Neue Szene hinzufügen",
+        "resetToDefault": "Auf Standard zurücksetzen",
+        "editScene": "Szene bearbeiten",
+        "newScene": "Neue Szene",
+        "name": "Name",
+        "englishName": "Englischer Name",
+        "sceneDescription": "Szenenbeschreibung",
+        "descriptionForPrompt": "(für Prompt-Generierung)",
+        "translationPrompt": "Übersetzungs-Prompt",
+        "promptPlaceholder": "Prompt eingeben oder Zauberstab klicken, um automatisch zu generieren (unterstützt Markdown-Format)",
+        "aiGenerating": "KI generiert...",
+        "characters": "Zeichen",
+        "lengthSuggestion": "(empfohlen zwischen 150-350 Zeichen)",
+        "generatePrompt": "KI verwenden, um Prompt auf Basis von Name und Beschreibung zu generieren",
+        "fillNameDescription": "Bitte zuerst englischen Namen und Beschreibung ausfüllen",
+        "nameDescriptionRequired": "⚠️ Englischer Name und Beschreibung werden benötigt, um KI für die Prompt-Generierung zu nutzen",
+        "sceneDeleted": "Szene gelöscht",
+        "sceneUpdated": "Szene aktualisiert",
+        "newSceneAdded": "Neue Szene hinzugefügt",
+        "sceneOrderUpdated": "Szenenreihenfolge aktualisiert",
+        "resetToDefaultDone": "Auf Standardszenen zurückgesetzt",
+        "needNameDescForPrompt": "Englischer Name und Beschreibung werden benötigt, um Prompt zu generieren",
+        "aiGeneratingPrompt": "KI generiert Prompt...",
+        "promptGeneratedSuccess": "Prompt erfolgreich generiert",
+        "promptGenerationFailed": "Prompt-Generierung fehlgeschlagen, bitte erneut versuchen"
+    }
 }

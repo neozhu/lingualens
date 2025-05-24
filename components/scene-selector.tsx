@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 import { Scene } from "@/lib/scenes"
+import { useTranslations, useLocale } from "next-intl"
 
 interface SceneSelectorProps {
   scenes: Scene[]
@@ -19,6 +20,8 @@ export function SceneSelector({ scenes, selectedScene, onSelectScene }: SceneSel
   const [api, setApi] = useState<CarouselApi>()
   const [count, setCount] = useState(0)
   const [current, setCurrent] = useState(0)
+  const t = useTranslations('sceneSelector')
+  const locale = useLocale()
 
   useEffect(() => {
     if (!api) return
@@ -56,7 +59,7 @@ export function SceneSelector({ scenes, selectedScene, onSelectScene }: SceneSel
                 variant={selectedScene.name === scene.name ? "default" : "secondary"} 
                 className="cursor-pointer rounded-lg px-3 py-1 whitespace-nowrap"
               >
-                {scene.name}
+                {locale === 'en' ? (scene.name_en || scene.name) : scene.name}
               </Badge>
             </CarouselItem>
           ))}
@@ -67,7 +70,7 @@ export function SceneSelector({ scenes, selectedScene, onSelectScene }: SceneSel
               className="cursor-pointer rounded-lg px-3 py-1 whitespace-nowrap border-dashed border-2"
               onClick={() => router.push('/scene-manage')}
             >
-              自定义场景
+              {t('customScene')}
             </Badge>
           </CarouselItem>
         </CarouselContent>
