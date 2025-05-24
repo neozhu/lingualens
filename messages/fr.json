@@ -78,5 +78,12 @@
         "aiGeneratingPrompt": "L'IA génère une invite...",
         "promptGeneratedSuccess": "Invite générée avec succès",
         "promptGenerationFailed": "Échec de la génération de l'invite, veuillez réessayer"
+    },
+    "tooltip": {
+        "switchLanguage": "Changer de langue",
+        "selectTheme": "Sélectionner le thème",
+        "sceneManage": "Gérer les scènes personnalisées",
+        "toggleMode": "Basculer le mode clair/sombre",
+        "github": "Voir sur GitHub"
     }
 }

@@ -78,5 +78,12 @@
         "aiGeneratingPrompt": "AI genereert prompt...",
         "promptGeneratedSuccess": "Prompt succesvol gegenereerd",
         "promptGenerationFailed": "Promptgeneratie mislukt, probeer het opnieuw"
+    },
+    "tooltip": {
+        "switchLanguage": "Taal wisselen",
+        "selectTheme": "Thema selecteren",
+        "sceneManage": "Aangepaste scènes beheren",
+        "toggleMode": "Licht/donker modus wisselen",
+        "github": "Bekijk op GitHub"
     }
 }

@@ -78,5 +78,12 @@
         "aiGeneratingPrompt": "AI ပရောမ့်ဖန်တီးနေသည်...",
         "promptGeneratedSuccess": "ပရောမ့်ဖန်တီးမှု အောင်မြင်သည်",
         "promptGenerationFailed": "ပရောမ့်ဖန်တီးမှု မအောင်မြင်ပါ၊ ထပ်မံကြိုးစားပါ"
+    },
+    "tooltip": {
+        "switchLanguage": "ဘာသာစကားပြောင်းရန်",
+        "selectTheme": "အပြင်အဆင်ရွေးချယ်ရန်",
+        "sceneManage": "စိတ်ကြိုက်အခန်းများစီမံရန်",
+        "toggleMode": "အလင်း/အမှောင်အခြေအနေပြောင်းရန်",
+        "github": "GitHub တွင်ကြည့်ရန်"
     }
 }

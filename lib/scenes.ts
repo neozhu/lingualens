@@ -20,17 +20,17 @@ export const SCENES: Scene[] = [
   {
     name: "单词解释",
     name_en: "Word Explanation",
-    description: "Helps users understand, remember, and use unfamiliar words by providing simple explanations and practical example sentences in both English and Chinese.",
+    description: "Helps users understand, remember, and use unfamiliar words by providing simple explanations and practical example sentences in both English and the user's native language.",
     prompt: `
-If the input is in Chinese, follow steps A; otherwise (for English or other languages), follow steps B.
+If the input is in the user's native language, follow steps A; otherwise (for English or other languages), follow steps B.
 
-A. For Chinese input:
+A. For input in the user's native language:
 1. Output two common English translations or synonyms, separated by a comma.
 2. Output a simple and practical English explanation using easy and practical language.
 3. Output three example sentences (each on a new line, numbered 1., 2. and 3.) that use each English word or phrase naturally in everyday context.
 
 B. For English or other language input:
-1. Output two common Chinese translations, separated by a comma.
+1. Output two common translations in the user's native language, separated by a comma.
 2. Output simple and practical English explanation using easy and practical language.
 3. Output three example sentences (each on a new line, numbered 1., 2. and 3.) that use the input word and a common English synonym or phrase naturally in everyday context.
 

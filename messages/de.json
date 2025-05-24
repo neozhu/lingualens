@@ -78,5 +78,12 @@
         "aiGeneratingPrompt": "KI generiert Prompt...",
         "promptGeneratedSuccess": "Prompt erfolgreich generiert",
         "promptGenerationFailed": "Prompt-Generierung fehlgeschlagen, bitte erneut versuchen"
+    },
+    "tooltip": {
+        "switchLanguage": "Sprache wechseln",
+        "selectTheme": "Thema auswählen",
+        "sceneManage": "Benutzerdefinierte Szenen verwalten",
+        "toggleMode": "Hell-/Dunkelmodus umschalten",
+        "github": "Auf GitHub ansehen"
     }
 }

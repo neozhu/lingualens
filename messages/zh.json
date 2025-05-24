@@ -49,6 +49,13 @@
     "sceneSelector": {
         "customScene": "自定义场景"
     },
+    "tooltip": {
+        "switchLanguage": "切换语言",
+        "selectTheme": "选择主题",
+        "sceneManage": "管理自定义场景",
+        "toggleMode": "切换明/暗模式",
+        "github": "在 GitHub 上查看"
+    },
     "sceneManage": {
         "title": "自定义场景管理",
         "description": "在此管理您的自定义翻译场景。您可以添加、编辑、删除或重新排序场景，以根据您的需求定制翻译体验。所有更改均保存在您的浏览器中，并可随时重置为默认设置。",

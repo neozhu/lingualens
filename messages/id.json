@@ -78,5 +78,12 @@
         "aiGeneratingPrompt": "AI sedang membuat prompt...",
         "promptGeneratedSuccess": "Prompt berhasil dibuat",
         "promptGenerationFailed": "Gagal membuat prompt, silakan coba lagi"
+    },
+    "tooltip": {
+        "switchLanguage": "Ganti Bahasa",
+        "selectTheme": "Pilih Tema",
+        "sceneManage": "Kelola Skena Kustom",
+        "toggleMode": "Beralih Mode Terang/Gelap",
+        "github": "Lihat di GitHub"
     }
 }

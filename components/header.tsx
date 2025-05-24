@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Languages } from "lucide-react";
+import { Languages, Clapperboard } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from '@/i18n/navigation';
 import { ModeToggle } from "./mode-toggle";
@@ -10,6 +10,7 @@ import { LanguageSwitcher } from "./language-switcher";
 import { useTheme } from 'next-themes';
 import Image from 'next/image'
 import { useTranslations } from 'next-intl';
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const Header = () => {
     const [isMounted, setIsMounted] = useState(false);
@@ -31,28 +32,74 @@ export const Header = () => {
                     </Link>
                 </div>                
                 <div className="flex justify-end items-center w-full gap-4">
-                    <LanguageSwitcher />
-                    <ThemeSelector />
-                    <ModeToggle />
-                    <Button variant="outline" size="icon" asChild>
-                        <Link
-                            href={githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="GitHub 仓库"
-                        >
-                            <Image
-                                src={
-                                    theme === 'dark'
-                                        ? '/github-mark-white.svg'
-                                        : '/github-mark.svg'
-                                }
-                                alt="GitHub 仓库"
-                                className="w-5 h-5"
-                                width="40" height="40"
-                            />
-                        </Link>
-                    </Button>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <div><LanguageSwitcher /></div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{t('tooltip.switchLanguage')}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <div><ThemeSelector /></div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{t('tooltip.selectTheme')}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button variant="outline" size="icon" asChild>
+                                <Link
+                                    href="/scene-manage"
+                                    aria-label={t('sceneSelector.customScene')}
+                                >
+                                    <Clapperboard className="w-5 h-5" />
+                                </Link>
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{t('tooltip.sceneManage')}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <div><ModeToggle /></div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{t('tooltip.toggleMode')}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button variant="outline" size="icon" asChild>
+                                <Link
+                                    href={githubUrl}
+                                    target="_blank"
+                                    aria-label="GitHub"
+                                >
+                                    <Image
+                                        src={
+                                            theme === 'dark'
+                                                ? '/github-mark-white.svg'
+                                                : '/github-mark.svg'
+                                        }
+                                        alt="GitHub"
+                                        className="w-5 h-5"
+                                        width="40" height="40"
+                                    />
+                                </Link>
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{t('tooltip.github')}</p>
+                        </TooltipContent>
+                    </Tooltip>
                 </div>
             </div>
         </header>

@@ -50,6 +50,13 @@
     "sceneSelector": {
         "customScene": "Custom Scenes"
     },
+    "tooltip": {
+        "switchLanguage": "Switch Language",
+        "selectTheme": "Select Theme",
+        "sceneManage": "Manage Custom Scenes",
+        "toggleMode": "Toggle Light/Dark Mode",
+        "github": "View on GitHub"
+    },
     "sceneManage": {
         "title": "Custom Scene Management",
         "description": "Manage your custom translation scenes here. You can add, edit, delete, or reorder scenes to tailor the translation experience to your needs. All changes are saved in your browser and can be reset to the default at any time.",

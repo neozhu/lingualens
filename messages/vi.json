@@ -78,5 +78,12 @@
         "aiGeneratingPrompt": "AI đang tạo prompt...",
         "promptGeneratedSuccess": "Tạo prompt thành công",
         "promptGenerationFailed": "Tạo prompt thất bại, vui lòng thử lại"
+    },
+    "tooltip": {
+        "switchLanguage": "Chuyển đổi ngôn ngữ",
+        "selectTheme": "Chọn chủ đề",
+        "sceneManage": "Quản lý cảnh tùy chỉnh",
+        "toggleMode": "Chuyển đổi chế độ Sáng/Tối",
+        "github": "Xem trên GitHub"
     }
 }

@@ -78,5 +78,12 @@
         "aiGeneratingPrompt": "AI กำลังสร้างพรอมต์...",
         "promptGeneratedSuccess": "สร้างพรอมต์สำเร็จ",
         "promptGenerationFailed": "สร้างพรอมต์ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง"
+    },
+    "tooltip": {
+        "switchLanguage": "เปลี่ยนภาษา",
+        "selectTheme": "เลือกธีม",
+        "sceneManage": "จัดการฉากที่กำหนดเอง",
+        "toggleMode": "สลับโหมดสว่าง/มืด",
+        "github": "ดูบน GitHub"
     }
 }

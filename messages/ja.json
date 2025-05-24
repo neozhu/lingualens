@@ -78,5 +78,12 @@
         "aiGeneratingPrompt": "AIがプロンプトを生成中...",
         "promptGeneratedSuccess": "プロンプトの生成に成功しました",
         "promptGenerationFailed": "プロンプトの生成に失敗しました。再試行してください"
+    },
+    "tooltip": {
+        "switchLanguage": "言語を切り替える",
+        "selectTheme": "テーマを選択",
+        "sceneManage": "カスタムシーンを管理",
+        "toggleMode": "ライト/ダークモードを切り替え",
+        "github": "GitHubで見る"
     }
 }

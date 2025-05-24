@@ -27,7 +27,7 @@ const groq = createGroq({
 function getLanguageNameByLocale(locale: string): string {
   const map: Record<string, string> = {
     zh: 'Simplified Chinese',
-    en: 'Simplified Chinese',
+    en: 'US English',
     de: 'German',
     fr: 'French',
     es: 'Spanish',
@@ -42,12 +42,13 @@ function getLanguageNameByLocale(locale: string): string {
   return map[locale] || 'English';
 }
 
-function createSystemPrompt(scene: Scene, locale:string): string {
+function createSystemInstructions(scene: Scene, locale:string): string {
   // General translation instructions
   const inputLang = getLanguageNameByLocale(locale);
   const baseInstructions = `
+The user's native language is ${inputLang}.
 You are a highly reliable, professional translation assistant. Always identify the primary language of the input text based on comprehensive analysis of syntax, vocabulary, and linguistic patterns. Follow these strict rules:
-- If the input's primary language is ${inputLang}, translate the entire content into US English.
+- If the input's primary language is ${inputLang}, translate the entire content into ${inputLang=='US English' ? 'Simplified Chinese':'US English'}.
 - If the input's primary language is not ${inputLang}, translate the entire content into ${inputLang}.
 - Output only the translated text. Do not include the original text, comments, explanations, or any unnecessary formatting, unless specifically required by the scenario.
 - Preserve important markdown, code, or structural formatting when present.
@@ -90,7 +91,7 @@ Translate the following text according to these requirements:
 export async function POST(req: Request) {
   const { messages, model = GEMINI_MODEL, scene,locale='en' } = await req.json();
   console.log(messages, model, scene);
-  const systemPrompt = createSystemPrompt(scene,locale);
+  const systemPrompt = createSystemInstructions(scene,locale);
   //console.log(messages, model, systemPrompt);
 
   // Select provider based on model

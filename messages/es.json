@@ -78,5 +78,12 @@
         "aiGeneratingPrompt": "La IA está generando la indicación...",
         "promptGeneratedSuccess": "Indicación generada con éxito",
         "promptGenerationFailed": "No se pudo generar la indicación, inténtelo de nuevo"
+    },
+    "tooltip": {
+        "switchLanguage": "Cambiar idioma",
+        "selectTheme": "Seleccionar tema",
+        "sceneManage": "Gestionar escenas personalizadas",
+        "toggleMode": "Alternar modo claro/oscuro",
+        "github": "Ver en GitHub"
     }
 }
