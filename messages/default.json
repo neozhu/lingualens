@@ -1,0 +1,44 @@
+{
+  "app": {
+    "title": "LinguaLens",
+    "description": "LinguaLens 智能双向翻译助手，支持多场景风格切换"
+  },
+  "nav": {
+    "home": "首页",
+    "scenes": "场景",
+    "manage": "管理",
+    "privacy": "隐私",
+    "terms": "条款",
+    "features": "功能",
+    "translation": "翻译",
+    "support": "支持",
+    "faq": "常见问题",
+    "contact": "联系我们",
+    "about": "关于"
+  },
+  "footer": {
+    "rights": "版权所有",
+    "madewith": "用爱制作"
+  },  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "retry": "重试",
+    "copy": "复制",
+    "copied": "已复制",
+    "download": "下载",
+    "upload": "上传",
+    "cancel": "取消",
+    "submit": "提交",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建"
+  },
+  "scene": {
+    "title": "系统提示生成器和场景描述",
+    "systemPrompt": "系统提示",
+    "promptDescription": "createSystemPrompt 函数根据所选场景动态生成翻译提示。",
+    "configInfo": "提示内容配置在 api/chat/route.ts 中；更新该文件以调整提示。",
+    "availableScenes": "可用场景"
+  }
+}

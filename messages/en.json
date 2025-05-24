@@ -1,0 +1,43 @@
+{
+  "app": {
+    "title": "LinguaLens",
+    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+  },  "nav": {
+    "home": "Home",
+    "scenes": "Scenes",
+    "manage": "Manage",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "features": "Features",
+    "translation": "Translation",
+    "support": "Support",
+    "faq": "FAQ",
+    "contact": "Contact Me",
+    "about": "About"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "madewith": "Made with"
+  },  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "copy": "Copy",
+    "copied": "Copied",
+    "download": "Download",
+    "upload": "Upload",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create"
+  },
+  "scene": {
+    "title": "System Prompt Generator and Scene Descriptions",
+    "systemPrompt": "System instructions",
+    "promptDescription": "The createSystemPrompt function dynamically generates translation prompts based on the selected scene.",
+    "configInfo": "Prompt content is configured in api/chat/route.ts; update that file to adjust the prompts.",
+    "availableScenes": "Available Scenes"
+  }
+}

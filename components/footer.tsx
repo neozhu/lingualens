@@ -1,7 +1,8 @@
 // components/Footer.tsx
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image'
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 interface MenuItem {
   title: string;
@@ -23,36 +24,48 @@ export const Footer: React.FC<FooterProps> = ({
     title: 'LinguaLens',
     url: '/',
   },
-  tagline = 'AI translation assistant with multi-scenario style switching',
-  menuItems = [
-    {
-      title: 'Features',
-      links: [
-        { text: 'Translation', url: 'https://github.com/neozhu/lingualens' },
-        { text: 'Scene Modes', url: '/scene' },
-      ],
-    },
-    {
-      title: 'Support',
-      links: [
-        { text: 'FAQ', url: 'https://github.com/neozhu/lingualens' },
-        { text: 'Contact Me', url: 'https://blazorserver.com/contact' },
-      ],
-    },
-    {
-      title: 'About',
-      links: [
-        { text: 'Privacy Policy', url: '/privacy' },
-        { text: 'Terms of Service', url: '/terms' },
-      ],
-    },
-  ],
-  copyright = '© 2025 LinguaLens. All rights reserved.',
-  bottomLinks = [
-    { text: 'Privacy Policy', url: '/privacy' },
-    { text: 'Terms of Service', url: '/terms' },
-  ],
+  tagline,
+  menuItems,
+  copyright,
+  bottomLinks,
 }: FooterProps) => {
+  // 使用 next-intl 的 useTranslations 钩子获取翻译内容
+  const t = useTranslations();
+  
+  // 使用翻译内容设置默认值
+  tagline = tagline || t('app.description');
+  copyright = copyright || `© ${new Date().getFullYear()} LinguaLens. ${t('footer.rights')}`;
+  
+  // 设置菜单项及其翻译
+  menuItems = menuItems || [
+    {
+      title: t('nav.features'),
+      links: [
+        { text: t('nav.translation'), url: 'https://github.com/neozhu/lingualens' },
+        { text: t('nav.scenes'), url: '/scene' },
+      ],
+    },
+    {
+      title: t('nav.support'),
+      links: [
+        { text: t('nav.faq'), url: 'https://github.com/neozhu/lingualens' },
+        { text: t('nav.contact'), url: 'https://blazorserver.com/contact' },
+      ],
+    },
+    {
+      title: t('nav.about'),
+      links: [
+        { text: t('nav.privacy'), url: '/privacy' },
+        { text: t('nav.terms'), url: '/terms' },
+      ],
+    },
+  ];
+  
+  // 设置底部链接及其翻译
+  bottomLinks = bottomLinks || [
+    { text: t('nav.privacy'), url: '/privacy' },
+    { text: t('nav.terms'), url: '/terms' },
+  ];
   return (
     <footer className="bg-background py-12">
       <div className="container mx-auto px-4">

@@ -1,0 +1,43 @@
+{
+  "app": {
+    "title": "LinguaLens",
+    "description": "LinguaLens Intelligenter bidirektionaler Übersetzer, der mehrere Szenenformate unterstützt"
+  },  "nav": {
+    "home": "Startseite",
+    "scenes": "Szenen",
+    "manage": "Verwalten",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "features": "Funktionen",
+    "translation": "Übersetzung",
+    "support": "Unterstützung",
+    "faq": "FAQ",
+    "contact": "Kontaktieren Sie uns",
+    "about": "Über uns"
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "madewith": "Hergestellt mit"
+  },  "common": {
+    "loading": "Wird geladen...",
+    "error": "Ein Fehler ist aufgetreten",
+    "retry": "Wiederholen",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "download": "Herunterladen",
+    "upload": "Hochladen",
+    "cancel": "Abbrechen",
+    "submit": "Absenden",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen"
+  },
+  "scene": {
+    "title": "System-Prompt-Generator und Szenenbeschreibungen",
+    "systemPrompt": "System instructions",
+    "promptDescription": "Die Funktion createSystemPrompt generiert dynamisch Übersetzungsaufforderungen basierend auf der ausgewählten Szene.",
+    "configInfo": "Prompt-Inhalte werden in api/chat/route.ts konfiguriert; aktualisieren Sie diese Datei, um die Prompts anzupassen.",
+    "availableScenes": "Verfügbare Szenen"
+  }
+}

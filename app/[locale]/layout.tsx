@@ -10,6 +10,10 @@ import { cn } from "@/lib/utils";
 import { Footer } from "@/components/footer";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import {NextIntlClientProvider, hasLocale} from 'next-intl';
+import {notFound} from 'next/navigation';
+import {routing} from '@/i18n/routing';
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -53,14 +57,20 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{locale: string}>;
 }>) {
+   const {locale} = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
   const cookieStore = await cookies()
   const activeThemeValue = cookieStore.get("active_theme")?.value
   const isScaled = activeThemeValue?.endsWith("-scaled")
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(`${geistSans.variable} ${geistMono.variable}`,
           "bg-background overscroll-none font-sans antialiased",
@@ -69,6 +79,7 @@ export default async function RootLayout({
           fontVariables
         )}
       >
+        <NextIntlClientProvider locale={locale} messages={(await import(`../../messages/${locale}.json`)).default}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -93,6 +104,7 @@ export default async function RootLayout({
             <Toaster />
           </ActiveThemeProvider>
         </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
