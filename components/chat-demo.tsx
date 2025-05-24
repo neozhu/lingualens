@@ -16,6 +16,7 @@ import { SCENES as DEFAULT_SCENES, Scene } from "@/lib/scenes"
 import { Message } from "@/components/ui/chat-message"
 import { MODELS } from "@/lib/models"
 import { SceneSelector } from "@/components/scene-selector"
+import { useLocale } from "next-intl"
 
 type ChatDemoProps = {
   initialMessages?: UseChatOptions["initialMessages"]
@@ -63,6 +64,7 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
   const handleSceneClick = (scene: Scene) => {
     setSelectedScene(scene)
   }
+  const locale = useLocale();
   const {
     messages,
     input,
@@ -78,6 +80,7 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
     body: {
       model: selectedModel,
       scene: selectedScene,
+      locale,
     },
   })
 

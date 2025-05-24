@@ -69,7 +69,7 @@ Translate the following text according to these requirements:
 
 
 export async function POST(req: Request) {
-  const { messages, model = GEMINI_MODEL, scene } = await req.json();
+  const { messages, model = GEMINI_MODEL, scene,locale='zh' } = await req.json();
   console.log(messages, model, scene);
   const systemPrompt = createSystemPrompt(scene);
   //console.log(messages, model, systemPrompt);
