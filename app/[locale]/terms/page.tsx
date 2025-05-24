@@ -1,5 +1,6 @@
 // app/terms/page.tsx
 import React from 'react';
+import Link from 'next/link';
 
 export default function TermsOfService() {
   return (
@@ -24,7 +25,7 @@ export default function TermsOfService() {
       <section className="mt-6">
         <h2 className="text-lg font-semibold mb-2">3. License and Open Source</h2>
         <p className="text-sm text-muted-foreground">
-          The Service&apos;s source code is available under the MIT License. You are free to use, copy, modify, merge, publish, distribute, and sublicense the software in accordance with the MIT terms. A copy of the MIT License can be found in the <a href="/LICENSE" className="text-blue-600 underline">LICENSE</a> file.
+          The Service&apos;s source code is available under the MIT License. You are free to use, copy, modify, merge, publish, distribute, and sublicense the software in accordance with the MIT terms. A copy of the MIT License can be found in the <Link href="/LICENSE" className="text-blue-600 underline">LICENSE</Link> file.
         </p>
       </section>
 
@@ -45,7 +46,7 @@ export default function TermsOfService() {
       <section className="mt-6">
         <h2 className="text-lg font-semibold mb-2">6. Privacy</h2>
         <p className="text-sm text-muted-foreground">
-          Please refer to our <a href="/privacy" className="text-blue-600 underline">Privacy Policy</a> for details on how we handle personal information.
+          Please refer to our <Link href="/privacy" className="text-blue-600 underline">Privacy Policy</Link> for details on how we handle personal information.
         </p>
       </section>
 

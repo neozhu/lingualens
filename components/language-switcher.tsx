@@ -22,6 +22,7 @@ const languages = [
   { code: 'vi', name: 'Tiếng Việt' },
   { code: 'my', name: 'မြန်မာ' },
   { code: 'ms', name: 'Bahasa Melayu' },
+  { code: 'ja', name: '日本語' },
 ];
 
 export function LanguageSwitcher() {

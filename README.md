@@ -9,7 +9,19 @@
 * **Bidirectional Translation**: Automatically translates Chinese to English and any non-Chinese language (e.g., English, French, German) to Chinese.
 * **Scene-based Context**: Tailors translations based on the context of specific work-related scenarios like online meetings, emails, Teams chats, and technical support.
 * **Custom Scene Management**: Create, edit, delete, and reorder your own custom translation scenes with a user-friendly interface. All custom scenes are saved in your browser's localStorage.
-* **Multilingual Support**: Currently supports translations between Chinese and several other languages, including English, French, German, etc.
+* **Multilingual Support**: Supports bidirectional translation between Chinese and a wide range of languages, including English, French, German, Dutch, Spanish, Indonesian, Thai, Vietnamese, Burmese, and Malay. Both the interface and translation engine support these languages.
+* **Internationalization**: Implements full internationalization (i18n) with language switcher and locale-based routing. Supported interface and translation languages:
+  - 简体中文 (Chinese)
+  - English
+  - Deutsch (German)
+  - Français (French)
+  - Español (Spanish)
+  - Nederlands (Dutch)
+  - Bahasa Indonesia (Indonesian)
+  - ไทย (Thai)
+  - Tiếng Việt (Vietnamese)
+  - မြန်မာ (Burmese)
+  - Bahasa Melayu (Malay)
 * **Customizable User Interface**: Easily switch between different scenes for translations, ensuring the tone and style fit the specific use case.
 * **User-Friendly Design**: Built with **Next.js** and **ShadCN UI**, making the interface simple and intuitive.
 * **Supports Gemini 2.5 Flash Preview 04-17**: You can choose the Gemini 2.5 Flash Preview 04-17 model, which provides excellent translation quality.
@@ -159,6 +171,17 @@ The new custom scene management feature allows you to:
 5. **Reset to Default**: Return to the default set of scenes at any time.
 
 All custom scenes are automatically saved in your browser's localStorage and will be available when you return to the application.
+
+## **Extending Supported Languages**
+
+If you want to add support for more languages (for both translation and the interface), follow these steps:
+
+1. **Add the locale code** to the `locales` array in `middleware.ts` and update the language switcher in `components/language-switcher.tsx`.
+2. **Create a new translation file** in the `messages/` directory, e.g., `messages/ja.json` for Japanese. Use the structure of `en.json` as a template and provide translations for all keys.
+3. **(Optional) Add scene prompt logic**: If your new language requires special translation logic, update the prompt generation in `app/api/chat/route.ts`.
+4. **Restart the development server** to apply the changes.
+
+This will enable both UI and translation support for the new language.
 
 ## **Contributing**
 

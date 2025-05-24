@@ -39,7 +39,7 @@ function SortableItem({ scene, idx, handleEdit, handleDelete }: {
   handleDelete: (idx: number) => void;
 }) {
   const locale = useLocale();
-  const t = useTranslations('sceneManage');
+
   const {
     attributes,
     listeners,

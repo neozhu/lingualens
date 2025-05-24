@@ -3,7 +3,7 @@ import {routing} from './i18n/routing';
  
 export default createMiddleware({
   // 支持的语言
-  locales: ['zh', 'en', 'de', 'fr', 'es', 'nl', 'id', 'th', 'vi', 'my', 'ms'],
+  locales: ['zh', 'en', 'de', 'fr', 'es', 'nl', 'id', 'th', 'vi', 'my', 'ms','ja'],
   
   // 默认语言
   defaultLocale: 'en',
