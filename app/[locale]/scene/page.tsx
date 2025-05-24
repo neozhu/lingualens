@@ -4,9 +4,9 @@ import { SCENES } from '@/lib/scenes';
 import { useTranslations, useLocale } from 'next-intl';
 
 export default function SceneDoc() {
-    const t = useTranslations();
-    const locale = useLocale();
-    const functionCode = `function createSystemPrompt(scene: Scene): string {
+  const t = useTranslations();
+  const locale = useLocale();
+  const functionCode = `function createSystemPrompt(scene: Scene): string {
       // General translation instructions
       const baseInstructions = \`
     You are a highly reliable, professional translation assistant. Always identify the primary language of the input text based on comprehensive analysis of syntax, vocabulary, and linguistic patterns. Follow these strict rules:
@@ -48,20 +48,21 @@ export default function SceneDoc() {
           {t('scene.promptDescription')}
         </p>
         <p className=" text-muted-foreground">
-        {t('scene.configInfo')}
+          {t('scene.configInfo')}
         </p>
         <pre className="px-4 py-5">
-          <code className="relative block font-mono text-sm leading-normal whitespace-pre-wrap break-words" data-language="javascript"> 
-                {functionCode}
+          <code className="relative block font-mono text-sm leading-normal whitespace-pre-wrap break-words" data-language="javascript">
+            {functionCode}
           </code>
         </pre>
       </section>      <section>
         <h2 className="text-xl font-semibold mb-4">{t('scene.availableScenes')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {SCENES.map((s) => (
-            <Card key={s.name}>              <CardContent className="space-y-3">
+            <Card key={s.name}>
+              <CardContent className="space-y-3">
                 <h3 className="text-lg font-medium">
-                  {locale === 'zh' || locale === 'default' ? s.name : s.name_en}
+                  {locale === 'en' ? s.name_en:s.name}
                 </h3>
                 <p className="text-sm text-muted-foreground">{s.description}</p>
               </CardContent>

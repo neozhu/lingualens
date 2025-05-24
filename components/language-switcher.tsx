@@ -11,7 +11,7 @@ import { Globe } from 'lucide-react';
 
 // 定义支持的语言
 const languages = [
-  { code: 'zh', name: '中文' },
+  { code: 'zh', name: '简体中文' },
   { code: 'en', name: 'English' },
   { code: 'de', name: 'Deutsch' },
 ];

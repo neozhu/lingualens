@@ -39,5 +39,34 @@
     "promptDescription": "Die Funktion createSystemPrompt generiert dynamisch Übersetzungsaufforderungen basierend auf der ausgewählten Szene.",
     "configInfo": "Prompt-Inhalte werden in api/chat/route.ts konfiguriert; aktualisieren Sie diese Datei, um die Prompts anzupassen.",
     "availableScenes": "Verfügbare Szenen"
-  }
+  },
+  "sceneManage": {
+    "title": "Benutzerdefinierte Szenenverwaltung",
+    "description": "Verwalten Sie hier Ihre benutzerdefinierten Übersetzungsszenen. Sie können Szenen hinzufügen, bearbeiten, löschen oder neu anordnen, um das Übersetzungserlebnis an Ihre Bedürfnisse anzupassen. Alle Änderungen werden in Ihrem Browser gespeichert und können jederzeit auf die Standardeinstellungen zurückgesetzt werden.",
+    "addScene": "Neue Szene hinzufügen",
+    "resetToDefault": "Auf Standard zurücksetzen",
+    "editScene": "Szene bearbeiten",
+    "newScene": "Neue Szene",
+    "name": "Name",
+    "englishName": "Englischer Name",
+    "sceneDescription": "Szenenbeschreibung",
+    "descriptionForPrompt": "(für Prompt-Generierung)",
+    "translationPrompt": "Übersetzungs-Prompt",
+    "promptPlaceholder": "Prompt eingeben oder Zauberstab klicken, um automatisch zu generieren (unterstützt Markdown-Format)",
+    "aiGenerating": "KI generiert...",
+    "characters": "Zeichen",
+    "lengthSuggestion": "(empfohlen zwischen 150-350 Zeichen)",
+    "generatePrompt": "KI verwenden, um Prompt auf Basis von Name und Beschreibung zu generieren",
+    "fillNameDescription": "Bitte zuerst englischen Namen und Beschreibung ausfüllen",
+    "nameDescriptionRequired": "⚠️ Englischer Name und Beschreibung werden benötigt, um KI für die Prompt-Generierung zu nutzen",
+    "sceneDeleted": "Szene gelöscht",
+    "sceneUpdated": "Szene aktualisiert",
+    "newSceneAdded": "Neue Szene hinzugefügt",
+    "sceneOrderUpdated": "Szenenreihenfolge aktualisiert",
+    "resetToDefaultDone": "Auf Standardszenen zurückgesetzt",
+    "needNameDescForPrompt": "Englischer Name und Beschreibung werden benötigt, um Prompt zu generieren",
+    "aiGeneratingPrompt": "KI generiert Prompt...",
+    "promptGeneratedSuccess": "Prompt erfolgreich generiert",
+    "promptGenerationFailed": "Prompt-Generierung fehlgeschlagen, bitte erneut versuchen"
+  }}
 }

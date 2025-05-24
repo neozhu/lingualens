@@ -12,6 +12,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { cn } from "@/lib/utils"
 import { GripVertical, Pencil, Trash2, Plus, Settings, Save, X, WandSparkles } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useTranslations, useLocale } from "next-intl"
 
 const LOCAL_KEY = "customScenes"
 
@@ -37,6 +38,8 @@ function SortableItem({ scene, idx, handleEdit, handleDelete }: {
   handleEdit: (idx: number) => void;
   handleDelete: (idx: number) => void;
 }) {
+  const locale = useLocale();
+  const t = useTranslations('sceneManage');
   const {
     attributes,
     listeners,
@@ -71,7 +74,7 @@ function SortableItem({ scene, idx, handleEdit, handleDelete }: {
           >
             <GripVertical className="h-4 w-4" />
           </span>
-          <div className="font-semibold">{scene.name} ({scene.name_en})</div>
+          <div className="font-semibold"> {locale === 'en' ? scene.name_en:scene.name}</div>
         </div>        <div className="flex gap-2">
           <Button size="sm" variant="ghost" onClick={() => handleEdit(idx)}>
             <Pencil className="h-4 w-4" />
@@ -108,6 +111,8 @@ function SceneSkeleton() {
 }
 
 export default function SceneManagePage() {
+  const t = useTranslations('sceneManage')
+  
   const [scenes, setScenes] = useState<Scene[]>([])
   const [loading, setLoading] = useState(true)
   const [editingIdx, setEditingIdx] = useState<number | null>(null)
@@ -144,7 +149,7 @@ export default function SceneManagePage() {
     setScenes(next)
     setLocalScenes(next)
     setEditingIdx(null)
-    toast.success("场景已删除")
+    toast.success(t('sceneDeleted'))
     setForm({})
   }
 
@@ -166,13 +171,13 @@ export default function SceneManagePage() {
     if (editingIdx === -1) {
       // Add new scene at the beginning
       newScenes = [newScene, ...scenes]
-      toast.success("新场景已添加")
+      toast.success(t('newSceneAdded'))
     } else if (editingIdx !== null) {
       // Edit existing scene
       newScenes = scenes.map((scene, i) =>
         i === editingIdx ? newScene : scene
       )
-      toast.success("场景已更新")
+      toast.success(t('sceneUpdated'))
     } else {
       return
     }
@@ -182,7 +187,6 @@ export default function SceneManagePage() {
     setEditingIdx(null)
     setForm({})
   }
-
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -195,22 +199,21 @@ export default function SceneManagePage() {
 
         const newScenes = arrayMove(prev, oldIndex, newIndex);
         setLocalScenes(newScenes);
-        toast.success("场景顺序已更新");
+        toast.success(t('sceneOrderUpdated'));
         return newScenes;
       });
     }
   }
-
   const handleGeneratePrompt = async () => {
     // Check if we have the required fields
     if (!form.name_en || !form.description) {
-      toast.error("需要填写英文名称和描述才能生成提示词")
+      toast.error(t('needNameDescForPrompt'))
       return
     }
 
     try {
       setGenerating(true)
-      toast.info("正在使用 AI 生成提示词...", { duration: 3000 })
+      toast.info(t('aiGeneratingPrompt'), { duration: 3000 })
 
       const response = await fetch('/api/generate', {
         method: 'POST',
@@ -232,34 +235,33 @@ export default function SceneManagePage() {
 
       // Update the form with the generated prompt
       setForm(prev => ({ ...prev, prompt: responseText }))
-      toast.success("已成功生成提示词")
+      toast.success(t('promptGeneratedSuccess'))
     } catch (error) {
       console.error("Error generating prompt:", error)
-      toast.error("生成提示词失败，请重试")
+      toast.error(t('promptGenerationFailed'))
     } finally {
       setGenerating(false)
     }
   }
-
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">自定义场景管理</h1>
+      <h1 className="text-2xl font-bold mb-4">{t('title')}</h1>
       <p className="mb-6 text-muted-foreground text-sm">
-        Manage your custom translation scenes here. You can add, edit, delete, or reorder scenes to tailor the translation experience to your needs. All changes are saved in your browser and can be reset to the default at any time.
+        {t('description')}
       </p>      <div className="mb-4 flex gap-2">
-        <Button onClick={handleAdd} variant="outline" title="Add New Scene">
+        <Button onClick={handleAdd} variant="outline" title={t('addScene')}>
           <Plus className="h-4 w-4" />
-          <span className="sr-only">Add New Scene</span>
+          <span className="sr-only">{t('addScene')}</span>
         </Button>
         <Button variant="outline" onClick={() => {
           setScenes(SCENES)
           setLocalScenes(SCENES)
           setEditingIdx(null)
-          toast.success("已重置为默认场景")
+          toast.success(t('resetToDefaultDone'))
           setForm({})
-        }} title="Reset to Default">
+        }} title={t('resetToDefault')}>
           <Settings className="h-4 w-4" />
-          <span className="sr-only">Reset to Default</span>
+          <span className="sr-only">{t('resetToDefault')}</span>
         </Button>
       </div>
 
@@ -296,24 +298,24 @@ export default function SceneManagePage() {
       {(editingIdx !== null || form.name) && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-lg shadow-lg relative">
-            <Button variant="outline" onClick={() => { setEditingIdx(null); setForm({}) }} title="Cancel" className="absolute top-3 right-3 p-2 h-8 w-8 flex items-center justify-center">
+            <Button variant="outline" onClick={() => { setEditingIdx(null); setForm({}) }} title={t('common.cancel')} className="absolute top-3 right-3 p-2 h-8 w-8 flex items-center justify-center">
               <X className="h-4 w-4" />
-              <span className="sr-only">Cancel</span>
+              <span className="sr-only">{t('common.cancel')}</span>
             </Button>
-            <h2 className="text-lg font-bold mb-2">{editingIdx !== null ? '编辑场景' : '新增场景'}</h2>
+            <h2 className="text-lg font-bold mb-2">{editingIdx !== -1 ? t('editScene') : t('newScene')}</h2>
             <div className="space-y-2">              <div>
-              <label className="text-xs text-muted-foreground mb-1 block">中文名称</label>
+              <label className="text-xs text-muted-foreground mb-1 block">{t('name')}</label>
               <Input
-                placeholder="输入中文名称"
+                placeholder={t('name')}
                 value={form.name || ''}
                 onChange={e => handleChange('name', e.target.value)}
                 className={cn(!form.name && "border-amber-200")}
               />
             </div>
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">英文名称</label>
+                <label className="text-xs text-muted-foreground mb-1 block">{t('englishName')}</label>
                 <Input
-                  placeholder="输入英文名称"
+                  placeholder={t('englishName')}
                   value={form.name_en || ''}
                   onChange={e => handleChange('name_en', e.target.value)}
                   className={cn(!form.name_en && "border-amber-200")}
@@ -321,11 +323,10 @@ export default function SceneManagePage() {
               </div><div className="flex gap-2">
                 <div className="flex-grow">
                   <label className="text-xs text-muted-foreground mb-1 block">
-                    场景描述 <span className="text-blue-500">(用于生成提示词)</span>
-                  </label>
-                  <div className="flex items-end gap-2">
+                    {t('sceneDescription')} <span className="text-blue-500">{t('descriptionForPrompt')}</span>
+                  </label>                  <div className="flex items-end gap-2">
                     <Input
-                      placeholder="详细描述翻译场景"
+                      placeholder={t('sceneDescription')}
                       value={form.description || ''}
                       onChange={e => handleChange('description', e.target.value)}
                       className={cn(!form.description && "border-amber-200")}
@@ -335,7 +336,7 @@ export default function SceneManagePage() {
                       size="icon"
                       onClick={handleGeneratePrompt}
                       disabled={!form.name_en || !form.description || generating}
-                      title="使用 AI 生成提示词"
+                      title={t('generatePrompt')}
                       className={cn(
                         "flex-shrink-0 border-dashed mt-0",
                         generating ? "animate-pulse bg-muted" : "hover:border-primary hover:text-primary"
@@ -343,16 +344,16 @@ export default function SceneManagePage() {
                     >
 
                       <WandSparkles className="h-4 w-4" />
-                      <span className="sr-only">使用 AI 生成提示词</span>
+                      <span className="sr-only">{t('generatePrompt')}</span>
                     </Button>
                   </div>
                 </div>
               </div>
               <div>
                 <label className="text-xs text-muted-foreground mb-1 block">
-                  翻译提示词 {generating && <span className="text-blue-500 animate-pulse">AI 正在生成中...</span>}
+                  {t('translationPrompt')} {generating && <span className="text-blue-500 animate-pulse">{t('aiGenerating')}</span>}
                 </label>                <Textarea
-                  placeholder="输入提示词或点击魔法棒自动生成 (支持 Markdown 格式)"
+                  placeholder={t('promptPlaceholder')}
                   rows={6}
                   value={form.prompt || ''}
                   onChange={e => handleChange('prompt', e.target.value)} className={cn(
@@ -360,23 +361,22 @@ export default function SceneManagePage() {
                     !form.prompt && "border-amber-200",
                     form.prompt && form.prompt.length > 350 && "border-amber-500"
                   )}
-                />
-                {form.prompt && (
+                />                {form.prompt && (
                   <div className="text-xs text-right mt-1 text-muted-foreground">
-                    {form.prompt.length} 字符 {form.prompt.length > 350 &&
-                      <span className="text-amber-500">（建议精简到 150-350 字）</span>}
+                    {form.prompt.length} {t('characters')} {form.prompt.length > 350 &&
+                      <span className="text-amber-500">{t('lengthSuggestion')}</span>}
                   </div>
                 )}
               </div>
-            </div>            
+            </div>
             <div className="flex gap-2 mt-4 justify-end">
               <Button variant="outline"
                 onClick={handleSave}
                 disabled={!form.name || !form.name_en || !form.description || !form.prompt}
-                title="Save"
+                title={t('common.save')}
               >
                 <Save className="h-4 w-4" />
-                <span className="sr-only">Save</span>
+                <span className="sr-only">{t('common.save')}</span>
               </Button>
             </div>            {editingIdx === null && (<div className="mt-4">
               <Button
@@ -387,27 +387,26 @@ export default function SceneManagePage() {
                 )}
                 variant="outline"
                 disabled={generating || !form.name_en || !form.description}
-                title="使用 AI 生成提示词"
+                title={t('generatePrompt')}
               >
                 {generating ? (
                   <>
-                    <span className="animate-pulse">AI 正在生成中...</span>
+                    <span className="animate-pulse">{t('aiGenerating')}</span>
                     <WandSparkles className="h-5 w-5 ml-2 animate-pulse" />
                   </>
                 ) : (
                   <>
                     {!form.name_en || !form.description ? (
-                      "请先填写英文名称和描述"
+                      t('fillNameDescription')
                     ) : (
-                      "使用 AI 根据名称和描述自动生成提示词"
+                      t('generatePrompt')
                     )}
                     <WandSparkles className="h-5 w-5 ml-2" />
                   </>
                 )}
-              </Button>
-              {(!form.name_en || !form.description) && (
+              </Button>              {(!form.name_en || !form.description) && (
                 <p className="text-xs text-muted-foreground text-center mt-2">
-                  ⚠️ 需要填写英文名称和描述才能使用 AI 生成翻译提示词
+                  ⚠️ {t('nameDescriptionRequired')}
                 </p>
               )}
             </div>

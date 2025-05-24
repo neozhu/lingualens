@@ -39,5 +39,34 @@
     "promptDescription": "createSystemPrompt 函数根据所选场景动态生成翻译提示。",
     "configInfo": "提示内容配置在 api/chat/route.ts 中；更新该文件以调整提示。",
     "availableScenes": "可用场景"
-  }
+  },
+  "sceneManage": {
+    "title": "自定义场景管理",
+    "description": "在此管理您的自定义翻译场景。您可以添加、编辑、删除或重新排序场景，以根据您的需求定制翻译体验。所有更改均保存在您的浏览器中，并可随时重置为默认设置。",
+    "addScene": "添加新场景",
+    "resetToDefault": "重置为默认",
+    "editScene": "编辑场景",
+    "newScene": "新增场景",
+    "name": "名称",
+    "englishName": "英文名称",
+    "sceneDescription": "场景描述",
+    "descriptionForPrompt": "（用于生成提示词）",
+    "translationPrompt": "翻译提示词",
+    "promptPlaceholder": "输入提示词或点击魔法棒自动生成（支持 Markdown 格式）",
+    "aiGenerating": "AI 正在生成中...",
+    "characters": "字符",
+    "lengthSuggestion": "（建议精简到 150-350 字）",
+    "generatePrompt": "使用 AI 根据名称和描述自动生成提示词",
+    "fillNameDescription": "请先填写英文名称和描述",
+    "nameDescriptionRequired": "⚠️ 需要填写英文名称和描述才能使用 AI 生成翻译提示词",
+    "sceneDeleted": "场景已删除",
+    "sceneUpdated": "场景已更新",
+    "newSceneAdded": "新场景已添加",
+    "sceneOrderUpdated": "场景顺序已更新",
+    "resetToDefaultDone": "已重置为默认场景",
+    "needNameDescForPrompt": "需要填写英文名称和描述才能生成提示词",
+    "aiGeneratingPrompt": "正在使用 AI 生成提示词...",
+    "promptGeneratedSuccess": "已成功生成提示词",
+    "promptGenerationFailed": "生成提示词失败，请重试"
+  }}
 }
