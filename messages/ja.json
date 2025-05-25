@@ -85,5 +85,20 @@
         "sceneManage": "カスタムシーンを管理",
         "toggleMode": "ライト/ダークモードを切り替え",
         "github": "GitHubで見る"
+    },
+    "modeToggle": {
+        "switch": "テーマを切り替える",
+        "light": "ライトモード",
+        "dark": "ダークモード",
+        "system": "システムデフォルト"
+    },
+    "themes": {
+        "default": "デフォルト",
+        "neutral": "ニュートラル",
+        "stone": "ストーン",
+        "zinc": "亜鉛",
+        "gray": "グレー",
+        "slate": "スレート",
+        "scaled": "スケールド"
     }
 }

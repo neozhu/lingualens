@@ -1,30 +1,30 @@
 export const THEMES = [
     {
-      name: "默认",
+      name: "Default",
       value: "default",
     },
     {
-      name: "中性",
+      name: "Neutral",
       value: "neutral",
     },
     {
-      name: "石头",
+      name: "Stone",
       value: "stone",
     },
     {
-      name: "锌",
+      name: "Zinc",
       value: "zinc",
     },
     {
-      name: "灰色",
+      name: "Gray",
       value: "gray",
     },
     {
-      name: "石板灰",
+      name: "Slate",
       value: "slate",
     },
     {
-      name: "缩放",
+      name: "Scaled",
       value: "scaled",
     },
   ]

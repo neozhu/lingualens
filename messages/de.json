@@ -45,7 +45,7 @@
     "chat": {
         "inputPlaceholder": "Geben Sie Inhalte zum Übersetzen ein...",
         "trySuggestions": "Versuchen Sie diese Vorschläge ✨",
-        "copyMessage": "Antwort in die Zwischenablage kopiert!" 
+        "copyMessage": "Antwort in die Zwischenablage kopiert!"
     },
     "sceneSelector": {
         "customScene": "Benutzerdefinierte Szenen"
@@ -85,5 +85,20 @@
         "sceneManage": "Benutzerdefinierte Szenen verwalten",
         "toggleMode": "Hell-/Dunkelmodus umschalten",
         "github": "Auf GitHub ansehen"
+    },
+    "modeToggle": {
+        "switch": "Thema wechseln",
+        "light": "Heller Modus",
+        "dark": "Dunkler Modus",
+        "system": "Systemstandard"
+    },
+    "themes": {
+        "default": "Standard",
+        "neutral": "Neutral",
+        "stone": "Stein",
+        "zinc": "Zink",
+        "gray": "Grau",
+        "slate": "Schiefer",
+        "scaled": "Skaliert"
     }
 }

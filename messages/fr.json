@@ -85,5 +85,20 @@
         "sceneManage": "Gérer les scènes personnalisées",
         "toggleMode": "Basculer le mode clair/sombre",
         "github": "Voir sur GitHub"
+    },
+    "modeToggle": {
+        "switch": "Changer de thème",
+        "light": "Mode clair",
+        "dark": "Mode sombre",
+        "system": "Par défaut du système"
+    },
+    "themes": {
+        "default": "Par défaut",
+        "neutral": "Neutre",
+        "stone": "Pierre",
+        "zinc": "Zinc",
+        "gray": "Gris",
+        "slate": "Ardoise",
+        "scaled": "Échelonné"
     }
 }

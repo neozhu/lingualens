@@ -85,5 +85,20 @@
         "sceneManage": "Urus Adegan Tersuai",
         "toggleMode": "Tukar Mod Cerah/Gelap",
         "github": "Lihat di GitHub"
+    },
+    "modeToggle": {
+        "switch": "Tukar Tema",
+        "light": "Mod Cerah",
+        "dark": "Mod Gelap",
+        "system": "Lalai Sistem"
+    },
+    "themes": {
+        "default": "Lalai",
+        "neutral": "Neutral",
+        "stone": "Batu",
+        "zinc": "Zink",
+        "gray": "Kelabu",
+        "slate": "Batu Lempeng",
+        "scaled": "Diskala"
     }
 }

@@ -85,5 +85,20 @@
         "sceneManage": "Kelola Skena Kustom",
         "toggleMode": "Beralih Mode Terang/Gelap",
         "github": "Lihat di GitHub"
+    },
+    "modeToggle": {
+        "switch": "Ganti Tema",
+        "light": "Mode Terang",
+        "dark": "Mode Gelap",
+        "system": "Bawaan Sistem"
+    },
+    "themes": {
+        "default": "Default",
+        "neutral": "Netral",
+        "stone": "Batu",
+        "zinc": "Seng",
+        "gray": "Abu-abu",
+        "slate": "Batu tulis",
+        "scaled": "Berskala"
     }
 }

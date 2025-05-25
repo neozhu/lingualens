@@ -84,5 +84,20 @@
         "aiGeneratingPrompt": "正在使用 AI 生成提示词...",
         "promptGeneratedSuccess": "已成功生成提示词",
         "promptGenerationFailed": "生成提示词失败，请重试"
+    },
+    "modeToggle": {
+        "switch": "切换主题",
+        "light": "浅色模式",
+        "dark": "深色模式",
+        "system": "系统默认"
+    },
+    "themes": {
+        "default": "默认",
+        "neutral": "中性",
+        "stone": "石头",
+        "zinc": "锌色",
+        "gray": "灰色",
+        "slate": "石板",
+        "scaled": "渐变"
     }
 }

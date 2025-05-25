@@ -85,5 +85,20 @@
         "aiGeneratingPrompt": "AI is generating prompt...",
         "promptGeneratedSuccess": "Prompt generated successfully",
         "promptGenerationFailed": "Failed to generate prompt, please try again"
+    },
+    "modeToggle": {
+        "switch": "Toggle Theme",
+        "light": "Light Mode",
+        "dark": "Dark Mode",
+        "system": "System Default"
+    },
+    "themes": {
+        "default": "Default",
+        "neutral": "Neutral",
+        "stone": "Stone",
+        "zinc": "Zinc",
+        "gray": "Gray",
+        "slate": "Slate",
+        "scaled": "Scaled"
     }
 }

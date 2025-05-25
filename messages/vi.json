@@ -85,5 +85,20 @@
         "sceneManage": "Quản lý cảnh tùy chỉnh",
         "toggleMode": "Chuyển đổi chế độ Sáng/Tối",
         "github": "Xem trên GitHub"
+    },
+    "modeToggle": {
+        "switch": "Chuyển đổi giao diện",
+        "light": "Chế độ sáng",
+        "dark": "Chế độ tối",
+        "system": "Mặc định hệ thống"
+    },
+    "themes": {
+        "default": "Mặc định",
+        "neutral": "Trung tính",
+        "stone": "Đá",
+        "zinc": "Kẽm",
+        "gray": "Xám",
+        "slate": "Đá phiến",
+        "scaled": "Tỷ lệ"
     }
 }

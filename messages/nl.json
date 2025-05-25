@@ -85,5 +85,20 @@
         "sceneManage": "Aangepaste scènes beheren",
         "toggleMode": "Licht/donker modus wisselen",
         "github": "Bekijk op GitHub"
+    },
+    "modeToggle": {
+        "switch": "Thema wisselen",
+        "light": "Lichte modus",
+        "dark": "Donkere modus",
+        "system": "Systeemstandaard"
+    },
+    "themes": {
+        "default": "Standaard",
+        "neutral": "Neutraal",
+        "stone": "Steen",
+        "zinc": "Zink",
+        "gray": "Grijs",
+        "slate": "Lei",
+        "scaled": "Geschaald"
     }
 }

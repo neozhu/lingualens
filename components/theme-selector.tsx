@@ -9,31 +9,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { Check, Paintbrush } from "lucide-react"
+import { Paintbrush } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export function ThemeSelector() {
   const { activeTheme, setActiveTheme } = useThemeConfig()
-
-  // 找到当前主题的名称，用于显示在按钮上
-  const currentThemeName = THEMES.find(theme => theme.value === activeTheme)?.name || "主题"
+  const t = useTranslations()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="flex items-center gap-1 justify-between">
-          <Paintbrush className="h-4 w-4" />
-          <span className="truncate">{currentThemeName}</span>
+        <Button variant="outline" size="icon" aria-label={t('tooltip.selectTheme')}>
+          <Paintbrush className="h-[1.2rem] w-[1.2rem]" />
+          <span className="sr-only">{t('tooltip.selectTheme')}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {THEMES.map((theme) => (
           <DropdownMenuItem
-            key={theme.name}
+            key={theme.value}
             onClick={() => setActiveTheme(theme.value)}
-            className="flex items-center justify-between"
           >
-            {theme.name}
-            {activeTheme === theme.value && <Check className="h-4 w-4 ml-2" />}
+            {t(`themes.${theme.value}`)}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
