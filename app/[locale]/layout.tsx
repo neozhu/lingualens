@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider"
@@ -101,6 +102,7 @@ export default async function RootLayout({
             </main>
             <Footer />
             <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+            <SpeedInsights />
             <Toaster />
           </ActiveThemeProvider>
         </ThemeProvider>
