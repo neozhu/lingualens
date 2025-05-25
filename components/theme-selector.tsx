@@ -13,7 +13,7 @@ import { Paintbrush } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 export function ThemeSelector() {
-  const { activeTheme, setActiveTheme } = useThemeConfig()
+  const { setActiveTheme } = useThemeConfig()
   const t = useTranslations()
 
   return (
