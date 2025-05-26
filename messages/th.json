@@ -65,7 +65,7 @@
         "promptPlaceholder": "ป้อนพรอมต์หรือคลิกไม้กายสิทธิ์เพื่อสร้างอัตโนมัติ (รองรับรูปแบบ Markdown)",
         "aiGenerating": "AI กำลังสร้าง...",
         "characters": "ตัวอักษร",
-        "lengthSuggestion": "(แนะนำให้มี 150-350 ตัวอักษร)",
+        "lengthSuggestion": "(แนะนำให้มี 250-400 ตัวอักษร)",
         "generatePrompt": "ใช้ AI สร้างพรอมต์ตามชื่อและคำอธิบาย",
         "fillNameDescription": "กรุณากรอกชื่อและคำอธิบายภาษาอังกฤษก่อน",
         "nameDescriptionRequired": "⚠️ ต้องกรอกชื่อและคำอธิบายภาษาอังกฤษเพื่อใช้ AI สร้างพรอมต์",

@@ -65,7 +65,7 @@
         "promptPlaceholder": "Masukkan prompt atau klik tongkat ajaib untuk menghasilkan secara otomatis (mendukung format Markdown)",
         "aiGenerating": "AI sedang membuat...",
         "characters": "karakter",
-        "lengthSuggestion": "(disarankan antara 150-350 karakter)",
+        "lengthSuggestion": "(disarankan antara 250-400 karakter)",
         "generatePrompt": "Gunakan AI untuk membuat prompt berdasarkan nama dan deskripsi",
         "fillNameDescription": "Silakan isi nama dan deskripsi dalam bahasa Inggris terlebih dahulu",
         "nameDescriptionRequired": "⚠️ Nama dan deskripsi dalam bahasa Inggris diperlukan untuk menggunakan AI dalam pembuatan prompt",

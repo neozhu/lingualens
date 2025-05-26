@@ -71,7 +71,7 @@
         "promptPlaceholder": "输入提示词或点击魔法棒自动生成（支持 Markdown 格式）",
         "aiGenerating": "AI 正在生成中...",
         "characters": "字符",
-        "lengthSuggestion": "（建议精简到 150-350 字）",
+        "lengthSuggestion": "（建议精简到 250-400 字）",
         "generatePrompt": "使用 AI 根据名称和描述自动生成提示词",
         "fillNameDescription": "请先填写英文名称和描述",
         "nameDescriptionRequired": "⚠️ 需要填写英文名称和描述才能使用 AI 生成翻译提示词",

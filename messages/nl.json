@@ -65,7 +65,7 @@
         "promptPlaceholder": "Voer prompt in of klik op toverstaf om automatisch te genereren (ondersteunt Markdown-formaat)",
         "aiGenerating": "AI genereert...",
         "characters": "tekens",
-        "lengthSuggestion": "(aanbevolen tussen 150-350 tekens)",
+        "lengthSuggestion": "(aanbevolen tussen 250-400 tekens)",
         "generatePrompt": "Gebruik AI om prompt te genereren op basis van naam en beschrijving",
         "fillNameDescription": "Vul eerst Engelse naam en beschrijving in",
         "nameDescriptionRequired": "⚠️ Engelse naam en beschrijving zijn vereist om AI te gebruiken voor promptgeneratie",

@@ -65,7 +65,7 @@
         "promptPlaceholder": "Entrez l'invite ou cliquez sur la baguette magique pour générer automatiquement (prend en charge le format Markdown)",
         "aiGenerating": "Génération IA...",
         "characters": "caractères",
-        "lengthSuggestion": "(recommandé entre 150-350 caractères)",
+        "lengthSuggestion": "(recommandé entre 250-400 caractères)",
         "generatePrompt": "Utiliser l'IA pour générer une invite basée sur le nom et la description",
         "fillNameDescription": "Veuillez d'abord remplir le nom anglais et la description",
         "nameDescriptionRequired": "⚠️ Le nom anglais et la description sont requis pour utiliser l'IA pour la génération d'invites",

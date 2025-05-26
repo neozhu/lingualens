@@ -65,7 +65,7 @@
         "promptPlaceholder": "Nhập prompt hoặc nhấn đũa thần để tạo tự động (hỗ trợ định dạng Markdown)",
         "aiGenerating": "AI đang tạo...",
         "characters": "ký tự",
-        "lengthSuggestion": "(nên giữ từ 150-350 ký tự)",
+        "lengthSuggestion": "(nên giữ từ 250-400 ký tự)",
         "generatePrompt": "Dùng AI tạo prompt dựa trên tên và mô tả",
         "fillNameDescription": "Vui lòng điền tên tiếng Anh và mô tả trước",
         "nameDescriptionRequired": "⚠️ Cần tên tiếng Anh và mô tả để dùng AI tạo prompt",

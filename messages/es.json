@@ -65,7 +65,7 @@
         "promptPlaceholder": "Ingrese la indicación o haga clic en la varita mágica para generar automáticamente (admite formato Markdown)",
         "aiGenerating": "Generando IA...",
         "characters": "caracteres",
-        "lengthSuggestion": "(se recomienda mantener entre 150-350 caracteres)",
+        "lengthSuggestion": "(se recomienda mantener entre 250-400 caracteres)",
         "generatePrompt": "Usar IA para generar indicación basada en el nombre y la descripción",
         "fillNameDescription": "Por favor complete primero el nombre y la descripción en inglés",
         "nameDescriptionRequired": "⚠️ Se requieren el nombre y la descripción en inglés para usar IA en la generación de indicaciones",

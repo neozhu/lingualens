@@ -65,7 +65,7 @@
         "promptPlaceholder": "プロンプトを入力するか、魔法の杖をクリックして自動生成（Markdown形式対応）",
         "aiGenerating": "AI生成中...",
         "characters": "文字",
-        "lengthSuggestion": "（150～350文字推奨）",
+        "lengthSuggestion": "（250～400文字推奨）",
         "generatePrompt": "AIで名前と説明からプロンプトを生成",
         "fillNameDescription": "まず英語名と説明を入力してください",
         "nameDescriptionRequired": "⚠️ AIプロンプト生成には英語名と説明が必要です",

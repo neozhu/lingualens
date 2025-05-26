@@ -359,11 +359,11 @@ export default function SceneManagePage() {
                   onChange={e => handleChange('prompt', e.target.value)} className={cn(
                     "font-mono text-sm whitespace-pre-wrap",
                     !form.prompt && "border-amber-200",
-                    form.prompt && form.prompt.length > 350 && "border-amber-500"
+                    form.prompt && form.prompt.length > 400 && "border-amber-500"
                   )}
                 />                {form.prompt && (
                   <div className="text-xs text-right mt-1 text-muted-foreground">
-                    {form.prompt.length} {t('characters')} {form.prompt.length > 350 &&
+                    {form.prompt.length} {t('characters')} {form.prompt.length > 400 &&
                       <span className="text-amber-500">{t('lengthSuggestion')}</span>}
                   </div>
                 )}

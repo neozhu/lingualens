@@ -72,7 +72,7 @@
         "promptPlaceholder": "Enter prompt or click magic wand to generate automatically (supports Markdown format)",
         "aiGenerating": "AI generating...",
         "characters": "characters",
-        "lengthSuggestion": "(recommend keeping between 150-350 characters)",
+        "lengthSuggestion": "(recommend keeping between 250-400 characters)",
         "generatePrompt": "Use AI to generate prompt based on name and description",
         "fillNameDescription": "Please fill in English name and description first",
         "nameDescriptionRequired": "⚠️ English name and description are required to use AI for prompt generation",

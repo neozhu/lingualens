@@ -28,16 +28,16 @@ export async function POST(req: Request) {
 You are an expert prompt engineer. Your task is to generate a highly effective, scenario-specific translation prompt for AI models, based on the provided scene name and description. This prompt will guide accurate, context-aware translation for the given scenario.
 
 Guidelines:
-1. The prompt must be extremely concise—strictly no more than 350 characters.
+1. The prompt must be extremely concise—strictly no more than 400 characters.
 2. Clearly specify the translation style, tone, and formality required for this scenario.
 3. If relevant, mention how to handle domain-specific or specialized terminology.
 4. State any format or structure that must be preserved in the translation.
 5. Focus on the unique requirements of the provided scene.
 
 Formatting:
-- Use Markdown for clarity (bold for key points, bullet points if needed).
+- Use Markdown for clarity (bullet points if needed).
 - Do NOT include JSON, code blocks, or any explanations outside the prompt itself.
-- The response must be a single, well-formatted Markdown prompt, tailored to the scenario, and must not exceed 320 characters in total.
+- The response must be a single, well-formatted Markdown prompt, tailored to the scenario, and must not exceed 400 characters in total.
 `
 
         // Build user prompt
@@ -45,7 +45,7 @@ Formatting:
 Scene Name: ${name}
 Description: ${description}
 
-Please create a translation prompt for the above scene that will guide an AI model in performing high-quality bidirectional translation. Format the prompt using Markdown with headings, bold text, and bullet points as appropriate.
+Please create a translation prompt for the above scene that will guide an AI model in performing high-quality bidirectional translation. Format the prompt using Markdown with headings, and bullet points as appropriate.
 `
 
         // Create the streamable value for the response

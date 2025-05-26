@@ -65,7 +65,7 @@
         "promptPlaceholder": "Prompt eingeben oder Zauberstab klicken, um automatisch zu generieren (unterstützt Markdown-Format)",
         "aiGenerating": "KI generiert...",
         "characters": "Zeichen",
-        "lengthSuggestion": "(empfohlen zwischen 150-350 Zeichen)",
+        "lengthSuggestion": "(empfohlen zwischen 250-400 Zeichen)",
         "generatePrompt": "KI verwenden, um Prompt auf Basis von Name und Beschreibung zu generieren",
         "fillNameDescription": "Bitte zuerst englischen Namen und Beschreibung ausfüllen",
         "nameDescriptionRequired": "⚠️ Englischer Name und Beschreibung werden benötigt, um KI für die Prompt-Generierung zu nutzen",
