@@ -30,26 +30,10 @@ export const Header = () => {
                         <Languages className="w-6 h-6" />
                         <span className="sm:grid hidden text-xl font-semibold motion motion-duration-500 motion-translate-x-in-[50%] motion-translate-y-in-[0%] motion-preset-blur-right" >{t('app.title')}</span>
                     </Link>
-                </div>                
+                </div>
                 <div className="flex justify-end items-center w-full gap-4">
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <div><LanguageSwitcher /></div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>{t('tooltip.switchLanguage')}</p>
-                        </TooltipContent>
-                    </Tooltip>
-                    
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <div><ThemeSelector /></div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>{t('tooltip.selectTheme')}</p>
-                        </TooltipContent>
-                    </Tooltip>
-                    
+                    <LanguageSwitcher />
+                    <ThemeSelector />
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button variant="outline" size="icon" asChild>
@@ -65,7 +49,7 @@ export const Header = () => {
                             <p>{t('tooltip.sceneManage')}</p>
                         </TooltipContent>
                     </Tooltip>
-                    
+
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <div><ModeToggle /></div>
@@ -74,7 +58,7 @@ export const Header = () => {
                             <p>{t('tooltip.toggleMode')}</p>
                         </TooltipContent>
                     </Tooltip>
-                    
+
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button variant="outline" size="icon" asChild>
