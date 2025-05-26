@@ -112,7 +112,8 @@ const features = [
       "Preset scenes for business, casual, technical content",
       "Create and manage custom translation scenes",
       "Tailor translation style to your specific needs",
-      "Save and reuse your favorite translation contexts"
+      "Save and reuse your favorite translation contexts",
+      "Automatically generate optimal prompts for each scene"
     ],
   },
   {
