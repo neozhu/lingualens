@@ -1,8 +1,10 @@
 // components/Footer.tsx
+"use client";
 import React from 'react';
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
 
 interface MenuItem {
   title: string;
@@ -31,7 +33,10 @@ export const Footer: React.FC<FooterProps> = ({
 }: FooterProps) => {
   // 使用 next-intl 的 useTranslations 钩子获取翻译内容
   const t = useTranslations();
+  const { theme } = useTheme();
   
+  // 根据主题动态设置 logo
+  logo.src = theme === 'dark' ? '/github-mark-white.svg' : '/github-mark.svg';
   // 使用翻译内容设置默认值
   tagline = tagline || t('app.description');
   copyright = copyright || `© ${new Date().getFullYear()} LinguaLens. ${t('footer.rights')}`;
@@ -41,15 +46,15 @@ export const Footer: React.FC<FooterProps> = ({
     {
       title: t('nav.features'),
       links: [
-        { text: t('nav.translation'), url: 'https://github.com/neozhu/lingualens' },
+        { text: t('nav.translation'), url: '/features' },
         { text: t('nav.scenes'), url: '/scene' },
       ],
     },
     {
       title: t('nav.support'),
       links: [
-        { text: t('nav.faq'), url: 'https://github.com/neozhu/lingualens' },
-        { text: t('nav.contact'), url: 'https://blazorserver.com/contact' },
+        { text: t('nav.faq'), url: 'https://github.com/neozhu/lingualens/issues/new' },
+        { text: t('nav.contact'), url: 'https://github.com/neozhu/lingualens/issues/new' },
       ],
     },
     {
