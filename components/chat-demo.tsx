@@ -5,6 +5,7 @@ import { useChat, type UseChatOptions } from "@ai-sdk/react"
 import { cn } from "@/lib/utils"
 import { transcribeAudio } from "@/lib/utils/audio"
 import { Chat } from "@/components/ui/chat"
+import { toast } from "sonner"
 import {
   Select,
   SelectContent,
@@ -70,6 +71,7 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
     input,
     handleInputChange,
     handleSubmit,
+    error,
     append,
     stop,
     status,
@@ -89,7 +91,6 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
     const custom = getCustomScenes();
     setScenes(custom || DEFAULT_SCENES);
   }, []);
-
   // Listen for visibility changes to sync scene changes
   useEffect(() => {
     const handleVisibility = () => {
@@ -101,6 +102,16 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
     document.addEventListener("visibilitychange", handleVisibility);
     return () => document.removeEventListener("visibilitychange", handleVisibility);
   }, []);
+  
+  // 显示错误信息
+  useEffect(() => {
+    if (error) {
+      toast.error("Translation Error", {
+        description: error.message || "An error occurred during translation. Please try again.",
+        duration: 5000,
+      });
+    }
+  }, [error]);
 
   return (
     <div className={cn("flex","flex-col", "w-full")}>
@@ -125,10 +136,11 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
         handleSubmit={handleSubmit}
         input={input}
         handleInputChange={handleInputChange}
-        isGenerating={status==="streaming"}
+        isGenerating={(status === 'streaming' )}
         stop={stop}
         append={append}
-        setMessages={setMessages}        transcribeAudio={transcribeAudio}
+        setMessages={setMessages}        
+        transcribeAudio={transcribeAudio}
         suggestions={[
           "生活就像一盒巧克力，你永远不知道下一颗是什么味道。",
           "The greatest glory in living lies not in never falling, but in rising every time we fall.",
