@@ -14,7 +14,7 @@ const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20";
  */
 export async function POST(req: Request) {
  
-  const { name, description } = await req.json();
+  const {messages, name, description } = await req.json();
   console.log("Received request to generate translation prompt:", { name, description });
   // Validate required parameters
   if (!name || !description) {
