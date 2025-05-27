@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
+import { useChat } from "@ai-sdk/react"
 import { DndContext, closestCenter, DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -118,6 +119,21 @@ export default function SceneManagePage() {
   const [editingIdx, setEditingIdx] = useState<number | null>(null)
   const [form, setForm] = useState<Partial<Scene>>({})
   const [generating, setGenerating] = useState(false)
+    // 使用 useChat 钩子来处理与 API 的通信
+  const { messages, handleSubmit, isLoading } = useChat({
+    api: "/api/generate",
+    onFinish: (message: { content: string }) => {
+      // 当生成完成时，更新表单的 prompt 字段
+      setForm(prev => ({ ...prev, prompt: message.content }))
+      setGenerating(false)
+      toast.success(t('promptGeneratedSuccess'))
+    },
+    onError: (error: Error) => {
+      console.error("Error generating prompt:", error)
+      setGenerating(false)
+      toast.error(t('promptGenerationFailed'))
+    }
+  })
 
   // Configure drag sensors, using only pointer (mouse/touch)
   const sensors = useSensors(
@@ -126,7 +142,13 @@ export default function SceneManagePage() {
         distance: 8, // 8px
       },
     })
-  );
+  );  // 监听消息列表变化，获取最新的助手回复
+  useEffect(() => {
+    const assistantMessage = messages.filter((m: { role: string; content: string }) => m.role === "assistant").pop()
+    if (assistantMessage?.content && !generating) {
+      setForm(prev => ({ ...prev, prompt: assistantMessage.content }))
+    }
+  }, [messages, generating])
 
   useEffect(() => {
     setLoading(true)
@@ -201,47 +223,24 @@ export default function SceneManagePage() {
         setLocalScenes(newScenes);
         toast.success(t('sceneOrderUpdated'));
         return newScenes;
-      });
-    }
+      });    }
   }
-  const handleGeneratePrompt = async () => {
+  
+  const handleGeneratePrompt = () => {
     // Check if we have the required fields
     if (!form.name_en || !form.description) {
       toast.error(t('needNameDescForPrompt'))
       return
     }
 
-    try {
-      setGenerating(true)
-      toast.info(t('aiGeneratingPrompt'), { duration: 3000 })
-
-      const response = await fetch('/api/generate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: form.name_en,
-          description: form.description
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error(`Failed to generate prompt: ${response.statusText}`)
+    setGenerating(true)
+    toast.info(t('aiGeneratingPrompt'), { duration: 3000 })    // 使用 handleSubmit 发送请求，无需手动处理 fetch
+    handleSubmit(undefined, {
+      data: {
+        name: form.name_en,
+        description: form.description
       }
-
-      // Get the response as text - now it comes directly as a streamable response
-      const responseText = await response.text()
-
-      // Update the form with the generated prompt
-      setForm(prev => ({ ...prev, prompt: responseText }))
-      toast.success(t('promptGeneratedSuccess'))
-    } catch (error) {
-      console.error("Error generating prompt:", error)
-      toast.error(t('promptGenerationFailed'))
-    } finally {
-      setGenerating(false)
-    }
+    })
   }
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -330,16 +329,15 @@ export default function SceneManagePage() {
                       value={form.description || ''}
                       onChange={e => handleChange('description', e.target.value)}
                       className={cn(!form.description && "border-amber-200")}
-                    />
-                    <Button
+                    />                    <Button
                       variant="outline"
                       size="icon"
                       onClick={handleGeneratePrompt}
-                      disabled={!form.name_en || !form.description || generating}
+                      disabled={!form.name_en || !form.description || generating || isLoading}
                       title={t('generatePrompt')}
                       className={cn(
                         "flex-shrink-0 border-dashed mt-0",
-                        generating ? "animate-pulse bg-muted" : "hover:border-primary hover:text-primary"
+                        (generating || isLoading) ? "animate-pulse bg-muted" : "hover:border-primary hover:text-primary"
                       )}
                     >
 
@@ -349,10 +347,9 @@ export default function SceneManagePage() {
                   </div>
                 </div>
               </div>
-              <div>
-                <label className="text-xs text-muted-foreground mb-1 block">
-                  {t('translationPrompt')} {generating && <span className="text-blue-500 animate-pulse">{t('aiGenerating')}</span>}
-                </label>                <Textarea
+              <div>                <label className="text-xs text-muted-foreground mb-1 block">
+                  {t('translationPrompt')} {(generating || isLoading) && <span className="text-blue-500 animate-pulse">{t('aiGenerating')}</span>}
+                </label><Textarea
                   placeholder={t('promptPlaceholder')}
                   rows={6}
                   value={form.prompt || ''}
@@ -378,18 +375,16 @@ export default function SceneManagePage() {
                 <Save className="h-4 w-4" />
                 <span className="sr-only">{t('common.save')}</span>
               </Button>
-            </div>            {editingIdx === null && (<div className="mt-4">
-              <Button
+            </div>            {editingIdx === null && (<div className="mt-4">              <Button
                 onClick={handleGeneratePrompt}
                 className={cn(
                   "w-full border-dashed",
-                  generating ? "bg-muted" : "hover:border-primary hover:text-primary"
+                  (generating || isLoading) ? "bg-muted" : "hover:border-primary hover:text-primary"
                 )}
                 variant="outline"
-                disabled={generating || !form.name_en || !form.description}
+                disabled={generating || isLoading || !form.name_en || !form.description}
                 title={t('generatePrompt')}
-              >
-                {generating ? (
+              >                {generating || isLoading ? (
                   <>
                     <span className="animate-pulse">{t('aiGenerating')}</span>
                     <WandSparkles className="h-5 w-5 ml-2 animate-pulse" />
