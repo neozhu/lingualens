@@ -14,19 +14,8 @@ const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20";
  */
 export async function POST(req: Request) {
  
-  const {messages, name, description } = await req.json();
-  console.log("Received request to generate translation prompt:", { name, description });
-  // Validate required parameters
-  if (!name || !description) {
-    return new Response(
-      JSON.stringify({ error: "Name and description are required" }),
-      {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
-
+  const {messages } = await req.json();
+  console.log(messages);
   // Build system prompt for generating translation instructions
   const systemPrompt = `
 You are an expert prompt engineer. Your task is to generate a highly effective, scenario-specific translation prompt for AI models, based on the provided scene name and description. This prompt will guide accurate, context-aware translation for the given scenario.
@@ -44,13 +33,7 @@ Formatting:
 - The response must be a single, well-formatted Markdown prompt, tailored to the scenario, and must not exceed 400 characters in total.
 `;
 
-  // Build user prompt
-  const userPrompt = `
-Scene Name: ${name}
-Description: ${description}
 
-Please create a translation prompt for the above scene that will guide an AI model in performing high-quality bidirectional translation. Format the prompt using Markdown with headings, and bullet points as appropriate.
-`;
 
   // Create Gemini model instance
   const provider = google(GEMINI_MODEL); // Start the streaming process
@@ -58,7 +41,7 @@ Please create a translation prompt for the above scene that will guide an AI mod
   const result = streamText({
     model: provider,
     system: systemPrompt,
-    messages: [{ role: "user", content: userPrompt }],
+    messages: messages,
     temperature: 0.3 // Balance creativity and precision
   });
 

@@ -159,12 +159,8 @@ export default function SceneManagePage() {
   const [form, setForm] = useState<Partial<Scene>>({});
   const [generating, setGenerating] = useState(false);
   // 使用 useChat 钩子来处理与 API 的通信
-  const { messages, handleSubmit,append  } = useChat({
+  const { messages, append } = useChat({
     api: "/api/generate",
-    body: {
-      name: form.name_en, // 从你的表单状态中获取
-      description: form.description,
-    },
     onFinish: (message: { content: string }) => {
       // 当生成完成时，更新表单的 prompt 字段
       setForm((prev) => ({ ...prev, prompt: message.content }));
@@ -272,7 +268,7 @@ export default function SceneManagePage() {
       });
     }
   };
-  const handleGeneratePrompt =async  () => {
+  const handleGeneratePrompt = async () => {
     // Check if we have the required fields
     if (!form.name_en || !form.description) {
       toast.error(t("needNameDescForPrompt"));
@@ -283,14 +279,17 @@ export default function SceneManagePage() {
     toast.info(t("aiGeneratingPrompt"), { duration: 3000 });
 
     // Fix: Create a message with empty content, but provide the data in the options
-    const mockEvent = {
-      preventDefault: () => {},
-    };
+    const userPrompt = `
+Scene Name: ${form.name_en}
+Description: ${form.description}
+
+Please create a translation prompt for the above scene that will guide an AI model in performing high-quality bidirectional translation. Format the prompt using Markdown with headings, and bullet points as appropriate.
+`;
     await append({
-    role: 'user',
-    content: 'abc'
-  })
-     console.log('handleSubmit', mockEvent);
+      role: 'user',
+      content: userPrompt
+    })
+
   };
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -432,7 +431,7 @@ export default function SceneManagePage() {
                 {" "}
                 <label className="text-xs text-muted-foreground mb-1 block">
                   {t("translationPrompt")}{" "}
-                  {(generating ) && (
+                  {(generating) && (
                     <span className="text-blue-500 animate-pulse">
                       {t("aiGenerating")}
                     </span>
@@ -447,8 +446,8 @@ export default function SceneManagePage() {
                     "font-mono text-sm whitespace-pre-wrap",
                     !form.prompt && "border-amber-200",
                     form.prompt &&
-                      form.prompt.length > 400 &&
-                      "border-amber-500"
+                    form.prompt.length > 400 &&
+                    "border-amber-500"
                   )}
                 />{" "}
                 {form.prompt && (
@@ -486,7 +485,7 @@ export default function SceneManagePage() {
                   onClick={handleGeneratePrompt}
                   className={cn(
                     "w-full border-dashed",
-                    generating 
+                    generating
                       ? "bg-muted"
                       : "hover:border-primary hover:text-primary"
                   )}
