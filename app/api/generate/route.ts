@@ -3,6 +3,8 @@
 import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 
+
+
 // Use Google Gemini 2.5 Flash Preview 05-20 model
 const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20";
 
@@ -11,6 +13,7 @@ const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20";
  * @param req Request object
  */
 export async function POST(req: Request) {
+ 
   const { name, description } = await req.json();
   console.log("Received request to generate translation prompt:", { name, description });
   // Validate required parameters

@@ -4,6 +4,8 @@ import { SCENES, Scene } from "@/lib/scenes";
 import { google } from '@ai-sdk/google'; // Import Google Gemini provider
 import { openai } from '@ai-sdk/openai';
 
+export const maxDuration = 30;
+
 // const LLAMA_MODEL = "llama-3.3-70b-versatile"
 const QWEN_MODEL = "qwen-qwq-32b"
 const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20"
@@ -110,8 +112,7 @@ export async function POST(req: Request) {
   const result = streamText({
     model: provider,
     system: systemPrompt,
-    temperature: 0.2,
-    topP: 0.9,
+    temperature: 0.3,
     messages,
   });
   return result.toDataStreamResponse({ sendReasoning: false });
