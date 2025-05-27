@@ -1,104 +1,108 @@
 {
-    "app": {
-        "title": "LinguaLens",
-        "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
-    },
-    "nav": {
-        "home": "Laman utama",
-        "scenes": "Adegan",
-        "manage": "Urus",
-        "privacy": "Privasi",
-        "terms": "Terma",
-        "features": "Ciri-ciri",
-        "translation": "Terjemahan",
-        "support": "Sokongan",
-        "faq": "FAQ",
-        "contact": "Hubungi Saya",
-        "about": "Tentang"
-    },
-    "footer": {
-        "rights": "Hak cipta terpelihara",
-        "madewith": "Dibuat dengan"
-    },
+  "app": {
+    "title": "LinguaLens",
+    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+  },
+  "nav": {
+    "home": "Laman utama",
+    "scenes": "Adegan",
+    "manage": "Urus",
+    "privacy": "Privasi",
+    "terms": "Terma",
+    "features": "Ciri-ciri",
+    "translation": "Terjemahan",
+    "support": "Sokongan",
+    "faq": "FAQ",
+    "contact": "Hubungi Saya",
+    "about": "Tentang"
+  },
+  "footer": {
+    "rights": "Hak cipta terpelihara",
+    "madewith": "Dibuat dengan"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Ralat telah berlaku",
+    "retry": "Cuba semula",
+    "copy": "Salin",
+    "copied": "Disalin",
+    "download": "Muat turun",
+    "upload": "Muat naik",
+    "cancel": "Batal",
+    "submit": "Hantar",
+    "save": "Simpan",
+    "delete": "Padam",
+    "edit": "Sunting",
+    "create": "Cipta"
+  },
+  "scene": {
+    "title": "Penjana Prompt Sistem dan Penerangan Adegan",
+    "systemPrompt": "Arahan sistem",
+    "promptDescription": "Fungsi createSystemPrompt menjana prompt terjemahan secara dinamik berdasarkan adegan yang dipilih.",
+    "configInfo": "Kandungan prompt dikonfigurasi dalam api/chat/route.ts; kemas kini fail itu untuk melaraskan prompt.",
+    "availableScenes": "Adegan tersedia"
+  },
+  "chat": {
+    "inputPlaceholder": "Masukkan kandungan untuk diterjemahkan...",
+    "trySuggestions": "Cuba prompt ini ✨",
+    "copyMessage": "Respons disalin ke papan klip!"
+  },
+  "sceneSelector": {
+    "customScene": "Adegan Tersuai"
+  },
+  "sceneManage": {
     "common": {
-        "loading": "Memuat...",
-        "error": "Ralat telah berlaku",
-        "retry": "Cuba semula",
-        "copy": "Salin",
-        "copied": "Disalin",
-        "download": "Muat turun",
-        "upload": "Muat naik",
-        "cancel": "Batal",
-        "submit": "Hantar",
-        "save": "Simpan",
-        "delete": "Padam",
-        "edit": "Sunting",
-        "create": "Cipta"
+      "cancel": "Batal",
+      "save": "Simpan"
     },
-    "scene": {
-        "title": "Penjana Prompt Sistem dan Penerangan Adegan",
-        "systemPrompt": "Arahan sistem",
-        "promptDescription": "Fungsi createSystemPrompt menjana prompt terjemahan secara dinamik berdasarkan adegan yang dipilih.",
-        "configInfo": "Kandungan prompt dikonfigurasi dalam api/chat/route.ts; kemas kini fail itu untuk melaraskan prompt.",
-        "availableScenes": "Adegan tersedia"
-    },
-    "chat": {
-        "inputPlaceholder": "Masukkan kandungan untuk diterjemahkan...",
-        "trySuggestions": "Cuba prompt ini ✨",
-        "copyMessage": "Respons disalin ke papan klip!"
-    },
-    "sceneSelector": {
-        "customScene": "Adegan Tersuai"
-    },
-    "sceneManage": {
-        "title": "Pengurusan Adegan Tersuai",
-        "description": "Urus adegan terjemahan tersuai anda di sini. Anda boleh menambah, mengedit, memadam atau menyusun semula adegan untuk menyesuaikan pengalaman terjemahan mengikut keperluan anda. Semua perubahan disimpan dalam pelayar anda dan boleh ditetapkan semula kepada lalai pada bila-bila masa.",
-        "addScene": "Tambah Adegan Baharu",
-        "resetToDefault": "Tetapkan Semula kepada Lalai",
-        "editScene": "Sunting Adegan",
-        "newScene": "Adegan Baharu",
-        "name": "Nama",
-        "englishName": "Nama Inggeris",
-        "sceneDescription": "Penerangan Adegan",
-        "descriptionForPrompt": "(digunakan untuk penjanaan prompt)",
-        "translationPrompt": "Prompt Terjemahan",
-        "promptPlaceholder": "Masukkan prompt atau klik tongkat ajaib untuk menjana secara automatik (menyokong format Markdown)",
-        "aiGenerating": "AI sedang menjana...",
-        "characters": "aksara",
-        "lengthSuggestion": "(disyorkan antara 250-400 aksara)",
-        "generatePrompt": "Gunakan AI untuk menjana prompt berdasarkan nama dan penerangan",
-        "fillNameDescription": "Sila isi nama dan penerangan Inggeris terlebih dahulu",
-        "nameDescriptionRequired": "⚠️ Nama dan penerangan Inggeris diperlukan untuk menggunakan AI bagi penjanaan prompt",
-        "sceneDeleted": "Adegan dipadam",
-        "sceneUpdated": "Adegan dikemas kini",
-        "newSceneAdded": "Adegan baharu ditambah",
-        "sceneOrderUpdated": "Susunan adegan dikemas kini",
-        "resetToDefaultDone": "Adegan lalai ditetapkan semula",
-        "needNameDescForPrompt": "Nama dan penerangan Inggeris diperlukan untuk menjana prompt",
-        "aiGeneratingPrompt": "AI sedang menjana prompt...",
-        "promptGeneratedSuccess": "Prompt berjaya dijana",
-        "promptGenerationFailed": "Penjanaan prompt gagal, sila cuba lagi"
-    },
-    "tooltip": {
-        "switchLanguage": "Tukar Bahasa",
-        "selectTheme": "Pilih Tema",
-        "sceneManage": "Urus Adegan Tersuai",
-        "toggleMode": "Tukar Mod Cerah/Gelap",
-        "github": "Lihat di GitHub"
-    },
-    "modeToggle": {
-        "switch": "Tukar Tema",
-        "light": "Mod Cerah",
-        "dark": "Mod Gelap",
-        "system": "Lalai Sistem"
-    },
-    "themes": {
-        "default": "Lalai",
-        "neutral": "Neutral",
-        "stone": "Batu",
-        "zinc": "Zink",
-        "gray": "Kelabu",
-        "slate": "Batu Lempeng",
-        "scaled": "Diskala"
-    }
+    "title": "Pengurusan Adegan Tersuai",
+    "description": "Urus adegan terjemahan tersuai anda di sini. Anda boleh menambah, mengedit, memadam atau menyusun semula adegan untuk menyesuaikan pengalaman terjemahan mengikut keperluan anda. Semua perubahan disimpan dalam pelayar anda dan boleh ditetapkan semula kepada lalai pada bila-bila masa.",
+    "addScene": "Tambah Adegan Baharu",
+    "resetToDefault": "Tetapkan Semula kepada Lalai",
+    "editScene": "Sunting Adegan",
+    "newScene": "Adegan Baharu",
+    "name": "Nama",
+    "englishName": "Nama Inggeris",
+    "sceneDescription": "Penerangan Adegan",
+    "descriptionForPrompt": "(digunakan untuk penjanaan prompt)",
+    "translationPrompt": "Prompt Terjemahan",
+    "promptPlaceholder": "Masukkan prompt atau klik tongkat ajaib untuk menjana secara automatik (menyokong format Markdown)",
+    "aiGenerating": "AI sedang menjana...",
+    "characters": "aksara",
+    "lengthSuggestion": "(disyorkan antara 250-400 aksara)",
+    "generatePrompt": "Gunakan AI untuk menjana prompt berdasarkan nama dan penerangan",
+    "fillNameDescription": "Sila isi nama dan penerangan Inggeris terlebih dahulu",
+    "nameDescriptionRequired": "⚠️ Nama dan penerangan Inggeris diperlukan untuk menggunakan AI bagi penjanaan prompt",
+    "sceneDeleted": "Adegan dipadam",
+    "sceneUpdated": "Adegan dikemas kini",
+    "newSceneAdded": "Adegan baharu ditambah",
+    "sceneOrderUpdated": "Susunan adegan dikemas kini",
+    "resetToDefaultDone": "Adegan lalai ditetapkan semula",
+    "needNameDescForPrompt": "Nama dan penerangan Inggeris diperlukan untuk menjana prompt",
+    "aiGeneratingPrompt": "AI sedang menjana prompt...",
+    "promptGeneratedSuccess": "Prompt berjaya dijana",
+    "promptGenerationFailed": "Penjanaan prompt gagal, sila cuba lagi"
+  },
+  "tooltip": {
+    "switchLanguage": "Tukar Bahasa",
+    "selectTheme": "Pilih Tema",
+    "sceneManage": "Urus Adegan Tersuai",
+    "toggleMode": "Tukar Mod Cerah/Gelap",
+    "github": "Lihat di GitHub"
+  },
+  "modeToggle": {
+    "switch": "Tukar Tema",
+    "light": "Mod Cerah",
+    "dark": "Mod Gelap",
+    "system": "Lalai Sistem"
+  },
+  "themes": {
+    "default": "Lalai",
+    "neutral": "Neutral",
+    "stone": "Batu",
+    "zinc": "Zink",
+    "gray": "Kelabu",
+    "slate": "Batu Lempeng",
+    "scaled": "Diskala"
+  }
 }
