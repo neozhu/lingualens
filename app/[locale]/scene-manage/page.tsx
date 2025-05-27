@@ -225,8 +225,7 @@ export default function SceneManagePage() {
         return newScenes;
       });    }
   }
-  
-  const handleGeneratePrompt = () => {
+    const handleGeneratePrompt = () => {
     // Check if we have the required fields
     if (!form.name_en || !form.description) {
       toast.error(t('needNameDescForPrompt'))
@@ -234,8 +233,10 @@ export default function SceneManagePage() {
     }
 
     setGenerating(true)
-    toast.info(t('aiGeneratingPrompt'), { duration: 3000 })    // 使用 handleSubmit 发送请求，无需手动处理 fetch
-    handleSubmit(undefined, {
+    toast.info(t('aiGeneratingPrompt'), { duration: 3000 })
+    
+    // Fix: Create a message with empty content, but provide the data in the options
+    handleSubmit({preventDefault: () => {}}, {
       data: {
         name: form.name_en,
         description: form.description
