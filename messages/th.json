@@ -1,104 +1,108 @@
 {
-    "app": {
-        "title": "LinguaLens",
-        "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
-    },
-    "nav": {
-        "home": "หน้าหลัก",
-        "scenes": "ฉาก",
-        "manage": "จัดการ",
-        "privacy": "ความเป็นส่วนตัว",
-        "terms": "ข้อกำหนด",
-        "features": "คุณสมบัติ",
-        "translation": "แปลภาษา",
-        "support": "สนับสนุน",
-        "faq": "FAQ",
-        "contact": "ติดต่อฉัน",
-        "about": "เกี่ยวกับ"
-    },
-    "footer": {
-        "rights": "สงวนลิขสิทธิ์ทั้งหมด",
-        "madewith": "สร้างด้วย"
-    },
+  "app": {
+    "title": "LinguaLens",
+    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+  },
+  "nav": {
+    "home": "หน้าหลัก",
+    "scenes": "ฉาก",
+    "manage": "จัดการ",
+    "privacy": "ความเป็นส่วนตัว",
+    "terms": "ข้อกำหนด",
+    "features": "คุณสมบัติ",
+    "translation": "แปลภาษา",
+    "support": "สนับสนุน",
+    "faq": "FAQ",
+    "contact": "ติดต่อฉัน",
+    "about": "เกี่ยวกับ"
+  },
+  "footer": {
+    "rights": "สงวนลิขสิทธิ์ทั้งหมด",
+    "madewith": "สร้างด้วย"
+  },
+  "common": {
+    "loading": "กำลังโหลด...",
+    "error": "เกิดข้อผิดพลาด",
+    "retry": "ลองอีกครั้ง",
+    "copy": "คัดลอก",
+    "copied": "คัดลอกแล้ว",
+    "download": "ดาวน์โหลด",
+    "upload": "อัปโหลด",
+    "cancel": "ยกเลิก",
+    "submit": "ส่ง",
+    "save": "บันทึก",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "create": "สร้าง"
+  },
+  "scene": {
+    "title": "ตัวสร้างพรอมต์ระบบและคำอธิบายฉาก",
+    "systemPrompt": "คำแนะนำระบบ",
+    "promptDescription": "ฟังก์ชัน createSystemPrompt สร้างพรอมต์การแปลตามฉากที่เลือกแบบไดนามิก",
+    "configInfo": "เนื้อหาพรอมต์ถูกกำหนดค่าใน api/chat/route.ts; อัปเดตไฟล์นั้นเพื่อปรับแต่งพรอมต์",
+    "availableScenes": "ฉากที่มีอยู่"
+  },
+  "chat": {
+    "inputPlaceholder": "ป้อนเนื้อหาที่จะแปล...",
+    "trySuggestions": "ลองพรอมต์เหล่านี้ ✨",
+    "copyMessage": "คัดลอกคำตอบไปยังคลิปบอร์ดแล้ว!"
+  },
+  "sceneSelector": {
+    "customScene": "ฉากที่กำหนดเอง"
+  },
+  "sceneManage": {
     "common": {
-        "loading": "กำลังโหลด...",
-        "error": "เกิดข้อผิดพลาด",
-        "retry": "ลองอีกครั้ง",
-        "copy": "คัดลอก",
-        "copied": "คัดลอกแล้ว",
-        "download": "ดาวน์โหลด",
-        "upload": "อัปโหลด",
-        "cancel": "ยกเลิก",
-        "submit": "ส่ง",
-        "save": "บันทึก",
-        "delete": "ลบ",
-        "edit": "แก้ไข",
-        "create": "สร้าง"
+      "cancel": "ยกเลิก",
+      "save": "บันทึก"
     },
-    "scene": {
-        "title": "ตัวสร้างพรอมต์ระบบและคำอธิบายฉาก",
-        "systemPrompt": "คำแนะนำระบบ",
-        "promptDescription": "ฟังก์ชัน createSystemPrompt สร้างพรอมต์การแปลตามฉากที่เลือกแบบไดนามิก",
-        "configInfo": "เนื้อหาพรอมต์ถูกกำหนดค่าใน api/chat/route.ts; อัปเดตไฟล์นั้นเพื่อปรับแต่งพรอมต์",
-        "availableScenes": "ฉากที่มีอยู่"
-    },
-    "chat": {
-        "inputPlaceholder": "ป้อนเนื้อหาที่จะแปล...",
-        "trySuggestions": "ลองพรอมต์เหล่านี้ ✨",
-        "copyMessage": "คัดลอกคำตอบไปยังคลิปบอร์ดแล้ว!"
-    },
-    "sceneSelector": {
-        "customScene": "ฉากที่กำหนดเอง"
-    },
-    "sceneManage": {
-        "title": "การจัดการฉากที่กำหนดเอง",
-        "description": "จัดการฉากแปลภาษาที่กำหนดเองของคุณที่นี่ คุณสามารถเพิ่ม แก้ไข ลบ หรือจัดลำดับฉากใหม่เพื่อปรับประสบการณ์การแปลให้เหมาะกับความต้องการของคุณ การเปลี่ยนแปลงทั้งหมดจะถูกบันทึกในเบราว์เซอร์ของคุณและสามารถรีเซ็ตเป็นค่าเริ่มต้นได้ทุกเมื่อ",
-        "addScene": "เพิ่มฉากใหม่",
-        "resetToDefault": "รีเซ็ตเป็นค่าเริ่มต้น",
-        "editScene": "แก้ไขฉาก",
-        "newScene": "ฉากใหม่",
-        "name": "ชื่อ",
-        "englishName": "ชื่อภาษาอังกฤษ",
-        "sceneDescription": "คำอธิบายฉาก",
-        "descriptionForPrompt": "(ใช้สำหรับสร้างพรอมต์)",
-        "translationPrompt": "พรอมต์การแปล",
-        "promptPlaceholder": "ป้อนพรอมต์หรือคลิกไม้กายสิทธิ์เพื่อสร้างอัตโนมัติ (รองรับรูปแบบ Markdown)",
-        "aiGenerating": "AI กำลังสร้าง...",
-        "characters": "ตัวอักษร",
-        "lengthSuggestion": "(แนะนำให้มี 250-400 ตัวอักษร)",
-        "generatePrompt": "ใช้ AI สร้างพรอมต์ตามชื่อและคำอธิบาย",
-        "fillNameDescription": "กรุณากรอกชื่อและคำอธิบายภาษาอังกฤษก่อน",
-        "nameDescriptionRequired": "⚠️ ต้องกรอกชื่อและคำอธิบายภาษาอังกฤษเพื่อใช้ AI สร้างพรอมต์",
-        "sceneDeleted": "ลบฉากแล้ว",
-        "sceneUpdated": "อัปเดตฉากแล้ว",
-        "newSceneAdded": "เพิ่มฉากใหม่แล้ว",
-        "sceneOrderUpdated": "อัปเดตลำดับฉากแล้ว",
-        "resetToDefaultDone": "รีเซ็ตฉากเป็นค่าเริ่มต้นแล้ว",
-        "needNameDescForPrompt": "ต้องกรอกชื่อและคำอธิบายภาษาอังกฤษเพื่อสร้างพรอมต์",
-        "aiGeneratingPrompt": "AI กำลังสร้างพรอมต์...",
-        "promptGeneratedSuccess": "สร้างพรอมต์สำเร็จ",
-        "promptGenerationFailed": "สร้างพรอมต์ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง"
-    },
-    "tooltip": {
-        "switchLanguage": "เปลี่ยนภาษา",
-        "selectTheme": "เลือกธีม",
-        "sceneManage": "จัดการฉากที่กำหนดเอง",
-        "toggleMode": "สลับโหมดสว่าง/มืด",
-        "github": "ดูบน GitHub"
-    },
-    "modeToggle": {
-        "switch": "สลับธีม",
-        "light": "โหมดสว่าง",
-        "dark": "โหมดมืด",
-        "system": "ค่าเริ่มต้นของระบบ"
-    },
-    "themes": {
-        "default": "ค่าเริ่มต้น",
-        "neutral": "เป็นกลาง",
-        "stone": "หิน",
-        "zinc": "สังกะสี",
-        "gray": "เทา",
-        "slate": "กระดานชนวน",
-        "scaled": "ปรับขนาด"
-    }
+    "title": "การจัดการฉากที่กำหนดเอง",
+    "description": "จัดการฉากแปลภาษาที่กำหนดเองของคุณที่นี่ คุณสามารถเพิ่ม แก้ไข ลบ หรือจัดลำดับฉากใหม่เพื่อปรับประสบการณ์การแปลให้เหมาะกับความต้องการของคุณ การเปลี่ยนแปลงทั้งหมดจะถูกบันทึกในเบราว์เซอร์ของคุณและสามารถรีเซ็ตเป็นค่าเริ่มต้นได้ทุกเมื่อ",
+    "addScene": "เพิ่มฉากใหม่",
+    "resetToDefault": "รีเซ็ตเป็นค่าเริ่มต้น",
+    "editScene": "แก้ไขฉาก",
+    "newScene": "ฉากใหม่",
+    "name": "ชื่อ",
+    "englishName": "ชื่อภาษาอังกฤษ",
+    "sceneDescription": "คำอธิบายฉาก",
+    "descriptionForPrompt": "(ใช้สำหรับสร้างพรอมต์)",
+    "translationPrompt": "พรอมต์การแปล",
+    "promptPlaceholder": "ป้อนพรอมต์หรือคลิกไม้กายสิทธิ์เพื่อสร้างอัตโนมัติ (รองรับรูปแบบ Markdown)",
+    "aiGenerating": "AI กำลังสร้าง...",
+    "characters": "ตัวอักษร",
+    "lengthSuggestion": "(แนะนำให้มี 250-400 ตัวอักษร)",
+    "generatePrompt": "ใช้ AI สร้างพรอมต์ตามชื่อและคำอธิบาย",
+    "fillNameDescription": "กรุณากรอกชื่อและคำอธิบายภาษาอังกฤษก่อน",
+    "nameDescriptionRequired": "⚠️ ต้องกรอกชื่อและคำอธิบายภาษาอังกฤษเพื่อใช้ AI สร้างพรอมต์",
+    "sceneDeleted": "ลบฉากแล้ว",
+    "sceneUpdated": "อัปเดตฉากแล้ว",
+    "newSceneAdded": "เพิ่มฉากใหม่แล้ว",
+    "sceneOrderUpdated": "อัปเดตลำดับฉากแล้ว",
+    "resetToDefaultDone": "รีเซ็ตฉากเป็นค่าเริ่มต้นแล้ว",
+    "needNameDescForPrompt": "ต้องกรอกชื่อและคำอธิบายภาษาอังกฤษเพื่อสร้างพรอมต์",
+    "aiGeneratingPrompt": "AI กำลังสร้างพรอมต์...",
+    "promptGeneratedSuccess": "สร้างพรอมต์สำเร็จ",
+    "promptGenerationFailed": "สร้างพรอมต์ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง"
+  },
+  "tooltip": {
+    "switchLanguage": "เปลี่ยนภาษา",
+    "selectTheme": "เลือกธีม",
+    "sceneManage": "จัดการฉากที่กำหนดเอง",
+    "toggleMode": "สลับโหมดสว่าง/มืด",
+    "github": "ดูบน GitHub"
+  },
+  "modeToggle": {
+    "switch": "สลับธีม",
+    "light": "โหมดสว่าง",
+    "dark": "โหมดมืด",
+    "system": "ค่าเริ่มต้นของระบบ"
+  },
+  "themes": {
+    "default": "ค่าเริ่มต้น",
+    "neutral": "เป็นกลาง",
+    "stone": "หิน",
+    "zinc": "สังกะสี",
+    "gray": "เทา",
+    "slate": "กระดานชนวน",
+    "scaled": "ปรับขนาด"
+  }
 }

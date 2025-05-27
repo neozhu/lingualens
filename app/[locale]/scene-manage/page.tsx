@@ -1,38 +1,65 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { SCENES, Scene } from "@/lib/scenes"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "sonner"
-import { DndContext, closestCenter, DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
-import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
-import { cn } from "@/lib/utils"
-import { GripVertical, Pencil, Trash2, Plus, Settings, Save, X, WandSparkles } from "lucide-react"
-import { Skeleton } from "@/components/ui/skeleton"
-import { useTranslations, useLocale } from "next-intl"
+import { useEffect, useState } from "react";
+import { SCENES, Scene } from "@/lib/scenes";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+import { useChat } from "@ai-sdk/react";
+import {
+  DndContext,
+  closestCenter,
+  DragEndEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { cn } from "@/lib/utils";
+import {
+  GripVertical,
+  Pencil,
+  Trash2,
+  Plus,
+  Settings,
+  Save,
+  X,
+  WandSparkles,
+} from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslations, useLocale } from "next-intl";
 
-const LOCAL_KEY = "customScenes"
+const LOCAL_KEY = "customScenes";
 
 function getLocalScenes(): Scene[] | null {
-  if (typeof window === "undefined") return null
-  const raw = localStorage.getItem(LOCAL_KEY)
-  if (!raw) return null
+  if (typeof window === "undefined") return null;
+  const raw = localStorage.getItem(LOCAL_KEY);
+  if (!raw) return null;
   try {
-    return JSON.parse(raw)
+    return JSON.parse(raw);
   } catch {
-    return null
+    return null;
   }
 }
 
 function setLocalScenes(scenes: Scene[]) {
-  localStorage.setItem(LOCAL_KEY, JSON.stringify(scenes))
+  localStorage.setItem(LOCAL_KEY, JSON.stringify(scenes));
 }
 
 // Drag and drop sorting component
-function SortableItem({ scene, idx, handleEdit, handleDelete }: {
+function SortableItem({
+  scene,
+  idx,
+  handleEdit,
+  handleDelete,
+}: {
   scene: Scene;
   idx: number;
   handleEdit: (idx: number) => void;
@@ -74,18 +101,31 @@ function SortableItem({ scene, idx, handleEdit, handleDelete }: {
           >
             <GripVertical className="h-4 w-4" />
           </span>
-          <div className="font-semibold"> {locale === 'en' ? scene.name_en:scene.name}</div>
-        </div>        <div className="flex gap-2">
+          <div className="font-semibold">
+            {" "}
+            {locale === "en" ? scene.name_en : scene.name}
+          </div>
+        </div>{" "}
+        <div className="flex gap-2">
           <Button size="sm" variant="ghost" onClick={() => handleEdit(idx)}>
             <Pencil className="h-4 w-4" />
           </Button>
-          <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive hover:bg-destructive/10" onClick={() => handleDelete(idx)}>
+          <Button
+            size="sm"
+            variant="ghost"
+            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+            onClick={() => handleDelete(idx)}
+          >
             <Trash2 className="h-4 w-4" />
           </Button>
         </div>
       </div>
-      <div className="text-sm text-muted-foreground mb-1">{scene.description}</div>
-      <pre className="bg-muted p-2 rounded text-xs whitespace-pre-wrap">{scene.prompt}</pre>
+      <div className="text-sm text-muted-foreground mb-1">
+        {scene.description}
+      </div>
+      <pre className="bg-muted p-2 rounded text-xs whitespace-pre-wrap">
+        {scene.prompt}
+      </pre>
     </div>
   );
 }
@@ -107,17 +147,32 @@ function SceneSkeleton() {
       <Skeleton className="h-4 w-full mb-2" />
       <Skeleton className="h-20 w-full" />
     </div>
-  )
+  );
 }
 
 export default function SceneManagePage() {
-  const t = useTranslations('sceneManage')
-  
-  const [scenes, setScenes] = useState<Scene[]>([])
-  const [loading, setLoading] = useState(true)
-  const [editingIdx, setEditingIdx] = useState<number | null>(null)
-  const [form, setForm] = useState<Partial<Scene>>({})
-  const [generating, setGenerating] = useState(false)
+  const t = useTranslations("sceneManage");
+
+  const [scenes, setScenes] = useState<Scene[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [editingIdx, setEditingIdx] = useState<number | null>(null);
+  const [form, setForm] = useState<Partial<Scene>>({});
+  const [generating, setGenerating] = useState(false);
+  // 使用 useChat 钩子来处理与 API 的通信
+  const { messages, append } = useChat({
+    api: "/api/generate",
+    onFinish: (message: { content: string }) => {
+      // 当生成完成时，更新表单的 prompt 字段
+      setForm((prev) => ({ ...prev, prompt: message.content }));
+      setGenerating(false);
+      toast.success(t("promptGeneratedSuccess"));
+    },
+    onError: (error: Error) => {
+      console.error("Error generating prompt:", error);
+      setGenerating(false);
+      toast.error(t("promptGenerationFailed"));
+    },
+  });
 
   // Configure drag sensors, using only pointer (mouse/touch)
   const sensors = useSensors(
@@ -126,67 +181,76 @@ export default function SceneManagePage() {
         distance: 8, // 8px
       },
     })
-  );
+  ); // 监听消息列表变化，获取最新的助手回复
+  useEffect(() => {
+    const assistantMessage = messages
+      .filter((m: { role: string; content: string }) => m.role === "assistant")
+      .pop();
+    if (assistantMessage?.content && !generating) {
+      setForm((prev) => ({ ...prev, prompt: assistantMessage.content }));
+    }
+  }, [messages, generating]);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     // Add a small delay to simulate loading and show the skeleton effect
     const timer = setTimeout(() => {
-      const local = getLocalScenes()
-      setScenes(local || SCENES)
-      setLoading(false)
-    }, 500)
+      const local = getLocalScenes();
+      setScenes(local || SCENES);
+      setLoading(false);
+    }, 500);
 
-    return () => clearTimeout(timer)
-  }, [])
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleEdit = (idx: number) => {
-    setEditingIdx(idx)
-    setForm(scenes[idx])
-  }
+    setEditingIdx(idx);
+    setForm(scenes[idx]);
+  };
   const handleDelete = (idx: number) => {
-    const next = scenes.filter((_, i) => i !== idx)
-    setScenes(next)
-    setLocalScenes(next)
-    setEditingIdx(null)
-    toast.success(t('sceneDeleted'))
-    setForm({})
-  }
+    const next = scenes.filter((_, i) => i !== idx);
+    setScenes(next);
+    setLocalScenes(next);
+    setEditingIdx(null);
+    toast.success(t("sceneDeleted"));
+    setForm({});
+  };
 
   const handleAdd = () => {
-    setEditingIdx(-1)
-    setForm({ name: "", name_en: "", description: "", prompt: "" })
-  }
+    setEditingIdx(-1);
+    setForm({ name: "", name_en: "", description: "", prompt: "" });
+  };
 
   const handleChange = (key: keyof Scene, value: string) => {
-    setForm(prev => ({ ...prev, [key]: value }))
-  }
+    setForm((prev) => ({ ...prev, [key]: value }));
+  };
 
   const handleSave = () => {
-    if (!form.name || !form.name_en || !form.description || !form.prompt) return
+    if (!form.name || !form.name_en || !form.description || !form.prompt)
+      return;
 
-    const newScene = form as Scene
-    let newScenes: Scene[]
+    const newScene = form as Scene;
+    let newScenes: Scene[];
 
     if (editingIdx === -1) {
       // Add new scene at the beginning
-      newScenes = [newScene, ...scenes]
-      toast.success(t('newSceneAdded'))
+      newScenes = [newScene, ...scenes];
+      toast.success(t("newSceneAdded"));
     } else if (editingIdx !== null) {
       // Edit existing scene
       newScenes = scenes.map((scene, i) =>
         i === editingIdx ? newScene : scene
-      )
-      toast.success(t('sceneUpdated'))
+      );
+      toast.success(t("sceneUpdated"));
     } else {
-      return
+      return;
     }
 
-    setScenes(newScenes)
-    setLocalScenes(newScenes)
-    setEditingIdx(null)
-    setForm({})
-  }
+    setScenes(newScenes);
+    setLocalScenes(newScenes);
+    setEditingIdx(null);
+    setForm({});
+  };
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -199,72 +263,60 @@ export default function SceneManagePage() {
 
         const newScenes = arrayMove(prev, oldIndex, newIndex);
         setLocalScenes(newScenes);
-        toast.success(t('sceneOrderUpdated'));
+        toast.success(t("sceneOrderUpdated"));
         return newScenes;
       });
     }
-  }
+  };
   const handleGeneratePrompt = async () => {
     // Check if we have the required fields
     if (!form.name_en || !form.description) {
-      toast.error(t('needNameDescForPrompt'))
-      return
+      toast.error(t("needNameDescForPrompt"));
+      return;
     }
 
-    try {
-      setGenerating(true)
-      toast.info(t('aiGeneratingPrompt'), { duration: 3000 })
+    setGenerating(true);
+    toast.info(t("aiGeneratingPrompt"), { duration: 3000 });
 
-      const response = await fetch('/api/generate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: form.name_en,
-          description: form.description
-        }),
-      })
+    // Fix: Create a message with empty content, but provide the data in the options
+    const userPrompt = `
+Scene Name: ${form.name_en}
+Description: ${form.description}
 
-      if (!response.ok) {
-        throw new Error(`Failed to generate prompt: ${response.statusText}`)
-      }
+Please create a translation prompt for the above scene that will guide an AI model in performing high-quality bidirectional translation. Format the prompt using Markdown with headings, and bullet points as appropriate.
+`;
+    await append({
+      role: 'user',
+      content: userPrompt
+    })
 
-      // Get the response as text - now it comes directly as a streamable response
-      const responseText = await response.text()
-
-      // Update the form with the generated prompt
-      setForm(prev => ({ ...prev, prompt: responseText }))
-      toast.success(t('promptGeneratedSuccess'))
-    } catch (error) {
-      console.error("Error generating prompt:", error)
-      toast.error(t('promptGenerationFailed'))
-    } finally {
-      setGenerating(false)
-    }
-  }
+  };
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">{t('title')}</h1>
+      <h1 className="text-2xl font-bold mb-4">{t("title")}</h1>
       <p className="mb-6 text-muted-foreground text-sm">
-        {t('description')}
-      </p>      <div className="mb-4 flex gap-2">
-        <Button onClick={handleAdd} variant="outline" title={t('addScene')}>
+        {t("description")}
+      </p>{" "}
+      <div className="mb-4 flex gap-2">
+        <Button onClick={handleAdd} variant="outline" title={t("addScene")}>
           <Plus className="h-4 w-4" />
-          <span className="sr-only">{t('addScene')}</span>
+          <span className="sr-only">{t("addScene")}</span>
         </Button>
-        <Button variant="outline" onClick={() => {
-          setScenes(SCENES)
-          setLocalScenes(SCENES)
-          setEditingIdx(null)
-          toast.success(t('resetToDefaultDone'))
-          setForm({})
-        }} title={t('resetToDefault')}>
+        <Button
+          variant="outline"
+          onClick={() => {
+            setScenes(SCENES);
+            setLocalScenes(SCENES);
+            setEditingIdx(null);
+            toast.success(t("resetToDefaultDone"));
+            setForm({});
+          }}
+          title={t("resetToDefault")}
+        >
           <Settings className="h-4 w-4" />
-          <span className="sr-only">{t('resetToDefault')}</span>
+          <span className="sr-only">{t("resetToDefault")}</span>
         </Button>
       </div>
-
       {loading ? (
         <div className="space-y-4">
           {[...Array(4)].map((_, i) => (
@@ -290,130 +342,186 @@ export default function SceneManagePage() {
                   handleEdit={handleEdit}
                   handleDelete={handleDelete}
                 />
-              ))}          </div>
+              ))}{" "}
+            </div>
           </SortableContext>
         </DndContext>
       )}
-
       {(editingIdx !== null || form.name) && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-lg shadow-lg relative">
-            <Button variant="outline" onClick={() => { setEditingIdx(null); setForm({}) }} title={t('common.cancel')} className="absolute top-3 right-3 p-2 h-8 w-8 flex items-center justify-center">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setEditingIdx(null);
+                setForm({});
+              }}
+              title={t("common.cancel")}
+              className="absolute top-3 right-3 p-2 h-8 w-8 flex items-center justify-center"
+            >
               <X className="h-4 w-4" />
-              <span className="sr-only">{t('common.cancel')}</span>
+              <span className="sr-only">{t("common.cancel")}</span>
             </Button>
-            <h2 className="text-lg font-bold mb-2">{editingIdx !== -1 ? t('editScene') : t('newScene')}</h2>
-            <div className="space-y-2">              <div>
-              <label className="text-xs text-muted-foreground mb-1 block">{t('name')}</label>
-              <Input
-                placeholder={t('name')}
-                value={form.name || ''}
-                onChange={e => handleChange('name', e.target.value)}
-                className={cn(!form.name && "border-amber-200")}
-              />
-            </div>
+            <h2 className="text-lg font-bold mb-2">
+              {editingIdx !== -1 ? t("editScene") : t("newScene")}
+            </h2>
+            <div className="space-y-2">
+              {" "}
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">{t('englishName')}</label>
+                <label className="text-xs text-muted-foreground mb-1 block">
+                  {t("name")}
+                </label>
                 <Input
-                  placeholder={t('englishName')}
-                  value={form.name_en || ''}
-                  onChange={e => handleChange('name_en', e.target.value)}
+                  placeholder={t("name")}
+                  value={form.name || ""}
+                  onChange={(e) => handleChange("name", e.target.value)}
+                  className={cn(!form.name && "border-amber-200")}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-muted-foreground mb-1 block">
+                  {t("englishName")}
+                </label>
+                <Input
+                  placeholder={t("englishName")}
+                  value={form.name_en || ""}
+                  onChange={(e) => handleChange("name_en", e.target.value)}
                   className={cn(!form.name_en && "border-amber-200")}
                 />
-              </div><div className="flex gap-2">
+              </div>
+              <div className="flex gap-2">
                 <div className="flex-grow">
                   <label className="text-xs text-muted-foreground mb-1 block">
-                    {t('sceneDescription')} <span className="text-blue-500">{t('descriptionForPrompt')}</span>
-                  </label>                  <div className="flex items-end gap-2">
+                    {t("sceneDescription")}{" "}
+                    <span className="text-blue-500">
+                      {t("descriptionForPrompt")}
+                    </span>
+                  </label>{" "}
+                  <div className="flex items-end gap-2">
                     <Input
-                      placeholder={t('sceneDescription')}
-                      value={form.description || ''}
-                      onChange={e => handleChange('description', e.target.value)}
+                      placeholder={t("sceneDescription")}
+                      value={form.description || ""}
+                      onChange={(e) =>
+                        handleChange("description", e.target.value)
+                      }
                       className={cn(!form.description && "border-amber-200")}
-                    />
+                    />{" "}
                     <Button
                       variant="outline"
                       size="icon"
                       onClick={handleGeneratePrompt}
-                      disabled={!form.name_en || !form.description || generating}
-                      title={t('generatePrompt')}
+                      disabled={
+                        !form.name_en || !form.description || generating
+                      }
+                      title={t("generatePrompt")}
                       className={cn(
                         "flex-shrink-0 border-dashed mt-0",
-                        generating ? "animate-pulse bg-muted" : "hover:border-primary hover:text-primary"
+                        generating
+                          ? "animate-pulse bg-muted"
+                          : "hover:border-primary hover:text-primary"
                       )}
                     >
-
                       <WandSparkles className="h-4 w-4" />
-                      <span className="sr-only">{t('generatePrompt')}</span>
+                      <span className="sr-only">{t("generatePrompt")}</span>
                     </Button>
                   </div>
                 </div>
               </div>
               <div>
+                {" "}
                 <label className="text-xs text-muted-foreground mb-1 block">
-                  {t('translationPrompt')} {generating && <span className="text-blue-500 animate-pulse">{t('aiGenerating')}</span>}
-                </label>                <Textarea
-                  placeholder={t('promptPlaceholder')}
+                  {t("translationPrompt")}{" "}
+                  {(generating) && (
+                    <span className="text-blue-500 animate-pulse">
+                      {t("aiGenerating")}
+                    </span>
+                  )}
+                </label>
+                <Textarea
+                  placeholder={t("promptPlaceholder")}
                   rows={6}
-                  value={form.prompt || ''}
-                  onChange={e => handleChange('prompt', e.target.value)} className={cn(
+                  value={form.prompt || ""}
+                  onChange={(e) => handleChange("prompt", e.target.value)}
+                  className={cn(
                     "font-mono text-sm whitespace-pre-wrap",
                     !form.prompt && "border-amber-200",
-                    form.prompt && form.prompt.length > 400 && "border-amber-500"
+                    form.prompt &&
+                    form.prompt.length > 400 &&
+                    "border-amber-500"
                   )}
-                />                {form.prompt && (
+                />{" "}
+                {form.prompt && (
                   <div className="text-xs text-right mt-1 text-muted-foreground">
-                    {form.prompt.length} {t('characters')} {form.prompt.length > 400 &&
-                      <span className="text-amber-500">{t('lengthSuggestion')}</span>}
+                    {form.prompt.length} {t("characters")}{" "}
+                    {form.prompt.length > 400 && (
+                      <span className="text-amber-500">
+                        {t("lengthSuggestion")}
+                      </span>
+                    )}
                   </div>
                 )}
               </div>
             </div>
             <div className="flex gap-2 mt-4 justify-end">
-              <Button variant="outline"
+              <Button
+                variant="outline"
                 onClick={handleSave}
-                disabled={!form.name || !form.name_en || !form.description || !form.prompt}
-                title={t('common.save')}
+                disabled={
+                  !form.name ||
+                  !form.name_en ||
+                  !form.description ||
+                  !form.prompt
+                }
+                title={t("common.save")}
               >
                 <Save className="h-4 w-4" />
-                <span className="sr-only">{t('common.save')}</span>
+                <span className="sr-only">{t("common.save")}</span>
               </Button>
-            </div>            {editingIdx === null && (<div className="mt-4">
-              <Button
-                onClick={handleGeneratePrompt}
-                className={cn(
-                  "w-full border-dashed",
-                  generating ? "bg-muted" : "hover:border-primary hover:text-primary"
+            </div>{" "}
+            {editingIdx === null && (
+              <div className="mt-4">
+                {" "}
+                <Button
+                  onClick={handleGeneratePrompt}
+                  className={cn(
+                    "w-full border-dashed",
+                    generating
+                      ? "bg-muted"
+                      : "hover:border-primary hover:text-primary"
+                  )}
+                  variant="outline"
+                  disabled={
+                    generating ||
+                    !form.name_en ||
+                    !form.description
+                  }
+                  title={t("generatePrompt")}
+                >
+                  {" "}
+                  {generating ? (
+                    <>
+                      <span className="animate-pulse">{t("aiGenerating")}</span>
+                      <WandSparkles className="h-5 w-5 ml-2 animate-pulse" />
+                    </>
+                  ) : (
+                    <>
+                      {!form.name_en || !form.description
+                        ? t("fillNameDescription")
+                        : t("generatePrompt")}
+                      <WandSparkles className="h-5 w-5 ml-2" />
+                    </>
+                  )}
+                </Button>{" "}
+                {(!form.name_en || !form.description) && (
+                  <p className="text-xs text-muted-foreground text-center mt-2">
+                    ⚠️ {t("nameDescriptionRequired")}
+                  </p>
                 )}
-                variant="outline"
-                disabled={generating || !form.name_en || !form.description}
-                title={t('generatePrompt')}
-              >
-                {generating ? (
-                  <>
-                    <span className="animate-pulse">{t('aiGenerating')}</span>
-                    <WandSparkles className="h-5 w-5 ml-2 animate-pulse" />
-                  </>
-                ) : (
-                  <>
-                    {!form.name_en || !form.description ? (
-                      t('fillNameDescription')
-                    ) : (
-                      t('generatePrompt')
-                    )}
-                    <WandSparkles className="h-5 w-5 ml-2" />
-                  </>
-                )}
-              </Button>              {(!form.name_en || !form.description) && (
-                <p className="text-xs text-muted-foreground text-center mt-2">
-                  ⚠️ {t('nameDescriptionRequired')}
-                </p>
-              )}
-            </div>
+              </div>
             )}
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }

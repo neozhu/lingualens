@@ -1,104 +1,108 @@
 {
-    "app": {
-        "title": "LinguaLens",
-        "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
-    },
-    "nav": {
-        "home": "Trang chủ",
-        "scenes": "Cảnh",
-        "manage": "Quản lý",
-        "privacy": "Bảo mật",
-        "terms": "Điều khoản",
-        "features": "Tính năng",
-        "translation": "Dịch",
-        "support": "Hỗ trợ",
-        "faq": "FAQ",
-        "contact": "Liên hệ",
-        "about": "Giới thiệu"
-    },
-    "footer": {
-        "rights": "Mọi quyền được bảo lưu",
-        "madewith": "Được tạo bởi"
-    },
+  "app": {
+    "title": "LinguaLens",
+    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "scenes": "Cảnh",
+    "manage": "Quản lý",
+    "privacy": "Bảo mật",
+    "terms": "Điều khoản",
+    "features": "Tính năng",
+    "translation": "Dịch",
+    "support": "Hỗ trợ",
+    "faq": "FAQ",
+    "contact": "Liên hệ",
+    "about": "Giới thiệu"
+  },
+  "footer": {
+    "rights": "Mọi quyền được bảo lưu",
+    "madewith": "Được tạo bởi"
+  },
+  "common": {
+    "loading": "Đang tải...",
+    "error": "Đã xảy ra lỗi",
+    "retry": "Thử lại",
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "download": "Tải xuống",
+    "upload": "Tải lên",
+    "cancel": "Hủy",
+    "submit": "Gửi",
+    "save": "Lưu",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "create": "Tạo mới"
+  },
+  "scene": {
+    "title": "Trình tạo prompt hệ thống và mô tả cảnh",
+    "systemPrompt": "Hướng dẫn hệ thống",
+    "promptDescription": "Hàm createSystemPrompt tạo động prompt dịch dựa trên cảnh đã chọn.",
+    "configInfo": "Nội dung prompt được cấu hình trong api/chat/route.ts; cập nhật tệp đó để điều chỉnh prompt.",
+    "availableScenes": "Các cảnh khả dụng"
+  },
+  "chat": {
+    "inputPlaceholder": "Nhập nội dung cần dịch...",
+    "trySuggestions": "Thử các prompt này ✨",
+    "copyMessage": "Đã sao chép phản hồi vào clipboard!"
+  },
+  "sceneSelector": {
+    "customScene": "Cảnh tùy chỉnh"
+  },
+  "sceneManage": {
     "common": {
-        "loading": "Đang tải...",
-        "error": "Đã xảy ra lỗi",
-        "retry": "Thử lại",
-        "copy": "Sao chép",
-        "copied": "Đã sao chép",
-        "download": "Tải xuống",
-        "upload": "Tải lên",
-        "cancel": "Hủy",
-        "submit": "Gửi",
-        "save": "Lưu",
-        "delete": "Xóa",
-        "edit": "Chỉnh sửa",
-        "create": "Tạo mới"
+      "cancel": "Hủy",
+      "save": "Lưu"
     },
-    "scene": {
-        "title": "Trình tạo prompt hệ thống và mô tả cảnh",
-        "systemPrompt": "Hướng dẫn hệ thống",
-        "promptDescription": "Hàm createSystemPrompt tạo động prompt dịch dựa trên cảnh đã chọn.",
-        "configInfo": "Nội dung prompt được cấu hình trong api/chat/route.ts; cập nhật tệp đó để điều chỉnh prompt.",
-        "availableScenes": "Các cảnh khả dụng"
-    },
-    "chat": {
-        "inputPlaceholder": "Nhập nội dung cần dịch...",
-        "trySuggestions": "Thử các prompt này ✨",
-        "copyMessage": "Đã sao chép phản hồi vào clipboard!"
-    },
-    "sceneSelector": {
-        "customScene": "Cảnh tùy chỉnh"
-    },
-    "sceneManage": {
-        "title": "Quản lý cảnh tùy chỉnh",
-        "description": "Quản lý các cảnh dịch tùy chỉnh của bạn tại đây. Bạn có thể thêm, chỉnh sửa, xóa hoặc sắp xếp lại các cảnh để phù hợp với nhu cầu dịch thuật của mình. Mọi thay đổi đều được lưu trong trình duyệt và có thể đặt lại về mặc định bất cứ lúc nào.",
-        "addScene": "Thêm cảnh mới",
-        "resetToDefault": "Đặt lại về mặc định",
-        "editScene": "Chỉnh sửa cảnh",
-        "newScene": "Cảnh mới",
-        "name": "Tên",
-        "englishName": "Tên tiếng Anh",
-        "sceneDescription": "Mô tả cảnh",
-        "descriptionForPrompt": "(dùng cho tạo prompt)",
-        "translationPrompt": "Prompt dịch",
-        "promptPlaceholder": "Nhập prompt hoặc nhấn đũa thần để tạo tự động (hỗ trợ định dạng Markdown)",
-        "aiGenerating": "AI đang tạo...",
-        "characters": "ký tự",
-        "lengthSuggestion": "(nên giữ từ 250-400 ký tự)",
-        "generatePrompt": "Dùng AI tạo prompt dựa trên tên và mô tả",
-        "fillNameDescription": "Vui lòng điền tên tiếng Anh và mô tả trước",
-        "nameDescriptionRequired": "⚠️ Cần tên tiếng Anh và mô tả để dùng AI tạo prompt",
-        "sceneDeleted": "Đã xóa cảnh",
-        "sceneUpdated": "Đã cập nhật cảnh",
-        "newSceneAdded": "Đã thêm cảnh mới",
-        "sceneOrderUpdated": "Đã cập nhật thứ tự cảnh",
-        "resetToDefaultDone": "Đã đặt lại cảnh mặc định",
-        "needNameDescForPrompt": "Cần tên tiếng Anh và mô tả để tạo prompt",
-        "aiGeneratingPrompt": "AI đang tạo prompt...",
-        "promptGeneratedSuccess": "Tạo prompt thành công",
-        "promptGenerationFailed": "Tạo prompt thất bại, vui lòng thử lại"
-    },
-    "tooltip": {
-        "switchLanguage": "Chuyển đổi ngôn ngữ",
-        "selectTheme": "Chọn chủ đề",
-        "sceneManage": "Quản lý cảnh tùy chỉnh",
-        "toggleMode": "Chuyển đổi chế độ Sáng/Tối",
-        "github": "Xem trên GitHub"
-    },
-    "modeToggle": {
-        "switch": "Chuyển đổi giao diện",
-        "light": "Chế độ sáng",
-        "dark": "Chế độ tối",
-        "system": "Mặc định hệ thống"
-    },
-    "themes": {
-        "default": "Mặc định",
-        "neutral": "Trung tính",
-        "stone": "Đá",
-        "zinc": "Kẽm",
-        "gray": "Xám",
-        "slate": "Đá phiến",
-        "scaled": "Tỷ lệ"
-    }
+    "title": "Quản lý cảnh tùy chỉnh",
+    "description": "Quản lý các cảnh dịch tùy chỉnh của bạn tại đây. Bạn có thể thêm, chỉnh sửa, xóa hoặc sắp xếp lại các cảnh để phù hợp với nhu cầu dịch thuật của mình. Mọi thay đổi đều được lưu trong trình duyệt và có thể đặt lại về mặc định bất cứ lúc nào.",
+    "addScene": "Thêm cảnh mới",
+    "resetToDefault": "Đặt lại về mặc định",
+    "editScene": "Chỉnh sửa cảnh",
+    "newScene": "Cảnh mới",
+    "name": "Tên",
+    "englishName": "Tên tiếng Anh",
+    "sceneDescription": "Mô tả cảnh",
+    "descriptionForPrompt": "(dùng cho tạo prompt)",
+    "translationPrompt": "Prompt dịch",
+    "promptPlaceholder": "Nhập prompt hoặc nhấn đũa thần để tạo tự động (hỗ trợ định dạng Markdown)",
+    "aiGenerating": "AI đang tạo...",
+    "characters": "ký tự",
+    "lengthSuggestion": "(nên giữ từ 250-400 ký tự)",
+    "generatePrompt": "Dùng AI tạo prompt dựa trên tên và mô tả",
+    "fillNameDescription": "Vui lòng điền tên tiếng Anh và mô tả trước",
+    "nameDescriptionRequired": "⚠️ Cần tên tiếng Anh và mô tả để dùng AI tạo prompt",
+    "sceneDeleted": "Đã xóa cảnh",
+    "sceneUpdated": "Đã cập nhật cảnh",
+    "newSceneAdded": "Đã thêm cảnh mới",
+    "sceneOrderUpdated": "Đã cập nhật thứ tự cảnh",
+    "resetToDefaultDone": "Đã đặt lại cảnh mặc định",
+    "needNameDescForPrompt": "Cần tên tiếng Anh và mô tả để tạo prompt",
+    "aiGeneratingPrompt": "AI đang tạo prompt...",
+    "promptGeneratedSuccess": "Tạo prompt thành công",
+    "promptGenerationFailed": "Tạo prompt thất bại, vui lòng thử lại"
+  },
+  "tooltip": {
+    "switchLanguage": "Chuyển đổi ngôn ngữ",
+    "selectTheme": "Chọn chủ đề",
+    "sceneManage": "Quản lý cảnh tùy chỉnh",
+    "toggleMode": "Chuyển đổi chế độ Sáng/Tối",
+    "github": "Xem trên GitHub"
+  },
+  "modeToggle": {
+    "switch": "Chuyển đổi giao diện",
+    "light": "Chế độ sáng",
+    "dark": "Chế độ tối",
+    "system": "Mặc định hệ thống"
+  },
+  "themes": {
+    "default": "Mặc định",
+    "neutral": "Trung tính",
+    "stone": "Đá",
+    "zinc": "Kẽm",
+    "gray": "Xám",
+    "slate": "Đá phiến",
+    "scaled": "Tỷ lệ"
+  }
 }
