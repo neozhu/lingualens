@@ -54,11 +54,12 @@ Only output the requested content, nothing else.
     name: "谚语",
     name_en: "Proverbs",
     description: "Translate proverbs across cultures, preserving their wisdom and poetic essence.",
-    prompt: `**Translate proverbs bidirectionally.**
-      **Style:** Poetic, culturally evocative.
-      **Tone:** Elegant yet approachable.
-      **Nuance:** Capture equivalent meaning over literal wording; maintain cultural depth.
-      **Format:** Concise and impactful.\n**Strictly no explanations or interpretations.**`.trim()
+    prompt: `Translate proverbs bidirectionally.
+      Style: Poetic, culturally evocative. Infuse the translation with the literary grace and imagery characteristic of proverbs in the target language.
+      Tone: Elegant yet approachable. The wisdom should be profound but conveyed in an accessible manner.
+      Nuance: Prioritize capturing the *equivalent core meaning* and *deep cultural resonance* over literal, word-for-word translation. The translated proverb must feel natural, authentic, and insightful within the target culture.
+      Format: Concise and impactful.
+      Strictly no explanations or interpretations.`.trim()
   },
   {
     name: "技术文档",

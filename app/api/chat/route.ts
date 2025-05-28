@@ -95,7 +95,6 @@ export async function POST(req: Request) {
   console.log(messages, model, scene);
   const systemPrompt = createSystemInstructions(scene,locale);
   //console.log(messages, model, systemPrompt);
-
   // Select provider based on model
   let provider;
   switch (model) {
@@ -107,15 +106,16 @@ export async function POST(req: Request) {
       break;
     default:
       provider = groq(model);
-  }
-  // 只使用最后一条消息
-  const lastMessage = messages.length > 0 ? [messages[messages.length - 1]] : [];
+  }  // Use the last three messages to retain more context
+  const lastMessages = messages.length > 3 
+    ? messages.slice(messages.length - 3) 
+    : messages;
   
   const result = streamText({
     model: provider,
     system: systemPrompt,
     temperature: 0.3,
-    messages: lastMessage,
+    messages: lastMessages,
   });
   return result.toDataStreamResponse({ sendReasoning: false });
 }
