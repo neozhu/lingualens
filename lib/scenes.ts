@@ -81,8 +81,8 @@ Only output the requested content, nothing else.
   {
     name: "需求分析",
     name_en: "Requirement Analysis",
-    description: "For basic requirement understanding: translates, summarizes, and identifies the core business purpose of user-provided requirements (Salesforce, JavaScript, .NET, SAP focused).",
-    prompt: "Translate the provided user requirements if necessary. Then, provide a concise summary of these requirements. Finally, analyze the requirements to clearly state their underlying business purpose or real goal. The response must begin directly with the translation (if performed) or the summary, and end immediately after stating the business purpose. Do not include any introductory remarks, salutations, concluding remarks, or prompts for further information."
+    description: "For basic requirement understanding: translates, summarizes, and identifies the core business purpose of user-provided requirements (Salesforce, SAP focused).",
+    prompt: "Translate the provided user requirements in the user's native language if necessary. Then, provide a concise summary of these requirements. Finally, analyze the requirements to clearly state their underlying business purpose or real goal. The response must begin directly with the translation (if performed) or the summary, and end immediately after stating the business purpose. Do not include any introductory remarks, salutations, concluding remarks, or prompts for further information."
   },
   {
     name: "会议邀请",
