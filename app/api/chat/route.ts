@@ -108,12 +108,14 @@ export async function POST(req: Request) {
     default:
       provider = groq(model);
   }
-
+  // 只使用最后一条消息
+  const lastMessage = messages.length > 0 ? [messages[messages.length - 1]] : [];
+  
   const result = streamText({
     model: provider,
     system: systemPrompt,
     temperature: 0.3,
-    messages,
+    messages: lastMessage,
   });
   return result.toDataStreamResponse({ sendReasoning: false });
 }
