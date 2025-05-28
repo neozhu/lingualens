@@ -79,16 +79,16 @@ Only output the requested content, nothing else.
     prompt: "Translate as technical support communication for systems like TOPdesk, focusing on Salesforce, JavaScript, .NET, or SAP. Use clear, concise, and solution-focused language with a professional and approachable tone. include a greeting or closing; address the issue or request directly."
   },
   {
+    name: "需求分析",
+    name_en: "Requirement Analysis",
+    description: "For basic requirement understanding: translates, summarizes, and identifies the core business purpose of user-provided requirements (Salesforce, JavaScript, .NET, SAP focused).",
+    prompt: "Translate the provided user requirements if necessary. Then, provide a concise summary of these requirements. Finally, analyze the requirements to clearly state their underlying business purpose or real goal. The response must begin directly with the translation (if performed) or the summary, and end immediately after stating the business purpose. Do not include any introductory remarks, salutations, concluding remarks, or prompts for further information."
+  },
+  {
     name: "会议邀请",
     name_en: "Meeting Invitation",
     description: "For translating formal meeting invitation messages.",
     prompt: "Translate as a formal meeting invitation. Include a polite greeting, clearly state the meeting purpose, date, time, venue, agenda, and participants, and end with an appropriate closing."
-  },
-  {
-    name: "讨论需求",
-    name_en: "Requirement Discussion",
-    description: "For discussions about requirements or gathering user needs, mainly for Salesforce, JavaScript, .NET, and SAP.",
-    prompt: "Translate as a requirements discussion, mainly related to Salesforce, JavaScript, .NET, or SAP. Be detailed and encourage clarification or more information."
   },
   {
     name: "会议纪要",
