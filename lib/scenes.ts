@@ -47,8 +47,8 @@ Only output the requested content, nothing else.
   {
     name: "新闻资讯",
     name_en: "News Article",
-    description: "For translating news reports or informational content, focusing on objectivity and accuracy.",
-    prompt: "Translate as a news article. Use clear, objective, and neutral language, faithfully preserving the original structure and all factual information. Follow journalistic writing conventions. Do not add opinions or commentary."
+    description: "For translating news reports or informational content, focusing on objectivity and accuracy, and concluding with a summary.",
+    prompt: "Translate as a news article. Use clear, objective, and neutral language, faithfully preserving the original structure and all factual information. Follow journalistic writing conventions. Do not add opinions or commentary. Conclude the article with a concise summary that captures the key points succinctly and accurately."
   },
   {
     name: "谚语",
