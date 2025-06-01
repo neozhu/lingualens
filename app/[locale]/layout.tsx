@@ -28,16 +28,25 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "LinguaLens 翻译助手",
-  description: "LinguaLens 智能双向翻译助手，支持多场景风格切换",
-  keywords: ['LinguaLens', '翻译', 'AI 翻译', '多场景翻译'],
+  title: "LinguaLens AI Translation Assistant",
+  description: "LinguaLens is an intelligent bidirectional translation assistant supporting multi-scenario style switching. Powered by AI for accurate and context-aware translations.",
+  keywords: [
+    'LinguaLens',
+    'translation',
+    'AI translation',
+    'multilingual',
+    'context-aware translation',
+    'language assistant',
+    'real-time translation',
+    'machine translation'
+  ],
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: 'LinguaLens 翻译助手',
-    description: 'LinguaLens 智能双向翻译助手，支持多场景风格切换',
+    title: 'LinguaLens AI Translation Assistant',
+    description: 'LinguaLens is an intelligent bidirectional translation assistant supporting multi-scenario style switching. Powered by AI for accurate and context-aware translations.',
     url: 'https://lingualens.blazorserver.com',
     siteName: 'LinguaLens',
     type: 'website',
@@ -46,14 +55,14 @@ export const metadata: Metadata = {
         url: '/screen.png',
         width: 1200,
         height: 630,
-        alt: 'LinguaLens 翻译助手界面预览',
+        alt: 'LinguaLens AI Translation Assistant interface preview',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LinguaLens 翻译助手',
-    description: '智能双向翻译助手，支持多场景风格切换',
+    title: 'LinguaLens AI Translation Assistant',
+    description: 'Intelligent bidirectional translation assistant with multi-scenario style switching.',
     images: ['/screen.png'],
   }
 };
