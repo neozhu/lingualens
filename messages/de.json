@@ -103,6 +103,15 @@
     "zinc": "Zink",
     "gray": "Grau",
     "slate": "Schiefer",
-    "scaled": "Skaliert"
+    "scaled": "Skaliert",
+    "mono": "Mono",
+    "blue": "Blau",
+    "green": "Grün",
+    "amber": "Bernstein",
+    "rose": "Rosa",
+    "purple": "Lila",
+    "orange": "Orange",
+    "teal": "Blaugrün",
+    "colors": "Farben"
   }
 }

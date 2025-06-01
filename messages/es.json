@@ -103,6 +103,15 @@
     "zinc": "Cinc",
     "gray": "Gris",
     "slate": "Pizarra",
-    "scaled": "Escalado"
+    "scaled": "Escalado",
+    "mono": "Mono",
+    "blue": "Azul",
+    "green": "Verde",
+    "amber": "Ámbar",
+    "rose": "Rosa",
+    "purple": "Púrpura",
+    "orange": "Naranja",
+    "teal": "Turquesa",
+    "colors": "Colores"
   }
 }

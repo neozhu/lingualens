@@ -103,6 +103,15 @@
     "zinc": "Zinc",
     "gray": "Gris",
     "slate": "Ardoise",
-    "scaled": "Échelonné"
+    "scaled": "Échelonné",
+    "mono": "Mono",
+    "blue": "Bleu",
+    "green": "Vert",
+    "amber": "Ambre",
+    "rose": "Rose",
+    "purple": "Violet",
+    "orange": "Orange",
+    "teal": "Sarcelle",
+    "colors": "Couleurs"
   }
 }

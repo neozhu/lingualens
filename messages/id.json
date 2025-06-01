@@ -103,6 +103,15 @@
     "zinc": "Seng",
     "gray": "Abu-abu",
     "slate": "Batu tulis",
-    "scaled": "Berskala"
+    "scaled": "Berskala",
+    "mono": "Mono",
+    "blue": "Biru",
+    "green": "Hijau",
+    "amber": "Amber",
+    "rose": "Mawar",
+    "purple": "Ungu",
+    "orange": "Oranye",
+    "teal": "Hijau Kebiruan",
+    "colors": "Warna"
   }
 }

@@ -103,6 +103,15 @@
     "zinc": "Zink",
     "gray": "Kelabu",
     "slate": "Batu Lempeng",
-    "scaled": "Diskala"
+    "scaled": "Diskala",
+    "mono": "Mono",
+    "blue": "Biru",
+    "green": "Hijau",
+    "amber": "Amber",
+    "rose": "Ros",
+    "purple": "Ungu",
+    "orange": "Jingga",
+    "teal": "Hijau Kebiruan",
+    "colors": "Warna"
   }
 }

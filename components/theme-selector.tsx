@@ -1,19 +1,23 @@
 "use client"
 
-import { THEMES } from "@/lib/themes"
+import { DEFAULT_THEMES, COLOR_THEMES } from "@/lib/themes"
 import { useThemeConfig } from "./active-theme"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Paintbrush } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { cn } from "@/lib/utils" // Import cn utility for conditionally merging classnames
 
 export function ThemeSelector() {
-  const { setActiveTheme } = useThemeConfig()
+  const { activeTheme, setActiveTheme } = useThemeConfig()  // Get the activeTheme
   const t = useTranslations()
 
   return (
@@ -25,14 +29,36 @@ export function ThemeSelector() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {THEMES.map((theme) => (
-          <DropdownMenuItem
-            key={theme.value}
-            onClick={() => setActiveTheme(theme.value)}
-          >
-            {t(`themes.${theme.value}`)}
-          </DropdownMenuItem>
-        ))}
+        <DropdownMenuGroup>
+          {DEFAULT_THEMES.map((theme) => (
+            <DropdownMenuItem
+              key={theme.value}
+              onClick={() => setActiveTheme(theme.value)}
+              className={cn(
+                activeTheme === theme.value && "bg-accent text-accent-foreground font-medium"
+              )}
+            >
+              {t(`themes.${theme.value}`)}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
+        
+        <DropdownMenuSeparator />
+        
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="text-sm text-muted-foreground">{t('themes.colors') || 'Colors'}</DropdownMenuLabel>
+          {COLOR_THEMES.map((theme) => (
+            <DropdownMenuItem
+              key={theme.value}
+              onClick={() => setActiveTheme(theme.value)}
+              className={cn(
+                activeTheme === theme.value && "bg-accent text-accent-foreground font-medium"
+              )}
+            >
+              {t(`themes.${theme.value}`)}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   )

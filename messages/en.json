@@ -103,6 +103,15 @@
     "zinc": "Zinc",
     "gray": "Gray",
     "slate": "Slate",
-    "scaled": "Scaled"
+    "scaled": "Scaled",
+    "mono": "Mono",
+    "blue": "Blue",
+    "green": "Green",
+    "amber": "Amber",
+    "rose": "Rose",
+    "purple": "Purple",
+    "orange": "Orange",
+    "teal": "Teal",
+    "colors": "Colors"
   }
 }

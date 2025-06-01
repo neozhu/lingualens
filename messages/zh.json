@@ -89,8 +89,7 @@
     "aiGeneratingPrompt": "正在使用 AI 生成提示词...",
     "promptGeneratedSuccess": "已成功生成提示词",
     "promptGenerationFailed": "生成提示词失败，请重试"
-  },
-  "modeToggle": {
+  },  "modeToggle": {
     "switch": "切换主题",
     "light": "浅色模式",
     "dark": "深色模式",
@@ -103,6 +102,15 @@
     "zinc": "锌色",
     "gray": "灰色",
     "slate": "石板",
-    "scaled": "渐变"
+    "scaled": "渐变",
+    "mono": "单色",
+    "blue": "蓝色",
+    "green": "绿色",
+    "amber": "琥珀",
+    "rose": "玫瑰",
+    "purple": "紫色",
+    "orange": "橙色",
+    "teal": "蓝绿",
+    "colors": "颜色"
   }
 }
