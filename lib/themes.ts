@@ -4,6 +4,14 @@ export const DEFAULT_THEMES = [
     value: "default",
   },
   {
+    name: "Neutral",
+    value: "neutral",
+  },
+  {
+    name: "Stone",
+    value: "stone",
+  },
+  {
     name: "Scaled",
     value: "scaled",
   },
@@ -14,6 +22,10 @@ export const DEFAULT_THEMES = [
 ]
 
 export const COLOR_THEMES = [
+  {
+    name: "Gray",
+    value: "gray",
+  },
   {
     name: "Blue",
     value: "blue",
