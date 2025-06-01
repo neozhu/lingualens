@@ -1,4 +1,4 @@
-.theme-default .theme-container {
+.theme-default  {
   --chart-1: var(--color-blue-300);
   --chart-2: var(--color-blue-500);
   --chart-3: var(--color-blue-600);
@@ -6,7 +6,7 @@
   --chart-5: var(--color-blue-800);
 }
 
-.theme-blue .theme-container {
+.theme-blue  {
   --primary: var(--color-blue-600);
   --primary-foreground: var(--color-blue-50);
   --ring: var(--color-blue-400);
@@ -29,7 +29,7 @@
   }
 }
 
-.theme-green .theme-container {
+.theme-green  {
   --primary: var(--color-lime-600);
   --primary-foreground: var(--color-lime-50);
   --ring: var(--color-lime-400);
@@ -52,7 +52,7 @@
   }
 }
 
-.theme-amber .theme-container {
+.theme-amber  {
   --primary: var(--color-amber-600);
   --primary-foreground: var(--color-amber-50);
   --ring: var(--color-amber-400);
@@ -75,7 +75,7 @@
   }
 }
 
-.theme-rose .theme-container {
+.theme-rose  {
   --primary: var(--color-rose-600);
   --primary-foreground: var(--color-rose-50);
   --ring: var(--color-rose-400);
@@ -98,7 +98,7 @@
   }
 }
 
-.theme-purple .theme-container {
+.theme-purple  {
   --primary: var(--color-purple-600);
   --primary-foreground: var(--color-purple-50);
   --ring: var(--color-purple-400);
@@ -121,7 +121,7 @@
   }
 }
 
-.theme-orange .theme-container {
+.theme-orange  {
   --primary: var(--color-orange-600);
   --primary-foreground: var(--color-orange-50);
   --ring: var(--color-orange-400);
@@ -144,7 +144,7 @@
   }
 }
 
-.theme-teal .theme-container {
+.theme-teal  {
   --primary: var(--color-teal-600);
   --primary-foreground: var(--color-teal-50);
   --chart-1: var(--color-teal-300);
@@ -165,7 +165,7 @@
   }
 }
 
-.theme-mono .theme-container {
+.theme-mono  {
   --font-sans: var(--font-mono);
   --primary: var(--color-stone-600);
   --primary-foreground: var(--color-stone-50);
@@ -225,7 +225,7 @@
   }
 }
 
-.theme-scaled .theme-container {
+.theme-scaled  {
   --chart-1: var(--color-blue-300);
   --chart-2: var(--color-blue-500);
   --chart-3: var(--color-blue-600);
@@ -264,7 +264,7 @@
   }
 }
 
-.theme-red .theme-container {
+.theme-red  {
   --primary: var(--color-red-600);
   --primary-foreground: var(--color-red-50);
   --ring: var(--color-red-400);
@@ -287,7 +287,7 @@
   }
 }
 
-.theme-yellow .theme-container {
+.theme-yellow  {
   --primary: var(--color-yellow-400);
   --primary-foreground: var(--color-yellow-900);
   --ring: var(--color-yellow-400);
@@ -310,7 +310,7 @@
   }
 }
 
-.theme-violet .theme-container {
+.theme-violet  {
   --primary: var(--color-violet-600);
   --primary-foreground: var(--color-violet-50);
   --ring: var(--color-violet-400);

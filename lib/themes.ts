@@ -52,3 +52,4 @@ export type Theme = {
 // If you still want to create types that specifically extract the possible values:
 export type DefaultThemeValue = (typeof DEFAULT_THEMES)[number]["value"]
 export type ColorThemeValue = (typeof COLOR_THEMES)[number]["value"]
+

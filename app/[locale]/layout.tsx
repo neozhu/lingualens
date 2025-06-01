@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
@@ -12,9 +13,9 @@ import { cn } from "@/lib/utils";
 import { Footer } from "@/components/footer";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
-import {NextIntlClientProvider, hasLocale} from 'next-intl';
-import {notFound} from 'next/navigation';
-import {routing} from '@/i18n/routing';
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -62,9 +63,9 @@ export default async function RootLayout({
   params
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 }>) {
-   const {locale} = await params;
+  const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -81,33 +82,36 @@ export default async function RootLayout({
           fontVariables
         )}
       >
+
         <NextIntlClientProvider locale={locale} messages={(await import(`../../messages/${locale}.json`)).default}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          enableColorScheme
-        >
-          <ActiveThemeProvider initialTheme={activeThemeValue}>
-            <Header></Header>
-            <main
-              className="
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            enableColorScheme
+          >
+            <ActiveThemeProvider initialTheme={activeThemeValue}>
+            
+                <Header></Header>
+                <main
+                  className="
               pt-20                          
               min-h-[calc(100vh-5rem)]      
               flex justify-center  items-center    
               px-4                         
             "
-            >
-              {children}
-            </main>
-            <Footer />
-            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
-            <SpeedInsights />
-            <Analytics/>
-            <Toaster />
-          </ActiveThemeProvider>
-        </ThemeProvider>
+                >
+                  {children}
+                </main>
+                <Footer />
+                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+                <SpeedInsights />
+                <Analytics />
+                <Toaster />
+       
+            </ActiveThemeProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>
