@@ -1,11 +1,9 @@
 import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { SCENES } from '@/lib/scenes';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 
 export default function SceneDoc() {
   const t = useTranslations();
-  const locale = useLocale();
   const functionCode = `function createSystemPrompt(scene: Scene): string {
       // General translation instructions
       const baseInstructions = \`
@@ -38,38 +36,29 @@ export default function SceneDoc() {
     Translate the following text according to these rules:
     \`;
       }`;
+  
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-background">
-      <h1 className="text-2xl font-bold mb-6">{t('scene.title')}</h1>
-
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-2">{t('scene.systemPrompt')}</h2>
-        <p className="mb-4 text-muted-foreground">
-          {t('scene.promptDescription')}
-        </p>
-        <p className=" text-muted-foreground">
-          {t('scene.configInfo')}
-        </p>
-        <pre className="px-4 py-5">
-          <code className="relative block font-mono text-sm leading-normal whitespace-pre-wrap break-words" data-language="javascript">
-            {functionCode}
-          </code>
-        </pre>
-      </section>      <section>
-        <h2 className="text-xl font-semibold mb-4">{t('scene.availableScenes')}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {SCENES.map((s) => (
-            <Card key={s.name}>
-              <CardContent className="space-y-3">
-                <h3 className="text-lg font-medium">
-                  {locale === 'en' ? s.name_en:s.name}
-                </h3>
-                <p className="text-sm text-muted-foreground">{s.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+    <div className="max-w-3xl mx-auto p-6">
+      <Card className="shadow-md">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-2xl font-bold">{t('scene.systemPrompt')}</CardTitle>
+          <CardDescription>
+            {t('scene.configInfo')}
+          </CardDescription>
+        </CardHeader>
+        
+        <CardContent className="space-y-4">   
+          <div className="bg-slate-950 text-slate-50 dark:bg-slate-900 overflow-hidden rounded-md">
+            <div className="p-6">
+              <pre className="font-mono text-sm leading-normal whitespace-pre-wrap break-words overflow-x-auto">
+                <code data-language="javascript">
+                  {functionCode}
+                </code>
+              </pre>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
