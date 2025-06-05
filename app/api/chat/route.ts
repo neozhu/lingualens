@@ -8,7 +8,8 @@ export const maxDuration = 30;
 
 // const LLAMA_MODEL = "llama-3.3-70b-versatile"
 const QWEN_MODEL = "qwen-qwq-32b"
-const GEMINI_MODEL = "gemini-2.5-pro-preview-05-06"
+const GEMINI_MODEL_PRO = "gemini-2.5-pro-preview-05-06"
+const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20"
 const GPT_4_MODEL = "gpt-4o-mini"
 
 
@@ -98,6 +99,7 @@ export async function POST(req: Request) {
   // Select provider based on model
   let provider;
   switch (model) {
+    case GEMINI_MODEL_PRO:
     case GEMINI_MODEL:
       provider = google(model);
       break;
