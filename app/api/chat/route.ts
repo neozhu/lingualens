@@ -93,9 +93,9 @@ Translate the following text according to these requirements:
 
 export async function POST(req: Request) {
   const { messages, model = GEMINI_MODEL, scene,locale='en' } = await req.json();
-  console.log(messages, model, scene);
+  //console.log(messages, model, scene);
   const systemPrompt = createSystemInstructions(scene,locale);
-  //console.log(messages, model, systemPrompt);
+  console.log(scene, model, messages);
   // Select provider based on model
   let provider;
   switch (model) {
@@ -112,14 +112,13 @@ export async function POST(req: Request) {
   const lastMessages = messages.length > 3 
     ? messages.slice(messages.length - 3) 
     : messages;
-  
   const result = streamText({
     model: provider,
     system: systemPrompt,
     temperature: 0.3,
     messages: lastMessages,
   });
-  return result.toDataStreamResponse({ sendReasoning: false });
+  return result.toDataStreamResponse();
 }
 
 

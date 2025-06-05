@@ -102,16 +102,15 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
     document.addEventListener("visibilitychange", handleVisibility);
     return () => document.removeEventListener("visibilitychange", handleVisibility);
   }, []);
-  
-  // 显示错误信息
+    // 显示错误信息
   useEffect(() => {
     if (error) {
       toast.error("Translation Error", {
-        description: error.message || "An error occurred during translation. Please try again.",
-        duration: 5000,
+        description: `${error.message || "An error occurred during translation."} ${selectedModel === MODELS[0].id ? "The selected model may not be available with your current API key." : ""} Please try again or select a different model.`,
+        duration: 8000,
       });
     }
-  }, [error]);
+  }, [error, selectedModel]);
 
   return (
     <div className={cn("flex","flex-col", "w-full")}>
