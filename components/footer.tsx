@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({
       links: [
         { text: t('nav.translation'), url: '/features' },
         { text: t('nav.instructions'), url: '/instructions' },
-        { text: t('nav.scenes'), url: '//scene-manage' },
+        { text: t('nav.scenes'), url: '/scene-manage' },
       ],
     },
     {
