@@ -8,7 +8,7 @@ export const maxDuration = 30;
 
 // const LLAMA_MODEL = "llama-3.3-70b-versatile"
 const QWEN_MODEL = "qwen-qwq-32b"
-const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20"
+const GEMINI_MODEL = "gemini-2.5-pro-preview-05-06"
 const GPT_4_MODEL = "gpt-4o-mini"
 
 
