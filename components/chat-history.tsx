@@ -134,7 +134,7 @@ export const ChatHistory = () => {
               <History className="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-80 max-h-[500px] overflow-y-auto overflow-x-hidden" align="end">
+          <DropdownMenuContent className="w-80 max-w-80 max-h-[500px] overflow-y-auto overflow-x-hidden" align="end">
             <DropdownMenuLabel className="flex items-center justify-between">
               <span>{t('history.title') || 'Chat History'}</span>
               <DropdownMenu>
@@ -167,14 +167,14 @@ export const ChatHistory = () => {
                 {t('history.empty') || 'No chat history'}
               </div>
             ) : (
-              <div className="max-h-[400px] overflow-y-auto">
+              <div className="max-h-[400px] overflow-y-auto overflow-x-hidden">
                 {groupedHistory.map((group) => (
-                  <div key={group.date}>
-                    <DropdownMenuLabel className="flex items-center justify-between text-xs text-muted-foreground sticky top-0 bg-background border-b">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-3 w-3" />
-                        <span>{formatDate(group.date)}</span>
-                        <Badge variant="secondary" className="text-xs px-1 py-0 ml-1">
+                  <div key={group.date} className="w-full">
+                    <DropdownMenuLabel className="flex items-center justify-between text-xs text-muted-foreground sticky top-0 bg-background border-b w-full">
+                      <div className="flex items-center gap-2 min-w-0 flex-1 overflow-hidden">
+                        <Calendar className="h-3 w-3 flex-shrink-0" />
+                        <span className="truncate">{formatDate(group.date)}</span>
+                        <Badge variant="secondary" className="text-xs px-1 py-0 ml-1 flex-shrink-0">
                           {group.sessions.length}
                         </Badge>
                       </div>
@@ -194,10 +194,10 @@ export const ChatHistory = () => {
                     {group.sessions.map((session) => (
                       <DropdownMenuItem
                         key={session.id}
-                        className="flex items-center justify-between p-3 cursor-pointer hover:bg-muted/50 min-h-[60px]"
+                        className="flex items-center justify-between p-3 cursor-pointer hover:bg-muted/50 min-h-[60px] w-full"
                         onClick={() => handleLoadSession(session.id)}
                       >
-                        <div className="flex-1 min-w-0">
+                        <div className="flex-1 min-w-0 max-w-[calc(100%-2rem)] overflow-hidden">
                           <div className="flex items-center gap-2 mb-1">
                             <MessageSquare className="h-3 w-3 text-muted-foreground" />
                             <span className="text-xs text-muted-foreground">
