@@ -18,9 +18,7 @@ import {
 
 interface CopyButtonProps extends Omit<ComponentProps<typeof Button>, "onClick"> {
   value: string
-  src?: string
   event?: Event["name"]
-  copyMessage?: string
 }
 
 export async function copyToClipboardWithMeta(value: string, event?: Event) {
@@ -33,10 +31,8 @@ export async function copyToClipboardWithMeta(value: string, event?: Event) {
 export function CopyButton({
   value,
   className,
-  src,
   variant = "ghost",
   event,
-  copyMessage,
   ...props
 }: CopyButtonProps) {
   const [hasCopied, setHasCopied] = React.useState(false)
@@ -87,7 +83,6 @@ export function CopyWithClassNames({
   value,
   classNames,
   className,
-  ...props
 }: CopyWithClassNamesProps) {
   const [hasCopied, setHasCopied] = React.useState(false)
 
@@ -140,7 +135,6 @@ interface CopyNpmCommandButtonProps extends DropdownMenuTriggerProps {
 export function CopyNpmCommandButton({
   commands,
   className,
-  ...props
 }: CopyNpmCommandButtonProps) {
   const [hasCopied, setHasCopied] = React.useState(false)
 
