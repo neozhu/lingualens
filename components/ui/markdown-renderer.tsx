@@ -116,7 +116,7 @@ const CodeBlock = ({
 
       <div className="invisible absolute right-2 top-2 flex space-x-1 rounded-lg p-1 opacity-0 transition-all duration-200 group-hover/code:visible group-hover/code:opacity-100">
       
-        <CopyButton value={code} content={code} copyMessage="Copied code to clipboard" className="
+        <CopyButton value={code} className="
             h-6 w-6
             text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
             dark:text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50
