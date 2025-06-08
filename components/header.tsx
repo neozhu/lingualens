@@ -7,6 +7,7 @@ import { Link } from '@/i18n/navigation';
 import { ModeToggle } from "./mode-toggle";
 import { ThemeSelector } from "./theme-selector";
 import { LanguageSwitcher } from "./language-switcher";
+import { ChatHistory } from "./chat-history";
 import { useTheme } from 'next-themes';
 import Image from 'next/image'
 import { useTranslations } from 'next-intl';
@@ -17,6 +18,7 @@ export const Header = () => {
     const { theme } = useTheme();
     const githubUrl = 'https://github.com/neozhu/lingualens';
     const t = useTranslations();
+    
     useEffect(() => {
         setIsMounted(true); // Set isMounted to true once the component is mounted on the client-side
     }, []);
@@ -31,9 +33,11 @@ export const Header = () => {
                         <span className="sm:grid hidden text-xl font-semibold motion motion-duration-500 motion-translate-x-in-[50%] motion-translate-y-in-[0%] motion-preset-blur-right" >{t('app.title')}</span>
                     </Link>
                 </div>
-                <div className="flex justify-end items-center w-full gap-4">
+                <div className="flex justify-end items-center w-full gap-2">
                     <LanguageSwitcher />
                     <ThemeSelector />
+                    
+                    <ChatHistory />
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button variant="outline" size="icon" asChild>

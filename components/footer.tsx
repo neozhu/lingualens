@@ -31,17 +31,17 @@ export const Footer: React.FC<FooterProps> = ({
   copyright,
   bottomLinks,
 }: FooterProps) => {
-  // 使用 next-intl 的 useTranslations 钩子获取翻译内容
+  // Use next-intl's useTranslations hook to get translation content
   const t = useTranslations();
   const { theme } = useTheme();
   
-  // 根据主题动态设置 logo
+  // Dynamically set logo based on theme
   logo.src = theme === 'dark' ? '/github-mark-white.svg' : '/github-mark.svg';
-  // 使用翻译内容设置默认值
+  // Set default values using translation content
   tagline = tagline || t('app.description');
   copyright = copyright || `© ${new Date().getFullYear()} LinguaLens. ${t('footer.rights')}`;
   
-  // 设置菜单项及其翻译
+  // Set menu items and their translations
   menuItems = menuItems || [
     {
       title: t('nav.features'),
@@ -67,7 +67,7 @@ export const Footer: React.FC<FooterProps> = ({
     },
   ];
   
-  // 设置底部链接及其翻译
+  // Set bottom links and their translations
   bottomLinks = bottomLinks || [
     { text: t('nav.privacy'), url: '/privacy' },
     { text: t('nav.terms'), url: '/terms' },

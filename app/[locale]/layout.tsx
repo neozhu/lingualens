@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { Footer } from "@/components/footer";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { ChatProvider } from "@/components/chat-provider";
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
@@ -101,7 +102,7 @@ export default async function RootLayout({
             enableColorScheme
           >
             <ActiveThemeProvider initialTheme={activeThemeValue}>
-            
+              <ChatProvider>
                 <Header></Header>
                 <main
                   className="
@@ -118,7 +119,7 @@ export default async function RootLayout({
                 <SpeedInsights />
                 <Analytics />
                 <Toaster />
-       
+              </ChatProvider>
             </ActiveThemeProvider>
           </ThemeProvider>
         </NextIntlClientProvider>

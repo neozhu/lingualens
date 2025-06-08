@@ -2,16 +2,16 @@ import createMiddleware from 'next-intl/middleware';
 import {routing} from './i18n/routing';
  
 export default createMiddleware({
-  // 支持的语言
+  // Supported locales
   locales: ['zh', 'en', 'de', 'fr', 'es', 'nl', 'id', 'th', 'vi', 'my', 'ms','ja'],
   
-  // 默认语言
+  // Default locale
   defaultLocale: 'en',
   
-  // 语言自动检测（基于浏览器设置）
+  // Automatic locale detection (based on browser settings)
   localeDetection: true,
   
-  // 重定向到默认语言时的状态码
+  // Status code when redirecting to default locale
   localePrefix: 'always'
 });
  

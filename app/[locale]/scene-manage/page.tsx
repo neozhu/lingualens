@@ -158,11 +158,11 @@ export default function SceneManagePage() {
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [form, setForm] = useState<Partial<Scene>>({});
   const [generating, setGenerating] = useState(false);
-  // 使用 useChat 钩子来处理与 API 的通信
+  // Use useChat hook to handle API communication
   const { messages, append } = useChat({
     api: "/api/generate",
     onFinish: (message: { content: string }) => {
-      // 当生成完成时，更新表单的 prompt 字段
+      // Update form prompt field when generation is complete
       setForm((prev) => ({ ...prev, prompt: message.content }));
       setGenerating(false);
       toast.success(t("promptGeneratedSuccess"));
@@ -181,7 +181,7 @@ export default function SceneManagePage() {
         distance: 8, // 8px
       },
     })
-  ); // 监听消息列表变化，获取最新的助手回复
+  ); // Listen for message list changes to get the latest assistant reply
   useEffect(() => {
     const assistantMessage = messages
       .filter((m: { role: string; content: string }) => m.role === "assistant")

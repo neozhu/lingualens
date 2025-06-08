@@ -34,7 +34,8 @@
     "save": "Opslaan",
     "delete": "Verwijderen",
     "edit": "Bewerken",
-    "create": "Aanmaken"
+    "create": "Aanmaken",
+    "confirm": "Bevestigen"
   },
   "scene": {
     "title": "Systeempromptgenerator en scènebeschrijvingen",
@@ -113,5 +114,24 @@
     "orange": "Oranje",
     "teal": "Groenblauw",
     "colors": "Kleuren"
+  },
+  "history": {
+    "title": "Chathistorie",
+    "tooltip": "Bekijk chathistorie",
+    "empty": "Geen chathistorie",
+    "today": "Vandaag",
+    "yesterday": "Gisteren",
+    "newSession": "Nieuwe sessie",
+    "clearToday": "Vandaag wissen",
+    "clearAll": "Alles wissen",
+    "emptySession": "Lege sessie",
+    "sessionLoaded": "Sessie geladen",
+    "sessionDeleted": "Sessie verwijderd",
+    "allCleared": "Alle historie gewist",
+    "todayCleared": "Vandaag gewist",
+    "confirmClearAll": "Alle historie wissen",
+    "confirmClearToday": "Vandaag wissen",
+    "confirmClearAllDesc": "Hiermee wordt alle chathistorie permanent verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
+    "confirmClearTodayDesc": "Hiermee wordt de chathistorie van vandaag permanent verwijderd. Deze actie kan niet ongedaan worden gemaakt."
   }
 }

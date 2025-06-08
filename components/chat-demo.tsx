@@ -18,6 +18,8 @@ import { Message } from "@/components/ui/chat-message"
 import { MODELS } from "@/lib/models"
 import { SceneSelector } from "@/components/scene-selector"
 import { useLocale } from "next-intl"
+import { useChatHistory } from "@/hooks/use-chat-history"
+import { useChatContext } from "@/components/chat-provider"
 
 type ChatDemoProps = {
   initialMessages?: UseChatOptions["initialMessages"]
@@ -37,6 +39,15 @@ function getCustomScenes() {
 export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, setSelectedModel] = useState(MODELS[0].id)
   const [scenes, setScenes] = useState(DEFAULT_SCENES);
   const [selectedScene, setSelectedScene] = useState(scenes[0]);
+  
+  const {
+    currentSessionId,
+    createNewSession,
+    updateSessionMessages,
+    setCurrentSessionId
+  } = useChatHistory()
+  
+  const { loadedMessages, loadedSessionId, loadedSessionModel, loadedSessionScene, shouldClearMessages, clearLoadedSession } = useChatContext()
   
   useEffect(() => {
     const storedModel = localStorage.getItem("selectedModel")
@@ -86,6 +97,61 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
     },
   })
 
+  // Automatically create new session
+  useEffect(() => {
+    if (!currentSessionId && messages.length === 0) {
+      const sessionId = createNewSession(selectedScene.name, selectedModel)
+      setCurrentSessionId(sessionId)
+    }
+  }, [currentSessionId, messages.length, selectedScene.name, selectedModel])
+
+  // Handle new session creation (clear messages)
+  useEffect(() => {
+    if (shouldClearMessages) {
+      setMessages([])
+      setCurrentSessionId(null)
+    }
+  }, [shouldClearMessages])
+
+  // Load history session
+  useEffect(() => {
+    if (loadedSessionId && loadedSessionModel && loadedSessionScene && loadedMessages.length > 0) {
+      setCurrentSessionId(loadedSessionId)
+      setSelectedModel(loadedSessionModel);
+      
+      // Find and set the scene
+      const sceneToLoad = scenes.find(s => s.name === loadedSessionScene);
+      if (sceneToLoad) {
+        setSelectedScene(sceneToLoad);
+      } else {
+        // Optionally handle if the scene is not found (e.g., log a warning or default)
+        console.warn(`Loaded session's scene "${loadedSessionScene}" not found in available scenes.`);
+      }
+
+      setMessages(loadedMessages.map(msg => ({
+        id: msg.id,
+        role: msg.role as "user" | "assistant" | "system" | "data",
+        content: msg.content,
+        createdAt: msg.createdAt
+      })))
+      clearLoadedSession() // Clear all loaded session data from context
+    }
+  }, [loadedSessionId, loadedMessages, loadedSessionModel, loadedSessionScene, setCurrentSessionId, setSelectedModel, setSelectedScene, scenes, setMessages, clearLoadedSession])
+
+  // Save messages to history
+  useEffect(() => {
+    if (currentSessionId) {
+      // Convert message format
+      const historyMessages = messages.map(msg => ({
+        id: msg.id,
+        role: msg.role,
+        content: msg.content,
+        createdAt: msg.createdAt || new Date()
+      }))
+      updateSessionMessages(currentSessionId, historyMessages, selectedScene.name, selectedModel)
+    }
+  }, [currentSessionId, messages])
+
   // Load custom scenes from localStorage
   useEffect(() => {
     const custom = getCustomScenes();
@@ -102,7 +168,7 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
     document.addEventListener("visibilitychange", handleVisibility);
     return () => document.removeEventListener("visibilitychange", handleVisibility);
   }, []);
-    // 显示错误信息
+    // Display error messages
   useEffect(() => {
     if (error) {
       toast.error("Translation Error", {

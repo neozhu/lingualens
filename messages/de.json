@@ -34,7 +34,8 @@
     "save": "Speichern",
     "delete": "Löschen",
     "edit": "Bearbeiten",
-    "create": "Erstellen"
+    "create": "Erstellen",
+    "confirm": "Bestätigen"
   },
   "scene": {
     "title": "System-Prompt-Generator und Szenenbeschreibungen",
@@ -114,5 +115,24 @@
     "orange": "Orange",
     "teal": "Blaugrün",
     "colors": "Farben"
+  },
+  "history": {
+    "title": "Chatverlauf",
+    "tooltip": "Chatverlauf anzeigen",
+    "empty": "Kein Chatverlauf",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "newSession": "Neue Sitzung",
+    "clearToday": "Heute löschen",
+    "clearAll": "Alles löschen",
+    "emptySession": "Leere Sitzung",
+    "sessionLoaded": "Sitzung geladen",
+    "sessionDeleted": "Sitzung gelöscht",
+    "allCleared": "Gesamter Verlauf gelöscht",
+    "todayCleared": "Heutiger Verlauf gelöscht",
+    "confirmClearAll": "Gesamten Verlauf löschen",
+    "confirmClearToday": "Heutigen Verlauf löschen",
+    "confirmClearAllDesc": "Dadurch wird der gesamte Chatverlauf dauerhaft gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "confirmClearTodayDesc": "Dadurch wird der heutige Chatverlauf dauerhaft gelöscht. Diese Aktion kann nicht rückgängig gemacht werden."
   }
 }

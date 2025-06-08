@@ -9,7 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Globe } from 'lucide-react';
 
-// 定义支持的语言
+// Define supported languages
 const languages = [
   { code: 'zh', name: '简体中文' },
   { code: 'en', name: 'English' },
@@ -30,11 +30,11 @@ export function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // 当前语言
+  // Current language
   const currentLanguage = languages.find(lang => lang.code === locale) || languages[0];
-  // 切换语言函数
+  // Language switching function
   const switchLanguage = (code: string) => {
-    // 使用 next-intl 导航，保持相同路径但切换语言
+    // Use next-intl navigation to keep the same path but switch language
     router.replace(pathname, { locale: code });
   };
 

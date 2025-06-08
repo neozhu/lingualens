@@ -34,7 +34,8 @@
     "save": "保存",
     "delete": "削除",
     "edit": "編集",
-    "create": "作成"
+    "create": "作成",
+    "confirm": "確認"
   },
   "scene": {
     "title": "システムプロンプト生成とシーン説明",
@@ -114,5 +115,24 @@
     "orange": "オレンジ",
     "teal": "ティール",
     "colors": "カラー"
+  },
+  "history": {
+    "title": "チャット履歴",
+    "tooltip": "チャット履歴を見る",
+    "empty": "チャット履歴がありません",
+    "today": "今日",
+    "yesterday": "昨日",
+    "newSession": "新しいセッション",
+    "clearToday": "今日をクリア",
+    "clearAll": "すべてクリア",
+    "emptySession": "空のセッション",
+    "sessionLoaded": "セッションを読み込みました",
+    "sessionDeleted": "セッションを削除しました",
+    "allCleared": "すべての履歴をクリアしました",
+    "todayCleared": "今日の履歴をクリアしました",
+    "confirmClearAll": "すべての履歴をクリア",
+    "confirmClearToday": "今日の履歴をクリア",
+    "confirmClearAllDesc": "これですべてのチャット履歴が完全に削除されます。この操作は元に戻せません。",
+    "confirmClearTodayDesc": "これで今日のチャット履歴が完全に削除されます。この操作は元に戻せません。"
   }
 }

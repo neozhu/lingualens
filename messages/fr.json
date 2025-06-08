@@ -34,7 +34,8 @@
     "save": "Enregistrer",
     "delete": "Supprimer",
     "edit": "Éditer",
-    "create": "Créer"
+    "create": "Créer",
+    "confirm": "Confirmer"
   },
   "scene": {
     "title": "Générateur d'instructions système et descriptions de scènes",
@@ -114,5 +115,24 @@
     "orange": "Orange",
     "teal": "Sarcelle",
     "colors": "Couleurs"
+  },
+  "history": {
+    "title": "Historique de chat",
+    "tooltip": "Voir l'historique du chat",
+    "empty": "Aucun historique de chat",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "newSession": "Nouvelle session",
+    "clearToday": "Effacer aujourd'hui",
+    "clearAll": "Tout effacer",
+    "emptySession": "Session vide",
+    "sessionLoaded": "Session chargée",
+    "sessionDeleted": "Session supprimée",
+    "allCleared": "Tout l'historique effacé",
+    "todayCleared": "Historique d'aujourd'hui effacé",
+    "confirmClearAll": "Effacer tout l'historique",
+    "confirmClearToday": "Effacer l'historique d'aujourd'hui",
+    "confirmClearAllDesc": "Cela supprimera définitivement tout l'historique du chat. Cette action est irréversible.",
+    "confirmClearTodayDesc": "Cela supprimera définitivement l'historique du chat d'aujourd'hui. Cette action est irréversible."
   }
 }

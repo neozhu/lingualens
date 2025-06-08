@@ -22,7 +22,7 @@
     "madewith": "Made with"
   },
   "common": {
-    "loading": "Loading...",
+   "loading": "Loading...",
     "error": "An error occurred",
     "retry": "Retry",
     "copy": "Copy",
@@ -30,6 +30,7 @@
     "download": "Download",
     "upload": "Upload",
     "cancel": "Cancel",
+    "confirm": "Confirm",
     "submit": "Submit",
     "save": "Save",
     "delete": "Delete",
@@ -114,5 +115,24 @@
     "orange": "Orange",
     "teal": "Teal",
     "colors": "Colors"
+  },
+  "history": {
+    "title": "Chat History",
+    "tooltip": "View chat history",
+    "empty": "No chat history",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "newSession": "New Session",
+    "clearToday": "Clear Today",
+    "clearAll": "Clear All",
+    "emptySession": "Empty session",
+    "sessionLoaded": "Session loaded",
+    "sessionDeleted": "Session deleted",
+    "allCleared": "All history cleared",
+    "todayCleared": "Today's history cleared",
+    "confirmClearAll": "Clear All History",
+    "confirmClearToday": "Clear Today's History",
+    "confirmClearAllDesc": "This will permanently delete all chat history. This action cannot be undone.",
+    "confirmClearTodayDesc": "This will permanently delete today's chat history. This action cannot be undone."
   }
 }

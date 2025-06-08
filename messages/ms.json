@@ -34,7 +34,8 @@
     "save": "Simpan",
     "delete": "Padam",
     "edit": "Sunting",
-    "create": "Cipta"
+    "create": "Cipta",
+    "confirm": "Sahkan"
   },
   "scene": {
     "title": "Penjana Prompt Sistem dan Penerangan Adegan",
@@ -114,5 +115,24 @@
     "orange": "Jingga",
     "teal": "Hijau Kebiruan",
     "colors": "Warna"
+  },
+  "history": {
+    "title": "Sejarah Sembang",
+    "tooltip": "Lihat sejarah sembang",
+    "empty": "Tiada sejarah sembang",
+    "today": "Hari ini",
+    "yesterday": "Semalam",
+    "newSession": "Sesi Baru",
+    "clearToday": "Kosongkan Hari Ini",
+    "clearAll": "Kosongkan Semua",
+    "emptySession": "Sesi kosong",
+    "sessionLoaded": "Sesi dimuatkan",
+    "sessionDeleted": "Sesi dipadam",
+    "allCleared": "Semua sejarah telah dikosongkan",
+    "todayCleared": "Sejarah hari ini telah dikosongkan",
+    "confirmClearAll": "Kosongkan Semua Sejarah",
+    "confirmClearToday": "Kosongkan Sejarah Hari Ini",
+    "confirmClearAllDesc": "Ini akan memadam semua sejarah sembang secara kekal. Tindakan ini tidak boleh dibuat asal.",
+    "confirmClearTodayDesc": "Ini akan memadam sejarah sembang hari ini secara kekal. Tindakan ini tidak boleh dibuat asal."
   }
 }

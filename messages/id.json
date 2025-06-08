@@ -34,7 +34,8 @@
     "save": "Simpan",
     "delete": "Hapus",
     "edit": "Edit",
-    "create": "Buat"
+    "create": "Buat",
+    "confirm": "Konfirmasi"
   },
   "scene": {
     "title": "Generator Prompt Sistem dan Deskripsi Adegan",
@@ -114,5 +115,24 @@
     "orange": "Oranye",
     "teal": "Hijau Kebiruan",
     "colors": "Warna"
+  },
+  "history": {
+    "title": "Riwayat Chat",
+    "tooltip": "Lihat riwayat chat",
+    "empty": "Tidak ada riwayat chat",
+    "today": "Hari ini",
+    "yesterday": "Kemarin",
+    "newSession": "Sesi Baru",
+    "clearToday": "Bersihkan Hari Ini",
+    "clearAll": "Bersihkan Semua",
+    "emptySession": "Sesi kosong",
+    "sessionLoaded": "Sesi dimuat",
+    "sessionDeleted": "Sesi dihapus",
+    "allCleared": "Semua riwayat dibersihkan",
+    "todayCleared": "Riwayat hari ini dibersihkan",
+    "confirmClearAll": "Bersihkan Semua Riwayat",
+    "confirmClearToday": "Bersihkan Riwayat Hari Ini",
+    "confirmClearAllDesc": "Ini akan menghapus semua riwayat chat secara permanen. Tindakan ini tidak dapat dibatalkan.",
+    "confirmClearTodayDesc": "Ini akan menghapus riwayat chat hari ini secara permanen. Tindakan ini tidak dapat dibatalkan."
   }
 }

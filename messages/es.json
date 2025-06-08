@@ -34,7 +34,8 @@
     "save": "Guardar",
     "delete": "Eliminar",
     "edit": "Editar",
-    "create": "Crear"
+    "create": "Crear",
+    "confirm": "Confirmar"
   },
   "scene": {
     "title": "Generador de instrucciones del sistema y descripciones de escenas",
@@ -114,5 +115,24 @@
     "orange": "Naranja",
     "teal": "Turquesa",
     "colors": "Colores"
+  },
+  "history": {
+    "title": "Historial de chat",
+    "tooltip": "Ver historial de chat",
+    "empty": "No hay historial de chat",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "newSession": "Nueva sesión",
+    "clearToday": "Borrar hoy",
+    "clearAll": "Borrar todo",
+    "emptySession": "Sesión vacía",
+    "sessionLoaded": "Sesión cargada",
+    "sessionDeleted": "Sesión eliminada",
+    "allCleared": "Todo el historial borrado",
+    "todayCleared": "Historial de hoy borrado",
+    "confirmClearAll": "Borrar todo el historial",
+    "confirmClearToday": "Borrar historial de hoy",
+    "confirmClearAllDesc": "Esto eliminará permanentemente todo el historial de chat. Esta acción no se puede deshacer.",
+    "confirmClearTodayDesc": "Esto eliminará permanentemente el historial de chat de hoy. Esta acción no se puede deshacer."
   }
 }

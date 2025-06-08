@@ -34,7 +34,8 @@
     "save": "Lưu",
     "delete": "Xóa",
     "edit": "Chỉnh sửa",
-    "create": "Tạo mới"
+    "create": "Tạo mới",
+    "confirm": "Xác nhận"
   },
   "scene": {
     "title": "Trình tạo prompt hệ thống và mô tả cảnh",
@@ -114,5 +115,24 @@
     "orange": "Cam",
     "teal": "Xanh ngọc",
     "colors": "Màu sắc"
+  },
+  "history": {
+    "title": "Lịch sử trò chuyện",
+    "tooltip": "Xem lịch sử trò chuyện",
+    "empty": "Không có lịch sử trò chuyện",
+    "today": "Hôm nay",
+    "yesterday": "Hôm qua",
+    "newSession": "Phiên mới",
+    "clearToday": "Xóa hôm nay",
+    "clearAll": "Xóa tất cả",
+    "emptySession": "Phiên trống",
+    "sessionLoaded": "Đã tải phiên",
+    "sessionDeleted": "Đã xóa phiên",
+    "allCleared": "Đã xóa toàn bộ lịch sử",
+    "todayCleared": "Đã xóa lịch sử hôm nay",
+    "confirmClearAll": "Xóa toàn bộ lịch sử",
+    "confirmClearToday": "Xóa lịch sử hôm nay",
+    "confirmClearAllDesc": "Thao tác này sẽ xóa vĩnh viễn toàn bộ lịch sử trò chuyện. Không thể hoàn tác.",
+    "confirmClearTodayDesc": "Thao tác này sẽ xóa vĩnh viễn lịch sử trò chuyện hôm nay. Không thể hoàn tác."
   }
 }

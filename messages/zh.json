@@ -30,6 +30,7 @@
     "download": "下载",
     "upload": "上传",
     "cancel": "取消",
+    "confirm": "确认",
     "submit": "提交",
     "save": "保存",
     "delete": "删除",
@@ -113,5 +114,24 @@
     "orange": "橙色",
     "teal": "蓝绿",
     "colors": "颜色"
+  },
+  "history": {
+    "title": "聊天记录",
+    "tooltip": "查看聊天记录",
+    "empty": "暂无聊天记录",
+    "today": "今天",
+    "yesterday": "昨天",
+    "newSession": "新建会话",
+    "clearToday": "清空今天",
+    "clearAll": "清空全部",
+    "emptySession": "空会话",
+    "sessionLoaded": "会话已加载",
+    "sessionDeleted": "会话已删除",
+    "allCleared": "所有记录已清空",
+    "todayCleared": "今天的记录已清空",
+    "confirmClearAll": "清空所有记录",
+    "confirmClearToday": "清空今天的记录",
+    "confirmClearAllDesc": "这将永久删除所有聊天记录，此操作无法撤销。",
+    "confirmClearTodayDesc": "这将永久删除今天的聊天记录，此操作无法撤销。"
   }
 }
