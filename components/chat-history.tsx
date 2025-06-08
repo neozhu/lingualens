@@ -134,7 +134,7 @@ export const ChatHistory = () => {
               <History className="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-80 max-h-[500px] overflow-y-auto" align="end">
+          <DropdownMenuContent className="w-80 max-h-[500px] overflow-y-auto overflow-x-hidden" align="end">
             <DropdownMenuLabel className="flex items-center justify-between">
               <span>{t('history.title') || 'Chat History'}</span>
               <DropdownMenu>

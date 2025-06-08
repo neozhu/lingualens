@@ -8,23 +8,23 @@ import { FileText, Info, Layers, ShieldAlert, Shield, FileCode, Bell, Mail } fro
 
 export default function TermsOfService() {
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <Card className="shadow-md">
-        <CardHeader className="border-b pb-6">
+    <div className="max-w-3xl mx-auto p-6 motion-preset-fade-in motion-duration-700">
+      <Card className="shadow-md motion-preset-slide-up motion-duration-500 motion-delay-200">
+        <CardHeader className="border-b pb-6 motion-preset-fade-in motion-duration-500 motion-delay-300">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-3xl font-bold">Terms of Service</CardTitle>
-              <CardDescription>Last updated: June 4, 2025</CardDescription>
+              <CardTitle className="text-3xl font-bold motion-preset-fade-in motion-duration-500 motion-delay-400">Terms of Service</CardTitle>
+              <CardDescription className="motion-preset-fade-in motion-duration-500 motion-delay-500">Last updated: June 4, 2025</CardDescription>
             </div>
-            <Badge variant="outline" className="px-3 py-1">
+            <Badge variant="outline" className="px-3 py-1 motion-preset-scale-up motion-duration-500 motion-delay-600">
               <FileText className="h-3.5 w-3.5 mr-1" />
               Legal Document
             </Badge>
           </div>
         </CardHeader>
 
-        <CardContent className="pt-6 space-y-6">
-          <div className="flex gap-4 items-start">
+        <CardContent className="pt-6 space-y-6 motion-preset-fade-in motion-duration-500 motion-delay-700">
+          <div className="flex gap-4 items-start motion-preset-slide-right motion-duration-500 motion-delay-800">
             <div className="bg-primary/10 p-2 rounded-full">
               <Info className="h-5 w-5 text-primary" />
             </div>
@@ -38,7 +38,7 @@ export default function TermsOfService() {
 
           <Separator />
 
-          <div className="flex gap-4 items-start">
+          <div className="flex gap-4 items-start motion-preset-slide-right motion-duration-500 motion-delay-900">
             <div className="bg-primary/10 p-2 rounded-full">
               <Layers className="h-5 w-5 text-primary" />
             </div>
@@ -51,7 +51,7 @@ export default function TermsOfService() {
 
           <Separator />
 
-          <div className="flex gap-4 items-start">
+          <div className="flex gap-4 items-start motion-preset-slide-right motion-duration-500 motion-delay-1000">
             <div className="bg-primary/10 p-2 rounded-full">
               <FileCode className="h-5 w-5 text-primary" />
             </div>
@@ -65,7 +65,7 @@ export default function TermsOfService() {
 
           <Separator />
 
-          <div className="flex gap-4 items-start">
+          <div className="flex gap-4 items-start motion-preset-slide-right motion-duration-500 motion-delay-1100">
             <div className="bg-primary/10 p-2 rounded-full">
               <ShieldAlert className="h-5 w-5 text-primary" />
             </div>
@@ -79,7 +79,7 @@ export default function TermsOfService() {
 
           <Separator />
 
-          <div className="flex gap-4 items-start">
+          <div className="flex gap-4 items-start motion-preset-slide-right motion-duration-500 motion-delay-1200">
             <div className="bg-primary/10 p-2 rounded-full">
               <Shield className="h-5 w-5 text-primary" />
             </div>
@@ -93,7 +93,7 @@ export default function TermsOfService() {
 
           <Separator />
 
-          <div className="flex gap-4 items-start">
+          <div className="flex gap-4 items-start motion-preset-slide-right motion-duration-500 motion-delay-1300">
             <div className="bg-primary/10 p-2 rounded-full">
               <FileText className="h-5 w-5 text-primary" />
             </div>
@@ -107,7 +107,7 @@ export default function TermsOfService() {
 
           <Separator />
 
-          <div className="flex gap-4 items-start">
+          <div className="flex gap-4 items-start motion-preset-slide-right motion-duration-500 motion-delay-1400">
             <div className="bg-primary/10 p-2 rounded-full">
               <Bell className="h-5 w-5 text-primary" />
             </div>
@@ -121,7 +121,7 @@ export default function TermsOfService() {
 
           <Separator />
 
-          <div className="flex gap-4 items-start">
+          <div className="flex gap-4 items-start motion-preset-slide-right motion-duration-500 motion-delay-1500">
             <div className="bg-primary/10 p-2 rounded-full">
               <Mail className="h-5 w-5 text-primary" />
             </div>
@@ -133,7 +133,7 @@ export default function TermsOfService() {
           </div>
         </CardContent>
 
-        <CardFooter className="border-t pt-6 flex justify-center text-xs text-muted-foreground">
+        <CardFooter className="border-t pt-6 flex justify-center text-xs text-muted-foreground motion-preset-fade-in motion-duration-500 motion-delay-1600">
           © {new Date().getFullYear()} LinguaLens. All rights reserved.        </CardFooter>
       </Card>
     </div>

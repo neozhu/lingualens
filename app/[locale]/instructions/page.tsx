@@ -38,19 +38,19 @@ export default function SceneDoc() {
       }`;
   
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <Card className="shadow-md">
+    <div className="max-w-3xl mx-auto p-6 motion-preset-fade-in motion-duration-700">
+      <Card className="shadow-md motion-preset-slide-up motion-duration-500 motion-delay-200">
         <CardHeader className="pb-3">
-          <CardTitle className="text-2xl font-bold">{t('scene.systemPrompt')}</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl font-bold motion-preset-fade-in motion-duration-500 motion-delay-300">{t('scene.systemPrompt')}</CardTitle>
+          <CardDescription className="motion-preset-fade-in motion-duration-500 motion-delay-400">
             {t('scene.configInfo')}
           </CardDescription>
         </CardHeader>
         
-        <CardContent className="space-y-4">   
-          <div className="bg-slate-950 text-slate-50 dark:bg-slate-900 overflow-hidden rounded-md">
+        <CardContent className="space-y-4 motion-preset-fade-in motion-duration-500 motion-delay-500">   
+          <div className="bg-slate-950 text-slate-50 dark:bg-slate-900 overflow-hidden rounded-md motion-preset-expand motion-duration-600 motion-delay-600">
             <div className="p-6">
-              <pre className="font-mono text-sm leading-normal whitespace-pre-wrap break-words overflow-x-auto">
+              <pre className="font-mono text-sm leading-normal whitespace-pre-wrap break-words overflow-x-auto motion-preset-fade-in motion-duration-500 motion-delay-700">
                 <code data-language="javascript">
                   {functionCode}
                 </code>

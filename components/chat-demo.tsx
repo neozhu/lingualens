@@ -103,7 +103,7 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
       const sessionId = createNewSession(selectedScene.name, selectedModel)
       setCurrentSessionId(sessionId)
     }
-  }, [currentSessionId, messages.length, selectedScene.name, selectedModel])
+  }, [currentSessionId, messages.length, selectedScene.name, selectedModel, createNewSession, setCurrentSessionId])
 
   // Handle new session creation (clear messages)
   useEffect(() => {
@@ -111,7 +111,7 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
       setMessages([])
       setCurrentSessionId(null)
     }
-  }, [shouldClearMessages])
+  }, [shouldClearMessages, setMessages, setCurrentSessionId])
 
   // Load history session
   useEffect(() => {
@@ -150,7 +150,7 @@ export default function ChatDemo(props: ChatDemoProps) {  const [selectedModel, 
       }))
       updateSessionMessages(currentSessionId, historyMessages, selectedScene.name, selectedModel)
     }
-  }, [currentSessionId, messages])
+  }, [currentSessionId, messages, selectedModel, selectedScene.name, updateSessionMessages])
 
   // Load custom scenes from localStorage
   useEffect(() => {

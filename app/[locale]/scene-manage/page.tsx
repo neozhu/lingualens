@@ -59,11 +59,13 @@ function SortableItem({
   idx,
   handleEdit,
   handleDelete,
+  animationDelay = 0,
 }: {
   scene: Scene;
   idx: number;
   handleEdit: (idx: number) => void;
   handleDelete: (idx: number) => void;
+  animationDelay?: number;
 }) {
   const locale = useLocale();
 
@@ -86,9 +88,12 @@ function SortableItem({
   return (
     <div
       ref={setNodeRef}
-      style={style}
+      style={{
+        ...style,
+        animationDelay: `${animationDelay}ms`,
+      }}
       className={cn(
-        "border rounded-lg p-4 relative",
+        "border rounded-lg p-4 relative animate-in fade-in slide-in-from-bottom-4 duration-500",
         isDragging && "shadow-xl border-primary"
       )}
     >
@@ -341,6 +346,7 @@ Please create a translation prompt for the above scene that will guide an AI mod
                   idx={idx}
                   handleEdit={handleEdit}
                   handleDelete={handleDelete}
+                  animationDelay={idx * 100}
                 />
               ))}{" "}
             </div>
