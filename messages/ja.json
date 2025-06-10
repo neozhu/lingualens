@@ -1,7 +1,10 @@
 {
   "app": {
     "title": "LinguaLens",
-    "description": "LinguaLens スマート双方向翻訳ツール、複数のシーンスタイルに対応"
+    "description": "LinguaLens スマート双方向翻訳ツール、複数のシーンスタイルに対応",
+    "metaTitle": "LinguaLens AI 翻訳アシスタント",
+    "metaDescription": "LinguaLensは、マルチシナリオスタイル切替をサポートするインテリジェント双方向翻訳アシスタントです。AIにより正確で文脈を理解した翻訳を提供します。",
+    "keywords": "LinguaLens, 翻訳, AI翻訳, 多言語, コンテキスト認識翻訳, 言語アシスタント, リアルタイム翻訳, 機械翻訳"
   },
   "nav": {
     "home": "ホーム",

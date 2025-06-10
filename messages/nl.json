@@ -1,7 +1,10 @@
 {
   "app": {
     "title": "LinguaLens",
-    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles",
+    "metaTitle": "LinguaLens AI Vertaalassistent",
+    "metaDescription": "LinguaLens is een intelligente bidirectionele vertaalassistent die het wisselen van multi-scenario stijlen ondersteunt. Aangedreven door AI voor nauwkeurige en contextbewuste vertalingen.",
+    "keywords": "LinguaLens, vertaling, AI vertaling, meertalig, contextbewuste vertaling, taalassistent, realtime vertaling, machinevertaling"
   },
   "nav": {
     "home": "Startpagina",

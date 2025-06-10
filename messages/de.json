@@ -1,7 +1,10 @@
 {
   "app": {
     "title": "LinguaLens",
-    "description": "LinguaLens Intelligenter bidirektionaler Übersetzer, der mehrere Szenenformate unterstützt"
+    "description": "LinguaLens Intelligenter bidirektionaler Übersetzer, der mehrere Szenenformate unterstützt",
+    "metaTitle": "LinguaLens KI-Übersetzungsassistent",
+    "metaDescription": "LinguaLens ist ein intelligenter bidirektionaler Übersetzungsassistent, der Mehrfach-Szenario-Stilwechsel unterstützt. Von KI angetrieben für präzise und kontextbewusste Übersetzungen.",
+    "keywords": "LinguaLens, Übersetzung, KI-Übersetzung, mehrsprachig, kontextbewusste Übersetzung, Sprachassistent, Echtzeit-Übersetzung, maschinelle Übersetzung"
   },
   "nav": {
     "home": "Startseite",

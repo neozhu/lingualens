@@ -1,7 +1,10 @@
 {
   "app": {
     "title": "LinguaLens",
-    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles",
+    "metaTitle": "LinguaLens ผู้ช่วยแปลภาษา AI",
+    "metaDescription": "LinguaLens เป็นผู้ช่วยแปลภาษาสองทิศทางอัจฉริยะที่รองรับการเปลี่ยนแปลงสไตล์หลายสถานการณ์ ขับเคลื่อนโดย AI สำหรับการแปลที่แม่นยำและตระหนักถึงบริบท",
+    "keywords": "LinguaLens, การแปล, การแปล AI, หลายภาษา, การแปลที่ตระหนักถึงบริบท, ผู้ช่วยภาษา, การแปลแบบเรียลไทม์, การแปลด้วยเครื่อง"
   },
   "nav": {
     "home": "หน้าหลัก",

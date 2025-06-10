@@ -1,7 +1,10 @@
 {
   "app": {
     "title": "LinguaLens",
-    "description": "LinguaLens 智能双向翻译助手，支持多场景风格切换"
+    "description": "LinguaLens 智能双向翻译助手，支持多场景风格切换",
+    "metaTitle": "LinguaLens AI 翻译助手",
+    "metaDescription": "LinguaLens 是一款智能双向翻译助手，支持多场景风格切换。由AI驱动，提供准确且具有上下文感知的翻译服务。",
+    "keywords": "LinguaLens, 翻译, AI翻译, 多语言, 智能翻译, 语言助手, 实时翻译, 机器翻译"
   },
   "nav": {
     "home": "首页",

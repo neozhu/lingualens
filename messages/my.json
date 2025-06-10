@@ -1,7 +1,10 @@
 {
   "app": {
     "title": "LinguaLens",
-    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles"
+    "description": "LinguaLens Smart Bidirectional Translator, supporting multiple scene styles",
+    "metaTitle": "LinguaLens AI ဘာသာပြန်လက်ထောက်",
+    "metaDescription": "LinguaLens သည် မျိုးစုံအခြေအနေပုံစံများကို ပြောင်းလဲအသုံးပြုနိုင်သော ဉာဏ်ရည်တုနှစ်ဘက်သွားဘာသာပြန်လက်ထောက်ဖြစ်သည်။ AI နဲ့တွဲဖက်ပြီး တိကျမှန်ကန်ပြီး အကြောင်းအရာနားလည်နိုင်သော ဘာသာပြန်မှုများပေးပါသည်။",
+    "keywords": "LinguaLens, ဘာသာပြန်, AI ဘာသာပြန်, ဘာသာစုံ, အကြောင်းအရာနားလည်ဘာသာပြန်, ဘာသာလက်ထောက်, အချိန်ရှိဘာသာပြန်, စက်ဘာသာပြန်"
   },
   "nav": {
     "home": "မူလစာမျက်နှာ",
