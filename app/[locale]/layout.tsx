@@ -26,7 +26,6 @@ export async function generateMetadata({
   });
   // Add x-default for international targeting
   alternateLanguages['x-default'] = `${baseUrl}/en`;
-
   return {
     title: appMessages.metaTitle || appMessages.title,
     description: appMessages.metaDescription || appMessages.description,
@@ -40,6 +39,11 @@ export async function generateMetadata({
       telephone: false,
     },
     metadataBase: new URL(baseUrl),
+    icons: {
+      icon: '/favicon.ico',
+      shortcut: '/favicon.ico',
+      apple: '/favicon.ico',
+    },
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: alternateLanguages,

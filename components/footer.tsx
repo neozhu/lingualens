@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({
   const { theme } = useTheme();
   
   // Dynamically set logo based on theme
-  logo.src = theme === 'dark' ? '/github-mark-white.svg' : '/github-mark.svg';
+  logo.src = theme === 'dark' ? '/logo_dark.png' : '/logo.png';
   // Set default values using translation content
   tagline = tagline || t('app.description');
   copyright = copyright || `© ${new Date().getFullYear()} LinguaLens. ${t('footer.rights')}`;

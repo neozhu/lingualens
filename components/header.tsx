@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Languages, Clapperboard } from "lucide-react";
+import { Clapperboard } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from '@/i18n/navigation';
 import { ModeToggle } from "./mode-toggle";
@@ -27,9 +27,14 @@ export const Header = () => {
     return (
         <header className="w-full z-40 fixed top-0 left-0 bg-background">
             <div className="container relative mx-auto min-h-20 flex gap-4 flex-row grid-cols-2 items-center px-4 sm:px-8 lg:px-16 py-4">
-                <div className="justify-start items-center gap-4  flex  flex-row">
-                    <Link href="/" className="flex items-center gap-2">
-                        <Languages className="w-6 h-6" />
+                <div className="justify-start items-center gap-4  flex  flex-row">                    <Link href="/" className="flex items-center gap-2">
+                        <Image
+                            src={theme === 'dark' ? '/logo_dark.png' : '/logo.png'}
+                            alt="LinguaLens Logo"
+                            className="w-10 h-10"
+                            width={40}
+                            height={40}
+                        />
                         <span className="sm:grid hidden text-xl font-semibold motion motion-duration-500 motion-translate-x-in-[50%] motion-translate-y-in-[0%] motion-preset-blur-right" >{t('app.title')}</span>
                     </Link>
                 </div>
