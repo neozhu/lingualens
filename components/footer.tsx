@@ -21,7 +21,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({
   logo = {
-    src: '/github-mark.svg',
+    src: '/logo.png',
     alt: 'LinguaLens Logo',
     title: 'LinguaLens',
     url: '/',
@@ -34,9 +34,16 @@ export const Footer: React.FC<FooterProps> = ({
   // Use next-intl's useTranslations hook to get translation content
   const t = useTranslations();
   const { theme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
   
+  // 只在客户端渲染后执行
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+ 
   // Dynamically set logo based on theme
-  logo.src = theme === 'dark' ? '/logo_dark.png' : '/logo.png';
+  const logoSrc = mounted && theme === 'dark' ? '/logo_dark.png' : '/logo.png';
+ 
   // Set default values using translation content
   tagline = tagline || t('app.description');
   copyright = copyright || `© ${new Date().getFullYear()} LinguaLens. ${t('footer.rights')}`;
@@ -75,10 +82,17 @@ export const Footer: React.FC<FooterProps> = ({
   return (
     <footer className="bg-background py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
-          <div className="col-span-2 mb-8 lg:mb-0">
+        <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">          <div className="col-span-2 mb-8 lg:mb-0">
             <Link href={logo.url} className="flex items-center gap-2">
-              <Image src={logo.src} alt={logo.alt} className="h-10" width="40" height="40" />
+              {mounted && (
+                <Image
+                  src={logoSrc}
+                  alt={logo.alt}
+                  className="w-10 h-10"
+                  width={40}
+                  height={40}
+                />
+              )}
               <span className="text-xl font-semibold">{logo.title}</span>
             </Link>
             <p className="mt-4 text-muted-foreground">{tagline}</p>
