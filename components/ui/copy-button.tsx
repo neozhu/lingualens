@@ -51,7 +51,8 @@ export function CopyButton({
         "relative z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50 [&_svg]:h-3 [&_svg]:w-3",
         className
       )}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation()
         copyToClipboardWithMeta(
           value,
           event

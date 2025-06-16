@@ -2,7 +2,7 @@
 
 "use client"
 
-import React, { useMemo, useState } from "react"
+import React, { useMemo, useState, useEffect } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { motion } from "framer-motion"
 import { Ban, ChevronRight, Code2, Loader2, Terminal } from "lucide-react"
@@ -134,6 +134,21 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   toolInvocations,
   parts,
 }) => {
+  const [isTouch, setIsTouch] = useState(false)
+  const [showActions, setShowActions] = useState(false)
+
+  // 检测设备是否支持触摸
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0)
+    }
+    checkTouch()
+    
+    // 监听窗口变化
+    window.addEventListener('resize', checkTouch)
+    return () => window.removeEventListener('resize', checkTouch)
+  }, [])
+
   const files = useMemo(() => {
     return experimental_attachments?.map((attachment) => {
       const dataArray = dataUrlToUint8Array(attachment.url)
@@ -148,6 +163,23 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
     hour: "2-digit",
     minute: "2-digit",
   })
+
+  const handleMessageClick = () => {
+    if (isTouch && actions) {
+      setShowActions(!showActions)
+    }
+  }
+
+  const getActionClasses = () => {
+    if (!actions) return null
+    
+    return cn(
+      "absolute -bottom-4 right-2 flex space-x-1 rounded-lg border bg-background p-1 text-foreground transition-opacity",
+      isTouch 
+        ? (showActions ? "opacity-100" : "opacity-0")
+        : "opacity-0 group-hover/message:opacity-100"
+    )
+  }
 
   if (isUser) {
     return (
@@ -192,13 +224,24 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
             )}
             key={`text-${index}`}
           >
-            <div className={cn(chatBubbleVariants({ isUser, animation }))}>
+            <div 
+              className={cn(chatBubbleVariants({ isUser, animation }))}
+              onClick={handleMessageClick}
+              style={isTouch && actions ? { cursor: 'pointer' } : undefined}
+            >
               <MarkdownRenderer>{part.text}</MarkdownRenderer>
               {actions ? (
-                <div className="absolute -bottom-4 right-2 flex space-x-1 rounded-lg border bg-background p-1 text-foreground opacity-0 transition-opacity group-hover/message:opacity-100">
+                <div className={getActionClasses()}>
                   {actions}
                 </div>
               ) : null}
+              
+              {/* 移动端提示文本 */}
+              {isTouch && actions && !showActions && (
+                <div className="absolute bottom-1 right-1 text-xs text-muted-foreground/50 pointer-events-none">
+                  点击显示操作
+                </div>
+              )}
             </div>
 
             {showTimeStamp && createdAt ? (
@@ -234,13 +277,24 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
   return (
     <div className={cn("flex flex-col", isUser ? "items-end" : "items-start")}>
-      <div className={cn(chatBubbleVariants({ isUser, animation }))}>
+      <div 
+        className={cn(chatBubbleVariants({ isUser, animation }))}
+        onClick={handleMessageClick}
+        style={isTouch && actions ? { cursor: 'pointer' } : undefined}
+      >
         <MarkdownRenderer>{content}</MarkdownRenderer>
         {actions ? (
-          <div className="absolute -bottom-4 right-2 flex space-x-1 rounded-lg border bg-background p-1 text-foreground opacity-0 transition-opacity group-hover/message:opacity-100">
+          <div className={getActionClasses()}>
             {actions}
           </div>
         ) : null}
+        
+        {/* 移动端提示文本 */}
+        {isTouch && actions && !showActions && (
+          <div className="absolute bottom-1 right-1 text-xs text-muted-foreground/50 pointer-events-none">
+            点击显示操作
+          </div>
+        )}
       </div>
 
       {showTimeStamp && createdAt ? (
