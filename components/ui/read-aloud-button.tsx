@@ -37,20 +37,13 @@ export function ReadAloudButton({
       })
       
       if (!res.ok) {
-        console.error('TTS API error:', res.status, res.statusText);
         setIsPlaying(false);
         return;
       }
       
       const blob = await res.blob()
-      console.log('Audio blob received:', { 
-        size: blob.size, 
-        type: blob.type,
-        actualType: res.headers.get('content-type')
-      });
       
       if (blob.size === 0) {
-        console.error('Audio blob is empty');
         setIsPlaying(false);
         return;
       }
@@ -59,36 +52,10 @@ export function ReadAloudButton({
       const audio = new Audio(url)
       audioRef.current = audio
       
-      // Add more detailed error handling
-      audio.addEventListener('loadstart', () => console.log('Audio loadstart'));
-      audio.addEventListener('loadedmetadata', () => console.log('Audio metadata loaded:', { duration: audio.duration }));
-      audio.addEventListener('canplay', () => console.log('Audio can play'));
-      audio.addEventListener('error', (e) => {
-        console.error('Audio error event:', e);
-        const audioElement = e.target as HTMLAudioElement;
-        if (audioElement.error) {
-          console.error('Audio error details:', {
-            code: audioElement.error.code,
-            message: audioElement.error.message,
-            MEDIA_ERR_ABORTED: audioElement.error.MEDIA_ERR_ABORTED,
-            MEDIA_ERR_NETWORK: audioElement.error.MEDIA_ERR_NETWORK,
-            MEDIA_ERR_DECODE: audioElement.error.MEDIA_ERR_DECODE,
-            MEDIA_ERR_SRC_NOT_SUPPORTED: audioElement.error.MEDIA_ERR_SRC_NOT_SUPPORTED
-          });
-        }
-        setIsPlaying(false);
-      });
-      
       audio.onended = () => setIsPlaying(false);
+      audio.onerror = () => setIsPlaying(false);
       
-      // Try to play the audio
-      try {
-        await audio.play();
-        console.log('Audio started playing successfully');
-      } catch (playError) {
-        console.error('Audio play error:', playError);
-        setIsPlaying(false);
-      }
+      await audio.play();
     } catch (error) {
       console.error('TTS error:', error);
       setIsPlaying(false);

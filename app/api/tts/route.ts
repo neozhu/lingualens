@@ -64,12 +64,10 @@ export async function POST(req: NextRequest) {
     }
 
     const pcmBuffer = Buffer.from(audioData, 'base64');
-    console.log('PCM data received, size:', pcmBuffer.length);
     
     // Create WAV file by adding header to PCM data
     const wavHeader = createWavHeader(pcmBuffer.length);
     const wavBuffer = Buffer.concat([wavHeader, pcmBuffer]);
-    console.log('WAV file created, size:', wavBuffer.length);
 
     return new Response(wavBuffer, {
       headers: {
