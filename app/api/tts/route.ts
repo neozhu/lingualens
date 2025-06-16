@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import { GoogleGenAI } from '@google/genai';
-import * as wav from 'wav';
 
 if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
   throw new Error('Missing GOOGLE_GENERATIVE_AI_API_KEY environment variable')
@@ -10,31 +9,31 @@ const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY })
 
 export const maxDuration = 30;
 
-// Function to create WAV file from PCM data using wav library
-function createWavBuffer(pcmData: Buffer, channels = 1, rate = 24000, sampleWidth = 2): Promise<Buffer> {
-  return new Promise((resolve, reject) => {
-    const chunks: Buffer[] = [];
-    
-    const writer = new wav.FileWriter({
-      channels,
-      sampleRate: rate,
-      bitDepth: sampleWidth * 8,
-    });
+// Function to create WAV header for PCM data (matching Google Gemini TTS format)
+function createWavHeader(dataLength: number, sampleRate = 24000, numChannels = 1, bitsPerSample = 16) {
+  const buffer = Buffer.alloc(44);
+  let offset = 0;
 
-    writer.on('data', (chunk: Buffer) => {
-      chunks.push(chunk);
-    });
+  // RIFF header
+  buffer.write('RIFF', offset); offset += 4;
+  buffer.writeUInt32LE(36 + dataLength, offset); offset += 4;
+  buffer.write('WAVE', offset); offset += 4;
 
-    writer.on('finish', () => {
-      const wavBuffer = Buffer.concat(chunks);
-      resolve(wavBuffer);
-    });
+  // fmt chunk
+  buffer.write('fmt ', offset); offset += 4;
+  buffer.writeUInt32LE(16, offset); offset += 4; // PCM chunk size
+  buffer.writeUInt16LE(1, offset); offset += 2; // PCM format
+  buffer.writeUInt16LE(numChannels, offset); offset += 2;
+  buffer.writeUInt32LE(sampleRate, offset); offset += 4;
+  buffer.writeUInt32LE(sampleRate * numChannels * bitsPerSample / 8, offset); offset += 4; // byte rate
+  buffer.writeUInt16LE(numChannels * bitsPerSample / 8, offset); offset += 2; // block align
+  buffer.writeUInt16LE(bitsPerSample, offset); offset += 2;
 
-    writer.on('error', reject);
+  // data chunk
+  buffer.write('data', offset); offset += 4;
+  buffer.writeUInt32LE(dataLength, offset);
 
-    writer.write(pcmData);
-    writer.end();
-  });
+  return buffer;
 }
 
 export async function POST(req: NextRequest) {
@@ -67,8 +66,9 @@ export async function POST(req: NextRequest) {
     const pcmBuffer = Buffer.from(audioData, 'base64');
     console.log('PCM data received, size:', pcmBuffer.length);
     
-    // Convert PCM data to WAV format using wav library (like in the official example)
-    const wavBuffer = await createWavBuffer(pcmBuffer);
+    // Create WAV file by adding header to PCM data
+    const wavHeader = createWavHeader(pcmBuffer.length);
+    const wavBuffer = Buffer.concat([wavHeader, pcmBuffer]);
     console.log('WAV file created, size:', wavBuffer.length);
 
     return new Response(wavBuffer, {
