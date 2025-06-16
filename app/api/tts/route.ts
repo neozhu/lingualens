@@ -37,12 +37,38 @@ export async function POST(req: NextRequest) {
     }
 
     const buffer = Buffer.from(audioData, 'base64');
+    
+    // Check the audio format by examining the first few bytes
+    const header = buffer.slice(0, 12);
+    console.log('Audio header bytes:', Array.from(header).map(b => b.toString(16).padStart(2, '0')).join(' '));
+    
+    // Determine content type based on header
+    let contentType = "audio/wav";
+    let fileExtension = "wav";
+    
+    // Check for different audio formats
+    if (header.includes(Buffer.from('RIFF'))) {
+      contentType = "audio/wav";
+      fileExtension = "wav";
+    } else if (header.includes(Buffer.from('ID3')) || buffer[0] === 0xFF && (buffer[1] & 0xE0) === 0xE0) {
+      contentType = "audio/mpeg";
+      fileExtension = "mp3";
+    } else if (header.includes(Buffer.from('OggS'))) {
+      contentType = "audio/ogg";
+      fileExtension = "ogg";
+    } else if (header.includes(Buffer.from('ftyp'))) {
+      contentType = "audio/mp4";
+      fileExtension = "m4a";
+    }
+    
+    console.log(`Detected audio format: ${contentType}, buffer size: ${buffer.length} bytes`);
 
     return new Response(buffer, {
       headers: {
-        "Content-Type": "audio/wav",
+        "Content-Type": contentType,
         "Cache-Control": "no-store",
         "Content-Length": buffer.length.toString(),
+        "Content-Disposition": `inline; filename="audio.${fileExtension}"`,
       },
     });
   } catch (error) {
