@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars, prefer-const */
 
-import React, { Suspense } from "react"
+import React, { Suspense, useState, useEffect } from "react"
 import type { JSX } from "react";
 import Markdown from "react-markdown"
 import remarkGfm from "remark-gfm"
@@ -90,6 +90,21 @@ const CodeBlock = ({
   language,
   ...restProps
 }: CodeBlockProps) => {
+  const [isTouch, setIsTouch] = useState(false)
+  const [showButtons, setShowButtons] = useState(false)
+
+  // 检测设备是否支持触摸
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0)
+    }
+    checkTouch()
+    
+    // 监听窗口变化
+    window.addEventListener('resize', checkTouch)
+    return () => window.removeEventListener('resize', checkTouch)
+  }, [])
+
   const code =
     typeof children === "string"
       ? children
@@ -100,8 +115,25 @@ const CodeBlock = ({
     className
   )
 
+  const handleCodeBlockClick = () => {
+    if (isTouch) {
+      setShowButtons(!showButtons)
+    }
+  }
+
+  const buttonClasses = cn(
+    "absolute right-2 top-2 flex space-x-1 rounded-lg p-1 transition-all duration-200",
+    isTouch 
+      ? (showButtons ? "visible opacity-100" : "invisible opacity-0")
+      : "invisible opacity-0 group-hover/code:visible group-hover/code:opacity-100"
+  )
+
   return (
-    <div className="group/code relative mb-4">
+    <div 
+      className="group/code relative mb-4"
+      onClick={isTouch ? handleCodeBlockClick : undefined}
+      style={isTouch ? { cursor: 'pointer' } : undefined}
+    >
       <Suspense
         fallback={
           <pre className={preClass} {...restProps}>
@@ -114,22 +146,32 @@ const CodeBlock = ({
         </HighlightedPre>
       </Suspense>
 
-      <div className="invisible absolute right-2 top-2 flex space-x-1 rounded-lg p-1 opacity-0 transition-all duration-200 group-hover/code:visible group-hover/code:opacity-100">
-      
-        <CopyButton value={code} className="
+      <div className={buttonClasses}>
+        <CopyButton 
+          value={code} 
+          className="
             h-6 w-6
             text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
             dark:text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50
-            " />
+          " 
+          onClick={(e) => e.stopPropagation()}
+        />
         <ReadAloudButton
-            text={code}
-            className="
+          text={code}
+          className="
             h-6 w-6
             text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
             dark:text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50
-            "
-          />
+          "
+          onClick={(e) => e.stopPropagation()}
+        />
       </div>
+        {/* Mobile touch prompt */}
+      {isTouch && !showButtons && (
+        <div className="absolute bottom-2 right-2 text-xs text-zinc-500 dark:text-zinc-400 pointer-events-none">
+          Tap to show actions
+        </div>
+      )}
     </div>
   )
 }

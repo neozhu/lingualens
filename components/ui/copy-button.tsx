@@ -19,6 +19,7 @@ import {
 interface CopyButtonProps extends Omit<ComponentProps<typeof Button>, "onClick"> {
   value: string
   event?: Event["name"]
+  onClick?: (e: React.MouseEvent) => void
 }
 
 export async function copyToClipboardWithMeta(value: string, event?: Event) {
@@ -33,6 +34,7 @@ export function CopyButton({
   className,
   variant = "ghost",
   event,
+  onClick,
   ...props
 }: CopyButtonProps) {
   const [hasCopied, setHasCopied] = React.useState(false)
@@ -51,7 +53,8 @@ export function CopyButton({
         "relative z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50 [&_svg]:h-3 [&_svg]:w-3",
         className
       )}
-      onClick={() => {
+    onClick={(e) => {
+        e.stopPropagation()
         copyToClipboardWithMeta(
           value,
           event
@@ -64,6 +67,8 @@ export function CopyButton({
             : undefined
         )
         setHasCopied(true)
+          // Call the passed onClick handler if provided
+        onClick?.(e)
       }}
       {...props}
     >
