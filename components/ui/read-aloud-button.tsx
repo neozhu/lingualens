@@ -27,7 +27,6 @@ export function ReadAloudButton({
       return
     }
     
-    console.log('🎵 Starting TTS request for text:', text);
     setIsPlaying(true)
     
     try {
@@ -37,47 +36,28 @@ export function ReadAloudButton({
         body: JSON.stringify({ text }),
       })
       
-      console.log('📡 TTS API response status:', res.status);
-      console.log('📡 TTS API response headers:', Object.fromEntries(res.headers.entries()));
-      
       if (!res.ok) {
-        const errorText = await res.text();
-        console.error('❌ TTS API error:', errorText);
         setIsPlaying(false);
         return;
       }
       
       const blob = await res.blob()
-      console.log('🎵 Audio blob received, size:', blob.size, 'type:', blob.type);
       
       if (blob.size === 0) {
-        console.error('❌ Audio blob is empty');
         setIsPlaying(false);
         return;
       }
       
       const url = URL.createObjectURL(blob)
-      console.log('🔗 Audio URL created:', url);
-      
       const audio = new Audio(url)
       audioRef.current = audio
       
-      audio.onloadstart = () => console.log('🎵 Audio loadstart');
-      audio.oncanplay = () => console.log('🎵 Audio can play');
-      audio.onplay = () => console.log('🎵 Audio started playing');
-      audio.onended = () => {
-        console.log('🎵 Audio ended');
-        setIsPlaying(false);
-      };
-      audio.onerror = (e) => {
-        console.error('❌ Audio error:', e);
-        setIsPlaying(false);
-      };
+      audio.onended = () => setIsPlaying(false);
+      audio.onerror = () => setIsPlaying(false);
       
       await audio.play();
-      console.log('🎵 Audio play() called');
     } catch (error) {
-      console.error('❌ TTS error:', error);
+      console.error('TTS error:', error);
       setIsPlaying(false);
     }
   }, [text, isPlaying])
