@@ -36,6 +36,18 @@ export const ChatHistory = () => {
   
   const { setLoadedMessages, setLoadedSessionId, clearLoadedSession, triggerClearMessages, setLoadedSessionModel, setLoadedSessionScene } = useChatContext();
   const [groupedHistory, setGroupedHistory] = useState<GroupedChatHistory[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Detect mobile devices
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || ('ontouchstart' in window || navigator.maxTouchPoints > 0));
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Load history on initialization
   useEffect(() => {
@@ -143,7 +155,7 @@ export const ChatHistory = () => {
               <History className="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-80 max-w-80 max-h-[500px] overflow-y-auto overflow-x-hidden" align="end">
+          <DropdownMenuContent className={`w-80 ${isMobile ? 'max-w-[90vw]' : 'max-w-80'} max-h-[500px] overflow-y-auto overflow-x-hidden`} align="end">
             <DropdownMenuLabel className="flex items-center justify-between">
               <span>{t('history.title') || 'Chat History'}</span>
               <DropdownMenu>
@@ -200,10 +212,9 @@ export const ChatHistory = () => {
                       </Button>
                     </DropdownMenuLabel>
                     
-                    {group.sessions.map((session) => (
-                      <DropdownMenuItem
+                    {group.sessions.map((session) => (                      <DropdownMenuItem
                         key={session.id}
-                        className="flex items-center justify-between p-3 cursor-pointer hover:bg-muted/50 min-h-[60px] w-full"
+                        className={`flex items-center justify-between p-3 cursor-pointer hover:bg-muted/50 ${isMobile ? 'min-h-[70px]' : 'min-h-[60px]'} w-full`}
                         onClick={() => handleLoadSession(session.id)}
                       >
                         <div className="flex-1 min-w-0 max-w-[calc(100%-2rem)] overflow-hidden">
@@ -219,11 +230,10 @@ export const ChatHistory = () => {
                           <p className="text-sm truncate text-foreground">
                             {getSessionPreview(session)}
                           </p>
-                        </div>
-                        <Button
+                        </div>                        <Button
                           variant="ghost"
                           size="sm"
-                          className="h-6 w-6 p-0 ml-2 opacity-60 hover:opacity-100"
+                          className={`${isMobile ? 'h-8 w-8' : 'h-6 w-6'} p-0 ml-2 opacity-60 hover:opacity-100`}
                           onClick={(e) => handleDeleteSession(session.id, e)}
                         >
                           <X className="h-3 w-3" />
@@ -244,4 +254,4 @@ export const ChatHistory = () => {
       </TooltipContent>
     </Tooltip>
   );
-}; 
+};

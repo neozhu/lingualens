@@ -236,10 +236,10 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
                 </div>
               ) : null}
               
-              {/* 移动端提示文本 */}
+              {/* Mobile touch prompt */}
               {isTouch && actions && !showActions && (
                 <div className="absolute bottom-1 right-1 text-xs text-muted-foreground/50 pointer-events-none">
-                  点击显示操作
+                  Tap to show actions
                 </div>
               )}
             </div>
@@ -251,8 +251,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
                   "mt-1 block px-1 text-xs opacity-50",
                   animation !== "none" && "duration-500 animate-in fade-in-0"
                 )}
-              >
-                {formattedTime}
+              >                {formattedTime}
               </time>
             ) : null}
           </div>
@@ -289,10 +288,10 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
           </div>
         ) : null}
         
-        {/* 移动端提示文本 */}
+        {/* Mobile touch prompt */}
         {isTouch && actions && !showActions && (
           <div className="absolute bottom-1 right-1 text-xs text-muted-foreground/50 pointer-events-none">
-            点击显示操作
+            Tap to show actions
           </div>
         )}
       </div>
@@ -440,3 +439,5 @@ function ToolCall({
     </div>
   )
 }
+
+// End of file

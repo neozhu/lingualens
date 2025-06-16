@@ -166,11 +166,10 @@ const CodeBlock = ({
           onClick={(e) => e.stopPropagation()}
         />
       </div>
-      
-      {/* 移动端提示文本 */}
+        {/* Mobile touch prompt */}
       {isTouch && !showButtons && (
         <div className="absolute bottom-2 right-2 text-xs text-zinc-500 dark:text-zinc-400 pointer-events-none">
-          点击显示操作
+          Tap to show actions
         </div>
       )}
     </div>

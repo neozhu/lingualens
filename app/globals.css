@@ -66,11 +66,11 @@ body {
   color: hsl(var(--foreground));
 }
 
-/* 移动端优化样式 */
+/* Mobile optimization styles */
 @media (pointer: coarse) {
-  /* 触摸设备优化 */
+  /* Touch device optimizations */
   .group\/code .mobile-action-buttons {
-    min-height: 44px; /* 确保触摸目标足够大 */
+    min-height: 44px; /* Ensure touch targets are large enough */
   }
   
   .group\/code .mobile-action-buttons button {
@@ -87,6 +87,13 @@ body {
     min-width: 44px;
     min-height: 44px;
     padding: 8px;
+  }
+  
+  /* Enhanced button visibility for mobile */
+  .mobile-action-hint {
+    opacity: 0.7;
+    font-size: 0.75rem;
+    pointer-events: none;
   }
 }
 
