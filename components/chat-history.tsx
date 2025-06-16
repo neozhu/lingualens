@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { History, Trash2, Calendar, MessageSquare, X, MoreVertical, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslations } from 'next-intl';
+import { useRouter, usePathname } from '@/i18n/navigation';
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   DropdownMenu,
@@ -20,6 +21,8 @@ import { toast } from "sonner";
 
 export const ChatHistory = () => {
   const t = useTranslations();
+  const router = useRouter();
+  const pathname = usePathname();
   
   const {
     getGroupedHistory,
@@ -54,6 +57,12 @@ export const ChatHistory = () => {
       setLoadedSessionId(session.id);
       setLoadedSessionModel(session.model);
       setLoadedSessionScene(session.scene);
+      
+      // Check if we're not on the home page, if so, navigate to home
+      if (pathname !== '/') {
+        router.push('/');
+      }
+      
       toast.success(t('history.sessionLoaded') || 'Session loaded');
     } else {
       toast.error(t('history.sessionLoadError') || 'Failed to load session');

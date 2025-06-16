@@ -33,17 +33,15 @@ import {
   X,
   WandSparkles,
 } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations, useLocale } from "next-intl";
 
 const LOCAL_KEY = "customScenes";
 
 function getLocalScenes(): Scene[] | null {
   if (typeof window === "undefined") return null;
-  const raw = localStorage.getItem(LOCAL_KEY);
-  if (!raw) return null;
   try {
-    return JSON.parse(raw);
+    const raw = localStorage.getItem(LOCAL_KEY);
+    return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
   }
@@ -135,37 +133,23 @@ function SortableItem({
   );
 }
 
-// Skeleton component for loading state
-function SceneSkeleton() {
-  return (
-    <div className="border rounded-lg p-4 relative">
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-2">
-          <Skeleton className="h-4 w-4" />
-          <Skeleton className="h-6 w-40" />
-        </div>
-        <div className="flex gap-2">
-          <Skeleton className="h-9 w-16" />
-          <Skeleton className="h-9 w-16" />
-        </div>
-      </div>
-      <Skeleton className="h-4 w-full mb-2" />
-      <Skeleton className="h-20 w-full" />
-    </div>
-  );
-}
+
 
 export default function SceneManagePage() {
   const t = useTranslations("sceneManage");
 
-  const [scenes, setScenes] = useState<Scene[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [scenes, setScenes] = useState<Scene[]>(() => {
+    // Initialize with data immediately to avoid loading state
+    const local = getLocalScenes();
+    return local || SCENES;
+  });
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [form, setForm] = useState<Partial<Scene>>({});
   const [generating, setGenerating] = useState(false);
   // Use useChat hook to handle API communication
   const { messages, append } = useChat({
     api: "/api/generate",
+    initialMessages: [], // Explicitly set empty initial messages
     onFinish: (message: { content: string }) => {
       // Update form prompt field when generation is complete
       setForm((prev) => ({ ...prev, prompt: message.content }));
@@ -196,17 +180,7 @@ export default function SceneManagePage() {
     }
   }, [messages, generating]);
 
-  useEffect(() => {
-    setLoading(true);
-    // Add a small delay to simulate loading and show the skeleton effect
-    const timer = setTimeout(() => {
-      const local = getLocalScenes();
-      setScenes(local || SCENES);
-      setLoading(false);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
+  // Data is now initialized directly in useState, no need for loading effect
 
   const handleEdit = (idx: number) => {
     setEditingIdx(idx);
@@ -322,37 +296,29 @@ Please create a translation prompt for the above scene that will guide an AI mod
           <span className="sr-only">{t("resetToDefault")}</span>
         </Button>
       </div>
-      {loading ? (
-        <div className="space-y-4">
-          {[...Array(4)].map((_, i) => (
-            <SceneSkeleton key={i} />
-          ))}
-        </div>
-      ) : (
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext
+          items={scenes.map((_, idx) => idx.toString())}
+          strategy={verticalListSortingStrategy}
         >
-          <SortableContext
-            items={scenes.map((_, idx) => idx.toString())}
-            strategy={verticalListSortingStrategy}
-          >
-            <div className="space-y-4">
-              {scenes.map((scene, idx) => (
-                <SortableItem
-                  key={idx}
-                  scene={scene}
-                  idx={idx}
-                  handleEdit={handleEdit}
-                  handleDelete={handleDelete}
-                  animationDelay={idx * 100}
-                />
-              ))}{" "}
-            </div>
-          </SortableContext>
-        </DndContext>
-      )}
+          <div className="space-y-4">
+            {scenes.map((scene, idx) => (
+              <SortableItem
+                key={idx}
+                scene={scene}
+                idx={idx}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                animationDelay={idx * 100}
+              />
+            ))}{" "}
+          </div>
+        </SortableContext>
+      </DndContext>
       {(editingIdx !== null || form.name) && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-lg shadow-lg relative">
