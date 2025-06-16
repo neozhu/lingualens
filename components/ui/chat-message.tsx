@@ -170,8 +170,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
     }
   }
 
-  const getActionClasses = () => {
-    if (!actions) return null
+  const getActionClasses = (): string | undefined => {
+    if (!actions) return undefined
     
     return cn(
       "absolute -bottom-4 right-2 flex space-x-1 rounded-lg border bg-background p-1 text-foreground transition-opacity",
@@ -230,7 +230,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
               style={isTouch && actions ? { cursor: 'pointer' } : undefined}
             >
               <MarkdownRenderer>{part.text}</MarkdownRenderer>
-              {actions ? (
+              {actions && getActionClasses() ? (
                 <div className={getActionClasses()}>
                   {actions}
                 </div>
@@ -283,7 +283,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         style={isTouch && actions ? { cursor: 'pointer' } : undefined}
       >
         <MarkdownRenderer>{content}</MarkdownRenderer>
-        {actions ? (
+        {actions && getActionClasses() ? (
           <div className={getActionClasses()}>
             {actions}
           </div>
