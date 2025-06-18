@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({
 }: FooterProps) => {
   // Use next-intl's useTranslations hook to get translation content
   const t = useTranslations();
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   
   // 只在客户端渲染后执行
@@ -42,7 +42,7 @@ export const Footer: React.FC<FooterProps> = ({
   }, []);
  
   // Dynamically set logo based on theme
-  const logoSrc = mounted && theme === 'dark' ? '/logo_dark.png' : '/logo.png';
+  const logoSrc = mounted && resolvedTheme === 'dark' ? '/logo_dark.png' : '/logo.png';
  
   // Set default values using translation content
   tagline = tagline || t('app.description');
