@@ -1,7 +1,7 @@
 // Model constants
 export const QWEN_MODEL = "qwen-qwq-32b"
 export const GEMINI_MODEL_FLASH = "gemini-2.5-flash"
-export const GEMINI_MODEL_LITE = "gemini-2.5-flash-lite-preview-06-17"
+export const GEMINI_MODEL_LITE = "gemini-2.5-flash-lite"
 export const GPT_4_MODEL = "gpt-4o-mini"
 export const LLAMA_MODEL = "llama-3.3-70b-versatile"
 

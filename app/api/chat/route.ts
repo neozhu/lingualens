@@ -40,36 +40,92 @@ function getLanguageNameByLocale(locale: string): string {
 
 function createSystemInstructions(scene: Scene, locale: string): string {
   const inputLang = getLanguageNameByLocale(locale);
+  const targetLang = inputLang === 'US English' ? 'Simplified Chinese' : 'US English';
+  
   const baseInstructions = `
-The user's native language is ${inputLang}.
-You are a highly reliable, professional translation assistant. Always identify the primary language of the input text based on comprehensive analysis of syntax, vocabulary, and linguistic patterns. Follow these strict rules:
-- If the input's primary language is ${inputLang}, translate the entire content into ${inputLang=='US English' ? 'Simplified Chinese':'US English'}.
-- If the input's primary language is not ${inputLang}, translate the entire content into ${inputLang}.
-- Output only the translated text. Do not include the original text, comments, explanations, or any unnecessary formatting, unless specified by the scenario.
-- Preserve important markdown, code, or structural formatting when present.
-- If a specific structure or style is required by the scenario, strictly follow those requirements.
-`;
+## Role
+You are an expert professional translator specializing in high-quality, contextually accurate translations.
 
-  if (!scene || typeof scene === 'string' || !scene.name_en || !scene.description || !scene.prompt) {
-    if (typeof scene === 'string') {
-      const sceneObj = SCENES.find((s) => s.name === scene);
-      if (sceneObj) {
-        return `${baseInstructions}
-Context: ${sceneObj.name_en} - ${sceneObj.description}
-Special Instructions: ${sceneObj.prompt}
+## User Context
+- User's native language: ${inputLang}
+- Primary translation direction: ${inputLang} ↔ ${targetLang}
 
-Translate the following text according to these requirements:`;
-      }
+## Core Translation Rules
+1. **Language Detection & Direction**:
+   - If input is primarily in ${inputLang} → Translate to ${targetLang}
+   - If input is primarily in any other language → Translate to ${inputLang}
+   - Use comprehensive linguistic analysis (syntax, vocabulary, script, context) for detection
+
+2. **Translation Quality Standards**:
+   - Maintain natural, fluent expression in target language
+   - Preserve original meaning, tone, and intent
+   - Adapt cultural references and idioms appropriately
+   - Use professional, contextually appropriate terminology
+   - Consider the specific scenario context for optimal word choice
+
+3. **Output Format**:
+   - Provide ONLY the final translation
+   - NO original text, explanations, or meta-commentary
+   - Preserve all formatting (markdown, code blocks, structure)
+   - Maintain consistent style throughout
+
+4. **Special Handling**:
+   - Code: Translate comments/strings only, preserve syntax
+   - Mixed language: Translate each part to appropriate target
+   - Technical terms: Use standard industry terminology
+   - Proper nouns: Keep original unless commonly translated`;
+
+  // 处理场景上下文
+  let sceneContext = '';
+  let sceneInstructions = '';
+  
+  if (scene && typeof scene === 'object' && scene.name_en && scene.description && scene.prompt) {
+    sceneContext = `
+
+## Scenario Context
+- **Scenario**: ${scene.name_en}
+- **Description**: ${scene.description}
+- **Domain**: This translation is for ${scene.name_en.toLowerCase()} context
+- **Target Audience**: Users in ${scene.name_en.toLowerCase()} scenarios`;
+
+    sceneInstructions = `
+
+## Scenario-Specific Instructions
+${scene.prompt}
+
+**Additional Context Considerations**:
+- Adapt terminology to ${scene.name_en.toLowerCase()} domain standards
+- Ensure translations are appropriate for this specific use case
+- Maintain consistency with ${scene.name_en.toLowerCase()} conventions`;
+  } else if (typeof scene === 'string') {
+    const sceneObj = SCENES.find((s) => s.name === scene);
+    if (sceneObj) {
+      sceneContext = `
+
+## Scenario Context
+- **Scenario**: ${sceneObj.name_en}
+- **Description**: ${sceneObj.description}
+- **Domain**: This translation is for ${sceneObj.name_en.toLowerCase()} context
+- **Target Audience**: Users in ${sceneObj.name_en.toLowerCase()} scenarios`;
+
+      sceneInstructions = `
+
+## Scenario-Specific Instructions
+${sceneObj.prompt}
+
+**Additional Context Considerations**:
+- Adapt terminology to ${sceneObj.name_en.toLowerCase()} domain standards
+- Ensure translations are appropriate for this specific use case
+- Maintain consistency with ${sceneObj.name_en.toLowerCase()} conventions`;
     }
-    return `${baseInstructions}
-Translate the following text according to these rules:`;
   }
 
-  return `${baseInstructions}
-Context: ${scene.name_en} - ${scene.description}
-Special Instructions: ${scene.prompt}
+  const finalInstructions = `${baseInstructions}${sceneContext}${sceneInstructions}
 
-Translate the following text according to these requirements:`;
+## Task
+Translate the following text according to all above requirements:`;
+
+  return finalInstructions;
 }
 
 function getModelProvider(model: string) {
