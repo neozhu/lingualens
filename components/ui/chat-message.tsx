@@ -4,15 +4,10 @@
 
 import React, { useMemo, useState, useEffect } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { motion } from "framer-motion"
-import { Ban, ChevronRight, Code2, Loader2, Terminal } from "lucide-react"
+import { Ban, Code2, Loader2, Terminal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+// Collapsible components removed due to no Thinking UI
 import { FilePreview } from "@/components/ui/file-preview"
 import { MarkdownRenderer } from "@/components/ui/markdown-renderer"
 
@@ -182,6 +177,14 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   }
 
   if (isUser) {
+    const userText =
+      typeof content === "string" && content.length > 0
+        ? content
+        : Array.isArray(parts)
+          ? parts
+              .map((p: any) => (p && p.type === "text" && typeof p.text === "string" ? p.text : ""))
+              .join("")
+          : ""
     return (
       <div
         className={cn("flex flex-col", isUser ? "items-end" : "items-start")}
@@ -195,7 +198,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         ) : null}
 
         <div className={cn(chatBubbleVariants({ isUser, animation }))}>
-          <MarkdownRenderer>{content}</MarkdownRenderer>
+          <MarkdownRenderer>{userText}</MarkdownRenderer>
         </div>
 
         {showTimeStamp && createdAt ? (
@@ -257,7 +260,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
           </div>
         )
       } else if (part.type === "reasoning") {
-        return <ReasoningBlock key={`reasoning-${index}`} part={part} />
+        // Do not render reasoning blocks (hide "Thinking")
+        return null
       } else if (part.type === "tool-invocation") {
         return (
           <ToolCall
@@ -317,46 +321,7 @@ function dataUrlToUint8Array(data: string) {
   return new Uint8Array(buf)
 }
 
-const ReasoningBlock = ({ part }: { part: ReasoningPart }) => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <div className="mb-2 flex flex-col items-start sm:max-w-[70%]">
-      <Collapsible
-        open={isOpen}
-        onOpenChange={setIsOpen}
-        className="group w-full overflow-hidden rounded-lg border bg-muted/50"
-      >
-        <div className="flex items-center p-2">
-          <CollapsibleTrigger asChild>
-            <button className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-              <ChevronRight className="h-4 w-4 transition-transform group-data-[state=open]:rotate-90" />
-              <span>Thinking</span>
-            </button>
-          </CollapsibleTrigger>
-        </div>
-        <CollapsibleContent forceMount>
-          <motion.div
-            initial={false}
-            animate={isOpen ? "open" : "closed"}
-            variants={{
-              open: { height: "auto", opacity: 1 },
-              closed: { height: 0, opacity: 0 },
-            }}
-            transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
-            className="border-t"
-          >
-            <div className="p-2">
-              <div className="whitespace-pre-wrap text-xs">
-                {part.reasoning}
-              </div>
-            </div>
-          </motion.div>
-        </CollapsibleContent>
-      </Collapsible>
-    </div>
-  )
-}
+// ReasoningBlock removed from render; kept intentionally out to disable "Thinking" UI
 
 function ToolCall({
   toolInvocations,

@@ -1,24 +1,12 @@
-import { createGroq } from "@ai-sdk/groq"
-import { streamText  } from "ai"
+import { streamText, convertToModelMessages, type UIMessage } from "ai"
 import { SCENES, Scene } from "@/lib/scenes";
 import { google } from '@ai-sdk/google';
 import { openai } from '@ai-sdk/openai';
-import { QWEN_MODEL, DEFAULT_MODEL, MODELS } from "@/lib/models";
+import { DEFAULT_MODEL, MODELS } from "@/lib/models";
 
 export const maxDuration = 30;
 
-const groq = createGroq({
-  fetch: async (url, options) => {
-    if (options?.body) {
-      const body = JSON.parse(options.body as string)
-      if (body?.model === QWEN_MODEL) {
-        body.reasoning_format = "parsed"
-        options.body = JSON.stringify(body)
-      }
-    }
-    return fetch(url, options)
-  },
-})
+
 
 function getLanguageNameByLocale(locale: string): string {
   const map: Record<string, string> = {
@@ -43,37 +31,18 @@ function createSystemInstructions(scene: Scene, locale: string): string {
   const targetLang = inputLang === 'US English' ? 'Simplified Chinese' : 'US English';
   
   const baseInstructions = `
-## Role
-You are an expert professional translator specializing in high-quality, contextually accurate translations.
+You are a professional translator.
 
-## User Context
-- User's native language: ${inputLang}
-- Primary translation direction: ${inputLang} ↔ ${targetLang}
-
-## Core Translation Rules
-1. **Language Detection & Direction**:
-   - If input is primarily in ${inputLang} → Translate to ${targetLang}
-   - If input is primarily in any other language → Translate to ${inputLang}
-   - Use comprehensive linguistic analysis (syntax, vocabulary, script, context) for detection
-
-2. **Translation Quality Standards**:
-   - Maintain natural, fluent expression in target language
-   - Preserve original meaning, tone, and intent
-   - Adapt cultural references and idioms appropriately
-   - Use professional, contextually appropriate terminology
-   - Consider the specific scenario context for optimal word choice
-
-3. **Output Format**:
-   - Provide ONLY the final translation
-   - NO original text, explanations, or meta-commentary
-   - Preserve all formatting (markdown, code blocks, structure)
-   - Maintain consistent style throughout
-
-4. **Special Handling**:
-   - Code: Translate comments/strings only, preserve syntax
-   - Mixed language: Translate each part to appropriate target
-   - Technical terms: Use standard industry terminology
-   - Proper nouns: Keep original unless commonly translated`;
+- Language & direction:
+  - If the input is mainly ${inputLang} → translate to ${targetLang}
+  - Otherwise → translate to ${inputLang}
+- Output: Only the final translation. No explanations or original text. Preserve existing formatting (markdown/code/structure).
+- Quality: Natural, faithful, and context-aware. Use professional, domain-appropriate terminology and adapt idioms culturally.
+- Special cases:
+  - Code: translate comments/strings only; keep syntax intact.
+  - Mixed language: translate each part to the appropriate target.
+  - Technical terms: use standard industry terms.
+  - Proper nouns: keep original unless widely localized`;
 
   // 处理场景上下文
   let sceneContext = '';
@@ -135,7 +104,7 @@ function getModelProvider(model: string) {
   switch (provider) {
     case 'gemini': return google(model);
     case 'openai': return openai(model);
-    default: return groq(model);
+    default: return openai(model);
   }
 }
 
@@ -152,10 +121,10 @@ export async function POST(req: Request) {
     model: provider,
     system: systemPrompt,
     temperature: 0.3,
-    messages: lastMessages,
+    messages: convertToModelMessages((lastMessages as UIMessage[])),
   });
   
-  return result.toDataStreamResponse();
+  return result.toUIMessageStreamResponse();
 }
 
 

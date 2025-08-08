@@ -32,6 +32,7 @@ interface ChatPropsBase {
   className?: string
   handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement>
   isGenerating: boolean
+  status?: 'submitted' | 'streaming' | 'ready' | 'error'
   stop?: () => void
   onRateResponse?: (
     messageId: string,
@@ -60,6 +61,7 @@ export function Chat({
   handleInputChange,
   stop,
   isGenerating,
+  status,
   append,
   suggestions,
   className,
@@ -70,7 +72,18 @@ export function Chat({
   const t = useTranslations('chat')
   const lastMessage = messages.at(-1)
   const isEmpty = messages.length === 0
-  const isTyping = lastMessage?.role === "user"
+  const lastAssistant = [...messages].slice().reverse().find(m => m.role === 'assistant')
+  const lastAssistantText = lastAssistant && Array.isArray((lastAssistant as any).parts)
+    ? (lastAssistant as any).parts.filter((p: any) => p?.type === 'text').map((p: any) => p.text).join('')
+    : (lastAssistant as any)?.content ?? ''
+  // Precise typing indicator: show while request is submitted/streaming and
+  // - the last message is user (awaiting assistant), or
+  // - the last assistant placeholder has not produced any text yet
+  const isTyping = (
+    status === 'submitted' || status === 'streaming' || isGenerating
+  ) && (
+    lastMessage?.role === 'user' || (lastMessage?.role === 'assistant' && lastAssistantText.length === 0)
+  )
 
   const messagesRef = useRef(messages)
   messagesRef.current = messages
@@ -163,8 +176,9 @@ export function Chat({
     (message: Message) => ({
       actions: onRateResponse ? (
         <>
-          <div className="border-r pr-1">          <CopyButton
-            value={message.content}
+          <div className="border-r pr-1">
+            <CopyButton
+              value={message.parts?.filter((p: any) => p?.type === 'text').map((p: any) => p.text).join('') || message.content}
             className="
             h-6 w-6
             text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
@@ -189,14 +203,14 @@ export function Chat({
             <ThumbsDown className="h-4 w-4" />
           </Button>
           <ReadAloudButton
-            text={message.content}
+            text={message.parts?.filter((p: any) => p?.type === 'text').map((p: any) => p.text).join('') || message.content}
             className="h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50"
           />
         </>
       ) : (
         <div className="d-flex items-center space-x-2">
           <CopyButton
-            value={message.content}
+            value={message.parts?.filter((p: any) => p?.type === 'text').map((p: any) => p.text).join('') || message.content}
             className="
             h-6 w-6
             text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
@@ -204,7 +218,7 @@ export function Chat({
             "
           />
           <ReadAloudButton
-            text={message.content}
+            text={message.parts?.filter((p: any) => p?.type === 'text').map((p: any) => p.text).join('') || message.content}
             className="
             h-6 w-6
             text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900

@@ -16,6 +16,7 @@ export function PromptSuggestions({
         {suggestions.map((suggestion, idx) => (
           <button
             key={suggestion}
+            type="button"
             onClick={() => append({ role: "user", content: suggestion })}
             className="h-max flex-1 rounded-xl border bg-background p-4 hover:bg-muted motion motion-preset-slide-left"
             style={{ animationDelay: `${100 + idx * 150}ms` }}

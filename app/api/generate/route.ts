@@ -1,12 +1,12 @@
 "use server";
 
 import { google } from "@ai-sdk/google";
-import { streamText } from "ai";
+import { streamText, convertToModelMessages, type UIMessage } from "ai";
 
 
 
 // Use Google Gemini 2.5 Flash Preview 05-20 model
-const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20";
+const GEMINI_MODEL = "gemini-2.5-flash";
 
 /**
  * Generate translation prompt for a specific scene
@@ -14,7 +14,7 @@ const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20";
  */
 export async function POST(req: Request) {
  
-  const {messages } = await req.json();
+  const { messages } = await req.json();
   console.log(messages);
   // Build system prompt for generating translation instructions
   const systemPrompt = `
@@ -41,9 +41,9 @@ Formatting:
   const result = streamText({
     model: provider,
     system: systemPrompt,
-    messages: messages,
+    messages: convertToModelMessages(messages as UIMessage[]),
     temperature: 0.3 // Balance creativity and precision
   });
 
-  return result.toDataStreamResponse({ sendReasoning: false });
+  return result.toUIMessageStreamResponse({ sendReasoning: false });
 }
