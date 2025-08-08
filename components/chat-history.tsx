@@ -140,7 +140,7 @@ export const ChatHistory = () => {
   const getSessionPreview = (session: ChatSession) => {
     const userMessages = session.messages.filter((m) => m.role === 'user');
     if (userMessages.length > 0) {
-      const preview = userMessages[0].content;
+      const preview = userMessages[0].content ?? '';
       return preview.length > 30 ? preview.substring(0, 30) + '...' : preview;
     }
     return t('history.emptySession') || 'Empty session';

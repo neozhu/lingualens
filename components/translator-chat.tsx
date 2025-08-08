@@ -6,15 +6,13 @@ import { cn } from "@/lib/utils"
 import { transcribeAudio } from "@/lib/utils/audio"
 import { Chat } from "@/components/ui/chat"
 import { toast } from "sonner"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { SCENES as DEFAULT_SCENES, Scene } from "@/lib/scenes"
-import { Message } from "@/components/ui/chat-message"
+type Message = {
+  id: string
+  role: 'user' | 'assistant' | string
+  content?: string
+  parts?: Array<{ type?: string; text?: string }>
+}
 import { MODELS } from "@/lib/models"
 import { SceneSelector } from "@/components/scene-selector"
 import { useLocale } from "next-intl"
@@ -34,7 +32,12 @@ function getCustomScenes() {
   }
 }
 
-export default function ChatDemo() {  const [selectedModel, setSelectedModel] = useState(MODELS[0].id)
+export default function TranslatorChat() {  const [selectedModel, setSelectedModel] = useState(() => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('selectedModel') || MODELS[0].id
+  }
+  return MODELS[0].id
+})
   const [scenes, setScenes] = useState(DEFAULT_SCENES);
   const [selectedScene, setSelectedScene] = useState(scenes[0]);
   const [input, setInput] = useState("");
@@ -49,13 +52,10 @@ export default function ChatDemo() {  const [selectedModel, setSelectedModel] = 
   const { loadedMessages, loadedSessionId, loadedSessionModel, loadedSessionScene, shouldClearMessages, clearLoadedSession } = useChatContext()
   
   useEffect(() => {
-    const storedModel = localStorage.getItem("selectedModel")
     const storedSceneName = localStorage.getItem("selectedScene")
-    
-    if (storedModel) setSelectedModel(storedModel)
-    
     // Find scene by name if stored
-    if (storedSceneName) {      const customScenes = getCustomScenes() || DEFAULT_SCENES;
+    if (storedSceneName) {
+      const customScenes = getCustomScenes() || DEFAULT_SCENES;
       const foundScene = customScenes.find((s: Scene) => s.name === storedSceneName);
       if (foundScene) {
         setSelectedScene(foundScene);
@@ -91,10 +91,10 @@ export default function ChatDemo() {  const [selectedModel, setSelectedModel] = 
 
   const chat = useChat({}) as unknown as ChatHelpers
 
-  const toChatStateMessage = (m: { id: string; role: "user" | "assistant" | "system" | "data"; content: string; createdAt?: Date }): unknown => ({
+  const toChatStateMessage = (m: { id: string; role: "user" | "assistant" | "system" | "data"; content?: string; createdAt?: Date }): unknown => ({
     id: m.id,
     role: (m.role === 'data' ? 'user' : m.role),
-    parts: [{ type: 'text', text: m.content }],
+    parts: [{ type: 'text', text: m.content ?? '' }],
   })
 
   const textFromChatStateMessage = (m: unknown): string => {
@@ -217,21 +217,6 @@ export default function ChatDemo() {  const [selectedModel, setSelectedModel] = 
 
   return (
     <div className={cn("flex","flex-col", "w-full")}>
-      <div className={cn("flex", "justify-end", "mb-2")}>
-        <Select value={selectedModel} onValueChange={setSelectedModel}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select Model" />
-          </SelectTrigger>
-          <SelectContent>
-            {MODELS.map((model) => (
-              <SelectItem key={model.id} value={model.id}>
-                {model.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
       <Chat
         className="w-full"
         messages={messages as unknown as Message[]}
@@ -244,6 +229,8 @@ export default function ChatDemo() {  const [selectedModel, setSelectedModel] = 
         append={append}
         setMessages={setMessages}        
         transcribeAudio={transcribeAudio}
+        selectedModel={selectedModel}
+        setSelectedModel={setSelectedModel}
         suggestions={[
           "生活就像一盒巧克力，你永远不知道下一颗是什么味道。",
           "The greatest glory in living lies not in never falling, but in rising every time we fall.",

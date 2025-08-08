@@ -1,15 +1,17 @@
 "use client"
 
 import { createContext, useContext, useState, ReactNode } from 'react'
-import { Message } from '@/components/ui/chat-message'
+import type { Message as ChatMessage } from '@/components/ui/chat'
+
+type HistoryMessage = ChatMessage & { createdAt?: Date }
 
 interface ChatContextType {
-  loadedMessages: Message[]
+  loadedMessages: HistoryMessage[]
   loadedSessionId: string | null
   loadedSessionModel: string | null
   loadedSessionScene: string | null
   shouldClearMessages: boolean
-  setLoadedMessages: (messages: Message[]) => void
+  setLoadedMessages: (messages: HistoryMessage[]) => void
   setLoadedSessionId: (sessionId: string | null) => void
   setLoadedSessionModel: (model: string | null) => void
   setLoadedSessionScene: (sceneName: string | null) => void
@@ -20,7 +22,7 @@ interface ChatContextType {
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
 export function ChatProvider({ children }: { children: ReactNode }) {
-  const [loadedMessages, setLoadedMessages] = useState<Message[]>([])
+  const [loadedMessages, setLoadedMessages] = useState<HistoryMessage[]>([])
   const [loadedSessionId, setLoadedSessionId] = useState<string | null>(null)
   const [loadedSessionModel, setLoadedSessionModel] = useState<string | null>(null)
   const [loadedSessionScene, setLoadedSessionScene] = useState<string | null>(null)

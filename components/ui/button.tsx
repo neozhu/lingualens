@@ -51,7 +51,6 @@ function Button({
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
-      {...(!asChild ? { type: (props as React.ComponentProps<"button">).type ?? "button" } : {})}
       {...props}
     />
   )
