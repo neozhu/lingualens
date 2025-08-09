@@ -9,7 +9,7 @@ import {
   useState,
   type ReactElement,
 } from "react"
-import { Square as SquareIcon, RefreshCw, Copy, Volume2, Check, CircleStop } from "lucide-react"
+import { Square as SquareIcon, RefreshCw, Copy, Volume2, Check, CircleStop, Brain } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
@@ -123,6 +123,7 @@ export function Chat({
 
   const [files, setFiles] = useState<File[] | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const [isOcrProcessing, setIsOcrProcessing] = useState(false)
 
   const { isListening, isSpeechSupported, isRecording, isTranscribing, audioStream, toggleListening, stopRecording } = useAudioRecording({
     transcribeAudio,
@@ -265,15 +266,45 @@ export function Chat({
               ref={fileInputRef}
               type="file"
               multiple
+              accept="image/*"
               className="hidden"
-              onChange={(e) => setFiles(e.currentTarget.files ? Array.from(e.currentTarget.files) : null)}
+              onChange={async (e) => {
+                const list = e.currentTarget.files
+                if (!list || list.length === 0) return
+                const imageFiles = Array.from(list).filter((f) => f.type.startsWith('image/'))
+                if (imageFiles.length === 0) return
+                try {
+                  setIsOcrProcessing(true)
+                  const form = new FormData()
+                  for (const f of imageFiles) form.append('images', f)
+                  const res = await fetch('/api/ocr', { method: 'POST', body: form })
+                  if (!res.ok) return
+                  const data = (await res.json()) as { text?: string }
+                  const text = (data?.text ?? '').trim()
+                  if (!text) return
+                  const sep = input && !input.endsWith('\n') ? '\n' : ''
+                  const nextValue = `${input}${sep}${text}`
+                  ;(handleInputChange as any)({ target: { value: nextValue } })
+                  setTimeout(() => {
+                    try { (handleSubmit as any)() } catch {}
+                  }, 0)
+                } finally {
+                  setIsOcrProcessing(false)
+                  // Clear the input selection so same files can be re-selected if needed
+                  if (fileInputRef.current) fileInputRef.current.value = ''
+                }
+              }}
             />
             <PromptInputButton
               aria-label="Attach files"
               onClick={() => fileInputRef.current?.click()}
-              disabled={isGenerating}
+              disabled={isGenerating || isOcrProcessing}
             >
-              <Paperclip className="size-4" />
+              {isOcrProcessing ? (
+                <Brain className={cn("size-4", "animate-pulse")} />
+              ) : (
+                <Paperclip className="size-4" />
+              )}
             </PromptInputButton>
 
             {status === 'streaming' && stop ? (
