@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "Enter content to translate...",
     "trySuggestions": "Try these prompts ✨",
-    "copyMessage": "Copied response to clipboard!"
+    "copyMessage": "Copied response to clipboard!",
+    "copy": "Copy",
+    "stop": "Stop",
+    "readAloud": "Read aloud"
   },
   "sceneSelector": {
     "customScene": "Custom Scenes"

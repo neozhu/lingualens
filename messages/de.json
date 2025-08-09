@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "Geben Sie Inhalte zum Übersetzen ein...",
     "trySuggestions": "Versuchen Sie diese Vorschläge ✨",
-    "copyMessage": "Antwort in die Zwischenablage kopiert!"
+    "copyMessage": "Antwort in die Zwischenablage kopiert!",
+    "copy": "Kopieren",
+    "stop": "Stopp",
+    "readAloud": "Vorlesen"
   },
   "sceneSelector": {
     "customScene": "Benutzerdefinierte Szenen"

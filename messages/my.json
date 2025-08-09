@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "ဘာသာပြန်ရန် အကြောင်းအရာ ထည့်ပါ...",
     "trySuggestions": "ဤပရောမ့်များကို စမ်းကြည့်ပါ ✨",
-    "copyMessage": "တုံ့ပြန်ချက်ကို clipboard သို့ ကူးယူပြီးပါပြီ!"
+    "copyMessage": "တုံ့ပြန်ချက်ကို clipboard သို့ ကူးယူပြီးပါပြီ!",
+    "copy": "ကူးယူ",
+    "stop": "ရပ်တန့်ရန်",
+    "readAloud": "အသံဖြင့်ဖတ်ပါ"
   },
   "sceneSelector": {
     "customScene": "စိတ်ကြိုက်အခန်းများ"

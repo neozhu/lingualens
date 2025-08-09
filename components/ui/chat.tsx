@@ -320,6 +320,9 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
   const [speakingByKey, setSpeakingByKey] = useState<Record<string, boolean>>({})
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({})
 
+  const t = useTranslations('chat')
+  const tCommon = useTranslations('common')
+
   return (
     <Conversation className="pb-4">
       <ConversationContent>
@@ -349,12 +352,12 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
               </MessageContent>
               {from === 'assistant' && (
                 <Actions className="mt-1 self-start">
-                  <Action aria-label="Retry" tooltip="重试" onClick={handleRetry}>
+                  <Action aria-label={tCommon('retry')} tooltip={tCommon('retry')} onClick={handleRetry}>
                     <RefreshCw className="h-4 w-4" />
                   </Action>
                   <Action
-                    aria-label="Copy"
-                    tooltip="复制"
+                    aria-label={t('copy')}
+                    tooltip={t('copy')}
                     onClick={async () => {
                       try {
                         await navigator.clipboard.writeText(text)
@@ -372,8 +375,8 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
                     )}
                   </Action>
                   <Action
-                    aria-label="Read aloud"
-                    tooltip={speakingByKey[key] ? "停止" : "朗读"}
+                    aria-label={t('readAloud')}
+                    tooltip={speakingByKey[key] ? t('stop') : t('readAloud')}
                     onClick={async () => {
                       try {
                         const current = audioRefs.current[key]

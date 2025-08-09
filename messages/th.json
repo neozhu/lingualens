@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "ป้อนเนื้อหาที่จะแปล...",
     "trySuggestions": "ลองพรอมต์เหล่านี้ ✨",
-    "copyMessage": "คัดลอกคำตอบไปยังคลิปบอร์ดแล้ว!"
+    "copyMessage": "คัดลอกคำตอบไปยังคลิปบอร์ดแล้ว!",
+    "copy": "คัดลอก",
+    "stop": "หยุด",
+    "readAloud": "อ่านออกเสียง"
   },
   "sceneSelector": {
     "customScene": "ฉากที่กำหนดเอง"

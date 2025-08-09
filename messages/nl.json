@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "Voer inhoud in om te vertalen...",
     "trySuggestions": "Probeer deze prompts ✨",
-    "copyMessage": "Antwoord gekopieerd naar klembord!"
+    "copyMessage": "Antwoord gekopieerd naar klembord!",
+    "copy": "Kopiëren",
+    "stop": "Stop",
+    "readAloud": "Hardop voorlezen"
   },
   "sceneSelector": {
     "customScene": "Aangepaste scènes"

@@ -4,6 +4,7 @@ import * as React from "react"
 import { Volume2Icon, CircleStopIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
 
 interface ReadAloudButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string
@@ -17,6 +18,7 @@ export function ReadAloudButton({
 }: ReadAloudButtonProps) {
   const [isPlaying, setIsPlaying] = React.useState(false)
   const audioRef = React.useRef<HTMLAudioElement | null>(null)
+  const t = useTranslations('chat')
 
   const handlePlay = React.useCallback(async () => {
     if (!text) return
@@ -76,7 +78,7 @@ export function ReadAloudButton({
       type="button"
       size="icon"
       variant="ghost"
-      aria-label={isPlaying ? "Stop reading aloud" : "Read aloud"}
+      aria-label={isPlaying ? t('stop') : t('readAloud')}
       className={cn(
         "relative z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50",
         className
@@ -92,7 +94,7 @@ export function ReadAloudButton({
       ) : (
         <Volume2Icon className="h-3 w-3" />
       )}
-      <span className="sr-only">{isPlaying ? "Stop reading aloud" : "Read aloud"}</span>
+      <span className="sr-only">{isPlaying ? t('stop') : t('readAloud')}</span>
     </Button>
   )
 }

@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "翻訳する内容を入力してください...",
     "trySuggestions": "これらのプロンプトを試してください ✨",
-    "copyMessage": "回答をクリップボードにコピーしました！"
+    "copyMessage": "回答をクリップボードにコピーしました！",
+    "copy": "コピー",
+    "stop": "停止",
+    "readAloud": "音読"
   },
   "sceneSelector": {
     "customScene": "カスタムシーン"

@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "Nhập nội dung cần dịch...",
     "trySuggestions": "Thử các prompt này ✨",
-    "copyMessage": "Đã sao chép phản hồi vào clipboard!"
+    "copyMessage": "Đã sao chép phản hồi vào clipboard!",
+    "copy": "Sao chép",
+    "stop": "Dừng",
+    "readAloud": "Đọc to"
   },
   "sceneSelector": {
     "customScene": "Cảnh tùy chỉnh"
