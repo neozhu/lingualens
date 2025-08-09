@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "Entrez le contenu à traduire...",
     "trySuggestions": "Essayez ces invites ✨",
-    "copyMessage": "Réponse copiée dans le presse-papiers !"
+    "copyMessage": "Réponse copiée dans le presse-papiers !",
+    "copy": "Copier",
+    "stop": "Arrêter",
+    "readAloud": "Lire à voix haute"
   },
   "sceneSelector": {
     "customScene": "Scènes personnalisées"

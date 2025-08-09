@@ -13,33 +13,45 @@ export const maxDuration = 60
 export async function POST(req: NextRequest) {
   try {
     const form = await req.formData()
-    const file = form.get("audio") as unknown as File | null
 
-    if (!file) {
-      return new Response(JSON.stringify({ error: "Missing 'audio' file part" }), {
+    // Support both single 'image' and multiple 'images'
+    const collected: File[] = []
+    const single = form.get("image")
+    if (single && single instanceof File) collected.push(single)
+    const multiples = form.getAll("images").filter((v): v is File => v instanceof File)
+    collected.push(...multiples)
+
+    const images = collected.filter((f) => (f.type || "").startsWith("image/"))
+
+    if (images.length === 0) {
+      return new Response(JSON.stringify({ error: "No image files provided" }), {
         status: 400,
         headers: { "Content-Type": "application/json" },
       })
     }
 
-    const arrayBuffer = await file.arrayBuffer()
-    const base64Audio = Buffer.from(arrayBuffer).toString("base64")
-    const mimeType = file.type || "audio/webm"
+    // Convert images to base64
+    const inlineParts = [] as Array<{ inlineData: { data: string; mimeType: string } }>
+    for (const file of images) {
+      const arrayBuffer = await file.arrayBuffer()
+      const base64 = Buffer.from(arrayBuffer).toString("base64")
+      const mimeType = file.type || "image/png"
+      inlineParts.push({ inlineData: { data: base64, mimeType } })
+    }
+
+    const systemPrompt =
+      "Perform high-fidelity OCR on the provided image(s). Preserve original formatting and layout as closely as possible. Output using Markdown when helpful: maintain headings, paragraphs, line breaks, lists, tables (use Markdown tables), and code blocks. Do not add commentary; output only the recognized content in text/Markdown."
 
     const response = await ai.models.generateContent({
       model: GEMINI_MODEL_FLASH,
       contents: [
         {
           role: "user",
-          parts: [
-            { text: "Transcribe this audio to plain text. Output text only." },
-            { inlineData: { data: base64Audio, mimeType } },
-          ],
+          parts: [{ text: systemPrompt }, ...inlineParts],
         },
       ],
     })
 
-    // Extract text from response
     type GeminiResponse = {
       candidates?: Array<{
         content?: { parts?: Array<Record<string, unknown>> }
@@ -58,7 +70,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (!text) {
-      return new Response(JSON.stringify({ error: "No transcription produced" }), {
+      return new Response(JSON.stringify({ error: "No OCR text produced" }), {
         status: 500,
         headers: { "Content-Type": "application/json" },
       })
@@ -68,8 +80,8 @@ export async function POST(req: NextRequest) {
       headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
     })
   } catch (error) {
-    console.error("Gemini STT Error:", error)
-    return new Response(JSON.stringify({ error: "Transcription error" }), {
+    console.error("Gemini OCR Error:", error)
+    return new Response(JSON.stringify({ error: "OCR error" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     })

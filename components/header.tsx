@@ -15,7 +15,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 
 export const Header = () => {
     const [isMounted, setIsMounted] = useState(false);
-    const { theme } = useTheme();
+    const { resolvedTheme } = useTheme();
     const githubUrl = 'https://github.com/neozhu/lingualens';
     const t = useTranslations();
     
@@ -29,7 +29,7 @@ export const Header = () => {
             <div className="container relative mx-auto min-h-20 flex gap-4 flex-row grid-cols-2 items-center px-4 sm:px-8 lg:px-16 py-4">
                 <div className="justify-start items-center gap-4  flex  flex-row">                    <Link href="/" className="flex items-center gap-2">
                         <Image
-                            src={theme === 'dark' ? '/logo_dark.png' : '/logo.png'}
+                            src={resolvedTheme === 'dark' ? '/logo_dark.png' : '/logo.png'}
                             alt="LinguaLens Logo"
                             className="w-10 h-10"
                             width={40}
@@ -78,7 +78,7 @@ export const Header = () => {
                                 >
                                     <Image
                                         src={
-                                            theme === 'dark'
+                                            resolvedTheme === 'dark'
                                                 ? '/github-mark-white.svg'
                                                 : '/github-mark.svg'
                                         }

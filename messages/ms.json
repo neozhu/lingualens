@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "Masukkan kandungan untuk diterjemahkan...",
     "trySuggestions": "Cuba prompt ini ✨",
-    "copyMessage": "Respons disalin ke papan klip!"
+    "copyMessage": "Respons disalin ke papan klip!",
+    "copy": "Salin",
+    "stop": "Hentikan",
+    "readAloud": "Baca kuat"
   },
   "sceneSelector": {
     "customScene": "Adegan Tersuai"

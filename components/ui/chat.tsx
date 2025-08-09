@@ -9,18 +9,47 @@ import {
   useState,
   type ReactElement,
 } from "react"
-import { ArrowDown, ThumbsDown, ThumbsUp } from "lucide-react"
+import { Square as SquareIcon, RefreshCw, Copy, Volume2, Check, CircleStop, Brain } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
-import { useAutoScroll } from "@/hooks/use-auto-scroll"
-import { Button } from "@/components/ui/button"
-import { type Message } from "@/components/ui/chat-message"
-import { CopyButton } from "@/components/ui/copy-button"
-import { ReadAloudButton } from "@/components/ui/read-aloud-button"
-import { MessageInput } from "@/components/ui/message-input"
-import { MessageList } from "@/components/ui/message-list"
+// Local message type used by legacy code paths; now only used for shape.
+export type Message = {
+  id: string
+  role: 'user' | 'assistant' | string
+  content?: string
+  parts?: Array<{ type?: string; text?: string }>
+  toolInvocations?: Array<{
+    state: 'partial-call' | 'call' | 'result'
+    toolName?: string
+    result?: unknown
+  }>
+}
 import { PromptSuggestions } from "@/components/ui/prompt-suggestions"
+import { Actions, Action } from "@/components/ai-elements/actions"
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputToolbar,
+  PromptInputTools,
+  PromptInputSubmit,
+  PromptInputButton,
+  PromptInputModelSelect,
+  PromptInputModelSelectTrigger,
+  PromptInputModelSelectValue,
+  PromptInputModelSelectContent,
+  PromptInputModelSelectItem,
+} from "@/components/ai-elements/prompt-input"
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/components/ai-elements/conversation"
+import { Message as AIMessage, MessageContent } from "@/components/ai-elements/message"
+import { MarkdownRenderer } from "@/components/ui/markdown-renderer"
+import { MODELS } from "@/lib/models"
+import { Mic, Paperclip } from "lucide-react"
+import { useAudioRecording } from "@/hooks/use-audio-recording"
 
 interface ChatPropsBase {
   handleSubmit: (
@@ -32,6 +61,7 @@ interface ChatPropsBase {
   className?: string
   handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement>
   isGenerating: boolean
+  status?: 'submitted' | 'streaming' | 'ready' | 'error'
   stop?: () => void
   onRateResponse?: (
     messageId: string,
@@ -39,6 +69,8 @@ interface ChatPropsBase {
   ) => void
   setMessages?: (messages: any[]) => void
   transcribeAudio?: (blob: Blob) => Promise<string>
+  selectedModel: string
+  setSelectedModel: (id: string) => void
 }
 
 interface ChatPropsWithoutSuggestions extends ChatPropsBase {
@@ -60,20 +92,45 @@ export function Chat({
   handleInputChange,
   stop,
   isGenerating,
+  status,
   append,
   suggestions,
   className,
   onRateResponse,
   setMessages,
   transcribeAudio,
+  selectedModel,
+  setSelectedModel,
 }: ChatProps) {
   const t = useTranslations('chat')
   const lastMessage = messages.at(-1)
   const isEmpty = messages.length === 0
-  const isTyping = lastMessage?.role === "user"
+  const lastAssistant = [...messages].slice().reverse().find(m => m.role === 'assistant')
+  const lastAssistantText = lastAssistant && Array.isArray((lastAssistant as any).parts)
+    ? (lastAssistant as any).parts.filter((p: any) => p?.type === 'text').map((p: any) => p.text).join('')
+    : (lastAssistant as any)?.content ?? ''
+  // Precise typing indicator: show while request is submitted/streaming and
+  // - the last message is user (awaiting assistant), or
+  // - the last assistant placeholder has not produced any text yet
+  const isTyping = (
+    status === 'submitted' || status === 'streaming' || isGenerating
+  ) && (
+    lastMessage?.role === 'user' || (lastMessage?.role === 'assistant' && lastAssistantText.length === 0)
+  )
 
   const messagesRef = useRef(messages)
   messagesRef.current = messages
+
+  const [files, setFiles] = useState<File[] | null>(null)
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const [isOcrProcessing, setIsOcrProcessing] = useState(false)
+
+  const { isListening, isSpeechSupported, isRecording, isTranscribing, audioStream, toggleListening, stopRecording } = useAudioRecording({
+    transcribeAudio,
+    onTranscriptionComplete: (text) => {
+      handleInputChange({ target: { value: `${input}${text}` } } as any)
+    },
+  })
 
   // Enhanced stop function that marks pending tool calls as cancelled
   const handleStop = useCallback(() => {
@@ -159,64 +216,7 @@ export function Chat({
     }
   }, [stop, setMessages, messagesRef])
 
-  const messageOptions = useCallback(
-    (message: Message) => ({
-      actions: onRateResponse ? (
-        <>
-          <div className="border-r pr-1">          <CopyButton
-            value={message.content}
-            className="
-            h-6 w-6
-            text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
-            dark:text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50
-            "
-            />
-          </div>
-          <Button
-            size="icon"
-            variant="ghost"
-            className="h-6 w-6"
-            onClick={() => onRateResponse(message.id, "thumbs-up")}
-          >
-            <ThumbsUp className="h-4 w-4" />
-          </Button>
-          <Button
-            size="icon"
-            variant="ghost"
-            className="h-6 w-6"
-            onClick={() => onRateResponse(message.id, "thumbs-down")}
-          >
-            <ThumbsDown className="h-4 w-4" />
-          </Button>
-          <ReadAloudButton
-            text={message.content}
-            className="h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50"
-          />
-        </>
-      ) : (
-        <div className="d-flex items-center space-x-2">
-          <CopyButton
-            value={message.content}
-            className="
-            h-6 w-6
-            text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
-            dark:text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50
-            "
-          />
-          <ReadAloudButton
-            text={message.content}
-            className="
-            h-6 w-6
-            text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900
-            dark:text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50
-            "
-          />
-        </div>
-
-      ),
-    }),
-    [onRateResponse]
-  )
+  // rating and copy actions are temporarily removed in ai-elements migration
 
   return (
     <ChatContainer className={className}>
@@ -228,79 +228,235 @@ export function Chat({
         />
       ) : null}
 
-      {messages.length > 0 ? (
-        <ChatMessages messages={messages}>
-          <MessageList
-            messages={messages}
-            isTyping={isTyping}
-            messageOptions={messageOptions}
-          />
-        </ChatMessages>
-      ) : null}
+      <ChatMessages messages={messages} append={append as any} />
 
-      <ChatForm
+      <PromptInput
         className="mt-auto"
-        isPending={isGenerating || isTyping}
-        handleSubmit={handleSubmit}
+        onSubmit={(e) => {
+          if (files && files.length > 0) {
+            const list = createFileList(files)
+            handleSubmit(e as any, { experimental_attachments: list })
+            setFiles(null)
+          } else {
+            handleSubmit(e as any)
+          }
+        }}
       >
+        <PromptInputTextarea
+          value={input}
+          onChange={handleInputChange}
+          placeholder={t('inputPlaceholder')}
+        />
+        <PromptInputToolbar>
+          <PromptInputTools>
+            <PromptInputModelSelect value={selectedModel} onValueChange={setSelectedModel}>
+              <PromptInputModelSelectTrigger className="w-[180px]">
+                <PromptInputModelSelectValue placeholder="Select Model" />
+              </PromptInputModelSelectTrigger>
+              <PromptInputModelSelectContent>
+                {MODELS.map((model) => (
+                  <PromptInputModelSelectItem key={model.id} value={model.id}>
+                    {model.name}
+                  </PromptInputModelSelectItem>
+                ))}
+              </PromptInputModelSelectContent>
+            </PromptInputModelSelect>
 
-        {({ files, setFiles }) => (
-          <MessageInput
-            value={input}
-            placeholder={t('inputPlaceholder')}
-            onChange={handleInputChange}
-            allowAttachments={false}
-            stop={handleStop}
-            isGenerating={isGenerating}
-            transcribeAudio={transcribeAudio}
-          />
-        )}
-      </ChatForm>
+            <input
+              ref={fileInputRef}
+              type="file"
+              multiple
+              accept="image/*"
+              className="hidden"
+              onChange={async (e) => {
+                const list = e.currentTarget.files
+                if (!list || list.length === 0) return
+                const imageFiles = Array.from(list).filter((f) => f.type.startsWith('image/'))
+                if (imageFiles.length === 0) return
+                try {
+                  setIsOcrProcessing(true)
+                  const form = new FormData()
+                  for (const f of imageFiles) form.append('images', f)
+                  const res = await fetch('/api/ocr', { method: 'POST', body: form })
+                  if (!res.ok) return
+                  const data = (await res.json()) as { text?: string }
+                  const text = (data?.text ?? '').trim()
+                  if (!text) return
+                  const sep = input && !input.endsWith('\n') ? '\n' : ''
+                  const nextValue = `${input}${sep}${text}`
+                  ;(handleInputChange as any)({ target: { value: nextValue } })
+                  setTimeout(() => {
+                    try { (handleSubmit as any)() } catch {}
+                  }, 0)
+                } finally {
+                  setIsOcrProcessing(false)
+                  // Clear the input selection so same files can be re-selected if needed
+                  if (fileInputRef.current) fileInputRef.current.value = ''
+                }
+              }}
+            />
+            <PromptInputButton
+              aria-label="Attach files"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isGenerating || isOcrProcessing}
+            >
+              {isOcrProcessing ? (
+                <Brain className={cn("size-4", "animate-pulse")} />
+              ) : (
+                <Paperclip className="size-4" />
+              )}
+            </PromptInputButton>
+
+            {status === 'streaming' && stop ? (
+              <PromptInputButton
+                aria-label={t('stop')}
+                type="button"
+                onClick={handleStop}
+              >
+                <SquareIcon className="size-4" />
+              </PromptInputButton>
+            ) : (
+              <PromptInputButton
+                aria-label={isListening || isRecording || isTranscribing ? t('stop') : "Voice input"}
+                type="button"
+                onClick={toggleListening}
+                disabled={!isSpeechSupported || isGenerating}
+                variant={isListening || isRecording || isTranscribing ? 'destructive' : 'ghost'}
+                className={cn((isListening || isRecording || isTranscribing) && 'animate-pulse')}
+              >
+                <Mic className="size-4" />
+              </PromptInputButton>
+            )}
+          </PromptInputTools>
+          <PromptInputSubmit status={status} disabled={isGenerating || input === ''} />
+        </PromptInputToolbar>
+      </PromptInput>
     </ChatContainer>
   )
 }
 Chat.displayName = "Chat"
 
-export function ChatMessages({
-  messages,
-  children,
-}: React.PropsWithChildren<{
-  messages: Message[]
-}>) {
-  const {
-    containerRef,
-    scrollToBottom,
-    handleScroll,
-    shouldAutoScroll,
-    handleTouchStart,
-  } = useAutoScroll([messages])
+export function ChatMessages({ messages, append }: { messages: Message[]; append?: (message: { role: "user"; content: string }) => unknown }) {
+  const renderMessageText = (m: Message): string => {
+    if (Array.isArray((m as any).parts)) {
+      return (m as any).parts
+        .filter((p: any) => p?.type === 'text')
+        .map((p: any) => p.text)
+        .join('')
+    }
+    return (m as any).content ?? ''
+  }
+
+  const [copiedByKey, setCopiedByKey] = useState<Record<string, boolean>>({})
+  const [speakingByKey, setSpeakingByKey] = useState<Record<string, boolean>>({})
+  const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({})
+
+  const t = useTranslations('chat')
+  const tCommon = useTranslations('common')
 
   return (
-    <div
-      className="grid grid-cols-1 overflow-y-auto pb-4"
-      ref={containerRef}
-      onScroll={handleScroll}
-      onTouchStart={handleTouchStart}
-    >
-      <div className="max-w-full [grid-column:1/1] [grid-row:1/1]">
-        {children}
-      </div>
-
-      {!shouldAutoScroll && (
-        <div className="pointer-events-none flex flex-1 items-end justify-end [grid-column:1/1] [grid-row:1/1]">
-          <div className="sticky bottom-0 left-0 flex w-full justify-end">
-            <Button
-              onClick={scrollToBottom}
-              className="pointer-events-auto h-8 w-8 rounded-full ease-in-out animate-in fade-in-0 slide-in-from-bottom-1"
-              size="icon"
-              variant="ghost"
-            >
-              <ArrowDown className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      )}
-    </div>
+    <Conversation className="pb-4">
+      <ConversationContent>
+        {messages.map((m, index) => {
+          const from: 'user' | 'assistant' | 'system' =
+            m.role === 'user' ? 'user' : m.role === 'assistant' ? 'assistant' : 'system'
+          const text = renderMessageText(m)
+          const key = m.id ?? `${m.role}-${index}`
+          const handleRetry = () => {
+            if (!append) return
+            // find the nearest previous user message before this assistant response
+            for (let i = index - 1; i >= 0; i--) {
+              if (messages[i]?.role === 'user') {
+                const prevText = renderMessageText(messages[i] as Message)
+                if (prevText) {
+                  append({ role: 'user', content: prevText })
+                }
+                break
+              }
+            }
+          }
+          return (
+          <AIMessage key={key} from={from}>
+            <div className="flex flex-col gap-0">
+              <MessageContent>
+                <MarkdownRenderer>{text}</MarkdownRenderer>
+              </MessageContent>
+              {from === 'assistant' && (
+                <Actions className="mt-1 self-start">
+                  <Action aria-label={tCommon('retry')} tooltip={tCommon('retry')} onClick={handleRetry}>
+                    <RefreshCw className="h-4 w-4" />
+                  </Action>
+                  <Action
+                    aria-label={t('copy')}
+                    tooltip={t('copy')}
+                    onClick={async () => {
+                      try {
+                        await navigator.clipboard.writeText(text)
+                        setCopiedByKey((prev) => ({ ...prev, [key]: true }))
+                        setTimeout(() => {
+                          setCopiedByKey((prev) => ({ ...prev, [key]: false }))
+                        }, 1200)
+                      } catch {}
+                    }}
+                  >
+                    {copiedByKey[key] ? (
+                      <Check className="h-4 w-4" />
+                    ) : (
+                      <Copy className="h-4 w-4" />
+                    )}
+                  </Action>
+                  <Action
+                    aria-label={t('readAloud')}
+                    tooltip={speakingByKey[key] ? t('stop') : t('readAloud')}
+                    onClick={async () => {
+                      try {
+                        const current = audioRefs.current[key]
+                        if (speakingByKey[key] && current) {
+                          current.pause()
+                          audioRefs.current[key] = null
+                          setSpeakingByKey((prev) => ({ ...prev, [key]: false }))
+                          return
+                        }
+                        const res = await fetch('/api/tts', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ text }),
+                        })
+                        if (!res.ok) return
+                        const blob = await res.blob()
+                        if (blob.size === 0) return
+                        const url = URL.createObjectURL(blob)
+                        const audio = new Audio(url)
+                        audioRefs.current[key] = audio
+                        audio.onended = () => {
+                          setSpeakingByKey((prev) => ({ ...prev, [key]: false }))
+                          audioRefs.current[key] = null
+                        }
+                        audio.onerror = () => {
+                          setSpeakingByKey((prev) => ({ ...prev, [key]: false }))
+                          audioRefs.current[key] = null
+                        }
+                        setSpeakingByKey((prev) => ({ ...prev, [key]: true }))
+                        await audio.play()
+                      } catch {
+                        setSpeakingByKey((prev) => ({ ...prev, [key]: false }))
+                      }
+                    }}
+                  >
+                    {speakingByKey[key] ? (
+                      <CircleStop className="h-4 w-4 text-primary" />
+                    ) : (
+                      <Volume2 className="h-4 w-4" />
+                    )}
+                  </Action>
+                </Actions>
+              )}
+            </div>
+          </AIMessage>
+        )})}
+      </ConversationContent>
+      <ConversationScrollButton />
+    </Conversation>
   )
 }
 

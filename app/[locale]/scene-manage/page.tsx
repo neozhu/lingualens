@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { UIMessage } from "ai";
+import { DefaultChatTransport } from "ai";
 import { SCENES, Scene } from "@/lib/scenes";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -146,13 +148,34 @@ export default function SceneManagePage() {
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [form, setForm] = useState<Partial<Scene>>({});
   const [generating, setGenerating] = useState(false);
-  // Use useChat hook to handle API communication
-  const { messages, append } = useChat({
-    api: "/api/generate",
-    initialMessages: [], // Explicitly set empty initial messages
-    onFinish: (message: { content: string }) => {
+  // Define lightweight types to avoid 'any' while supporting v4/v5 APIs
+  type TextPart = { type: 'text'; text: string };
+  type AssistantMessage = {
+    role: 'assistant' | 'user' | 'system';
+    content?: string;
+    parts?: Array<TextPart | { type: string }>;
+  };
+  type ChatHelpers = {
+    messages: AssistantMessage[];
+    sendMessage?: (message: { text: string }) => unknown;
+    append?: (message: { role: 'user'; content: string }) => unknown;
+  };
+
+  // Use useChat hook to handle API communication (supports v4/v5 APIs)
+  const chatHelpers = useChat({
+    transport: new DefaultChatTransport({ api: "/api/generate" }),
+    // Support both legacy and v5 signatures by using wide parameter types
+    onFinish: (first: unknown) => {
       // Update form prompt field when generation is complete
-      setForm((prev) => ({ ...prev, prompt: message.content }));
+      const maybeObj = (first as { message?: UIMessage })
+      const msg: UIMessage | undefined = maybeObj?.message ?? (first as UIMessage);
+      const content = Array.isArray(msg?.parts)
+        ? msg.parts
+            .filter((p): p is { type: 'text'; text: string } => (p as { type?: string; text?: unknown }).type === 'text' && typeof (p as { text?: unknown }).text === 'string')
+            .map((p) => p.text)
+            .join("")
+        : (msg as unknown as AssistantMessage)?.content ?? "";
+      setForm((prev) => ({ ...prev, prompt: content }));
       setGenerating(false);
       toast.success(t("promptGeneratedSuccess"));
     },
@@ -162,6 +185,17 @@ export default function SceneManagePage() {
       toast.error(t("promptGenerationFailed"));
     },
   });
+  const { messages } = chatHelpers as unknown as { messages: AssistantMessage[] };
+  const send = async (text: string): Promise<unknown> => {
+    const helpers = chatHelpers as unknown as ChatHelpers;
+    if (typeof helpers.sendMessage === 'function') {
+      return helpers.sendMessage({ text });
+    }
+    if (typeof helpers.append === 'function') {
+      return helpers.append({ role: 'user', content: text });
+    }
+    return Promise.resolve();
+  };
 
   // Configure drag sensors, using only pointer (mouse/touch)
   const sensors = useSensors(
@@ -173,10 +207,18 @@ export default function SceneManagePage() {
   ); // Listen for message list changes to get the latest assistant reply
   useEffect(() => {
     const assistantMessage = messages
-      .filter((m: { role: string; content: string }) => m.role === "assistant")
+      .filter((m) => m.role === "assistant")
       .pop();
-    if (assistantMessage?.content && !generating) {
-      setForm((prev) => ({ ...prev, prompt: assistantMessage.content }));
+    if (assistantMessage && !generating) {
+      const content = Array.isArray(assistantMessage.parts)
+        ? assistantMessage.parts
+            .filter((p): p is TextPart => (p as { type?: string; text?: unknown }).type === 'text' && typeof (p as { text?: unknown }).text === 'string')
+            .map((p) => p.text)
+            .join("")
+        : assistantMessage.content ?? "";
+      if (content) {
+        setForm((prev) => ({ ...prev, prompt: content }));
+      }
     }
   }, [messages, generating]);
 
@@ -264,10 +306,7 @@ Description: ${form.description}
 
 Please create a translation prompt for the above scene that will guide an AI model in performing high-quality bidirectional translation. Format the prompt using Markdown with headings, and bullet points as appropriate.
 `;
-    await append({
-      role: 'user',
-      content: userPrompt
-    })
+    await send(userPrompt)
 
   };
   return (

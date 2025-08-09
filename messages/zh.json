@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "输入想要翻译的内容...",
     "trySuggestions": "试试这些提示 ✨",
-    "copyMessage": "已复制回复到剪贴板！"
+    "copyMessage": "已复制回复到剪贴板！",
+    "copy": "复制",
+    "stop": "停止",
+    "readAloud": "朗读"
   },
   "sceneSelector": {
     "customScene": "自定义场景"

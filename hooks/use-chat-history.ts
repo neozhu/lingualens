@@ -1,11 +1,13 @@
 import { useState, useEffect, useCallback } from 'react'
-import { Message } from '@/components/ui/chat-message'
+import type { Message as ChatMessage } from '@/components/ui/chat'
+
+export type HistoryMessage = ChatMessage & { createdAt?: Date }
 
 export interface ChatSession {
   id: string
   date: string
   timestamp: number
-  messages: Message[]
+  messages: HistoryMessage[]
   scene: string
   model: string
 }
@@ -89,7 +91,7 @@ export function useChatHistory() {
   }, [])
 
   // Update session messages
-  const updateSessionMessages = useCallback((sessionId: string, messages: Message[], scene?: string, model?: string) => {
+  const updateSessionMessages = useCallback((sessionId: string, messages: HistoryMessage[], scene?: string, model?: string) => {
     if (!sessionId) return
     
     setHistory(prevHistory => {

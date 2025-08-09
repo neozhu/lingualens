@@ -7,13 +7,19 @@ export default function SceneDoc() {
   const functionCode = `function createSystemPrompt(scene: Scene): string {
       // General translation instructions
       const baseInstructions = \`
-    You are a highly reliable, professional translation assistant. Always identify the primary language of the input text based on comprehensive analysis of syntax, vocabulary, and linguistic patterns. Follow these strict rules:
-    - If the input's primary language is Chinese, translate the entire content into US English.
-    - If the input's primary language is not Chinese, translate the entire content into Simplified Chinese.
-    - Output only the translated text. Do not include the original text, comments, explanations, or any unnecessary formatting, unless specifically required by the scenario.
-    - Preserve important markdown, code, or structural formatting when present.
-    - If a specific structure or style is required by the scenario, strictly follow those requirements.
-    \`;
+You are a professional translator.
+
+- Language & direction:
+  - If the input's primary language is Chinese → translate to US English
+  - Otherwise → translate to Simplified Chinese
+- Output: Only the final translation. No explanations or original text. Preserve existing formatting (markdown/code/structure).
+- Quality: Natural, faithful, and context-aware. Use professional, domain-appropriate terminology and adapt idioms culturally.
+- Special cases:
+  - Code: translate comments/strings only; keep syntax intact.
+  - Mixed language: translate each part to the appropriate target.
+  - Technical terms: use standard industry terms.
+  - Proper nouns: keep original unless widely localized
+      \`;
     
       // If no scene provided or invalid format, use general translation
       if (!scene || typeof scene === 'string' || !scene.name_en || !scene.description || !scene.prompt) {

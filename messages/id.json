@@ -50,7 +50,10 @@
   "chat": {
     "inputPlaceholder": "Masukkan konten untuk diterjemahkan...",
     "trySuggestions": "Coba prompt ini ✨",
-    "copyMessage": "Respons disalin ke clipboard!"
+    "copyMessage": "Respons disalin ke clipboard!",
+    "copy": "Salin",
+    "stop": "Hentikan",
+    "readAloud": "Bacakan"
   },
   "sceneSelector": {
     "customScene": "Adegan Kustom"
