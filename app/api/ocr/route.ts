@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server"
 import { GoogleGenAI } from "@google/genai"
+import { GEMINI_MODEL_FLASH } from "@/lib/models"
 
 if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
   throw new Error("Missing GOOGLE_GENERATIVE_AI_API_KEY environment variable")
@@ -42,7 +43,7 @@ export async function POST(req: NextRequest) {
       "Perform high-fidelity OCR on the provided image(s). Preserve original formatting and layout as closely as possible. Output using Markdown when helpful: maintain headings, paragraphs, line breaks, lists, tables (use Markdown tables), and code blocks. Do not add commentary; output only the recognized content in text/Markdown."
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: GEMINI_MODEL_FLASH,
       contents: [
         {
           role: "user",

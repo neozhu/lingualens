@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server"
 import { GoogleGenAI } from "@google/genai"
+import { GEMINI_MODEL_FLASH } from "@/lib/models"
 
 if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
   throw new Error("Missing GOOGLE_GENERATIVE_AI_API_KEY environment variable")
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest) {
     const mimeType = file.type || "audio/webm"
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: GEMINI_MODEL_FLASH,
       contents: [
         {
           role: "user",
