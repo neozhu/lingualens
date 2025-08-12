@@ -46,7 +46,7 @@ import {
   ConversationScrollButton,
 } from "@/components/ai-elements/conversation"
 import { Message as AIMessage, MessageContent } from "@/components/ai-elements/message"
-import { MarkdownRenderer } from "@/components/ui/markdown-renderer"
+import { Response } from "@/components/ai-elements/response"
 import { MODELS } from "@/lib/models"
 import { Mic, Paperclip } from "lucide-react"
 import { useAudioRecording } from "@/hooks/use-audio-recording"
@@ -379,7 +379,7 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
           <AIMessage key={key} from={from}>
             <div className="flex flex-col gap-0">
               <MessageContent>
-                <MarkdownRenderer>{text}</MarkdownRenderer>
+                <Response>{text}</Response>
               </MessageContent>
               {from === 'assistant' && (
                 <Actions className="mt-1 self-start">
