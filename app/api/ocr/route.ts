@@ -39,8 +39,16 @@ export async function POST(req: NextRequest) {
       inlineParts.push({ inlineData: { data: base64, mimeType } })
     }
 
-    const systemPrompt =
-      "Perform high-fidelity OCR on the provided image(s). Preserve original formatting and layout as closely as possible. Output using Markdown when helpful: maintain headings, paragraphs, line breaks, lists, tables (use Markdown tables), and code blocks. Do not add commentary; output only the recognized content in text/Markdown."
+    const systemPrompt = [
+      "Return GitHub-Flavored Markdown (GFM) only. Never output HTML/XML/SGML tags or attributes.",
+      "Preserve structure: headings, paragraphs, line breaks, lists, blockquotes, inline code, fenced code blocks.",
+      "Tables must use Markdown pipe tables.",
+      "Do not add explanations or metadata; output recognized content only.",
+      "Use fenced code blocks only for actual code; do not wrap the entire output.",
+      "Treat angle-bracket text like <...> as literal, not HTML.",
+      "Use Markdown links [text](url) only when both text and URL are visible in the source.",
+      "Concatenate multi-page inputs in reading order.",
+    ].join("\n")
 
     const response = await ai.models.generateContent({
       model: GEMINI_MODEL_FLASH,

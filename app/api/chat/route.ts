@@ -112,7 +112,6 @@ export async function POST(req: Request) {
   const { messages, model = DEFAULT_MODEL, scene, locale = 'en' } = await req.json();
   const systemPrompt = createSystemInstructions(scene, locale);
   const provider = getModelProvider(model);
-  
   const lastMessages = messages.length > 3 
     ? messages.slice(messages.length - 3) 
     : messages;

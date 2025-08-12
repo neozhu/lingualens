@@ -14,8 +14,16 @@ export const SCENES: Scene[] = [
   {
     name: "日常沟通",
     name_en: "Daily Communication",
-    description: "Casual, friendly exchanges between colleagues or friends, using common vocabulary and simple grammar.",
-    prompt: "Translate the input as a daily, casual conversation suitable for colleagues or friends, using common vocabulary, simple grammar, and a friendly tone. Ensure the result sounds natural, like what a native speaker would say in a relaxed setting. Avoid formal, stiff, or overly technical expressions. Only use casual and commonly used words."
+    description: "For translating what you'd say in Teams chats or during meetings. Keep it natural, concise, and professional‑casual.",
+    prompt: `Translate the input as something to say in a Teams chat or during a meeting.
+
+Guidelines:
+- Preserve the conversational format, speaker labels, and line breaks.
+- Use natural, professional‑casual spoken style; prefer short, direct sentences and common vocabulary. Contractions are fine (e.g., I'm, we'll).
+- Keep the original intent (requests, updates, questions, action items). Do not add greetings/sign‑offs or extra details unless present in the input.
+- Avoid stiff, overly formal, or jargon‑heavy wording; also avoid slang.
+- If multiple messages are provided, translate each line separately in order.
+- Only output the translation, nothing else.`.trim()
   },
   {
     name: "单词解释",
@@ -41,31 +49,46 @@ Only output the requested content, nothing else.
   {
     name: "邮件",
     name_en: "Email",
-    description: "For professional business email communication.",
-    prompt: "Translate as a formal business email, starting with a suitable greeting and ending with the closing: 'Best regards,\\n[Your name]'. Use clear, polite, and professional language throughout. Ensure the translation accurately reflects the original meaning, maintains a respectful and professional tone, and keeps the structure and formatting appropriate for business communication. Leave a blank line between paragraphs."
+    description: "For translating professional business emails. Preserve structure (subject, greeting, body, closing) and keep tone formal, polite, and concise.",
+    prompt: `Translate as a formal business email.
+
+Requirements:
+- Preserve and translate the original subject, greeting, sign-offs, and signature blocks if present; do not invent details.
+- If no greeting is provided, add an appropriate formal greeting (e.g., "Dear [Name]," or "Hello,") based on the input context.
+- Preserve lists, bullet points, numbering, and line breaks; keep one blank line between paragraphs.
+- Use clear, polite, professional language; be concise and action-oriented. Avoid slang and overly casual expressions.
+- Maintain dates, numbers, attachments, and proper nouns accurately and consistently.
+- If no closing is provided, end with: "Best regards,\n[Your name]".
+- Only output the email content, nothing else.`.trim()
   },
   {
     name: "新闻资讯",
     name_en: "News Article",
-    description: "For translating news reports or informational content, focusing on objectivity and accuracy, and concluding with a summary.",
-    prompt: "Translate as a news article. Use clear, objective, and neutral language, faithfully preserving the original structure and all factual information. Follow journalistic writing conventions. Do not add opinions or commentary. Conclude the article with a concise summary that captures the key points succinctly and accurately."
-  },
-  {
-    name: "谚语",
-    name_en: "Proverbs",
-    description: "Translate proverbs across cultures, preserving their wisdom and poetic essence.",
-    prompt: `Translate proverbs bidirectionally.
-      Style: Poetic, culturally evocative. Infuse the translation with the literary grace and imagery characteristic of proverbs in the target language.
-      Tone: Elegant yet approachable. The wisdom should be profound but conveyed in an accessible manner.
-      Nuance: Prioritize capturing the *equivalent core meaning* and *deep cultural resonance* over literal, word-for-word translation. The translated proverb must feel natural, authentic, and insightful within the target culture.
-      Format: Concise and impactful.
-      Strictly no explanations or interpretations.`.trim()
+    description: "For translating news reports or informational content, focusing on objectivity and accuracy, and concluding with a summary and a brief interpretation preceded by a separator line.",
+    prompt: `Translate as a news article. Use clear, objective, and neutral language, faithfully preserving the original structure and all factual information. Follow journalistic writing conventions. Do not add opinions or commentary in the body.
+
+After the article body, insert a single horizontal rule line '---' on its own line. Then append two sections in the target language, clearly labeled:
+- Summary: 3–5 bullet points capturing the key facts and outcomes.
+- Interpretation: 2–4 concise sentences explaining the significance, likely impact, and context. Identify stakeholders, risks, and uncertainties where relevant. Base the interpretation on facts stated in the article; avoid speculation and do not introduce new information.`.trim()
   },
   {
     name: "技术文档",
     name_en: "Technical Documentation",
     description: "For translating technical documentation",
-    prompt: "Translate as developer-oriented technical documentation or API reference. Use clear, concise, and professional language throughout. Ensure all technical terms and code elements are translated accurately and consistently. Preserve the logical structure and formatting suitable for developer reference."
+    prompt: `
+Translate as developer‑oriented technical documentation or API reference.
+
+Requirements:
+- Preserve Markdown structure: headings, lists, tables, blockquotes, admonitions (e.g., Note/Warning), links and anchors, images, and math.
+- Code and identifiers: Do NOT translate code, identifiers, API/endpoint paths, HTTP methods, CLI commands, file paths, package names, configuration keys, JSON/YAML keys. Translate comments and user‑facing string literals only; keep placeholders (e.g., {var}, %s), regex, escape sequences, and backslashes unchanged.
+- Maintain formatting: keep code block language tags, inline code backticks, indentation, and line breaks. Keep relative/absolute links intact; don't add extra code fences.
+- Terminology: Use standard, consistent technical terminology in the target language. Keep product names and proper nouns in the original unless there is a widely accepted localized form.
+- Numbers/units/constants: keep versions, units, constants, and casing of acronyms (e.g., API, HTTP) as in source.
+- Examples: preserve sample commands, outputs, and configuration snippets exactly; do not localize shell prompts; do not add commentary.
+- Consistency and tone: concise, precise, and neutral, matching professional developer documentation style. Prefer imperative mood for instructions (e.g., "Run", "Configure").
+- No hallucinations: do not invent content, options, or missing steps; if ambiguous, keep ambiguity.
+
+Output: only the translated document content, nothing else.`.trim()
   },
   {
     name: "社交媒体帖子",
@@ -76,8 +99,24 @@ Only output the requested content, nothing else.
   {
     name: "技术支持",
     name_en: "Technical Support",
-    description: "For translating technical support communication in systems like TOPdesk.",
-    prompt: "Translate as technical support communication for systems like TOPdesk, focusing on Salesforce, JavaScript, .NET, or SAP. Use clear, concise, and solution-focused language with a professional and approachable tone. include a greeting or closing; address the issue or request directly."
+    description: "For translating technical support communications that deliver direct answers and actionable solutions.",
+    prompt: `
+Translate as a professional technical support reply that directly answers the question and provides an actionable solution.
+
+Requirements:
+- Output structure (use the target language for section titles):
+  - Summary: one concise line with the answer or resolution.
+  - Resolution Steps: numbered, minimal steps with exact commands, UI paths, configuration keys, and expected results.
+  - Root Cause: brief when known; otherwise omit.
+  - Next Actions: what the user should do or provide (e.g., logs, environment details), or escalation path if needed.
+  - Clarifying Questions: only if critical information is missing (max 3, concise, placed at the end).
+ - Formatting & fidelity: preserve Markdown; keep code blocks with language tags, inline code, indentation, and line breaks. Do NOT translate code, identifiers, API/endpoint paths, HTTP methods, CLI commands, file paths, package names, configuration keys, JSON/YAML keys, or log lines. Translate comments and user‑facing strings only. Preserve placeholders (e.g., {id}, %s, \${VAR}), regex, and escape sequences.
+- Accuracy: be precise and non‑speculative. Do not invent features, commands, options, or data. If assumptions are necessary, state them briefly.
+- Tone: empathetic, professional, concise; avoid boilerplate and marketing language.
+- Privacy: if sensitive tokens/IDs appear in the source, mask them in the output (e.g., ****).
+- Greetings/sign‑offs: preserve only if present in the source; otherwise omit.
+
+Output: only the support reply content, nothing else.`.trim()
   },
   {
     name: "需求分析",
@@ -96,6 +135,17 @@ Only output the requested content, nothing else.
     name_en: "Meeting Minutes",
     description: "For translating meeting minutes with a clear and structured format.",
     prompt: "Translate as formal meeting minutes. Use clear headings and a structured format. Summarize key points, record decisions, and list action items for follow-up."
+  },
+  {
+    name: "谚语",
+    name_en: "Proverbs",
+    description: "Translate proverbs across cultures, preserving their wisdom and poetic essence.",
+    prompt: `Translate proverbs bidirectionally.
+      Style: Poetic, culturally evocative. Infuse the translation with the literary grace and imagery characteristic of proverbs in the target language.
+      Tone: Elegant yet approachable. The wisdom should be profound but conveyed in an accessible manner.
+      Nuance: Prioritize capturing the *equivalent core meaning* and *deep cultural resonance* over literal, word-for-word translation. The translated proverb must feel natural, authentic, and insightful within the target culture.
+      Format: Concise and impactful.
+      Strictly no explanations or interpretations.`.trim()
   },
   {
     name: "演示文稿",
