@@ -53,7 +53,9 @@
     "copyMessage": "Antwort in die Zwischenablage kopiert!",
     "copy": "Kopieren",
     "stop": "Stopp",
-    "readAloud": "Vorlesen"
+    "readAloud": "Vorlesen",
+    "thinkingOn": "Denken: Ein",
+    "thinkingOff": "Denken: Aus"
   },
   "sceneSelector": {
     "customScene": "Benutzerdefinierte Szenen"

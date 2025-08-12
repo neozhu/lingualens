@@ -53,7 +53,9 @@
     "copyMessage": "Réponse copiée dans le presse-papiers !",
     "copy": "Copier",
     "stop": "Arrêter",
-    "readAloud": "Lire à voix haute"
+    "readAloud": "Lire à voix haute",
+    "thinkingOn": "Raisonnement : Activé",
+    "thinkingOff": "Raisonnement : Désactivé"
   },
   "sceneSelector": {
     "customScene": "Scènes personnalisées"

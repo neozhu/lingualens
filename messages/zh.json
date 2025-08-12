@@ -53,7 +53,9 @@
     "copyMessage": "已复制回复到剪贴板！",
     "copy": "复制",
     "stop": "停止",
-    "readAloud": "朗读"
+    "readAloud": "朗读",
+    "thinkingOn": "思考：开启",
+    "thinkingOff": "思考：关闭"
   },
   "sceneSelector": {
     "customScene": "自定义场景"

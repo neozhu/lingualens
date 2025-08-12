@@ -53,7 +53,9 @@
     "copyMessage": "တုံ့ပြန်ချက်ကို clipboard သို့ ကူးယူပြီးပါပြီ!",
     "copy": "ကူးယူ",
     "stop": "ရပ်တန့်ရန်",
-    "readAloud": "အသံဖြင့်ဖတ်ပါ"
+    "readAloud": "အသံဖြင့်ဖတ်ပါ",
+    "thinkingOn": "စဉ်းစားမှု: ဖွင့်ထားသည်",
+    "thinkingOff": "စဉ်းစားမှု: ပိတ်ထားသည်"
   },
   "sceneSelector": {
     "customScene": "စိတ်ကြိုက်အခန်းများ"

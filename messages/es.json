@@ -53,7 +53,9 @@
     "copyMessage": "¡Respuesta copiada al portapapeles!",
     "copy": "Copiar",
     "stop": "Detener",
-    "readAloud": "Leer en voz alta"
+    "readAloud": "Leer en voz alta",
+    "thinkingOn": "Razonamiento: Activado",
+    "thinkingOff": "Razonamiento: Desactivado"
   },
   "sceneSelector": {
     "customScene": "Escenas personalizadas"

@@ -71,6 +71,9 @@ interface ChatPropsBase {
   transcribeAudio?: (blob: Blob) => Promise<string>
   selectedModel: string
   setSelectedModel: (id: string) => void
+  // Optional: toggle whether to send reasoning ("thinking") tokens
+  thinkingEnabled?: boolean
+  onToggleThinking?: () => void
 }
 
 interface ChatPropsWithoutSuggestions extends ChatPropsBase {
@@ -101,6 +104,8 @@ export function Chat({
   transcribeAudio,
   selectedModel,
   setSelectedModel,
+  thinkingEnabled,
+  onToggleThinking,
 }: ChatProps) {
   const t = useTranslations('chat')
   const lastMessage = messages.at(-1)
@@ -261,6 +266,19 @@ export function Chat({
                 ))}
               </PromptInputModelSelectContent>
             </PromptInputModelSelect>
+
+            {typeof onToggleThinking === 'function' ? (
+              <PromptInputButton
+                aria-label="Toggle thinking"
+                aria-pressed={!!thinkingEnabled}
+                type="button"
+                onClick={onToggleThinking}
+                variant="ghost"
+                title={thinkingEnabled ? t('thinkingOn') : t('thinkingOff')}
+              >
+                <Brain className={cn('size-4', thinkingEnabled ? 'text-primary' : 'text-muted-foreground')} />
+              </PromptInputButton>
+            ) : null}
 
             <input
               ref={fileInputRef}

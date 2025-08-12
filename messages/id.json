@@ -53,7 +53,9 @@
     "copyMessage": "Respons disalin ke clipboard!",
     "copy": "Salin",
     "stop": "Hentikan",
-    "readAloud": "Bacakan"
+    "readAloud": "Bacakan",
+    "thinkingOn": "Penalaran: Aktif",
+    "thinkingOff": "Penalaran: Nonaktif"
   },
   "sceneSelector": {
     "customScene": "Adegan Kustom"

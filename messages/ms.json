@@ -53,7 +53,9 @@
     "copyMessage": "Respons disalin ke papan klip!",
     "copy": "Salin",
     "stop": "Hentikan",
-    "readAloud": "Baca kuat"
+    "readAloud": "Baca kuat",
+    "thinkingOn": "Penaakulan: Diaktifkan",
+    "thinkingOff": "Penaakulan: Dinyahaktifkan"
   },
   "sceneSelector": {
     "customScene": "Adegan Tersuai"

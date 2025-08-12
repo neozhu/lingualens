@@ -53,7 +53,9 @@
     "copyMessage": "Copied response to clipboard!",
     "copy": "Copy",
     "stop": "Stop",
-    "readAloud": "Read aloud"
+    "readAloud": "Read aloud",
+    "thinkingOn": "Thinking: On",
+    "thinkingOff": "Thinking: Off"
   },
   "sceneSelector": {
     "customScene": "Custom Scenes"

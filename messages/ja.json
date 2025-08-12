@@ -53,7 +53,9 @@
     "copyMessage": "回答をクリップボードにコピーしました！",
     "copy": "コピー",
     "stop": "停止",
-    "readAloud": "音読"
+    "readAloud": "音読",
+    "thinkingOn": "推論：オン",
+    "thinkingOff": "推論：オフ"
   },
   "sceneSelector": {
     "customScene": "カスタムシーン"

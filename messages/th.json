@@ -53,7 +53,9 @@
     "copyMessage": "คัดลอกคำตอบไปยังคลิปบอร์ดแล้ว!",
     "copy": "คัดลอก",
     "stop": "หยุด",
-    "readAloud": "อ่านออกเสียง"
+    "readAloud": "อ่านออกเสียง",
+    "thinkingOn": "การให้เหตุผล: เปิด",
+    "thinkingOff": "การให้เหตุผล: ปิด"
   },
   "sceneSelector": {
     "customScene": "ฉากที่กำหนดเอง"

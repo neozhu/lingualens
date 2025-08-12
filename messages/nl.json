@@ -53,7 +53,9 @@
     "copyMessage": "Antwoord gekopieerd naar klembord!",
     "copy": "Kopiëren",
     "stop": "Stop",
-    "readAloud": "Hardop voorlezen"
+    "readAloud": "Hardop voorlezen",
+    "thinkingOn": "Redeneren: Aan",
+    "thinkingOff": "Redeneren: Uit"
   },
   "sceneSelector": {
     "customScene": "Aangepaste scènes"

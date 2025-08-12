@@ -41,6 +41,7 @@ export default function TranslatorChat() {  const [selectedModel, setSelectedMod
   const [scenes, setScenes] = useState(DEFAULT_SCENES);
   const [selectedScene, setSelectedScene] = useState(scenes[0]);
   const [input, setInput] = useState("");
+  const [thinkingEnabled, setThinkingEnabled] = useState(false);
   
   const {
     currentSessionId,
@@ -125,7 +126,7 @@ export default function TranslatorChat() {  const [selectedModel, setSelectedMod
   const append = (msg: { role: 'user'; content: string }): unknown => {
     if (typeof chat.sendMessage === 'function') return chat.sendMessage(
       { text: msg.content },
-      { body: { model: selectedModel, scene: selectedScene, locale } }
+      { body: { model: selectedModel, scene: selectedScene, locale, thinking: thinkingEnabled } }
     )
     if (typeof chat.append === 'function') return chat.append(msg)
     return undefined
@@ -231,6 +232,8 @@ export default function TranslatorChat() {  const [selectedModel, setSelectedMod
         transcribeAudio={transcribeAudio}
         selectedModel={selectedModel}
         setSelectedModel={setSelectedModel}
+        thinkingEnabled={thinkingEnabled}
+        onToggleThinking={() => setThinkingEnabled(prev => !prev)}
         suggestions={[
           "生活就像一盒巧克力，你永远不知道下一颗是什么味道。",
           "The greatest glory in living lies not in never falling, but in rising every time we fall.",

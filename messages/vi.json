@@ -53,7 +53,9 @@
     "copyMessage": "Đã sao chép phản hồi vào clipboard!",
     "copy": "Sao chép",
     "stop": "Dừng",
-    "readAloud": "Đọc to"
+    "readAloud": "Đọc to",
+    "thinkingOn": "Suy luận: Bật",
+    "thinkingOff": "Suy luận: Tắt"
   },
   "sceneSelector": {
     "customScene": "Cảnh tùy chỉnh"
