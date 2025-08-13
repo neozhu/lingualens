@@ -336,16 +336,6 @@ export function Chat({
               onToggleRecording={audioManager.recording.toggleListening}
             />
 
-            {/* Stop streaming button - only visible during streaming */}
-            {status === 'streaming' && stop && (
-              <PromptInputButton
-                aria-label={t('stop')}
-                type="button"
-                onClick={handleStop}
-              >
-                <SquareIcon className="size-4" />
-              </PromptInputButton>
-            )}
           </PromptInputTools>
           <PromptInputSubmit status={status} disabled={isGenerating || input === ''} />
         </PromptInputToolbar>
