@@ -9,7 +9,7 @@ import {
   useState,
   type ReactElement,
 } from "react"
-import { Square as SquareIcon, RefreshCw, Copy, Volume2, Check, CircleStop, Brain } from "lucide-react"
+import { Square as SquareIcon, RefreshCw, Copy, Check, Brain } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
@@ -48,8 +48,9 @@ import {
 import { Message as AIMessage, MessageContent } from "@/components/ai-elements/message"
 import { Response } from "@/components/ai-elements/response"
 import { MODELS } from "@/lib/models"
-import { Mic, Paperclip,Loader2Icon } from "lucide-react"
-import { useAudioRecording } from "@/hooks/use-audio-recording"
+import { Paperclip, Loader2Icon } from "lucide-react"
+import { useAudioManager } from "@/hooks/use-audio-manager"
+import { VoiceRecordingButton, TextToSpeechButton } from "@/components/audio"
 
 interface ChatPropsBase {
   handleSubmit: (
@@ -130,17 +131,13 @@ export function Chat({
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [isOcrProcessing, setIsOcrProcessing] = useState(false)
 
-  const { isListening, isSpeechSupported, isRecording, isTranscribing, audioStream, toggleListening, stopRecording } = useAudioRecording({
+  // Audio manager - completely independent from chat states
+  const audioManager = useAudioManager({
     transcribeAudio,
     onTranscriptionComplete: (text) => {
       handleInputChange({ target: { value: `${input}${text}` } } as any)
     },
   })
-
-  // Voice recording state - completely independent from streaming/generation states
-  const isVoiceRecordingActive = isListening || isRecording || isTranscribing
-  const voiceButtonVariant = isVoiceRecordingActive ? 'destructive' : 'ghost'
-  const voiceButtonClassName = cn(isVoiceRecordingActive && 'animate-pulse')
 
   // Enhanced stop function that marks pending tool calls as cancelled
   const handleStop = useCallback(() => {
@@ -330,17 +327,14 @@ export function Chat({
               )}
             </PromptInputButton>
 
-            {/* Voice recording button - always available when speech is supported */}
-            <PromptInputButton
-              aria-label={isVoiceRecordingActive ? t('stop') : "Voice input"}
-              type="button"
-              onClick={toggleListening}
-              disabled={!isSpeechSupported}
-              variant={voiceButtonVariant}
-              className={voiceButtonClassName}
-            >
-              <Mic className="size-4" />
-            </PromptInputButton>
+            {/* Voice recording button - completely independent from chat state */}
+            <VoiceRecordingButton
+              isListening={audioManager.recording.isListening}
+              isRecording={audioManager.recording.isRecording}
+              isTranscribing={audioManager.recording.isTranscribing}
+              isSpeechSupported={audioManager.recording.isSpeechSupported}
+              onToggleRecording={audioManager.recording.toggleListening}
+            />
 
             {/* Stop streaming button - only visible during streaming */}
             {status === 'streaming' && stop && (
@@ -373,8 +367,9 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
   }
 
   const [copiedByKey, setCopiedByKey] = useState<Record<string, boolean>>({})
-  const [speakingByKey, setSpeakingByKey] = useState<Record<string, boolean>>({})
-  const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({})
+  
+  // Audio manager for TTS - independent from chat state
+  const audioManager = useAudioManager()
 
   const t = useTranslations('chat')
   const tCommon = useTranslations('common')
@@ -430,50 +425,12 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
                       <Copy className="h-4 w-4" />
                     )}
                   </Action>
-                  <Action
-                    aria-label={t('readAloud')}
-                    tooltip={speakingByKey[key] ? t('stop') : t('readAloud')}
-                    onClick={async () => {
-                      try {
-                        const current = audioRefs.current[key]
-                        if (speakingByKey[key] && current) {
-                          current.pause()
-                          audioRefs.current[key] = null
-                          setSpeakingByKey((prev) => ({ ...prev, [key]: false }))
-                          return
-                        }
-                        const res = await fetch('/api/tts', {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ text }),
-                        })
-                        if (!res.ok) return
-                        const blob = await res.blob()
-                        if (blob.size === 0) return
-                        const url = URL.createObjectURL(blob)
-                        const audio = new Audio(url)
-                        audioRefs.current[key] = audio
-                        audio.onended = () => {
-                          setSpeakingByKey((prev) => ({ ...prev, [key]: false }))
-                          audioRefs.current[key] = null
-                        }
-                        audio.onerror = () => {
-                          setSpeakingByKey((prev) => ({ ...prev, [key]: false }))
-                          audioRefs.current[key] = null
-                        }
-                        setSpeakingByKey((prev) => ({ ...prev, [key]: true }))
-                        await audio.play()
-                      } catch {
-                        setSpeakingByKey((prev) => ({ ...prev, [key]: false }))
-                      }
-                    }}
-                  >
-                    {speakingByKey[key] ? (
-                      <CircleStop className="h-4 w-4 text-primary" />
-                    ) : (
-                      <Volume2 className="h-4 w-4" />
-                    )}
-                  </Action>
+                  <TextToSpeechButton
+                    text={text}
+                    messageId={key}
+                    isSpeaking={audioManager.tts.isSpeaking(key)}
+                    onToggleSpeech={audioManager.tts.speakText}
+                  />
                 </Actions>
               )}
             </div>
