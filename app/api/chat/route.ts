@@ -1,5 +1,5 @@
 import { streamText, convertToModelMessages, type UIMessage } from "ai"
-import { SCENES, Scene } from "@/lib/scenes";
+import { Scene } from "@/lib/scenes";
 import { google } from '@ai-sdk/google';
 import { openai } from '@ai-sdk/openai';
 import { DEFAULT_MODEL, MODELS } from "@/lib/models";
@@ -39,20 +39,9 @@ function createSystemInstructions(scene: Scene, locale: string): string {
 - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
 - Scene rules below may refine or override these defaults.`;
 
-  // 处理场景上下文
-  let sceneContext = '';
-  let sceneInstructions = '';
-  
-  if (scene && typeof scene === 'object' && scene.name_en && scene.description && scene.prompt) {
-    sceneContext = `\nScene: ${scene.name_en} — ${scene.description}`;
-    sceneInstructions = `\nScene rules:\n${scene.prompt}`;
-  } else if (typeof scene === 'string') {
-    const sceneObj = SCENES.find((s) => s.name === scene);
-    if (sceneObj) {
-      sceneContext = `\nScene: ${sceneObj.name_en} — ${sceneObj.description}`;
-      sceneInstructions = `\nScene rules:\n${sceneObj.prompt}`;
-    }
-  }
+  // Build scene context and instructions
+  const sceneContext = scene ? `\nScene: ${scene.name_en} — ${scene.description}` : '';
+  const sceneInstructions = scene ? `\nScene rules:\n${scene.prompt}` : '';
 
   const finalInstructions = `${baseInstructions}${sceneContext}${sceneInstructions}
 

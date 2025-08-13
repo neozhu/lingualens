@@ -18,23 +18,15 @@ export default function SceneDoc() {
 - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
 - Scene rules below may refine or override these defaults.\`;
 
-  let sceneContext = '';
-  let sceneInstructions = '';
-  
-  if (scene && typeof scene === 'object' && scene.name_en && scene.description && scene.prompt) {
-    sceneContext = \`\\nScene: \${scene.name_en} — \${scene.description}\`;
-    sceneInstructions = \`\\nScene rules:\\n\${scene.prompt}\`;
-  } else if (typeof scene === 'string') {
-    const sceneObj = SCENES.find((s) => s.name === scene);
-    if (sceneObj) {
-      sceneContext = \`\\nScene: \${sceneObj.name_en} — \${sceneObj.description}\`;
-      sceneInstructions = \`\\nScene rules:\\n\${sceneObj.prompt}\`;
-    }
-  }
+  // Build scene context and instructions
+  const sceneContext = scene ? \`\\nScene: \${scene.name_en} — \${scene.description}\` : '';
+  const sceneInstructions = scene ? \`\\nScene rules:\\n\${scene.prompt}\` : '';
 
-  return \`\${baseInstructions}\${sceneContext}\${sceneInstructions}
+  const finalInstructions = \`\${baseInstructions}\${sceneContext}\${sceneInstructions}
 
 Task: Apply the rules to translate the following text.\`;
+
+  return finalInstructions;
 }`;
   
   return (
