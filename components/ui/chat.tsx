@@ -338,7 +338,7 @@ export function Chat({
                 aria-label={isListening || isRecording || isTranscribing ? t('stop') : "Voice input"}
                 type="button"
                 onClick={toggleListening}
-                disabled={!isSpeechSupported || isGenerating}
+                disabled={!isSpeechSupported}
                 variant={isListening || isRecording || isTranscribing ? 'destructive' : 'ghost'}
                 className={cn((isListening || isRecording || isTranscribing) && 'animate-pulse')}
               >
