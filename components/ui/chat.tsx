@@ -137,6 +137,11 @@ export function Chat({
     },
   })
 
+  // Voice recording state - completely independent from streaming/generation states
+  const isVoiceRecordingActive = isListening || isRecording || isTranscribing
+  const voiceButtonVariant = isVoiceRecordingActive ? 'destructive' : 'ghost'
+  const voiceButtonClassName = cn(isVoiceRecordingActive && 'animate-pulse')
+
   // Enhanced stop function that marks pending tool calls as cancelled
   const handleStop = useCallback(() => {
     stop?.()
@@ -325,24 +330,26 @@ export function Chat({
               )}
             </PromptInputButton>
 
-            {status === 'streaming' && stop ? (
+            {/* Voice recording button - always available when speech is supported */}
+            <PromptInputButton
+              aria-label={isVoiceRecordingActive ? t('stop') : "Voice input"}
+              type="button"
+              onClick={toggleListening}
+              disabled={!isSpeechSupported}
+              variant={voiceButtonVariant}
+              className={voiceButtonClassName}
+            >
+              <Mic className="size-4" />
+            </PromptInputButton>
+
+            {/* Stop streaming button - only visible during streaming */}
+            {status === 'streaming' && stop && (
               <PromptInputButton
                 aria-label={t('stop')}
                 type="button"
                 onClick={handleStop}
               >
                 <SquareIcon className="size-4" />
-              </PromptInputButton>
-            ) : (
-              <PromptInputButton
-                aria-label={isListening || isRecording || isTranscribing ? t('stop') : "Voice input"}
-                type="button"
-                onClick={toggleListening}
-                disabled={!isSpeechSupported}
-                variant={isListening || isRecording || isTranscribing ? 'destructive' : 'ghost'}
-                className={cn((isListening || isRecording || isTranscribing) && 'animate-pulse')}
-              >
-                <Mic className="size-4" />
               </PromptInputButton>
             )}
           </PromptInputTools>
