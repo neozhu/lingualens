@@ -319,7 +319,7 @@ export function Chat({
               disabled={isGenerating || isOcrProcessing}
             >
               {isOcrProcessing ? (
-                <Loader2Icon  className={cn("size-4", "animate-pulse")} />
+                <Loader2Icon  className={cn("size-4", "animate-pulse animate-spin")} />
               ) : (
                 <Paperclip className="size-4" />
               )}
