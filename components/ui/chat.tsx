@@ -48,7 +48,7 @@ import {
 import { Message as AIMessage, MessageContent } from "@/components/ai-elements/message"
 import { Response } from "@/components/ai-elements/response"
 import { MODELS } from "@/lib/models"
-import { Mic, Paperclip } from "lucide-react"
+import { Mic, Paperclip,Loader2Icon } from "lucide-react"
 import { useAudioRecording } from "@/hooks/use-audio-recording"
 
 interface ChatPropsBase {
@@ -319,7 +319,7 @@ export function Chat({
               disabled={isGenerating || isOcrProcessing}
             >
               {isOcrProcessing ? (
-                <Brain className={cn("size-4", "animate-pulse")} />
+                <Loader2Icon  className={cn("size-4", "animate-pulse")} />
               ) : (
                 <Paperclip className="size-4" />
               )}

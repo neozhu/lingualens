@@ -1,47 +1,41 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Response } from "@/components/ai-elements/response";
 
 export default function SceneDoc() {
   const t = useTranslations();
-  const functionCode = `function createSystemPrompt(scene: Scene): string {
-      // General translation instructions
-      const baseInstructions = \`
-You are a professional translator.
+  const functionCode = `function createSystemInstructions(scene: Scene, locale: string): string {
+  const inputLang = getLanguageNameByLocale(locale);
+  const targetLang = inputLang === 'US English' ? 'Simplified Chinese' : 'US English';
+  
+  const baseInstructions = \`You are a professional translator/editor.
 
-- Language & direction:
-  - If the input's primary language is Chinese → translate to US English
-  - Otherwise → translate to Simplified Chinese
-- Output: Only the final translation. No explanations or original text. Preserve existing formatting (markdown/code/structure).
-- Quality: Natural, faithful, and context-aware. Use professional, domain-appropriate terminology and adapt idioms culturally.
-- Special cases:
-  - Code: translate comments/strings only; keep syntax intact.
-  - Mixed language: translate each part to the appropriate target.
-  - Technical terms: use standard industry terms.
-  - Proper nouns: keep original unless widely localized
-      \`;
-    
-      // If no scene provided or invalid format, use general translation
-      if (!scene || typeof scene === 'string' || !scene.name_en || !scene.description || !scene.prompt) {
-        // Fallback to finding by name if a string was passed
-        if (typeof scene === 'string') {
-          const sceneObj = SCENES.find((s) => s.name === scene);
-          if (sceneObj) {
-            return \`
-    \${baseInstructions}
-    Context: \${sceneObj.name_en} - \${sceneObj.description}
-    Special Instructions: \${sceneObj.prompt}
-    
-    Translate the following text according to these requirements:
-    \`;
-          }
-        }
-        
-        return \`
-    \${baseInstructions}
-    Translate the following text according to these rules:
-    \`;
-      }`;
+- Direction: if input is mainly \${inputLang} → \${targetLang}; otherwise → \${inputLang}.
+- Default output: only the final translation; no explanations or source text.
+- Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
+- Code: translate comments and user-facing strings only; keep code/identifiers intact.
+- Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
+- Scene rules below may refine or override these defaults.\`;
+
+  let sceneContext = '';
+  let sceneInstructions = '';
+  
+  if (scene && typeof scene === 'object' && scene.name_en && scene.description && scene.prompt) {
+    sceneContext = \`\\nScene: \${scene.name_en} — \${scene.description}\`;
+    sceneInstructions = \`\\nScene rules:\\n\${scene.prompt}\`;
+  } else if (typeof scene === 'string') {
+    const sceneObj = SCENES.find((s) => s.name === scene);
+    if (sceneObj) {
+      sceneContext = \`\\nScene: \${sceneObj.name_en} — \${sceneObj.description}\`;
+      sceneInstructions = \`\\nScene rules:\\n\${sceneObj.prompt}\`;
+    }
+  }
+
+  return \`\${baseInstructions}\${sceneContext}\${sceneInstructions}
+
+Task: Apply the rules to translate the following text.\`;
+}`;
   
   return (
     <div className="max-w-3xl mx-auto p-6 motion-preset-fade-in motion-duration-700">
@@ -54,14 +48,10 @@ You are a professional translator.
         </CardHeader>
         
         <CardContent className="space-y-4 motion-preset-fade-in motion-duration-500 motion-delay-500">   
-          <div className="bg-slate-950 text-slate-50 dark:bg-slate-900 overflow-hidden rounded-md motion-preset-expand motion-duration-600 motion-delay-600">
-            <div className="p-6">
-              <pre className="font-mono text-sm leading-normal whitespace-pre-wrap break-words overflow-x-auto motion-preset-fade-in motion-duration-500 motion-delay-700">
-                <code data-language="javascript">
-                  {functionCode}
-                </code>
-              </pre>
-            </div>
+          <div className="motion-preset-expand motion-duration-600 motion-delay-600">
+            <Response className="motion-preset-fade-in motion-duration-500 motion-delay-700">
+              {`\`\`\`typescript\n${functionCode}\n\`\`\``}
+            </Response>
           </div>
         </CardContent>
       </Card>
