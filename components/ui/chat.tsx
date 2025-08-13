@@ -419,6 +419,7 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
                     text={text}
                     messageId={key}
                     isSpeaking={audioManager.tts.isSpeaking(key)}
+                    isLoading={audioManager.tts.isLoading(key)}
                     onToggleSpeech={audioManager.tts.speakText}
                   />
                 </Actions>

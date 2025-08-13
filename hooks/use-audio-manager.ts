@@ -33,6 +33,7 @@ export function useAudioManager({
 
   // TTS states
   const [speakingMessages, setSpeakingMessages] = useState<Record<string, boolean>>({})
+  const [loadingMessages, setLoadingMessages] = useState<Record<string, boolean>>({})
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({})
 
   useEffect(() => {
@@ -98,12 +99,24 @@ export function useAudioManager({
   const speakText = async (text: string, messageId: string) => {
     try {
       const current = audioRefs.current[messageId]
-      if (speakingMessages[messageId] && current) {
+      const isCurrentlySpeaking = speakingMessages[messageId]
+      const isCurrentlyLoading = loadingMessages[messageId]
+      
+      // If already speaking, stop it
+      if (isCurrentlySpeaking && current) {
         current.pause()
         audioRefs.current[messageId] = null
         setSpeakingMessages((prev) => ({ ...prev, [messageId]: false }))
         return
       }
+      
+      // If already loading, ignore the click to prevent duplicate requests
+      if (isCurrentlyLoading) {
+        return
+      }
+
+      // Set loading state immediately to prevent duplicate requests
+      setLoadingMessages((prev) => ({ ...prev, [messageId]: true }))
 
       const res = await fetch('/api/tts', {
         method: 'POST',
@@ -111,10 +124,16 @@ export function useAudioManager({
         body: JSON.stringify({ text }),
       })
       
-      if (!res.ok) return
+      if (!res.ok) {
+        setLoadingMessages((prev) => ({ ...prev, [messageId]: false }))
+        return
+      }
       
       const blob = await res.blob()
-      if (blob.size === 0) return
+      if (blob.size === 0) {
+        setLoadingMessages((prev) => ({ ...prev, [messageId]: false }))
+        return
+      }
       
       const url = URL.createObjectURL(blob)
       const audio = new Audio(url)
@@ -130,10 +149,13 @@ export function useAudioManager({
         audioRefs.current[messageId] = null
       }
       
+      // Clear loading state and set speaking state
+      setLoadingMessages((prev) => ({ ...prev, [messageId]: false }))
       setSpeakingMessages((prev) => ({ ...prev, [messageId]: true }))
       await audio.play()
     } catch (error) {
       console.error('TTS error:', error)
+      setLoadingMessages((prev) => ({ ...prev, [messageId]: false }))
       setSpeakingMessages((prev) => ({ ...prev, [messageId]: false }))
     }
   }
@@ -145,6 +167,7 @@ export function useAudioManager({
       audioRefs.current[messageId] = null
     }
     setSpeakingMessages((prev) => ({ ...prev, [messageId]: false }))
+    setLoadingMessages((prev) => ({ ...prev, [messageId]: false }))
   }
 
   const stopAllSpeaking = () => {
@@ -156,6 +179,7 @@ export function useAudioManager({
       }
     })
     setSpeakingMessages({})
+    setLoadingMessages({})
   }
 
   // Cleanup on unmount
@@ -194,10 +218,12 @@ export function useAudioManager({
     // TTS interface
     tts: {
       speakingMessages,
+      loadingMessages,
       speakText,
       stopSpeaking,
       stopAllSpeaking,
       isSpeaking: (messageId: string) => !!speakingMessages[messageId],
+      isLoading: (messageId: string) => !!loadingMessages[messageId],
     }
   }
 }
