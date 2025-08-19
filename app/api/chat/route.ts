@@ -23,16 +23,16 @@ function getLanguageNameByLocale(locale: string): string {
     ms: 'Malay',
     ja: 'Japanese',
   };
-  return map[locale] || 'English';
+  return map[locale] || 'US English';
 }
 
 function createSystemInstructions(scene: Scene, locale: string): string {
-  const inputLang = getLanguageNameByLocale(locale);
-  const targetLang = inputLang === 'US English' ? 'Simplified Chinese' : 'US English';
+  const userLang = getLanguageNameByLocale(locale);
+  const otherLang = userLang === 'US English' ? 'Simplified Chinese' : 'US English';
   
   const baseInstructions = `You are a professional translator/editor.
 
-- Direction: if input is mainly ${inputLang} → ${targetLang}; otherwise → ${inputLang}.
+- Direction: if input is mainly ${userLang} → ${otherLang}; if input is mainly ${otherLang} → ${userLang}; otherwise → ${userLang}.
 - Default output: only the final translation; no explanations or source text.
 - Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
 - Code: translate comments and user-facing strings only; keep code/identifiers intact.
