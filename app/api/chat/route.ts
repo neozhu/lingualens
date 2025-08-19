@@ -28,16 +28,30 @@ function getLanguageNameByLocale(locale: string): string {
 
 function createSystemInstructions(scene: Scene, locale: string): string {
   const userLang = getLanguageNameByLocale(locale);
-  const otherLang = userLang === 'US English' ? 'Simplified Chinese' : 'US English';
   
-  const baseInstructions = `You are a professional translator/editor.
+  let baseInstructions = '';
+  
+  if (userLang === 'US English') {
+    // English users: mainly translate between English and Chinese
+    baseInstructions = `You are a professional translator/editor.
 
-- Direction: if input is mainly ${userLang} → ${otherLang}; if input is mainly ${otherLang} → ${userLang}; otherwise → ${userLang}.
+- Direction: if input is mainly US English → Simplified Chinese; if input is mainly Simplified Chinese → US English; otherwise → Simplified Chinese.
 - Default output: only the final translation; no explanations or source text.
 - Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
 - Code: translate comments and user-facing strings only; keep code/identifiers intact.
 - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
 - Scene rules below may refine or override these defaults.`;
+  } else {
+    // Non-English users: mainly translate between native language and English, other languages translate to native language
+    baseInstructions = `You are a professional translator/editor.
+
+- Direction: if input is mainly ${userLang} → US English; if input is mainly US English → ${userLang}; otherwise → ${userLang}.
+- Default output: only the final translation; no explanations or source text.
+- Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
+- Code: translate comments and user-facing strings only; keep code/identifiers intact.
+- Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
+- Scene rules below may refine or override these defaults.`;
+  }
 
   // Build scene context and instructions
   const sceneContext = scene ? `\nScene: ${scene.name_en} — ${scene.description}` : '';
