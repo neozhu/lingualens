@@ -73,15 +73,15 @@ B. English/other input:
   {
     name: "技术支持",
     name_en: "Technical Support",
-    description: "Two‑phase workflow: translate foreign‑language TOPdesk tickets into your native language; then turn your native‑language solution into a concise English reply with actionable steps.",
+    description: "Two‑phase workflow: translate foreign‑language TOPdesk tickets into your native language (from locale); then turn your native‑language solution into a concise English reply with actionable steps.",
     prompt: `Two‑phase technical support assistant.
 
 Detection:
-- If the input language differs from the user's native language (target locale) → Phase 1.
-- If the input language matches the user's native language → Phase 2.
+- If the input language differs from the native language (from locale) → Phase 1.
+- If the input language matches the native language (from locale) → Phase 2.
 
 Phase 1 — Ticket translation (to native language):
-- Translate the ticket content into the user's native language.
+- Translate the ticket content into the native language (from locale).
 - Preserve structure, headings, lists, and line breaks; do not add solutions or commentary.
 - Keep code/identifiers/endpoints/HTTP methods/CLI/file paths/package names/config keys/JSON‑YAML keys/log lines in original; translate only user‑facing text.
 

@@ -59,6 +59,7 @@ function createSystemInstructions(scene: Scene, locale: string): string {
 
   const finalInstructions = `${baseInstructions}${sceneContext}${sceneInstructions}
 
+Native language (from locale): ${userLang}
 Task: Apply the rules to translate the following text.`;
 
   return finalInstructions;
