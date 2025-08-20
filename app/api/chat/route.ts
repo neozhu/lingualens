@@ -28,29 +28,27 @@ function getLanguageNameByLocale(locale: string): string {
 
 function createSystemInstructions(scene: Scene, locale: string): string {
   const userLang = getLanguageNameByLocale(locale);
-  
+
   let baseInstructions = '';
-  
+
   if (userLang === 'US English') {
-    // English users: mainly translate between English and Chinese
     baseInstructions = `You are a professional translator/editor.
-
-- Direction: if input is mainly US English → Simplified Chinese; if input is mainly Simplified Chinese → US English; otherwise → Simplified Chinese.
-- Default output: only the final translation; no explanations or source text.
-- Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
-- Code: translate comments and user-facing strings only; keep code/identifiers intact.
-- Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
-- Scene rules below should refine these defaults; only override if the Scene prompt explicitly requires it.`;
+  
+  - Direction: if input is mainly US English → Simplified Chinese; if mainly Simplified Chinese → US English; otherwise → Simplified Chinese.
+  - Priority: Scene rules OVERRIDE these defaults when conflicts occur.
+  - Default output: only the final translation; no explanations or source text.
+  - Fidelity: preserve formatting (Markdown/code/structure), speaker labels, and line breaks.
+  - Code: translate comments and user-facing strings only; keep code/identifiers intact.
+  - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.`;
   } else {
-    // Non-English users: mainly translate between native language and English, other languages translate to native language
     baseInstructions = `You are a professional translator/editor.
-
-- Direction: if input is mainly ${userLang} → US English; if input is mainly US English → ${userLang}; otherwise → ${userLang}.
-- Default output: only the final translation; no explanations or source text.
-- Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
-- Code: translate comments and user-facing strings only; keep code/identifiers intact.
-- Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
-- Scene rules below should refine these defaults; only override if the Scene prompt explicitly requires it.`;
+  
+  - Direction: if input is mainly ${userLang} → US English; if mainly US English → ${userLang}; otherwise → ${userLang} (unless Scene rules enforce an English reply in Phase 2).
+  - Priority: Scene rules OVERRIDE these defaults when conflicts occur.
+  - Default output: only the final translation; no explanations or source text.
+  - Fidelity: preserve formatting (Markdown/code/structure), speaker labels, and line breaks.
+  - Code: translate comments and user-facing strings only; keep code/identifiers intact.
+  - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.`;
   }
 
   // Build scene context and instructions
@@ -68,7 +66,7 @@ Task: Apply the rules to translate the following text.`;
 function getModelProvider(model: string) {
   const modelConfig = MODELS.find(m => m.id === model);
   const provider = modelConfig?.provider || 'openai';
-  
+
   switch (provider) {
     case 'gemini': return google(model);
     case 'openai': return openai(model);
@@ -83,10 +81,10 @@ export async function POST(req: Request) {
   const enableReasoning = body?.thinking === true;
   const systemPrompt = createSystemInstructions(scene, locale);
   const provider = getModelProvider(model);
-  const lastMessages = messages.length > 4 
-    ? messages.slice(messages.length - 4) 
+  const lastMessages = messages.length > 4
+    ? messages.slice(messages.length - 4)
     : messages;
-    
+
   const result = streamText({
     model: provider,
     system: systemPrompt,
@@ -95,17 +93,17 @@ export async function POST(req: Request) {
     // Apply OpenAI reasoning settings when requested by client
     providerOptions: enableReasoning
       ? {
-          openai: {
-            reasoningEffort: 'medium',
-          },
-        }
+        openai: {
+          reasoningEffort: 'medium',
+        },
+      }
       : {
         openai: {
           reasoningEffort: 'minimal',
         },
       },
   });
-  
+
   return result.toUIMessageStreamResponse();
 }
 
