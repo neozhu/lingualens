@@ -77,7 +77,7 @@ B. English/other input:
     prompt: `Ticket support assistant (2 phases). Decide phase from this message only.
 
 - Phase 1 — Translate ticket → native language (from locale)
-  - Trigger if it looks like a support ticket: has Details label, reporter name/date/time header, common header fields (subject/to/date), separators.
+  - Trigger if it looks like a support ticket: has Details label, reporter name/date/time header, Or if the input is simply a user question/request without headers/labels, also treat as ticket.
   - Translate only user‑facing text; keep structure/line breaks; do not add solutions.
   - Preserve names, URLs, "Details", and header labels; do not translate code/identifiers/paths/JSON‑YAML keys/log lines.
   - Compact ticket header heuristics (no spaces between name/date/Details):
