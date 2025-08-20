@@ -83,14 +83,14 @@ export async function POST(req: Request) {
   const enableReasoning = body?.thinking === true;
   const systemPrompt = createSystemInstructions(scene, locale);
   const provider = getModelProvider(model);
-  const lastMessages = messages.length > 6 
-    ? messages.slice(messages.length - 6) 
+  const lastMessages = messages.length > 4 
+    ? messages.slice(messages.length - 4) 
     : messages;
     
   const result = streamText({
     model: provider,
     system: systemPrompt,
-    temperature: 0.3,
+    temperature: 0.2,
     messages: convertToModelMessages((lastMessages as UIMessage[])),
     // Apply OpenAI reasoning settings when requested by client
     providerOptions: enableReasoning

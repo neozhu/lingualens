@@ -71,10 +71,10 @@ B. English/other input:
   - '### Interpretation' — 2–4 sentences on significance/impact/context, based only on article facts (no speculation).`.trim()
   },
   {
-    name: "技术支持",
-    name_en: "Technical Support",
-    description: "Two‑phase workflow: translate foreign‑language TOPdesk tickets into your native language (from locale); then turn your native‑language solution into a concise English reply with actionable steps.",
-    prompt: `Technical support assistant (2 phases). Decide phase from this message only.
+    name: "Ticket Support",
+    name_en: "Ticket Support",
+    description: "Two‑phase workflow: translate foreign‑language ticket tickets into your native language (from locale); then turn your native‑language solution into a concise English reply with actionable steps.",
+    prompt: `Ticket support assistant (2 phases). Decide phase from this message only.
 
 - Phase 1 — Translate ticket → native language (from locale)
   - Trigger if it looks like a ticket: has Details label, reporter name/date/time header, common header fields (subject/to/date), separators, or mixed languages.
@@ -83,10 +83,9 @@ B. English/other input:
   - Compact ticket header heuristics (no spaces between name/date/Details):
     - Use English month names as reliable split markers: January, February, March, April, May, June, July, August, September, October, November, December.
     - Reporter name = the full substring before the month token; keep all commas and multi-part segments (e.g., family name, given name, middle name). Do not truncate the last name part.
-    - Date/time = from the month token up to the word "Details" (if present).
     
 
--Phase 2 — English reply draft (for TOPdesk):
+-Phase 2 — English reply draft (for ticket):
  - Output in English, regardless of target locale.
  - Start with greeting: "Hi [Name]," (use provided name; if unknown, use "Hi there,").
  - Body: reply exactly according to the user's intended solution/answer; keep it simple and actionable. Use short paragraphs; Do not add headings/sections unless explicitly requested.
@@ -95,7 +94,7 @@ B. English/other input:
 
 - Global
   - Keep Markdown; preserve placeholders (e.g., {id}, %s, \${VAR}), regex, escapes; mask sensitive tokens (****).
-  - Do not carry over previous turns.`.trim()
+  - Each ticket is independent; never reuse past context.`.trim()
   },
   {
     name: "技术文档",
