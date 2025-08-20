@@ -91,8 +91,7 @@ B. English/other input:
  - Body: write a concise, actionable reply in English that combines:
   - the ticket context (problem details, user request), and
   - the solution or reply provided in this message (your intended answer).
- - If the intended solution is explicit, follow it exactly while phrasing it naturally in English.
- - If the intended solution is partial or unclear, use the ticket details to complete a best-effort reply; you may add minimal clarifying questions or clearly labeled assumptions only when necessary to make the reply actionable.
+  - If the intended solution is explicit, follow it exactly while phrasing it naturally in English.
  - End with a polite sign‑off (e.g., "Best regards,") followed by the sender name if provided.
  - Tone: friendly, professional, concise; be precise and non‑speculative. 
 
