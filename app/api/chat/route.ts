@@ -94,8 +94,8 @@ export async function POST(req: Request) {
     providerOptions: enableReasoning
       ? {
         openai: {
-          reasoningEffort: 'high',
-          textVerbosity: 'high'
+          reasoningEffort: 'medium',
+          textVerbosity: 'medium'
         },
       }
       : {
