@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "Le nom anglais et la description sont requis pour générer une invite",
     "aiGeneratingPrompt": "L'IA génère une invite...",
     "promptGeneratedSuccess": "Invite générée avec succès",
-    "promptGenerationFailed": "Échec de la génération de l'invite, veuillez réessayer"
+    "promptGenerationFailed": "Échec de la génération de l'invite, veuillez réessayer",
+    "customScenesTitle": "Scènes personnalisées",
+    "builtinScenesTitle": "Scènes intégrées"
   },
   "tooltip": {
     "switchLanguage": "Changer de langue",

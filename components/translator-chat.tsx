@@ -38,7 +38,8 @@ export default function TranslatorChat() {  const [selectedModel, setSelectedMod
   }
   return MODELS[0].id
 })
-  const [scenes, setScenes] = useState(DEFAULT_SCENES);
+  // Combine built-in scenes with local custom scenes for selection
+  const [scenes, setScenes] = useState<Scene[]>(DEFAULT_SCENES);
   const [selectedScene, setSelectedScene] = useState(scenes[0]);
   const [input, setInput] = useState("");
   const [thinkingEnabled, setThinkingEnabled] = useState(false);
@@ -56,8 +57,8 @@ export default function TranslatorChat() {  const [selectedModel, setSelectedMod
     const storedSceneName = localStorage.getItem("selectedScene")
     // Find scene by name if stored
     if (storedSceneName) {
-      const customScenes = getCustomScenes() || DEFAULT_SCENES;
-      const foundScene = customScenes.find((s: Scene) => s.name === storedSceneName);
+      const combined = [...(getCustomScenes() || []), ...DEFAULT_SCENES]
+      const foundScene = combined.find((s: Scene) => s.name === storedSceneName);
       if (foundScene) {
         setSelectedScene(foundScene);
       }
@@ -190,17 +191,17 @@ export default function TranslatorChat() {  const [selectedModel, setSelectedMod
     }
   }, [currentSessionId, messages, selectedModel, selectedScene.name, updateSessionMessages])
 
-  // Load custom scenes from localStorage
+  // Load custom scenes from localStorage and merge with defaults
   useEffect(() => {
-    const custom = getCustomScenes();
-    setScenes(custom || DEFAULT_SCENES);
+    const custom = getCustomScenes() || [];
+    setScenes([...custom, ...DEFAULT_SCENES]);
   }, []);
   // Listen for visibility changes to sync scene changes
   useEffect(() => {
     const handleVisibility = () => {
       if (document.visibilityState === "visible") {
-        const custom = getCustomScenes();
-        setScenes(custom || DEFAULT_SCENES);
+        const custom = getCustomScenes() || [];
+        setScenes([...custom, ...DEFAULT_SCENES]);
       }
     };
     document.addEventListener("visibilitychange", handleVisibility);

@@ -140,11 +140,8 @@ function SortableItem({
 export default function SceneManagePage() {
   const t = useTranslations("sceneManage");
 
-  const [scenes, setScenes] = useState<Scene[]>(() => {
-    // Initialize with data immediately to avoid loading state
-    const local = getLocalScenes();
-    return local || SCENES;
-  });
+  // Maintain custom scenes separately; built-ins are read-only and never saved locally
+  const [customScenes, setCustomScenes] = useState<Scene[]>(() => getLocalScenes() || []);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [form, setForm] = useState<Partial<Scene>>({});
   const [generating, setGenerating] = useState(false);
@@ -222,15 +219,13 @@ export default function SceneManagePage() {
     }
   }, [messages, generating]);
 
-  // Data is now initialized directly in useState, no need for loading effect
-
   const handleEdit = (idx: number) => {
     setEditingIdx(idx);
-    setForm(scenes[idx]);
+    setForm(customScenes[idx]);
   };
   const handleDelete = (idx: number) => {
-    const next = scenes.filter((_, i) => i !== idx);
-    setScenes(next);
+    const next = customScenes.filter((_, i) => i !== idx);
+    setCustomScenes(next);
     setLocalScenes(next);
     setEditingIdx(null);
     toast.success(t("sceneDeleted"));
@@ -255,11 +250,11 @@ export default function SceneManagePage() {
 
     if (editingIdx === -1) {
       // Add new scene at the beginning
-      newScenes = [newScene, ...scenes];
+      newScenes = [newScene, ...customScenes];
       toast.success(t("newSceneAdded"));
     } else if (editingIdx !== null) {
       // Edit existing scene
-      newScenes = scenes.map((scene, i) =>
+      newScenes = customScenes.map((scene, i) =>
         i === editingIdx ? newScene : scene
       );
       toast.success(t("sceneUpdated"));
@@ -267,7 +262,7 @@ export default function SceneManagePage() {
       return;
     }
 
-    setScenes(newScenes);
+    setCustomScenes(newScenes);
     setLocalScenes(newScenes);
     setEditingIdx(null);
     setForm({});
@@ -278,7 +273,7 @@ export default function SceneManagePage() {
     if (!over) return;
 
     if (active.id !== over.id) {
-      setScenes((prev) => {
+      setCustomScenes((prev) => {
         const oldIndex = Number(active.id);
         const newIndex = Number(over.id);
 
@@ -323,8 +318,9 @@ Please create a translation prompt for the above scene that will guide an AI mod
         <Button
           variant="outline"
           onClick={() => {
-            setScenes(SCENES);
-            setLocalScenes(SCENES);
+            // Clear custom scenes only; do not persist built-in scenes
+            setCustomScenes([]);
+            setLocalScenes([]);
             setEditingIdx(null);
             toast.success(t("resetToDefaultDone"));
             setForm({});
@@ -335,17 +331,24 @@ Please create a translation prompt for the above scene that will guide an AI mod
           <span className="sr-only">{t("resetToDefault")}</span>
         </Button>
       </div>
+      {/* Custom scenes (editable/sortable) */}
+      <h2 className="text-lg font-semibold mb-2">{t("customScenesTitle", { default: "Custom scenes" })}</h2>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
         <SortableContext
-          items={scenes.map((_, idx) => idx.toString())}
+          items={customScenes.map((_, idx) => idx.toString())}
           strategy={verticalListSortingStrategy}
         >
           <div className="space-y-4">
-            {scenes.map((scene, idx) => (
+            {customScenes.length === 0 && (
+              <div className="text-sm text-muted-foreground border rounded-lg p-4">
+                {t("noCustomScenesHint", { default: "No custom scenes yet. Click + to add one." })}
+              </div>
+            )}
+            {customScenes.map((scene, idx) => (
               <SortableItem
                 key={idx}
                 scene={scene}
@@ -358,6 +361,33 @@ Please create a translation prompt for the above scene that will guide an AI mod
           </div>
         </SortableContext>
       </DndContext>
+
+      {/* Built-in scenes (read-only, not stored locally) */}
+      <h2 className="text-lg font-semibold mt-8 mb-2">{t("builtinScenesTitle", { default: "Built-in scenes" })}</h2>
+      <div className="space-y-4">
+        {SCENES.map((scene, idx) => (
+          <div
+            key={`builtin-${idx}`}
+            className={cn(
+              "border rounded-lg p-4 relative",
+              "bg-muted/20"
+            )}
+          >
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex items-center gap-2">
+                <div className="font-semibold">{scene.name_en}</div>
+                <div className="text-xs text-muted-foreground">{scene.name}</div>
+              </div>
+            </div>
+            <div className="text-sm text-muted-foreground mb-1">
+              {scene.description}
+            </div>
+            <pre className="bg-muted p-2 rounded text-xs whitespace-pre-wrap">
+              {scene.prompt}
+            </pre>
+          </div>
+        ))}
+      </div>
       {(editingIdx !== null || form.name) && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-lg shadow-lg relative">

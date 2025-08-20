@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "ပရောမ့်ဖန်တီးရန် အင်္ဂလိပ်အမည်နှင့် ဖော်ပြချက် လိုအပ်သည်",
     "aiGeneratingPrompt": "AI ပရောမ့်ဖန်တီးနေသည်...",
     "promptGeneratedSuccess": "ပရောမ့်ဖန်တီးမှု အောင်မြင်သည်",
-    "promptGenerationFailed": "ပရောမ့်ဖန်တီးမှု မအောင်မြင်ပါ၊ ထပ်မံကြိုးစားပါ"
+    "promptGenerationFailed": "ပရောမ့်ဖန်တီးမှု မအောင်မြင်ပါ၊ ထပ်မံကြိုးစားပါ",
+    "customScenesTitle": "စိတ်ကြိုက်အခန်းများ",
+    "builtinScenesTitle": "တပ်ဆင်ပြီးသားအခန်းများ"
   },
   "tooltip": {
     "switchLanguage": "ဘာသာစကားပြောင်းရန်",

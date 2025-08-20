@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "Engelse naam en beschrijving zijn vereist om prompt te genereren",
     "aiGeneratingPrompt": "AI genereert prompt...",
     "promptGeneratedSuccess": "Prompt succesvol gegenereerd",
-    "promptGenerationFailed": "Promptgeneratie mislukt, probeer het opnieuw"
+    "promptGenerationFailed": "Promptgeneratie mislukt, probeer het opnieuw",
+    "customScenesTitle": "Aangepaste scènes",
+    "builtinScenesTitle": "Ingebouwde scènes"
   },
   "tooltip": {
     "switchLanguage": "Taal wisselen",

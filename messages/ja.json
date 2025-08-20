@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "プロンプト生成には英語名と説明が必要です",
     "aiGeneratingPrompt": "AIがプロンプトを生成中...",
     "promptGeneratedSuccess": "プロンプトの生成に成功しました",
-    "promptGenerationFailed": "プロンプトの生成に失敗しました。再試行してください"
+    "promptGenerationFailed": "プロンプトの生成に失敗しました。再試行してください",
+    "customScenesTitle": "カスタムシーン",
+    "builtinScenesTitle": "内蔵シーン"
   },
   "tooltip": {
     "switchLanguage": "言語を切り替える",

@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "Se requieren el nombre y la descripción en inglés para generar la indicación",
     "aiGeneratingPrompt": "La IA está generando la indicación...",
     "promptGeneratedSuccess": "Indicación generada con éxito",
-    "promptGenerationFailed": "No se pudo generar la indicación, inténtelo de nuevo"
+    "promptGenerationFailed": "No se pudo generar la indicación, inténtelo de nuevo",
+    "customScenesTitle": "Escenas personalizadas",
+    "builtinScenesTitle": "Escenas integradas"
   },
   "tooltip": {
     "switchLanguage": "Cambiar idioma",

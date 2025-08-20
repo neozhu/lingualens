@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "Nama dan deskripsi dalam bahasa Inggris diperlukan untuk membuat prompt",
     "aiGeneratingPrompt": "AI sedang membuat prompt...",
     "promptGeneratedSuccess": "Prompt berhasil dibuat",
-    "promptGenerationFailed": "Gagal membuat prompt, silakan coba lagi"
+    "promptGenerationFailed": "Gagal membuat prompt, silakan coba lagi",
+    "customScenesTitle": "Adegan kustom",
+    "builtinScenesTitle": "Adegan bawaan"
   },
   "tooltip": {
     "switchLanguage": "Ganti Bahasa",

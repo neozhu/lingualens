@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "Cần tên tiếng Anh và mô tả để tạo prompt",
     "aiGeneratingPrompt": "AI đang tạo prompt...",
     "promptGeneratedSuccess": "Tạo prompt thành công",
-    "promptGenerationFailed": "Tạo prompt thất bại, vui lòng thử lại"
+    "promptGenerationFailed": "Tạo prompt thất bại, vui lòng thử lại",
+    "customScenesTitle": "Cảnh tùy chỉnh",
+    "builtinScenesTitle": "Cảnh tích hợp"
   },
   "tooltip": {
     "switchLanguage": "Chuyển đổi ngôn ngữ",

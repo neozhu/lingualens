@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "Englischer Name und Beschreibung werden benötigt, um Prompt zu generieren",
     "aiGeneratingPrompt": "KI generiert Prompt...",
     "promptGeneratedSuccess": "Prompt erfolgreich generiert",
-    "promptGenerationFailed": "Prompt-Generierung fehlgeschlagen, bitte erneut versuchen"
+    "promptGenerationFailed": "Prompt-Generierung fehlgeschlagen, bitte erneut versuchen",
+    "customScenesTitle": "Benutzerdefinierte Szenen",
+    "builtinScenesTitle": "Integrierte Szenen"
   },
   "tooltip": {
     "switchLanguage": "Sprache wechseln",

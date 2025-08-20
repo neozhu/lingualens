@@ -100,6 +100,12 @@ B. English/other input:
   - Each ticket is independent; never reuse past context.`.trim()
   },
   {
+    name: "用户故事分析",
+    name_en: "User Story Analysis",
+    description:"Analyzes user stories into structured insights (summary, purpose, solution, value analysis, effort estimation). Output adapts to locale: Chinese for zh-CN, otherwise English.",
+    prompt:"If the user's native language (from locale) is Simplified Chinese, first translate the user story into Chinese, then provide the entire analysis in Chinese. Otherwise, provide the analysis in English only (skip translation).\n\nThe analysis must be structured in Markdown with the following sections:\n\n## Summary\n(Concise summary of the user story/request)\n\n## Business Purpose\n(Underlying business goal the user aims to achieve)\n\n## Solution\n(Proposed solution or development approach, e.g., Salesforce configuration, SAP process, or custom development)\n\n## Value Analysis\n(Expected business value such as efficiency, cost reduction, compliance, revenue impact; quantify where possible)\n\n## Effort Estimation\n(Estimated development effort as a range in person-days or weeks)\n\n- If locale=zh-CN: Begin with **Translation (zh-CN):** (the Chinese translation of the user story), then continue all sections in Chinese.\n- Otherwise: Start directly with **## Summary** and output all sections in English.\n\nEnd right after **## Effort Estimation**. No extra commentary."
+  },
+  {
     name: "技术文档",
     name_en: "Technical Documentation",
     description: "For translating technical documentation",
@@ -120,22 +126,10 @@ B. English/other input:
     prompt: "Translate as an X/Reddit post: concise, engaging; use suitable hashtags/emojis/formatting. Do not answer questions or provide solutions—only translate the original content."
   },
   {
-    name: "需求分析",
-    name_en: "Requirement Analysis",
-    description: "For basic requirement understanding: translates, summarizes, and identifies the core business purpose of user-provided requirements (Salesforce, SAP focused).",
-    prompt: "If needed, translate the requirements; then give a concise summary; finally state the underlying business purpose. Start directly with the translation/summary and end right after the purpose. No extra text."
-  },
-  {
     name: "会议邀请",
     name_en: "Meeting Invitation",
     description: "For translating formal meeting invitation messages.",
     prompt: "Formal meeting invitation: polite greeting; clear purpose, date/time, venue, agenda, participants; appropriate closing."
-  },
-  {
-    name: "会议纪要",
-    name_en: "Meeting Minutes",
-    description: "For translating meeting minutes with a clear and structured format.",
-    prompt: "Formal meeting minutes: clear headings/structure; summarize key points; record decisions; list action items for follow‑up."
   },
   {
     name: "谚语",
@@ -146,12 +140,6 @@ B. English/other input:
       Focus: equivalent core meaning and deep cultural resonance over literal wording; must feel natural and insightful in the target culture.
       Format: concise and impactful.
       No explanations or interpretations.`.trim()
-  },
-  {
-    name: "演示文稿",
-    name_en: "Presentation Slides",
-    description: "For content used in presentation slides.",
-    prompt: "Presentation slides: clear, concise; short bullet points; impactful, easy to read."
   }
 ];
 

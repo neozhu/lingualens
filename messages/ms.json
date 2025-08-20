@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "Nama dan penerangan Inggeris diperlukan untuk menjana prompt",
     "aiGeneratingPrompt": "AI sedang menjana prompt...",
     "promptGeneratedSuccess": "Prompt berjaya dijana",
-    "promptGenerationFailed": "Penjanaan prompt gagal, sila cuba lagi"
+    "promptGenerationFailed": "Penjanaan prompt gagal, sila cuba lagi",
+    "customScenesTitle": "Adegan tersuai",
+    "builtinScenesTitle": "Adegan terbina dalam"
   },
   "tooltip": {
     "switchLanguage": "Tukar Bahasa",

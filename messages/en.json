@@ -98,7 +98,9 @@
     "needNameDescForPrompt": "English name and description are required to generate prompt",
     "aiGeneratingPrompt": "AI is generating prompt...",
     "promptGeneratedSuccess": "Prompt generated successfully",
-    "promptGenerationFailed": "Failed to generate prompt, please try again"
+    "promptGenerationFailed": "Failed to generate prompt, please try again",
+    "customScenesTitle": "Custom scenes",
+    "builtinScenesTitle": "Built-in scenes"
   },
   "modeToggle": {
     "switch": "Toggle Theme",

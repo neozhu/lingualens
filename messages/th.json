@@ -91,7 +91,9 @@
     "needNameDescForPrompt": "ต้องกรอกชื่อและคำอธิบายภาษาอังกฤษเพื่อสร้างพรอมต์",
     "aiGeneratingPrompt": "AI กำลังสร้างพรอมต์...",
     "promptGeneratedSuccess": "สร้างพรอมต์สำเร็จ",
-    "promptGenerationFailed": "สร้างพรอมต์ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง"
+    "promptGenerationFailed": "สร้างพรอมต์ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง",
+    "customScenesTitle": "ฉากที่กำหนดเอง",
+    "builtinScenesTitle": "ฉากในตัว"
   },
   "tooltip": {
     "switchLanguage": "เปลี่ยนภาษา",

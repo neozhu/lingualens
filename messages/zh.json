@@ -98,7 +98,9 @@
     "needNameDescForPrompt": "需要填写英文名称和描述才能生成提示词",
     "aiGeneratingPrompt": "正在使用 AI 生成提示词...",
     "promptGeneratedSuccess": "已成功生成提示词",
-    "promptGenerationFailed": "生成提示词失败，请重试"
+    "promptGenerationFailed": "生成提示词失败，请重试",
+    "customScenesTitle": "自定义场景",
+    "builtinScenesTitle": "内置场景"
   },  "modeToggle": {
     "switch": "切换主题",
     "light": "浅色模式",
