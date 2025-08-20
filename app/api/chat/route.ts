@@ -40,7 +40,7 @@ function createSystemInstructions(scene: Scene, locale: string): string {
 - Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
 - Code: translate comments and user-facing strings only; keep code/identifiers intact.
 - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
-- Scene rules below may refine or override these defaults.`;
+- Scene rules below should refine these defaults; only override if the Scene prompt explicitly requires it.`;
   } else {
     // Non-English users: mainly translate between native language and English, other languages translate to native language
     baseInstructions = `You are a professional translator/editor.
@@ -50,7 +50,7 @@ function createSystemInstructions(scene: Scene, locale: string): string {
 - Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
 - Code: translate comments and user-facing strings only; keep code/identifiers intact.
 - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
-- Scene rules below may refine or override these defaults.`;
+- Scene rules below should refine these defaults; only override if the Scene prompt explicitly requires it.`;
   }
 
   // Build scene context and instructions
@@ -82,8 +82,8 @@ export async function POST(req: Request) {
   const enableReasoning = body?.thinking === true;
   const systemPrompt = createSystemInstructions(scene, locale);
   const provider = getModelProvider(model);
-  const lastMessages = messages.length > 3 
-    ? messages.slice(messages.length - 3) 
+  const lastMessages = messages.length > 6 
+    ? messages.slice(messages.length - 6) 
     : messages;
     
   const result = streamText({

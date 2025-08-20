@@ -71,6 +71,34 @@ B. English/other input:
   - '### Interpretation' — 2–4 sentences on significance/impact/context, based only on article facts (no speculation).`.trim()
   },
   {
+    name: "技术支持",
+    name_en: "Technical Support",
+    description: "Two‑phase workflow: translate foreign‑language TOPdesk tickets into your native language; then turn your native‑language solution into a concise English reply with actionable steps.",
+    prompt: `Two‑phase technical support assistant.
+
+Detection:
+- If the input language differs from the user's native language (target locale) → Phase 1.
+- If the input language matches the user's native language → Phase 2.
+
+Phase 1 — Ticket translation (to native language):
+- Translate the ticket content into the user's native language.
+- Preserve structure, headings, lists, and line breaks; do not add solutions or commentary.
+- Keep code/identifiers/endpoints/HTTP methods/CLI/file paths/package names/config keys/JSON‑YAML keys/log lines in original; translate only user‑facing text.
+
+Phase 2 — English reply draft (for TOPdesk):
+- Output in English, regardless of target locale.
+ - Start with greeting: "Hi [Name]," (use provided name; if unknown, use "Hi there,").
+ - Body: reply exactly according to the user's intended solution/answer; keep it simple and actionable. Use short paragraphs; add a brief bullet list only when listing steps or options. Do not add headings/sections unless explicitly requested.
+ - End with a polite sign‑off (e.g., "Best regards,") followed by the sender name if provided.
+ - Tone: friendly, professional, concise; be precise and non‑speculative. State assumptions briefly if needed.
+
+Global:
+- Keep Markdown.
+- Preserve placeholders (e.g., {id}, %s, \${VAR}), regex, and escapes.
+- Mask sensitive tokens/IDs (e.g., ****).
+- Preserve greetings/sign‑offs only if present.`.trim()
+  },
+  {
     name: "技术文档",
     name_en: "Technical Documentation",
     description: "For translating technical documentation",
@@ -89,21 +117,6 @@ B. English/other input:
     name_en: "Social Media Post (X/Reddit)",
     description: "For translating engaging posts for X (Twitter) or Reddit.",
     prompt: "Translate as an X/Reddit post: concise, engaging; use suitable hashtags/emojis/formatting. Do not answer questions or provide solutions—only translate the original content."
-  },
-  {
-    name: "技术支持",
-    name_en: "Technical Support",
-    description: "For translating technical support communications that deliver direct answers and actionable solutions.",
-    prompt: `Professional technical support reply with direct answer and actionable steps.
-
-Sections (use target language titles):
-- Summary: one‑line answer/resolution.
-- Resolution Steps: numbered minimal steps with exact commands/UI paths/config keys and expected results.
-- Root Cause: brief if known (otherwise omit).
-- Next Actions: what the user should do/provide or escalation.
-- Clarifying Questions: only if critical; max 3; placed at the end.
-
-Keep Markdown; do not translate code/identifiers/endpoints/HTTP methods/CLI/file paths/package names/config keys/JSON‑YAML keys/log lines; translate comments/user‑facing strings only. Preserve placeholders (e.g., {id}, %s, \${VAR}), regex, escapes. Be precise, non‑speculative; state assumptions briefly if needed. Tone: empathetic, professional, concise. Mask sensitive tokens/IDs (e.g., ****). Preserve greetings/sign‑offs only if present.`.trim()
   },
   {
     name: "需求分析",
