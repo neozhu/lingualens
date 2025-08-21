@@ -134,7 +134,7 @@ Keep estimates realistic and conservative, reflecting Salesforce's high developm
 Do not overestimate.)
 
 ## IT Customization Scorecard
-(This section must always be in English, regardless of locale. Use the template below and fill in Evaluation, Rating (0;5;10), and Weighted score. Weighting (%) must remain unchanged. Weighted score = Rating × Weighting ÷ 100. The last row must show the total sum of Weighted scores.)
+(This section must always be in English, regardless of locale. Use the template below and fill in column 'Rating (0;5;10)', and 'Weighted score'. Weighting (%) must remain unchanged. Weighted score = Rating × Weighting ÷ 100. The last row must show the total sum of Weighted scores.)
 
 | Criterion | Criterion Description | Evaluation (explanation) | Rating (0;5;10) | Weighting (%) | Weighted score |
 |-----------|-----------------------|--------------------------|-----------------|---------------|----------------|
@@ -147,7 +147,7 @@ Do not overestimate.)
 | **Total** |  |  |  | **100** | **(sum)** |
 
 **Rules:**
-- Fill in Evaluation with explanation for the chosen Rating.  
+- Only fill 'Rating (0;5;10)' column.  
 - Ratings allowed: 0, 5, or 10 only.  
 - Weighting (%) must remain as in the template.  
 - Weighted score = Rating × Weighting ÷ 100.  
