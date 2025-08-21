@@ -95,7 +95,7 @@ export async function POST(req: Request) {
       ? {
         openai: {
           reasoningEffort: 'medium',
-          textVerbosity: 'medium'
+          textVerbosity: 'high'
         },
       }
       : {
