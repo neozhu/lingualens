@@ -123,9 +123,10 @@ The analysis must be structured in Markdown with the following sections:
 (Expected business value such as efficiency, cost reduction, compliance, revenue impact; quantify where possible)
 
 ## Effort Estimation
-(Break down the Salesforce development effort into specific tasks with estimated person-days for each task.
-Show tasks as a Markdown list, with a short description and a number in days.
-At the end, also show the total sum in days.
+(Break down the Salesforce development effort into specific tasks with estimated person-days for each task. 
+⚠️ Only include **development and deployment effort**. Do not include time for requirement gathering, stakeholder workshops, alignment meetings, or testing.  
+Show tasks as a Markdown list, with a short description and a number in days.  
+At the end, also show the total sum in days.  
 Keep estimates realistic and conservative, reflecting Salesforce's high development efficiency:
 - Small/simple task: 0.5–1 days
 - Medium task: 2–3 days
@@ -133,27 +134,28 @@ Keep estimates realistic and conservative, reflecting Salesforce's high developm
 Do not overestimate.)
 
 ## IT Customization Scorecard
-(This section must always be in English, regardless of locale. Complete the following table with realistic evaluation, rating, and weighted score based on the user story.)
+(This section must always be in English, regardless of locale. Complete the following table with realistic evaluation based on the user story. Ratings must be justified in Evaluation.)
 
 | Criterion | Criterion Description | Evaluation (explanation) | Rating (0;5;10) | Weighting (%) | Weighted score |
 |-----------|-----------------------|--------------------------|-----------------|---------------|----------------|
-| Business Impact | Contribution to achieving business goals (e.g. sales, efficiency, customer satisfaction) | Explain why the change has no, moderate, or high strategic impact. | (0/5/10) | 25 | (calculated) |
-| User reach | The number and relevance of users or roles affected by the change. | Explain if it impacts individuals, departments, or the whole organization. | (0/5/10) | 15 | (calculated) |
-| Effort / complexity | Technical effort and complexity. | Explain if effort is very high (>40 PD), medium (5–40 PD), or low (<5 PD). | (0/5/10) | 20 | (calculated) |
-| Risk / dependencies | Technical/organizational risks and dependencies. | Explain if risks are high, moderate, or low. | (0/5/10) | 10 | (calculated) |
-| Reusability / scalability | Potential to reuse or scale the solution. | Explain if it is single-use, partially reusable, or highly scalable. | (0/5/10) | 10 | (calculated) |
-| End-to-End Integration Capability | Extent of seamless integration across processes/systems. | Explain if there is no integration, partial integration, or full E2E integration. | (0/5/10) | 20 | (calculated) |
+| Business Impact | Contribution to achieving business goals (e.g. sales, efficiency, customer satisfaction) | Explanation of impact. | (0/5/10) | 25 | (Rating × 25 ÷ 100) |
+| User reach | The number and relevance of users or roles affected by the change. | Explanation of user reach. | (0/5/10) | 15 | (Rating × 15 ÷ 100) |
+| Effort / complexity | Technical effort and complexity. | Explanation of complexity. | (0/5/10) | 20 | (Rating × 20 ÷ 100) |
+| Risk / dependencies | Technical/organizational risks and dependencies. | Explanation of risk. | (0/5/10) | 10 | (Rating × 10 ÷ 100) |
+| Reusability / scalability | Potential to reuse or scale the solution. | Explanation of scalability. | (0/5/10) | 10 | (Rating × 10 ÷ 100) |
+| End-to-End Integration Capability | Extent of seamless integration across processes/systems. | Explanation of integration capability. | (0/5/10) | 20 | (Rating × 20 ÷ 100) |
 | **Total** |  |  |  | **100** | **(sum of weighted scores)** |
 
 **Rules:**
-- Ratings must be justified in Evaluation.  
 - Ratings allowed: 0, 5, or 10 only.  
-- Weighted score = (Rating ÷ 10) × Weighting (%).  
+- Weighting (%) must not change.  
+- Weighted score = Rating × Weighting (%) ÷ 100.  
 - The last row must show the total sum of Weighted scores.  
 
 End right after the scorecard table. No extra commentary.
 `.trim()
 }
+
 ,
   {
     name: "技术文档",
