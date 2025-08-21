@@ -4,7 +4,7 @@ import { google } from '@ai-sdk/google';
 import { openai } from '@ai-sdk/openai';
 import { DEFAULT_MODEL, MODELS } from "@/lib/models";
 
-export const maxDuration = 30;
+export const maxDuration = 120;
 
 
 
@@ -89,13 +89,14 @@ export async function POST(req: Request) {
     model: provider,
     system: systemPrompt,
     temperature: 0.2,
+    abortSignal: AbortSignal.timeout(25000),
     messages: convertToModelMessages((lastMessages as UIMessage[])),
     // Apply OpenAI reasoning settings when requested by client
     providerOptions: enableReasoning
       ? {
         openai: {
           reasoningEffort: 'medium',
-          textVerbosity: 'high'
+          textVerbosity: 'medium'
         },
       }
       : {
