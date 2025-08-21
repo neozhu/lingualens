@@ -12,6 +12,7 @@ export default function SceneDoc() {
   const baseInstructions = \`You are a professional translator/editor.
 
 - Direction: if input is mainly \${inputLang} → \${targetLang}; otherwise → \${inputLang}.
+- Priority: Scene rules OVERRIDE these defaults when conflicts occur.
 - Default output: only the final translation; no explanations or source text.
 - Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
 - Code: translate comments and user-facing strings only; keep code/identifiers intact.
@@ -23,7 +24,7 @@ export default function SceneDoc() {
   const sceneInstructions = scene ? \`\\nScene rules:\\n\${scene.prompt}\` : '';
 
   const finalInstructions = \`\${baseInstructions}\${sceneContext}\${sceneInstructions}
-
+Native language (from locale): \${userLang}
 Task: Apply the rules to translate the following text.\`;
 
   return finalInstructions;
