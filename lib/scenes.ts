@@ -116,11 +116,12 @@ The analysis must be structured in Markdown with the following sections:
 ## Business Purpose
 (Underlying Salesforce-related business goal the user aims to achieve)
 
+## Business Value Analysis
+(Expected business value such as efficiency, cost reduction, compliance, revenue impact; quantify where possible)
+
 ## Solution
 (Proposed Salesforce solution or development approach, such as configuration, customization, integration, automation with Flow/Apex, data model design, etc.)
 
-## Business Value Analysis
-(Expected business value such as efficiency, cost reduction, compliance, revenue impact; quantify where possible)
 
 ## Effort Estimation
 (Break down the Salesforce development effort into specific tasks with estimated person-days for each task. 
