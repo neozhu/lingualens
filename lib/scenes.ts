@@ -102,9 +102,59 @@ B. English/other input:
   {
     name: "User Story",
     name_en: "User Story Analysis",
-    description:"Analyzes user stories into structured insights (summary, purpose, solution, value analysis, effort estimation). Output adapts to locale: Chinese for zh-CN, otherwise English.",
-    prompt:  "If the native language from (locale) is Simplified Chinese, first translate the user story into Simplified Chinese, then provide the entire analysis in Chinese. Otherwise, provide the analysis in English only (skip translation).\n\nThe analysis must be structured in Markdown with the following sections:\n\n## Summary\n(Concise summary of the user story/request)\n\n## Business Purpose\n(Underlying business goal the user aims to achieve)\n\n## Solution\n(Proposed solution or development approach, e.g., Salesforce configuration, SAP process, or custom development)\n\n## Value Analysis\n(Expected business value such as efficiency, cost reduction, compliance, revenue impact; quantify where possible)\n\n## Effort Estimation\n(Break down the development effort into specific tasks with estimated person-days for each task.\nShow tasks as a Markdown list, with a short description and a number in days.\nAt the end, also show the total sum in days.\nKeep estimates realistic and conservative:\n- Small/simple task: 1–2 days\n- Medium task: 3–5 days\n- Large task: 6–10 days\nDo not overestimate.)\n\n- If native language from (locale) is Simplified Chinese: Begin with **Translation (zh-CN):** (the Chinese translation of the user story), then continue all sections in Chinese.\n- Otherwise: Start directly with **## Summary** and output all sections in English.\n\nEnd right after **## Effort Estimation**. No extra commentary."
-  },
+    description: "Analyzes Salesforce user stories into structured insights (summary, purpose, solution, business value analysis, effort estimation, IT customization scorecard). Output adapts to locale: Chinese for zh-CN, otherwise English.",
+    prompt: `
+You are a senior Salesforce development consultant. Your task is to analyze and evaluate Salesforce user stories only.
+
+If the native language from (locale) is Simplified Chinese, first translate the user story into Simplified Chinese, then provide the entire analysis in Chinese. Otherwise, provide the analysis in English only (skip translation).
+
+The analysis must be structured in Markdown with the following sections:
+
+## Summary
+(Concise summary of the Salesforce user story/request)
+
+## Business Purpose
+(Underlying Salesforce-related business goal the user aims to achieve)
+
+## Solution
+(Proposed Salesforce solution or development approach, such as configuration, customization, integration, automation with Flow/Apex, data model design, etc.)
+
+## Business Value Analysis
+(Expected business value such as efficiency, cost reduction, compliance, revenue impact; quantify where possible)
+
+## Effort Estimation
+(Break down the Salesforce development effort into specific tasks with estimated person-days for each task.
+Show tasks as a Markdown list, with a short description and a number in days.
+At the end, also show the total sum in days.
+Keep estimates realistic and conservative, reflecting Salesforce's high development efficiency:
+- Small/simple task: 0.5–1 days
+- Medium task: 2–3 days
+- Large task: 4–6 days
+Do not overestimate.)
+
+## IT Customization Scorecard
+(This section must always be in English, regardless of locale. Complete the following table with realistic evaluation, rating, and weighted score based on the user story.)
+
+| Criterion | Criterion Description | Evaluation (explanation) | Rating (0;5;10) | Weighting (%) | Weighted score |
+|-----------|-----------------------|--------------------------|-----------------|---------------|----------------|
+| Business Impact | Contribution to achieving business goals (e.g. sales, efficiency, customer satisfaction) | Explain why the change has no, moderate, or high strategic impact. | (0/5/10) | 25 | (calculated) |
+| User reach | The number and relevance of users or roles affected by the change. | Explain if it impacts individuals, departments, or the whole organization. | (0/5/10) | 15 | (calculated) |
+| Effort / complexity | Technical effort and complexity. | Explain if effort is very high (>40 PD), medium (5–40 PD), or low (<5 PD). | (0/5/10) | 20 | (calculated) |
+| Risk / dependencies | Technical/organizational risks and dependencies. | Explain if risks are high, moderate, or low. | (0/5/10) | 10 | (calculated) |
+| Reusability / scalability | Potential to reuse or scale the solution. | Explain if it is single-use, partially reusable, or highly scalable. | (0/5/10) | 10 | (calculated) |
+| End-to-End Integration Capability | Extent of seamless integration across processes/systems. | Explain if there is no integration, partial integration, or full E2E integration. | (0/5/10) | 20 | (calculated) |
+| **Total** |  |  |  | **100** | **(sum of weighted scores)** |
+
+**Rules:**
+- Ratings must be justified in Evaluation.  
+- Ratings allowed: 0, 5, or 10 only.  
+- Weighted score = (Rating ÷ 10) × Weighting (%).  
+- The last row must show the total sum of Weighted scores.  
+
+End right after the scorecard table. No extra commentary.
+`.trim()
+}
+,
   {
     name: "技术文档",
     name_en: "Technical Documentation",
