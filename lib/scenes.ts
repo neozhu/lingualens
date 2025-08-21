@@ -134,22 +134,23 @@ Keep estimates realistic and conservative, reflecting Salesforce's high developm
 Do not overestimate.)
 
 ## IT Customization Scorecard
-(This section must always be in English, regardless of locale. Complete the following table with realistic evaluation based on the user story. Ratings must be justified in Evaluation.)
+(This section must always be in English, regardless of locale. Use the template below and fill in Evaluation, Rating (0;5;10), and Weighted score. Weighting (%) must remain unchanged. Weighted score = Rating × Weighting ÷ 100. The last row must show the total sum of Weighted scores.)
 
 | Criterion | Criterion Description | Evaluation (explanation) | Rating (0;5;10) | Weighting (%) | Weighted score |
 |-----------|-----------------------|--------------------------|-----------------|---------------|----------------|
-| Business Impact | Contribution to achieving business goals (e.g. sales, efficiency, customer satisfaction) | Explanation of impact. | (0/5/10) | 25 | (Rating × 25 ÷ 100) |
-| User reach | The number and relevance of users or roles affected by the change. | Explanation of user reach. | (0/5/10) | 15 | (Rating × 15 ÷ 100) |
-| Effort / complexity | Technical effort and complexity. | Explanation of complexity. | (0/5/10) | 20 | (Rating × 20 ÷ 100) |
-| Risk / dependencies | Technical/organizational risks and dependencies. | Explanation of risk. | (0/5/10) | 10 | (Rating × 10 ÷ 100) |
-| Reusability / scalability | Potential to reuse or scale the solution. | Explanation of scalability. | (0/5/10) | 10 | (Rating × 10 ÷ 100) |
-| End-to-End Integration Capability | Extent of seamless integration across processes/systems. | Explanation of integration capability. | (0/5/10) | 20 | (Rating × 20 ÷ 100) |
-| **Total** |  |  |  | **100** | **(sum of weighted scores)** |
+| Business Impact | Contribution to achieving business goals (e.g. sales, efficiency, customer satisfaction) | "0: No recognizable benefit, 5: Moderate benefit for several departments, 10: Strategically important, high ROI, competitive advantage, legal requirement" |   | 25 |   |
+| User reach | The number and relevance of users or roles affected by the change, and how critical the change is to their daily work. | "0: Only individual persons affected, 5: Several departments affected, 10: Group-wide relevance" |   | 15 |   |
+| Effort / complexity | The level of technical effort and complexity required for implementation, including development, testing, deployment, and coordination. | "0: Very high effort (> 40 PD), 5: Medium effort (5-40 PD), 10: Low effort (< 5 PD)" |   | 20 |   |
+| Risk / dependencies | Technical (incl. technical debts), organizational or external risks | "0: High risks, critical dependencies, a lot of effort to upgrade systems 5: Moderate risks, 10: Low risk, independent" |   | 10 |   |
+| Reusability / scalability | The potential for the solution to be reused in other contexts or scaled to additional business units, regions, or use cases. | "0: Can only be used once, 5: Partially reusable, 10: Highly scalable and reusable / supplier best practice recommendation" |   | 10 |   |
+| End-to-End Integration Capability | The extent to which the solution enables seamless, automated integration across the entire process chain—covering systems, data flows, and organizational units. | "0: No integration or isolated solution; manual handovers or media breaks between systems/processes 5: Partial integration; some automated interfaces exist, but gaps remain in the end-to-end process; 10: Fully integrated end-to-end process; seamless data and process flow across all relevant systems and stakeholders" |   | 20 |   |
+| **Total** |  |  |  | **100** | **(sum)** |
 
 **Rules:**
+- Fill in Evaluation with explanation for the chosen Rating.  
 - Ratings allowed: 0, 5, or 10 only.  
-- Weighting (%) must not change.  
-- Weighted score = Rating × Weighting (%) ÷ 100.  
+- Weighting (%) must remain as in the template.  
+- Weighted score = Rating × Weighting ÷ 100.  
 - The last row must show the total sum of Weighted scores.  
 
 End right after the scorecard table. No extra commentary.
