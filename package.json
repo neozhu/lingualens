@@ -63,6 +63,7 @@
     "remeda": "^2.22.5",
     "shiki": "^3.4.2",
     "sonner": "^2.0.4",
+    "streamdown": "^1.0.12",
     "swr": "^2.3.3",
     "tailwind-merge": "^3.3.0",
     "tailwindcss-motion": "^1.1.0",

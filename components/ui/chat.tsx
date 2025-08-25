@@ -365,7 +365,7 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
   const tCommon = useTranslations('common')
 
   return (
-    <Conversation className="pb-4">
+    <Conversation className="relative w-full pb-4">
       <ConversationContent>
         {messages.map((m, index) => {
           const from: 'user' | 'assistant' | 'system' =
@@ -389,7 +389,7 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
           <AIMessage key={key} from={from}>
             <div className="flex flex-col gap-0">
               <MessageContent>
-                <Response>{text}</Response>
+                {from === 'assistant' ? <Response>{text}</Response> : text}
               </MessageContent>
               {from === 'assistant' && (
                 <Actions className="mt-1 self-start">
