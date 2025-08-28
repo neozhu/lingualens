@@ -10,13 +10,13 @@ importers:
     dependencies:
       '@ai-sdk/google':
         specifier: ^2.0.11
-        version: 2.0.11(zod@3.25.47)
+        version: 2.0.11(zod@4.1.4)
       '@ai-sdk/openai':
         specifier: ^2.0.22
-        version: 2.0.22(zod@3.25.47)
+        version: 2.0.22(zod@4.1.4)
       '@ai-sdk/react':
         specifier: ^2.0.26
-        version: 2.0.26(react@19.1.1)(zod@3.25.47)
+        version: 2.0.26(react@19.1.1)(zod@4.1.4)
       '@dnd-kit/core':
         specifier: ^6.3.1
         version: 6.3.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -100,7 +100,7 @@ importers:
         version: 1.2.0(next@15.5.2(@opentelemetry/api@1.9.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
       ai:
         specifier: ^5.0.26
-        version: 5.0.26(zod@3.25.47)
+        version: 5.0.26(zod@4.1.4)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -165,8 +165,8 @@ importers:
         specifier: ^2.22.5
         version: 2.22.5
       shiki:
-        specifier: ^3.4.2
-        version: 3.4.2
+        specifier: ^3.12.0
+        version: 3.12.0
       sonner:
         specifier: ^2.0.4
         version: 2.0.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -192,8 +192,8 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1(react@19.1.1)
       zod:
-        specifier: ^3.25.47
-        version: 3.25.47
+        specifier: ^4.1.4
+        version: 4.1.4
       zustand:
         specifier: ^5.0.5
         version: 5.0.5(@types/react@19.1.9)(react@19.1.1)(use-sync-external-store@1.5.0(react@19.1.1))
@@ -1389,41 +1389,23 @@ packages:
   '@schummar/icu-type-parser@1.21.5':
     resolution: {integrity: sha512-bXHSaW5jRTmke9Vd0h5P7BtWZG9Znqb8gSDxZnxaGSJnGwPLDPfS+3g0BKzeWqzgZPsIVZkM7m2tbo18cm5HBw==}
 
-  '@shikijs/core@3.11.0':
-    resolution: {integrity: sha512-oJwU+DxGqp6lUZpvtQgVOXNZcVsirN76tihOLBmwILkKuRuwHteApP8oTXmL4tF5vS5FbOY0+8seXmiCoslk4g==}
+  '@shikijs/core@3.12.0':
+    resolution: {integrity: sha512-rPfCBd6gHIKBPpf2hKKWn2ISPSrmRKAFi+bYDjvZHpzs3zlksWvEwaF3Z4jnvW+xHxSRef7qDooIJkY0RpA9EA==}
 
-  '@shikijs/core@3.4.2':
-    resolution: {integrity: sha512-AG8vnSi1W2pbgR2B911EfGqtLE9c4hQBYkv/x7Z+Kt0VxhgQKcW7UNDVYsu9YxwV6u+OJrvdJrMq6DNWoBjihQ==}
+  '@shikijs/engine-javascript@3.12.0':
+    resolution: {integrity: sha512-Ni3nm4lnKxyKaDoXQQJYEayX052BL7D0ikU5laHp+ynxPpIF1WIwyhzrMU6WDN7AoAfggVR4Xqx3WN+JTS+BvA==}
 
-  '@shikijs/engine-javascript@3.11.0':
-    resolution: {integrity: sha512-6/ov6pxrSvew13k9ztIOnSBOytXeKs5kfIR7vbhdtVRg+KPzvp2HctYGeWkqv7V6YIoLicnig/QF3iajqyElZA==}
+  '@shikijs/engine-oniguruma@3.12.0':
+    resolution: {integrity: sha512-IfDl3oXPbJ/Jr2K8mLeQVpnF+FxjAc7ZPDkgr38uEw/Bg3u638neSrpwqOTnTHXt1aU0Fk1/J+/RBdst1kVqLg==}
 
-  '@shikijs/engine-javascript@3.4.2':
-    resolution: {integrity: sha512-1/adJbSMBOkpScCE/SB6XkjJU17ANln3Wky7lOmrnpl+zBdQ1qXUJg2GXTYVHRq+2j3hd1DesmElTXYDgtfSOQ==}
+  '@shikijs/langs@3.12.0':
+    resolution: {integrity: sha512-HIca0daEySJ8zuy9bdrtcBPhcYBo8wR1dyHk1vKrOuwDsITtZuQeGhEkcEfWc6IDyTcom7LRFCH6P7ljGSCEiQ==}
 
-  '@shikijs/engine-oniguruma@3.11.0':
-    resolution: {integrity: sha512-4DwIjIgETK04VneKbfOE4WNm4Q7WC1wo95wv82PoHKdqX4/9qLRUwrfKlmhf0gAuvT6GHy0uc7t9cailk6Tbhw==}
+  '@shikijs/themes@3.12.0':
+    resolution: {integrity: sha512-/lxvQxSI5s4qZLV/AuFaA4Wt61t/0Oka/P9Lmpr1UV+HydNCczO3DMHOC/CsXCCpbv4Zq8sMD0cDa7mvaVoj0Q==}
 
-  '@shikijs/engine-oniguruma@3.4.2':
-    resolution: {integrity: sha512-zcZKMnNndgRa3ORja6Iemsr3DrLtkX3cAF7lTJkdMB6v9alhlBsX9uNiCpqofNrXOvpA3h6lHcLJxgCIhVOU5Q==}
-
-  '@shikijs/langs@3.11.0':
-    resolution: {integrity: sha512-Njg/nFL4HDcf/ObxcK2VeyidIq61EeLmocrwTHGGpOQx0BzrPWM1j55XtKQ1LvvDWH15cjQy7rg96aJ1/l63uw==}
-
-  '@shikijs/langs@3.4.2':
-    resolution: {integrity: sha512-H6azIAM+OXD98yztIfs/KH5H4PU39t+SREhmM8LaNXyUrqj2mx+zVkr8MWYqjceSjDw9I1jawm1WdFqU806rMA==}
-
-  '@shikijs/themes@3.11.0':
-    resolution: {integrity: sha512-BhhWRzCTEk2CtWt4S4bgsOqPJRkapvxdsifAwqP+6mk5uxboAQchc0etiJ0iIasxnMsb764qGD24DK9albcU9Q==}
-
-  '@shikijs/themes@3.4.2':
-    resolution: {integrity: sha512-qAEuAQh+brd8Jyej2UDDf+b4V2g1Rm8aBIdvt32XhDPrHvDkEnpb7Kzc9hSuHUxz0Iuflmq7elaDuQAP9bHIhg==}
-
-  '@shikijs/types@3.11.0':
-    resolution: {integrity: sha512-RB7IMo2E7NZHyfkqAuaf4CofyY8bPzjWPjJRzn6SEak3b46fIQyG6Vx5fG/obqkfppQ+g8vEsiD7Uc6lqQt32Q==}
-
-  '@shikijs/types@3.4.2':
-    resolution: {integrity: sha512-zHC1l7L+eQlDXLnxvM9R91Efh2V4+rN3oMVS2swCBssbj2U/FBwybD1eeLaq8yl/iwT+zih8iUbTBCgGZOYlVg==}
+  '@shikijs/types@3.12.0':
+    resolution: {integrity: sha512-jsFzm8hCeTINC3OCmTZdhR9DOl/foJWplH2Px0bTi4m8z59fnsueLsweX82oGcjRQ7mfQAluQYKGoH2VzsWY4A==}
 
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
@@ -4149,11 +4131,8 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  shiki@3.11.0:
-    resolution: {integrity: sha512-VgKumh/ib38I1i3QkMn6mAQA6XjjQubqaAYhfge71glAll0/4xnt8L2oSuC45Qcr/G5Kbskj4RliMQddGmy/Og==}
-
-  shiki@3.4.2:
-    resolution: {integrity: sha512-wuxzZzQG8kvZndD7nustrNFIKYJ1jJoWIPaBpVe2+KHSvtzMi4SBjOxrigs8qeqce/l3U0cwiC+VAkLKSunHQQ==}
+  shiki@3.12.0:
+    resolution: {integrity: sha512-E+ke51tciraTHpaXYXfqnPZFSViKHhSQ3fiugThlfs/om/EonlQ0hSldcqgzOWWqX6PcjkKKzFgrjIaiPAXoaA==}
 
   shimmer@1.2.1:
     resolution: {integrity: sha512-sQTKC1Re/rM6XyFM6fIAGHRPVGvyXfgzIDvzoq608vM+jeyVD0Tu1E6Np0Kc2zAIFWIj963V2800iF/9LPieQw==}
@@ -4641,11 +4620,11 @@ packages:
     peerDependencies:
       zod: ^3.24.1
 
-  zod@3.25.47:
-    resolution: {integrity: sha512-+f8+agSYoT9niC0VUL60IuXnr81FJeJ27Lf5YPrmcxTWmygcpGBeEuAAovDDEjkyQ36KyqNswwbhISZ1Z7yY+A==}
-
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+
+  zod@4.1.4:
+    resolution: {integrity: sha512-2YqJuWkU6IIK9qcE4k1lLLhyZ6zFw7XVRdQGpV97jEIZwTrscUw+DY31Xczd8nwaoksyJUIxCojZXwckJovWxA==}
 
   zustand@5.0.5:
     resolution: {integrity: sha512-mILtRfKW9xM47hqxGIxCv12gXusoY/xTSHBYApXozR0HmQv299whhBeeAcRy+KrPPybzosvJBCOmVjq6x12fCg==}
@@ -4670,44 +4649,44 @@ packages:
 
 snapshots:
 
-  '@ai-sdk/gateway@1.0.15(zod@3.25.47)':
+  '@ai-sdk/gateway@1.0.15(zod@4.1.4)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.7(zod@3.25.47)
-      zod: 3.25.47
+      '@ai-sdk/provider-utils': 3.0.7(zod@4.1.4)
+      zod: 4.1.4
 
-  '@ai-sdk/google@2.0.11(zod@3.25.47)':
+  '@ai-sdk/google@2.0.11(zod@4.1.4)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.7(zod@3.25.47)
-      zod: 3.25.47
+      '@ai-sdk/provider-utils': 3.0.7(zod@4.1.4)
+      zod: 4.1.4
 
-  '@ai-sdk/openai@2.0.22(zod@3.25.47)':
+  '@ai-sdk/openai@2.0.22(zod@4.1.4)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.7(zod@3.25.47)
-      zod: 3.25.47
+      '@ai-sdk/provider-utils': 3.0.7(zod@4.1.4)
+      zod: 4.1.4
 
-  '@ai-sdk/provider-utils@3.0.7(zod@3.25.47)':
+  '@ai-sdk/provider-utils@3.0.7(zod@4.1.4)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
       '@standard-schema/spec': 1.0.0
       eventsource-parser: 3.0.5
-      zod: 3.25.47
+      zod: 4.1.4
 
   '@ai-sdk/provider@2.0.0':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@2.0.26(react@19.1.1)(zod@3.25.47)':
+  '@ai-sdk/react@2.0.26(react@19.1.1)(zod@4.1.4)':
     dependencies:
-      '@ai-sdk/provider-utils': 3.0.7(zod@3.25.47)
-      ai: 5.0.26(zod@3.25.47)
+      '@ai-sdk/provider-utils': 3.0.7(zod@4.1.4)
+      ai: 5.0.26(zod@4.1.4)
       react: 19.1.1
       swr: 2.3.3(react@19.1.1)
       throttleit: 2.1.0
     optionalDependencies:
-      zod: 3.25.47
+      zod: 4.1.4
 
   '@alloc/quick-lru@5.2.0': {}
 
@@ -4908,8 +4887,8 @@ snapshots:
       express: 4.21.2
       get-port: 5.1.1
       json-schema: 0.4.0
-      zod: 3.25.47
-      zod-to-json-schema: 3.24.5(zod@3.25.47)
+      zod: 3.25.76
+      zod-to-json-schema: 3.24.5(zod@3.25.76)
     transitivePeerDependencies:
       - supports-color
 
@@ -4928,8 +4907,8 @@ snapshots:
       '@modelcontextprotocol/sdk': 1.12.1
       google-auth-library: 9.15.1
       ws: 8.18.2
-      zod: 3.25.47
-      zod-to-json-schema: 3.24.5(zod@3.25.47)
+      zod: 3.25.76
+      zod-to-json-schema: 3.24.5(zod@3.25.76)
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -5870,64 +5849,33 @@ snapshots:
 
   '@schummar/icu-type-parser@1.21.5': {}
 
-  '@shikijs/core@3.11.0':
+  '@shikijs/core@3.12.0':
     dependencies:
-      '@shikijs/types': 3.11.0
+      '@shikijs/types': 3.12.0
       '@shikijs/vscode-textmate': 10.0.2
       '@types/hast': 3.0.4
       hast-util-to-html: 9.0.5
 
-  '@shikijs/core@3.4.2':
+  '@shikijs/engine-javascript@3.12.0':
     dependencies:
-      '@shikijs/types': 3.4.2
-      '@shikijs/vscode-textmate': 10.0.2
-      '@types/hast': 3.0.4
-      hast-util-to-html: 9.0.5
-
-  '@shikijs/engine-javascript@3.11.0':
-    dependencies:
-      '@shikijs/types': 3.11.0
+      '@shikijs/types': 3.12.0
       '@shikijs/vscode-textmate': 10.0.2
       oniguruma-to-es: 4.3.3
 
-  '@shikijs/engine-javascript@3.4.2':
+  '@shikijs/engine-oniguruma@3.12.0':
     dependencies:
-      '@shikijs/types': 3.4.2
-      '@shikijs/vscode-textmate': 10.0.2
-      oniguruma-to-es: 4.3.3
-
-  '@shikijs/engine-oniguruma@3.11.0':
-    dependencies:
-      '@shikijs/types': 3.11.0
+      '@shikijs/types': 3.12.0
       '@shikijs/vscode-textmate': 10.0.2
 
-  '@shikijs/engine-oniguruma@3.4.2':
+  '@shikijs/langs@3.12.0':
     dependencies:
-      '@shikijs/types': 3.4.2
-      '@shikijs/vscode-textmate': 10.0.2
+      '@shikijs/types': 3.12.0
 
-  '@shikijs/langs@3.11.0':
+  '@shikijs/themes@3.12.0':
     dependencies:
-      '@shikijs/types': 3.11.0
+      '@shikijs/types': 3.12.0
 
-  '@shikijs/langs@3.4.2':
-    dependencies:
-      '@shikijs/types': 3.4.2
-
-  '@shikijs/themes@3.11.0':
-    dependencies:
-      '@shikijs/types': 3.11.0
-
-  '@shikijs/themes@3.4.2':
-    dependencies:
-      '@shikijs/types': 3.4.2
-
-  '@shikijs/types@3.11.0':
-    dependencies:
-      '@shikijs/vscode-textmate': 10.0.2
-      '@types/hast': 3.0.4
-
-  '@shikijs/types@3.4.2':
+  '@shikijs/types@3.12.0':
     dependencies:
       '@shikijs/vscode-textmate': 10.0.2
       '@types/hast': 3.0.4
@@ -6367,13 +6315,13 @@ snapshots:
 
   agent-base@7.1.3: {}
 
-  ai@5.0.26(zod@3.25.47):
+  ai@5.0.26(zod@4.1.4):
     dependencies:
-      '@ai-sdk/gateway': 1.0.15(zod@3.25.47)
+      '@ai-sdk/gateway': 1.0.15(zod@4.1.4)
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.7(zod@3.25.47)
+      '@ai-sdk/provider-utils': 3.0.7(zod@4.1.4)
       '@opentelemetry/api': 1.9.0
-      zod: 3.25.47
+      zod: 4.1.4
 
   ajv-formats@3.0.1(ajv@8.17.1):
     optionalDependencies:
@@ -9287,25 +9235,14 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
-  shiki@3.11.0:
+  shiki@3.12.0:
     dependencies:
-      '@shikijs/core': 3.11.0
-      '@shikijs/engine-javascript': 3.11.0
-      '@shikijs/engine-oniguruma': 3.11.0
-      '@shikijs/langs': 3.11.0
-      '@shikijs/themes': 3.11.0
-      '@shikijs/types': 3.11.0
-      '@shikijs/vscode-textmate': 10.0.2
-      '@types/hast': 3.0.4
-
-  shiki@3.4.2:
-    dependencies:
-      '@shikijs/core': 3.4.2
-      '@shikijs/engine-javascript': 3.4.2
-      '@shikijs/engine-oniguruma': 3.4.2
-      '@shikijs/langs': 3.4.2
-      '@shikijs/themes': 3.4.2
-      '@shikijs/types': 3.4.2
+      '@shikijs/core': 3.12.0
+      '@shikijs/engine-javascript': 3.12.0
+      '@shikijs/engine-oniguruma': 3.12.0
+      '@shikijs/langs': 3.12.0
+      '@shikijs/themes': 3.12.0
+      '@shikijs/types': 3.12.0
       '@shikijs/vscode-textmate': 10.0.2
       '@types/hast': 3.0.4
 
@@ -9376,7 +9313,7 @@ snapshots:
       rehype-katex: 7.0.1
       remark-gfm: 4.0.1
       remark-math: 6.0.0
-      shiki: 3.11.0
+      shiki: 3.12.0
       tailwind-merge: 3.3.1
     transitivePeerDependencies:
       - '@types/react'
@@ -9848,17 +9785,17 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod-to-json-schema@3.24.5(zod@3.25.47):
+  zod-to-json-schema@3.24.5(zod@3.25.76):
     dependencies:
-      zod: 3.25.47
+      zod: 3.25.76
 
   zod-to-json-schema@3.24.6(zod@3.25.76):
     dependencies:
       zod: 3.25.76
 
-  zod@3.25.47: {}
-
   zod@3.25.76: {}
+
+  zod@4.1.4: {}
 
   zustand@5.0.5(@types/react@19.1.9)(react@19.1.1)(use-sync-external-store@1.5.0(react@19.1.1)):
     optionalDependencies:
