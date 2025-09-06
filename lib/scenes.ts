@@ -15,13 +15,13 @@ export const SCENES: Scene[] = [
     name: "日常沟通",
     name_en: "Daily Communication",
     description: "For translating what you'd say in Teams chats or during meetings. Keep it natural, concise, and professional‑casual.",
-    prompt: `Translate for Teams chat/meetings.
+    prompt: `Translate for everyday chat and talk.
 
-- Keep speaker labels and line breaks.
-- Natural, concise, professional‑casual; short, direct sentences (contractions ok).
-- Preserve intent (requests/updates/questions/action items); do not add greetings/sign‑offs.
-- Avoid stiff jargon and slang.
-- If multiple lines, translate each line separately in order.`.trim()
+- Keep names and line breaks.
+- Use simple, common words; short, natural sentences (contractions OK).
+- Keep the same meaning and tone (requests, updates, questions, to‑dos).
+- Avoid slang and buzzwords.
+- If there are many lines, translate each line in order.`.trim()
   },
   {
     name: "单词解释",
@@ -47,17 +47,27 @@ B. English/other input:
 3) Three numbered example sentences using the input together with a common English synonym/phrase, showing varied patterns.`.trim()
   },
   {
-    name: "邮件",
-    name_en: "Email",
-    description: "For translating professional business emails. Preserve structure (subject, greeting, body, closing) and keep tone formal, polite, and concise.",
-    prompt: `Formal business email.
+    name: "邮件回复",
+    name_en: "Email Reply",
+    description: "Two‑phase email helper: if an email isn't in your native language (from locale), first translate it into your native language. Then, when you write your reply in your native language, draft a polished reply in the original email's language by combining the original context with your intended response.",
+    prompt: `Email assistant (2 phases). Decide phase from this message only.
 
-- Preserve subject, greeting, sign‑offs, and signature blocks; do not invent details.
-- If no greeting, add an appropriate one (e.g., "Dear [Name]," or "Hello,") per context.
-- Preserve lists/numbering; one blank line between paragraphs.
-- Clear, polite, professional; concise and action‑oriented.
-- Keep dates, numbers, attachments, and proper nouns accurate.
-- If no closing, end with: "Best regards,\n[Your name]".`.trim()
+- Phase 1 — Translate email → native language (from locale)
+  - Trigger if the input looks like an email (Subject/From/To/Date or greeting/closing) and its language ≠ native.
+  - Translate only user‑facing text; keep Subject, From, To, Date, greeting, body, closing, lists, and line breaks.
+  - Keep dates, numbers, attachments, links, and proper nouns accurate; do not invent details.
+
+- Phase 2 — Draft reply in the original email's language
+  - Input: your intended reply written in your native language (from locale), optionally with quoted/original email.
+  - Output language: same as the original email's language (detect from quoted/original content; if unknown, mirror the language of the initial email block in this message).
+  - Start with an appropriate greeting (e.g., "Dear [Name]," or "Hello,") unless one is already present; preserve thread style (RE/FW subject prefixes).
+  - Body: write a full reply in the original email's language that expresses your native‑language draft, adapted to the original email’s context (thread history, asks, tone). Clearly answer each point in the original email and keep facts consistent.
+  - End with a suitable closing/sign‑off; include signature only if provided.
+
+- Global
+  - Preserve formatting (subject, thread prefixes; lists/numbering; one blank line between paragraphs).
+  - Keep Markdown if present; preserve placeholders (e.g., {id}, %s, \${VAR}); do not translate code/identifiers.
+  - Professional tone; avoid slang and buzzwords.`.trim()
   },
   {
     name: "新闻资讯",
