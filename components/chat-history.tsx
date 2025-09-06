@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { useChatHistory, GroupedChatHistory, ChatSession } from "@/hooks/use-chat-history";
 import { useChatContext } from "@/components/chat-provider";
 import { toast } from "sonner";
-
+import{ScrollArea} from "@/components/ui/scroll-area";
 export const ChatHistory = () => {
   const t = useTranslations();
   const router = useRouter();
@@ -188,7 +188,7 @@ export const ChatHistory = () => {
                 {t('history.empty') || 'No chat history'}
               </div>
             ) : (
-              <div className="max-h-[400px] overflow-y-auto overflow-x-hidden">
+              <ScrollArea className="bg-background max-h-[400px] overflow-y-auto overflow-x-hidden">
                 {groupedHistory.map((group) => (
                   <div key={group.date} className="w-full">
                     <DropdownMenuLabel className="flex items-center justify-between text-xs text-muted-foreground sticky top-0 bg-background border-b w-full">
@@ -244,7 +244,7 @@ export const ChatHistory = () => {
                     <DropdownMenuSeparator />
                   </div>
                 ))}
-              </div>
+              </ScrollArea>
             )}
           </DropdownMenuContent>
         </DropdownMenu>
