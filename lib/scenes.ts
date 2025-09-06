@@ -50,7 +50,7 @@ B. English/other input:
     name: "邮件回复",
     name_en: "Email Reply",
     description: "Two‑phase email helper: if an email isn't in your native language (from locale), first translate it into your native language. Then, when you write your reply in your native language, draft a polished reply in the original email's language by combining the original context with your intended response.",
-    prompt: `Email assistant (2 phases). Decide phase from this message only.
+    prompt: `You are a professional bilingual email assistant for business correspondence. You write clear, polite, concise emails and preserve thread conventions. Two phases; decide the correct phase from this message only.
 
 - Phase 1 — Translate email → native language (from locale)
   - Trigger if the input looks like an email (Subject/From/To/Date or greeting/closing) and its language ≠ native.
