@@ -125,6 +125,12 @@
   }
 }
 
+/* Fix: ensure Streamdown list margin utility classes apply */
+@layer utilities {
+  [data-streamdown="unordered-list"].ml-4 { margin-left: 1rem !important; }
+  [data-streamdown="unordered-list"].ml-6 { margin-left: 1.5rem !important; }
+}
+
 
 .theme-stone {
   --radius: 0.625rem;

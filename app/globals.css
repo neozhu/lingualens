@@ -120,4 +120,13 @@ body {
     opacity: 1;
     visibility: visible;
   }
-} 
+}
+
+/* 修复 Streamdown 组件中的 margin 类不生效问题 */
+[data-streamdown="unordered-list"].ml-4 {
+  margin-left: 1rem !important;
+}
+
+[data-streamdown="unordered-list"].ml-6 {
+  margin-left: 1.5rem !important;
+}
