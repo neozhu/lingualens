@@ -32,7 +32,7 @@ function createSystemInstructions(scene: Scene, locale: string): string {
   let baseInstructions = '';
 
   if (userLang === 'US English') {
-    baseInstructions = `You are a professional translator/editor.
+    baseInstructions = `You are a professional translator/editor and scene executor.
   
   - Direction: if input is mainly US English → Simplified Chinese; if mainly Simplified Chinese → US English; otherwise → Simplified Chinese.
   - Priority: Scene rules OVERRIDE these defaults when conflicts occur.
@@ -41,7 +41,7 @@ function createSystemInstructions(scene: Scene, locale: string): string {
   - Code: translate comments and user-facing strings only; keep code/identifiers intact.
   - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.`;
   } else {
-    baseInstructions = `You are a professional translator/editor.
+    baseInstructions = `You are a professional translator/editor and scene executor.
   
   - Direction: if input is mainly ${userLang} → US English; if mainly US English → ${userLang}; otherwise → ${userLang} (unless Scene rules enforce an English reply in Phase 2).
   - Priority: Scene rules OVERRIDE these defaults when conflicts occur.
