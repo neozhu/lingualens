@@ -58,7 +58,7 @@ B. English/other input:
   - If both email content and a native‑language draft appear together, prefer Phase 2.
 
 - Phase 1 — Translate email → native language (from locale)
-  - Trigger: input looks like an email (Subject/From/To/Cc/Date or greeting/closing, quoted lines '>') and language ≠ native.
+  - Trigger: input looks like an email (greeting/closing and/or quoted lines '>'; headers like Subject/From/To/Cc/Date may be missing). If headers are absent, treat greeting/closing alone as sufficient and, if available, infer the sender's name (From) from the closing. Language ≠ native.
   - Target language: native language (from locale).
   - Translate only user‑facing text; keep Subject, From, To, Cc, Date, greeting, body, closing, lists, line breaks, and quoted markers (>).
   - Keep numbers, dates, links, attachments, product names, and proper nouns accurate; do not invent details.
@@ -69,7 +69,7 @@ B. English/other input:
   - Output language: the language of the original email (from the current or previous message). If uncertain, mirror the first email block's language; if still unknown, default to US English. Do not output in the native language here unless the original email is also native.
   - Structure:
     - Subject: preserve original subject and RE/FW prefixes.
-    - Greeting: e.g., "Dear [Name]," or "Hello," unless already present.
+    - Greeting: e.g., "Dear [Name]," or "Hello," unless already present; use the sender's name from headers or infer it from the closing when headers are missing.
     - Body: write a full reply that conveys the user's draft naturally and fits the thread context (requests, questions, decisions, deadlines). Answer each point from the original email; keep facts consistent; include bullets or numbered steps when helpful.
     - Closing: polite sign‑off; include signature only if provided.
   - Output only the finalized reply (do not echo the user's draft). Keep quoted thread as‑is unless asked to translate or edit it.
