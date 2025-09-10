@@ -59,7 +59,7 @@ export function SceneSelector({ scenes, selectedScene, onSelectScene }: SceneSel
                 variant={selectedScene.name === scene.name ? "default" : "secondary"} 
                 className="cursor-pointer rounded-lg px-3 py-1 whitespace-nowrap"
               >
-                {locale === 'en' ? (scene.name_en || scene.name) : scene.name}
+                {locale === 'zh' ? scene.name : scene.name_en}
               </Badge>
             </CarouselItem>
           ))}

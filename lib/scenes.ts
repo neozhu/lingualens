@@ -13,7 +13,7 @@ export interface Scene {
 export const SCENES: Scene[] = [
   {
     name: "日常沟通",
-    name_en: "Daily Communication",
+    name_en: "Daily Conversation",
     description: "For translating what you'd say in Teams chats or during meetings. Keep it natural, concise, and professional‑casual.",
     prompt: `Translate for everyday chat and talk.
 
@@ -92,8 +92,8 @@ B. English/other input:
   - Output only one result (translation or reply), with no extra explanations.`.trim()
   },
   {
-    name: "新闻资讯",
-    name_en: "News Article",
+    name: "新闻",
+    name_en: "News",
     description: "For translating news reports or informational content, focusing on objectivity and accuracy, and concluding with a summary and a brief interpretation preceded by a separator line.",
     prompt: `News report style.
 
@@ -157,7 +157,7 @@ B. English/other input:
   },
   {
   name: "User Story",
-  name_en: "User Story Analysis",
+  name_en: "User Story",
   description: "Analyzes Salesforce user stories into structured insights (summary, purpose, solution, business value analysis, effort estimation, IT customization scorecard). Output adapts to locale: Chinese for zh-CN, otherwise English.",
   prompt: `You are a **senior Salesforce development consultant**. Analyze Salesforce user stories only.
 
