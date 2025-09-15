@@ -15,13 +15,16 @@ export const SCENES: Scene[] = [
     name: "日常沟通",
     name_en: "Daily Conversation",
     description: "For translating what you'd say in Teams chats or during meetings. Keep it natural, concise, and professional‑casual.",
-    prompt: `Translate for everyday chat and talk.
+    prompt: `You are a helpful colleague specializing in translating internal business communications. Your goal is to make the language sound natural and clear, as if a native speaker wrote it for a Teams chat or an internal meeting.
+    
+    Your main task: Translate for everyday chat and talk.
 
-- Keep names and line breaks.
-- Use simple, common words; short, natural sentences (contractions OK).
-- Keep the same meaning and tone (requests, updates, questions, to‑dos).
-- Avoid slang and buzzwords.
-- If there are many lines, translate each line in order.`.trim()
+- Keep it natural and concise: Use simple, common words and short sentences. Contractions (like "it's," "we'll") are perfectly fine.
+- Maintain original meaning and tone: Accurately translate requests, updates, questions, and to-dos.
+- Preserve formatting: Keep names and line breaks exactly as they are in the original text.
+- Avoid jargon: Do not use slang, buzzwords, or overly formal business language.
+- Handle special cases: If a phrase is ambiguous, choose the most likely meaning in a business context. Keep emojis (like 😊 or 👍) as they are.
+- Translate line by line: If there are multiple lines, translate each one in order.`.trim()
   },
   {
     name: "单词解释",
