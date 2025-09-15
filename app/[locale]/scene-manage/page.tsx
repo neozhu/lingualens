@@ -416,7 +416,6 @@ Please create a translation prompt for the above scene that will guide an AI mod
                   placeholder={t("name")}
                   value={form.name || ""}
                   onChange={(e) => handleChange("name", e.target.value)}
-                  className={cn(!form.name && "border-amber-200")}
                 />
               </div>
               <div>
@@ -427,7 +426,6 @@ Please create a translation prompt for the above scene that will guide an AI mod
                   placeholder={t("englishName")}
                   value={form.name_en || ""}
                   onChange={(e) => handleChange("name_en", e.target.value)}
-                  className={cn(!form.name_en && "border-amber-200")}
                 />
               </div>
               <div className="flex gap-2">
@@ -445,7 +443,6 @@ Please create a translation prompt for the above scene that will guide an AI mod
                       onChange={(e) =>
                         handleChange("description", e.target.value)
                       }
-                      className={cn(!form.description && "border-amber-200")}
                     />{" "}
                     <Button
                       variant="outline"
@@ -480,16 +477,10 @@ Please create a translation prompt for the above scene that will guide an AI mod
                 </label>
                 <Textarea
                   placeholder={t("promptPlaceholder")}
-                  rows={6}
+                  rows={8}
                   value={form.prompt || ""}
                   onChange={(e) => handleChange("prompt", e.target.value)}
-                  className={cn(
-                    "font-mono text-sm whitespace-pre-wrap",
-                    !form.prompt && "border-amber-200",
-                    form.prompt &&
-                    form.prompt.length > 400 &&
-                    "border-amber-500"
-                  )}
+                  
                 />{" "}
                 {form.prompt && (
                   <div className="text-xs text-right mt-1 text-muted-foreground">
