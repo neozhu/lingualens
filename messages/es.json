@@ -93,6 +93,7 @@
     "promptGeneratedSuccess": "Indicación generada con éxito",
     "promptGenerationFailed": "No se pudo generar la indicación, inténtelo de nuevo",
     "customScenesTitle": "Escenas personalizadas",
+    "noCustomScenesHint": "Aún no hay escenas personalizadas. Haz clic en + para agregar una.",
     "builtinScenesTitle": "Escenas integradas"
   },
   "tooltip": {

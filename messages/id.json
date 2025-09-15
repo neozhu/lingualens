@@ -93,12 +93,13 @@
     "promptGeneratedSuccess": "Prompt berhasil dibuat",
     "promptGenerationFailed": "Gagal membuat prompt, silakan coba lagi",
     "customScenesTitle": "Adegan kustom",
+    "noCustomScenesHint": "Belum ada adegan kustom. Klik + untuk menambahkan.",
     "builtinScenesTitle": "Adegan bawaan"
   },
   "tooltip": {
     "switchLanguage": "Ganti Bahasa",
     "selectTheme": "Pilih Tema",
-    "sceneManage": "Kelola Skena Kustom",
+    "sceneManage": "Kelola Adegan Kustom",
     "toggleMode": "Beralih Mode Terang/Gelap",
     "github": "Lihat di GitHub"
   },

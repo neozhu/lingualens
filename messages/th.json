@@ -93,6 +93,7 @@
     "promptGeneratedSuccess": "สร้างพรอมต์สำเร็จ",
     "promptGenerationFailed": "สร้างพรอมต์ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง",
     "customScenesTitle": "ฉากที่กำหนดเอง",
+    "noCustomScenesHint": "ยังไม่มีฉากที่กำหนดเอง คลิก + เพื่อเพิ่ม",
     "builtinScenesTitle": "ฉากในตัว"
   },
   "tooltip": {

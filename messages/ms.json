@@ -93,6 +93,7 @@
     "promptGeneratedSuccess": "Prompt berjaya dijana",
     "promptGenerationFailed": "Penjanaan prompt gagal, sila cuba lagi",
     "customScenesTitle": "Adegan tersuai",
+    "noCustomScenesHint": "Tiada adegan tersuai lagi. Klik + untuk menambah.",
     "builtinScenesTitle": "Adegan terbina dalam"
   },
   "tooltip": {

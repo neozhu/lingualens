@@ -93,6 +93,7 @@
     "promptGeneratedSuccess": "Invite générée avec succès",
     "promptGenerationFailed": "Échec de la génération de l'invite, veuillez réessayer",
     "customScenesTitle": "Scènes personnalisées",
+    "noCustomScenesHint": "Aucune scène personnalisée pour le moment. Cliquez sur + pour en ajouter une.",
     "builtinScenesTitle": "Scènes intégrées"
   },
   "tooltip": {

@@ -100,6 +100,7 @@
     "promptGeneratedSuccess": "已成功生成提示词",
     "promptGenerationFailed": "生成提示词失败，请重试",
     "customScenesTitle": "自定义场景",
+    "noCustomScenesHint": "暂时还没有自定义场景，点击 + 新增一个吧。",
     "builtinScenesTitle": "内置场景"
   },  "modeToggle": {
     "switch": "切换主题",

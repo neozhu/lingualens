@@ -93,6 +93,7 @@
     "promptGeneratedSuccess": "Tạo prompt thành công",
     "promptGenerationFailed": "Tạo prompt thất bại, vui lòng thử lại",
     "customScenesTitle": "Cảnh tùy chỉnh",
+    "noCustomScenesHint": "Chưa có cảnh tùy chỉnh nào. Nhấn + để thêm.",
     "builtinScenesTitle": "Cảnh tích hợp"
   },
   "tooltip": {

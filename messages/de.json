@@ -93,6 +93,7 @@
     "promptGeneratedSuccess": "Prompt erfolgreich generiert",
     "promptGenerationFailed": "Prompt-Generierung fehlgeschlagen, bitte erneut versuchen",
     "customScenesTitle": "Benutzerdefinierte Szenen",
+    "noCustomScenesHint": "Noch keine benutzerdefinierten Szenen. Klicken Sie auf +, um eine hinzuzufügen.",
     "builtinScenesTitle": "Integrierte Szenen"
   },
   "tooltip": {

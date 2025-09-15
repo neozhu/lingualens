@@ -93,6 +93,7 @@
     "promptGeneratedSuccess": "プロンプトの生成に成功しました",
     "promptGenerationFailed": "プロンプトの生成に失敗しました。再試行してください",
     "customScenesTitle": "カスタムシーン",
+    "noCustomScenesHint": "まだカスタムシーンがありません。+ をクリックして追加してください。",
     "builtinScenesTitle": "内蔵シーン"
   },
   "tooltip": {

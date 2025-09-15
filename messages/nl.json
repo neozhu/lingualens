@@ -93,6 +93,7 @@
     "promptGeneratedSuccess": "Prompt succesvol gegenereerd",
     "promptGenerationFailed": "Promptgeneratie mislukt, probeer het opnieuw",
     "customScenesTitle": "Aangepaste scènes",
+    "noCustomScenesHint": "Nog geen aangepaste scènes. Klik op + om er een toe te voegen.",
     "builtinScenesTitle": "Ingebouwde scènes"
   },
   "tooltip": {

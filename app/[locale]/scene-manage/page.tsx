@@ -477,10 +477,10 @@ Please create a translation prompt for the above scene that will guide an AI mod
                 </label>
                 <Textarea
                   placeholder={t("promptPlaceholder")}
-                  rows={8}
+                  rows={10}
                   value={form.prompt || ""}
                   onChange={(e) => handleChange("prompt", e.target.value)}
-                  
+                  className="resize-none overflow-y-auto"
                 />{" "}
                 {form.prompt && (
                   <div className="text-xs text-right mt-1 text-muted-foreground">

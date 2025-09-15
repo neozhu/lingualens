@@ -100,6 +100,7 @@
     "promptGeneratedSuccess": "Prompt generated successfully",
     "promptGenerationFailed": "Failed to generate prompt, please try again",
     "customScenesTitle": "Custom scenes",
+    "noCustomScenesHint": "No custom scenes yet. Click + to add one.",
     "builtinScenesTitle": "Built-in scenes"
   },
   "modeToggle": {

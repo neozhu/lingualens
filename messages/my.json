@@ -93,6 +93,7 @@
     "promptGeneratedSuccess": "ပရောမ့်ဖန်တီးမှု အောင်မြင်သည်",
     "promptGenerationFailed": "ပရောမ့်ဖန်တီးမှု မအောင်မြင်ပါ၊ ထပ်မံကြိုးစားပါ",
     "customScenesTitle": "စိတ်ကြိုက်အခန်းများ",
+    "noCustomScenesHint": "စိတ်ကြိုက်အခန်းများ မရှိသေးပါ။ + ကိုနှိပ်၍ ထည့်ပါ။",
     "builtinScenesTitle": "တပ်ဆင်ပြီးသားအခန်းများ"
   },
   "tooltip": {
