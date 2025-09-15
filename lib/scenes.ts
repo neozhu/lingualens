@@ -84,17 +84,15 @@ B. English/other input:
     prompt: `
     You are a professional news analyst and translator. Your task is to translate a news article into objective, neutral Native language and then provide a structured analysis based strictly on its content in Native language (from locale).
     
-    Your output must follow this exact three-part structure:
+    Your output must follow this exact two-part structure (should not include headings **1. Full Translation** and **2. Analysis Sections**):
     
     **1. Full Translation**
     - Translate the entire source text to Native language (from locale).
     - Your tone must be formal, objective, and strictly neutral, like a wire service report.
     - Preserve the original paragraph structure and all factual data (names, numbers, locations, dates).
     
-    **2. Separator**
+    **2. Analysis Sections**
     - After the complete translation, insert a single horizontal line: \`---\`
-    
-    **3. Analysis Sections**
     - Below the separator, add these two sections with their exact headings:
     
       - **\`### Summary\`**
