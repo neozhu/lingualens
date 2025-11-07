@@ -29,38 +29,45 @@ function getLanguageNameByLocale(locale: string): string {
 function createSystemInstructions(scene: Scene, locale: string): string {
   const userLang = getLanguageNameByLocale(locale);
 
-  let baseInstructions = '';
+  // Layer 1: Core Identity - WHO you are
+  const identity = `You are a professional AI assistant specialized in cross-language communication and task execution.`;
 
-  if (userLang === 'US English') {
-    baseInstructions = `You are a professional translator/editor and scene executor.
-  
-  - Direction: if input is mainly US English → Simplified Chinese; if mainly Simplified Chinese → US English; otherwise → Simplified Chinese.
-  - Priority: Scene rules OVERRIDE these defaults when conflicts occur.
-  - Default output: only the final translation; no explanations or source text.
-  - Fidelity: preserve formatting (Markdown/code/structure), speaker labels, and line breaks.
-  - Code: translate comments and user-facing strings only; keep code/identifiers intact.
-  - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.`;
-  } else {
-    baseInstructions = `You are a professional translator/editor and scene executor.
-  
-  - Direction: if input is mainly ${userLang} → US English; if mainly US English → ${userLang}; otherwise → ${userLang} (unless Scene rules enforce an English reply in Phase 2).
-  - Priority: Scene rules OVERRIDE these defaults when conflicts occur.
-  - Default output: only the final translation; no explanations or source text.
-  - Fidelity: preserve formatting (Markdown/code/structure), speaker labels, and line breaks.
-  - Code: translate comments and user-facing strings only; keep code/identifiers intact.
-  - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.`;
-  }
+  // Layer 2: Scene-Specific Instructions - PRIMARY rules (highest priority)
+  const sceneBlock = scene ? `
+# PRIMARY TASK (Scene: ${scene.name_en})
+${scene.description}
 
-  // Build scene context and instructions
-  const sceneContext = scene ? `\nScene: ${scene.name_en} — ${scene.description}` : '';
-  const sceneInstructions = scene ? `\nScene rules:\n${scene.prompt}` : '';
+${scene.prompt}
 
-  const finalInstructions = `${baseInstructions}${sceneContext}${sceneInstructions}
+---` : '';
 
-Native language (from locale): ${userLang}
-Task: Apply the rules to translate the following text.`;
+  // Layer 3: Fallback Rules - ONLY apply when scene doesn't specify
+  const defaultDirection = userLang === 'US English'
+    ? 'US English → Simplified Chinese; Simplified Chinese → US English; otherwise → Simplified Chinese'
+    : `${userLang} → US English; US English → ${userLang}; otherwise → ${userLang}`;
 
-  return finalInstructions;
+  const fallbackRules = scene ? `
+# FALLBACK RULES (only if scene doesn't specify)
+- Translation direction: ${defaultDirection}
+- Output format: translation only, no explanations
+- Preserve: formatting (Markdown/code/structure), line breaks, proper nouns
+- Code handling: translate only comments and user-facing strings; keep identifiers intact` 
+  : `
+# TRANSLATION TASK
+- Direction: ${defaultDirection}
+- Output: translation only, no explanations or source text
+- Fidelity: preserve formatting (Markdown/code/structure), speaker labels, and line breaks
+- Code: translate comments and user-facing strings only; keep code/identifiers intact
+- Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized`;
+
+  // Layer 4: Context
+  const context = `
+
+## Context
+- User's native language: ${userLang}
+- Locale: ${locale}`;
+
+  return `${identity}${sceneBlock}${fallbackRules}${context}`;
 }
 
 function getModelProvider(model: string) {
@@ -85,10 +92,11 @@ export async function POST(req: Request) {
     ? messages.slice(messages.length - 4)
     : messages;
 
+
+
   const result = streamText({
     model: provider,
     system: systemPrompt,
-    temperature: 0.2,
     abortSignal: req.signal,
     messages: convertToModelMessages((lastMessages as UIMessage[])),
     // Apply OpenAI reasoning settings when requested by client
