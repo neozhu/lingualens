@@ -236,8 +236,8 @@ export default function TranslatorChat() {  const [selectedModel, setSelectedMod
         thinkingEnabled={thinkingEnabled}
         onToggleThinking={() => setThinkingEnabled(prev => !prev)}
         suggestions={[
-          "生活就像一盒巧克力，你永远不知道下一颗是什么味道。",
-          "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+          "重要的不是你有多少资源，而是你有多大的决心。",
+          "When something is important enough, you do it even if the odds are not in your favor.",
           "Das Leben ist wie ein Fahrrad. Man muss sich vorwärts bewegen, um das Gleichgewicht zu halten.",
         ]}
       />
