@@ -109,7 +109,7 @@ export async function POST(req: Request) {
       }
       : {
         openai: {
-          reasoningEffort: 'minimal',
+          reasoningEffort: 'low',
           textVerbosity: 'low'
         },
       },
