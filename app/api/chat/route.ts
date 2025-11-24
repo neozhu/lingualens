@@ -27,10 +27,10 @@ function getLanguageNameByLocale(locale: string): string {
 }
 
 function createSystemInstructions(scene: Scene, locale: string): string {
-  const userLang = getLanguageNameByLocale(locale);
+  const targetLang = getLanguageNameByLocale(locale);
 
   // Layer 1: Core Identity - WHO you are
-  const identity = `You are a professional AI assistant specialized in cross-language communication and task execution.`;
+  const identity = `You are a professional AI assistant specialized in cross-language communication and task execution. Unless a scene overrides it, keep all user-facing outputs in the target language inferred from the locale.`;
 
   // Layer 2: Scene-Specific Instructions - PRIMARY rules (highest priority)
   const sceneBlock = scene ? `
@@ -42,18 +42,20 @@ ${scene.prompt}
 ---` : '';
 
   // Layer 3: Fallback Rules - ONLY apply when scene doesn't specify
-  const defaultDirection = userLang === 'US English'
-    ? 'US English → Simplified Chinese; Simplified Chinese → US English; otherwise → Simplified Chinese'
-    : `${userLang} → US English; US English → ${userLang}; otherwise → ${userLang}`;
+  const defaultDirection = targetLang === 'US English'
+    ? 'Other languages → US English; US English → the requested target language (if specified); otherwise → US English'
+    : `${targetLang} → US English; US English → ${targetLang}; otherwise → ${targetLang}`;
 
   const fallbackRules = scene ? `
 # FALLBACK RULES (only if scene doesn't specify)
+- Primary output language: ${targetLang}
 - Translation direction: ${defaultDirection}
 - Output format: translation only, no explanations
 - Preserve: formatting (Markdown/code/structure), line breaks, proper nouns
-- Code handling: translate only comments and user-facing strings; keep identifiers intact` 
+- Code handling: translate only comments and user-facing strings; keep identifiers intact`
   : `
 # TRANSLATION TASK
+- Primary output language: ${targetLang}
 - Direction: ${defaultDirection}
 - Output: translation only, no explanations or source text
 - Fidelity: preserve formatting (Markdown/code/structure), speaker labels, and line breaks
@@ -64,7 +66,7 @@ ${scene.prompt}
   const context = `
 
 ## Context
-- User's native language: ${userLang}
+- Target language (for user-facing outputs): ${targetLang}
 - Locale: ${locale}`;
 
   return `${identity}${sceneBlock}${fallbackRules}${context}`;
