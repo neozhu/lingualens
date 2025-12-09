@@ -78,6 +78,8 @@ pnpm install
 npm install
 ```
 
+If your registry policy blocks `npx fix-react2shell-next` during setup, you can rerun it later with `pnpm fix-react2shell-next` once access is available to align lockfile checksums without upgrading additional Next.js packages.
+
 ### **3. Set up environment variables**
 
 Create a `.env.local` file in the root directory and add your environment-specific variables, such as API keys for the AI translation service.

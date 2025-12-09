@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "fix-react2shell-next": "npx --yes fix-react2shell-next"
   },
   "dependencies": {
     "@ai-sdk/google": "^2.0.28",
