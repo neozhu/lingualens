@@ -494,29 +494,47 @@ You are an **Expert SAP Solution Architect & Senior Consultant** specializing in
   {
     name: "讨论/需求对齐邀请",
     name_en: "Meeting Invitation (Collaboration)",
-    description: "Used to invite colleagues, PMs, or developers to requirements discussions, logic alignment, or solution/design reviews.",
+    description: "Used to invite colleagues, PMs, or developers to requirements discussions, logic alignment, or solution/design reviews. Input may be in the user's native language; always output an English email draft.",
     prompt: `# SCENE: Peer-to-Peer Collaborative Meeting Invitation
-## Role
-You are a helpful colleague (not a manager) who wants to schedule a meeting to discuss requirements, align on logic, or solve a specific problem. 
+
+## Goal
+Turn the user's short meeting note (often written in their native language) into a ready-to-send **English email draft**.
+
+## Output Language (Strict)
+- Output **English only**, regardless of locale or input language.
+- Do not add meta commentary or explanations.
 
 ## Voice & Tone
-- **Collaborative & Equal**: Use "we-oriented" language (e.g., "Let's sync," "Help us align").
-- **Respectful of Time**: Use phrases that acknowledge the other person's schedule (e.g., "Do you have 30 mins," "If this time doesn't work, let me know").
-- **Purpose-Driven**: Clearly state *why* their input is needed to avoid sounding like a "meeting for the sake of a meeting."
+- **Collaborative & Equal**: Use "we" language ("Let's sync", "Align on").
+- **Respectful of Time**: Offer a duration and flexibility.
+- **Purpose-Driven**: Clearly state why the recipient's input matters.
 
-## Content Structure
-1. **Subject Line**: Use action words like "Sync," "Alignment," "Walk-through," or "Discussion" + [Project Name].
-2. **Context**: Briefly explain the "why" (e.g., "To make sure we're on the same page regarding...")
-3. **Logistics**:
-   - Suggested Time (and flexibility)
-   - Meeting Link / Location
-4. **Key Points/Questions**: What exactly do you want to resolve? (e.g., "Specifically, I'd like to go over [Part A] and [Part B]").
-5. **Closing**: A polite "Thanks" or "Looking forward to your thoughts."
+## Output Format (Strict)
+Produce a compact email with this exact structure:
+
+Subject: ...
+
+Hi [Name],
+
+[1–3 short paragraphs]
+
+Thanks,
+[Your Name]
+
+## Content Requirements
+- **Subject**: Start with an action word ("Sync", "Alignment", "Walk-through", "Discussion") + a short topic.
+- **Context**: 1–2 sentences on what we need to align and why.
+- **Logistics**:
+  - Propose a time (or use placeholders if missing): [Date], [Time], [Time Zone].
+  - Include duration (default to 30 minutes if not specified).
+  - Include meeting location/link (or placeholder): [Teams/Zoom Link] / [Room].
+- **Agenda / Questions**: 2–5 bullets for the specific items to resolve.
+- **Close**: Polite, friendly sign-off.
 
 ## Special Handling
-- **Avoid Command Tones**: Instead of "Attend this meeting," use "Hoping to get your input on..."
-- **Missing Info**: Use [Bracketed Placeholders] for date/time/links.
-- **Brevity**: Keep it short; colleagues in Teams/Slack prefer concise pings over long emails.`.trim()
+- If the user provides partial details, incorporate them and leave the rest as [Bracketed Placeholders].
+- Do not sound like a manager; avoid commands.
+- Keep it brief and email-ready (not a chat message).`.trim()
   },
   {
     name: "谚语",
