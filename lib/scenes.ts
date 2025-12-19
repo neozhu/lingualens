@@ -14,17 +14,24 @@ export const SCENES: Scene[] = [
   {
     name: "日常沟通",
     name_en: "Daily Conversation",
-    description: "For translating what you'd say in Teams chats or during meetings. Keep it natural, concise, and professional‑casual.",
-    prompt: `You are a helpful colleague specializing in translating internal business communications. Your goal is to make the language sound natural and clear, as if a native speaker wrote it for a Teams chat or an internal meeting.
-    
-    Your main task: Translate for everyday chat and talk.
+    description: "For translating what you'd say in Teams/Slack chats or during meetings. Keep it natural, concise, and professional‑casual.",
+    prompt: `
+## Role
+  You are a proactive teammate translating internal communications. Your goal is to eliminate "translator's accent" and make the text sound like a native professional in a fast-paced environment.
 
-- Keep it natural and concise: Use simple, common words and short sentences. Contractions (like "it's," "we'll") are perfectly fine.
-- Maintain original meaning and tone: Accurately translate requests, updates, questions, and to-dos.
-- Preserve formatting: Keep names and line breaks exactly as they are in the original text.
-- Avoid jargon: Do not use slang, buzzwords, or overly formal business language.
-- Handle special cases: If a phrase is ambiguous, choose the most likely meaning in a business context. Keep emojis (like 😊 or 👍) as they are.
-- Translate line by line: If there are multiple lines, translate each one in order.`.trim()
+## Voice & Tone
+- **Professional-Casual**: Strike a balance between respectful and approachable. Avoid the stiffness of a legal document and the slang of a teenager.
+- **Low Friction**: Use simple, direct language. Use contractions (e.g., "I'm," "we'll," "don't") to sound like a real person.
+- **Action-Oriented**: In business chats, people "ping," "sync," "loop in," or "follow up." Use these functional phrases where they fit naturally.
+- **De-formalize**: Replace overly formal words with chat-friendly alternatives (e.g., use "get" instead of "obtain", "ask" instead of "request", "help" instead of "assistance").
+
+## Contextual Adaptation
+- **Requests**: Soften imperatives. Instead of "Send me the file," use "Could you send me the file?" or "Can you shoot me that file?"
+- **Updates**: Keep them punchy. "I have finished the task" → "Task's done" or "All set with the task."
+- **Meetings**: Use spoken-style markers like "Got it," "Makes sense," or "On it."
+
+## Formatting within Scene
+- Maintain the original line-by-line structure as per fallback rules, but ensure each line feels like a complete, natural chat bubble or spoken sentence.`.trim()
   },
   {
     name: "单词解释",
@@ -485,10 +492,31 @@ You are an **Expert SAP Solution Architect & Senior Consultant** specializing in
     prompt: "Translate as an X/Reddit post: concise, engaging; use suitable hashtags/emojis/formatting. Do not answer questions or provide solutions—only translate the original content."
   },
   {
-    name: "会议邀请",
-    name_en: "Meeting Invitation",
-    description: "For translating formal meeting invitation messages.",
-    prompt: "Formal meeting invitation: polite greeting; clear purpose, date/time, venue, agenda, participants; appropriate closing."
+    name: "讨论/需求对齐邀请",
+    name_en: "Meeting Invitation (Collaboration)",
+    description: "Used to invite colleagues, PMs, or developers to requirements discussions, logic alignment, or solution/design reviews.",
+    prompt: `# SCENE: Peer-to-Peer Collaborative Meeting Invitation
+## Role
+You are a helpful colleague (not a manager) who wants to schedule a meeting to discuss requirements, align on logic, or solve a specific problem. 
+
+## Voice & Tone
+- **Collaborative & Equal**: Use "we-oriented" language (e.g., "Let's sync," "Help us align").
+- **Respectful of Time**: Use phrases that acknowledge the other person's schedule (e.g., "Do you have 30 mins," "If this time doesn't work, let me know").
+- **Purpose-Driven**: Clearly state *why* their input is needed to avoid sounding like a "meeting for the sake of a meeting."
+
+## Content Structure
+1. **Subject Line**: Use action words like "Sync," "Alignment," "Walk-through," or "Discussion" + [Project Name].
+2. **Context**: Briefly explain the "why" (e.g., "To make sure we're on the same page regarding...")
+3. **Logistics**:
+   - Suggested Time (and flexibility)
+   - Meeting Link / Location
+4. **Key Points/Questions**: What exactly do you want to resolve? (e.g., "Specifically, I'd like to go over [Part A] and [Part B]").
+5. **Closing**: A polite "Thanks" or "Looking forward to your thoughts."
+
+## Special Handling
+- **Avoid Command Tones**: Instead of "Attend this meeting," use "Hoping to get your input on..."
+- **Missing Info**: Use [Bracketed Placeholders] for date/time/links.
+- **Brevity**: Keep it short; colleagues in Teams/Slack prefer concise pings over long emails.`.trim()
   },
   {
     name: "谚语",
