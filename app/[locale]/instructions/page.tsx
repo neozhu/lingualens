@@ -6,28 +6,52 @@ import { Response } from "@/components/ai-elements/response";
 export default function SceneDoc() {
   const t = useTranslations();
   const functionCode = `function createSystemInstructions(scene: Scene, locale: string): string {
-  const inputLang = getLanguageNameByLocale(locale);
-  const targetLang = inputLang === 'US English' ? 'Simplified Chinese' : 'US English';
-  
-  const baseInstructions = \`You are a professional translator/editor.
+  const targetLang = getLanguageNameByLocale(locale);
 
-- Direction: if input is mainly \${inputLang} → \${targetLang}; otherwise → \${inputLang}.
-- Priority: Scene rules OVERRIDE these defaults when conflicts occur.
-- Default output: only the final translation; no explanations or source text.
-- Fidelity: preserve original formatting (Markdown/code/structure), speaker labels, and line breaks.
-- Code: translate comments and user-facing strings only; keep code/identifiers intact.
-- Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized.
-- Scene rules below may refine or override these defaults.\`;
+  // Core identity; scene directions set the priorities where they speak, otherwise use defaults.
+  const identity = \`You are a professional AI assistant specialized in cross-language communication and task execution. When a scene gives directives, follow them first; otherwise apply the defaults below. Unless a scene changes it, keep all user-facing outputs in the target language inferred from the locale.\`;
 
-  // Build scene context and instructions
-  const sceneContext = scene ? \`\\nScene: \${scene.name_en} — \${scene.description}\` : '';
-  const sceneInstructions = scene ? \`\\nScene rules:\\n\${scene.prompt}\` : '';
+  // Scene directives take highest priority where specified; they can reuse or replace defaults.
+  const sceneBlock = scene ? \`
+# SCENE DIRECTIVES (highest priority)
+- Obey this scene above any defaults or system guidance for any instructions it specifies.
+- Scene: \${scene.name_en}
+\${scene.description}
 
-  const finalInstructions = \`\${baseInstructions}\${sceneContext}\${sceneInstructions}
-Native language (from locale): \${userLang}
-Task: Apply the rules to translate the following text.\`;
+\${scene.prompt}
 
-  return finalInstructions;
+---\` : '';
+
+  // Fallback rules only apply when the scene is silent on a detail.
+  const defaultDirection = targetLang === 'US English'
+    ? 'Other languages → US English; US English → the requested target language (if specified); otherwise → US English'
+    : \`\${targetLang} → US English; US English → \${targetLang}; otherwise → \${targetLang}\`;
+
+  const fallbackRules = scene ? \`
+# FALLBACK RULES (use only if the scene is silent)
+- Primary output language: \${targetLang}
+- Translation direction: \${defaultDirection}
+- Output format: translation only, no explanations
+- Preserve: formatting (Markdown/code/structure), line breaks, proper nouns
+- Code handling: translate only comments and user-facing strings; keep identifiers intact\`
+  : \`
+# TRANSLATION TASK
+- Primary output language: \${targetLang}
+- Direction: \${defaultDirection}
+- Output: translation only, no explanations or source text
+- Fidelity: preserve formatting (Markdown/code/structure), speaker labels, and line breaks
+- Code: translate comments and user-facing strings only; keep code/identifiers intact
+- Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized\`;
+
+  // Context
+  const context = \`
+
+## Context
+- Target language (for user-facing outputs): \${targetLang}
+- Locale: \${locale}\`;
+
+  // When a scene exists, surface it first to reinforce precedence.
+  return scene ? \`\${sceneBlock}\${identity}\${fallbackRules}\${context}\` : \`\${identity}\${fallbackRules}\${context}\`;
 }`;
   
   return (

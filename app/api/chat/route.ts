@@ -29,25 +29,27 @@ function getLanguageNameByLocale(locale: string): string {
 function createSystemInstructions(scene: Scene, locale: string): string {
   const targetLang = getLanguageNameByLocale(locale);
 
-  // Layer 1: Core Identity - WHO you are
-  const identity = `You are a professional AI assistant specialized in cross-language communication and task execution. Unless a scene overrides it, keep all user-facing outputs in the target language inferred from the locale.`;
+  // Core identity; scene directions set the priorities where they speak, otherwise use defaults.
+  const identity = `You are a professional AI assistant specialized in cross-language communication and task execution. When a scene gives directives, follow them first; otherwise apply the defaults below. Unless a scene changes it, keep all user-facing outputs in the target language inferred from the locale.`;
 
-  // Layer 2: Scene-Specific Instructions - PRIMARY rules (highest priority)
+  // Scene directives take highest priority where specified; they can reuse or replace defaults.
   const sceneBlock = scene ? `
-# PRIMARY TASK (Scene: ${scene.name_en})
+# SCENE DIRECTIVES (highest priority)
+- Obey this scene above any defaults or system guidance for any instructions it specifies.
+- Scene: ${scene.name_en}
 ${scene.description}
 
 ${scene.prompt}
 
 ---` : '';
 
-  // Layer 3: Fallback Rules - ONLY apply when scene doesn't specify
+  // Fallback rules only apply when the scene is silent on a detail.
   const defaultDirection = targetLang === 'US English'
     ? 'Other languages → US English; US English → the requested target language (if specified); otherwise → US English'
     : `${targetLang} → US English; US English → ${targetLang}; otherwise → ${targetLang}`;
 
   const fallbackRules = scene ? `
-# FALLBACK RULES (only if scene doesn't specify)
+# FALLBACK RULES (use only if the scene is silent)
 - Primary output language: ${targetLang}
 - Translation direction: ${defaultDirection}
 - Output format: translation only, no explanations
@@ -62,14 +64,15 @@ ${scene.prompt}
 - Code: translate comments and user-facing strings only; keep code/identifiers intact
 - Terminology: natural, domain-appropriate wording; keep proper nouns unless widely localized`;
 
-  // Layer 4: Context
+  // Context
   const context = `
 
 ## Context
 - Target language (for user-facing outputs): ${targetLang}
 - Locale: ${locale}`;
 
-  return `${identity}${sceneBlock}${fallbackRules}${context}`;
+  // When a scene exists, surface it first to reinforce precedence.
+  return scene ? `${sceneBlock}${identity}${fallbackRules}${context}` : `${identity}${fallbackRules}${context}`;
 }
 
 function getModelProvider(model: string) {
