@@ -93,8 +93,8 @@ export async function POST(req: Request) {
   const enableReasoning = body?.thinking === true;
   const systemPrompt = createSystemInstructions(scene, locale);
   const provider = getModelProvider(model);
-  const lastMessages = messages.length > 4
-    ? messages.slice(messages.length - 4)
+  const lastMessages = messages.length > 5
+    ? messages.slice(messages.length - 5)
     : messages;
 
 
