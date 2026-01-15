@@ -1,48 +1,51 @@
 "use server";
 
-import { google } from "@ai-sdk/google";
-import { GEMINI_MODEL_FLASH } from "@/lib/models";
+import { GPT_5_MINI_MODEL } from "@/lib/models";
 import { streamText, convertToModelMessages, type UIMessage } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 
 
 // Use configured Gemini Flash model
 
 /**
- * Generate translation prompt for a specific scene
+ * Optimize user-provided prompts (scene prompts) for clarity and cross-model compatibility.
  * @param req Request object
  */
 export async function POST(req: Request) {
  
   const { messages } = await req.json();
-  console.log(messages);
-  // Build system prompt for generating translation instructions
+  // System prompt for prompt-optimization (vendor-agnostic: OpenAI / Gemini / Anthropic)
   const systemPrompt = `
-You are a senior prompt engineer. Create ONE ultra‑concise, scenario‑specific instruction for an AI translator using the scene name and description from the chat.
+You are a senior prompt engineer. Rewrite the user's prompt into a clearer, more accurate, more robust prompt that works well across OpenAI, Google Gemini, and Anthropic models.
 
-Rules:
-- Max 400 characters.
-- Output the prompt text only (no titles, quotes, examples, JSON, or code fences).
-- Use plain Markdown; short bullet(s) allowed; no extra commentary.
+Input:
+- Treat the latest user message as the "source prompt" to optimize. It may include a scene name/description and requirements.
 
-What the prompt must cover (terse):
-- Tone and formality appropriate to the scene.
-- How to handle domain terminology and proper nouns.
-- What formatting to preserve (markdown/code/structure).
-- Language direction: if input is US English -> translate to Simplified Chinese; otherwise -> translate to US English.
-- Any scene‑specific constraints.
+Goal:
+- Keep the user's intent and requirements, but remove ambiguity, add missing constraints, and make the instructions executable.
+- Make it model-agnostic: avoid provider-specific syntax; avoid referencing hidden policies; write as universal instructions.
 
-Do not mention “scene”, “description”, or “this prompt”. Write as a direct instruction to the translator.
+What to improve (when applicable):
+- Role + objective: who the assistant is and what success looks like.
+- Required inputs/assumptions: what information is provided vs missing.
+- Output contract: exact output format, language, length/verbosity, and what NOT to include.
+- Constraints: tone, formatting preservation, terminology/proper nouns, edge cases.
+- Safety: if user asks for disallowed content, instruct the assistant to refuse briefly.
+
+Output requirements (strict):
+- Output ONLY the optimized prompt text (no preface, no analysis, no meta commentary).
+- Use clean Markdown with short sections/headings if helpful.
+- Do NOT mention "the user message", "the chat", or "this prompt".
 `;
 
 
-
-  // Create Gemini model instance
-  const provider = google(GEMINI_MODEL_FLASH); // Start the streaming process
+  const provider = openai(GPT_5_MINI_MODEL);
 
   const result = streamText({
     model: provider,
     system: systemPrompt,
+    abortSignal: req.signal,
     messages: convertToModelMessages(messages as UIMessage[]),
     temperature: 0.3 // Balance creativity and precision
   });
