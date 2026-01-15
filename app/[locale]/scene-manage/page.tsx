@@ -389,8 +389,9 @@ Please create a translation prompt for the above scene that will guide an AI mod
         ))}
       </div>
       {(editingIdx !== null || form.name) && (
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-lg shadow-lg relative">
+        <div className="fixed inset-0 z-50 bg-black/30 overflow-y-auto p-4 sm:p-6">
+          <div className="flex min-h-full items-start justify-center sm:items-center">
+            <div className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-lg shadow-lg relative max-h-[calc(100vh-2rem)] sm:max-h-[90vh] flex flex-col">
             <Button
               variant="outline"
               onClick={() => {
@@ -403,11 +404,12 @@ Please create a translation prompt for the above scene that will guide an AI mod
               <X className="h-4 w-4" />
               <span className="sr-only">{t("common.cancel")}</span>
             </Button>
-            <h2 className="text-lg font-bold mb-2">
-              {editingIdx !== -1 ? t("editScene") : t("newScene")}
-            </h2>
-            <div className="space-y-2">
-              {" "}
+            <div className="shrink-0 pr-10">
+              <h2 className="text-lg font-bold mb-2">
+                {editingIdx !== -1 ? t("editScene") : t("newScene")}
+              </h2>
+            </div>
+            <div className="flex-1 min-h-0 overflow-y-auto space-y-2">
               <div>
                 <label className="text-xs text-muted-foreground mb-1 block">
                   {t("name")}
@@ -480,7 +482,7 @@ Please create a translation prompt for the above scene that will guide an AI mod
                   rows={10}
                   value={form.prompt || ""}
                   onChange={(e) => handleChange("prompt", e.target.value)}
-                  className="resize-none overflow-y-auto"
+                  className="resize-none overflow-y-auto max-h-[40vh]"
                 />{" "}
                 {form.prompt && (
                   <div className="text-xs text-right mt-1 text-muted-foreground">
@@ -493,8 +495,47 @@ Please create a translation prompt for the above scene that will guide an AI mod
                   </div>
                 )}
               </div>
+              {editingIdx === null && (
+                <div className="pt-4">
+                  <Button
+                    onClick={handleGeneratePrompt}
+                    className={cn(
+                      "w-full border-dashed",
+                      generating
+                        ? "bg-muted"
+                        : "hover:border-primary hover:text-primary"
+                    )}
+                    variant="outline"
+                    disabled={
+                      generating ||
+                      !form.name_en ||
+                      !form.description
+                    }
+                    title={t("generatePrompt")}
+                  >
+                    {generating ? (
+                      <>
+                        <span className="animate-pulse">{t("aiGenerating")}</span>
+                        <WandSparkles className="h-5 w-5 ml-2 animate-pulse" />
+                      </>
+                    ) : (
+                      <>
+                        {!form.name_en || !form.description
+                          ? t("fillNameDescription")
+                          : t("generatePrompt")}
+                        <WandSparkles className="h-5 w-5 ml-2" />
+                      </>
+                    )}
+                  </Button>
+                  {(!form.name_en || !form.description) && (
+                    <p className="text-xs text-muted-foreground text-center mt-2">
+                      ⚠️ {t("nameDescriptionRequired")}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
-            <div className="flex gap-2 mt-4 justify-end">
+            <div className="shrink-0 mt-4 pt-4 border-t flex gap-2 justify-end">
               <Button
                 variant="outline"
                 onClick={handleSave}
@@ -509,48 +550,8 @@ Please create a translation prompt for the above scene that will guide an AI mod
                 <Save className="h-4 w-4" />
                 <span className="sr-only">{t("common.save")}</span>
               </Button>
-            </div>{" "}
-            {editingIdx === null && (
-              <div className="mt-4">
-                {" "}
-                <Button
-                  onClick={handleGeneratePrompt}
-                  className={cn(
-                    "w-full border-dashed",
-                    generating
-                      ? "bg-muted"
-                      : "hover:border-primary hover:text-primary"
-                  )}
-                  variant="outline"
-                  disabled={
-                    generating ||
-                    !form.name_en ||
-                    !form.description
-                  }
-                  title={t("generatePrompt")}
-                >
-                  {" "}
-                  {generating ? (
-                    <>
-                      <span className="animate-pulse">{t("aiGenerating")}</span>
-                      <WandSparkles className="h-5 w-5 ml-2 animate-pulse" />
-                    </>
-                  ) : (
-                    <>
-                      {!form.name_en || !form.description
-                        ? t("fillNameDescription")
-                        : t("generatePrompt")}
-                      <WandSparkles className="h-5 w-5 ml-2" />
-                    </>
-                  )}
-                </Button>{" "}
-                {(!form.name_en || !form.description) && (
-                  <p className="text-xs text-muted-foreground text-center mt-2">
-                    ⚠️ {t("nameDescriptionRequired")}
-                  </p>
-                )}
-              </div>
-            )}
+            </div>
+            </div>
           </div>
         </div>
       )}
