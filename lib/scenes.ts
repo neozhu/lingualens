@@ -99,7 +99,7 @@ Formatting rules for readability:
 - Leave a blank line between sections.
 - Do not merge multiple "原文" items into one section.
 
--------
+---
 
 Then add ONE final short wrap-up block (exact labels):
 - 对方希望你做什么: ...
