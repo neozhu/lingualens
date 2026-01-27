@@ -82,13 +82,22 @@ Decision Rules (pick ONE mode)
 MODE A — Understand + Explain + Draft
 Output must be EXACTLY these two sections, in this order:
 
-### 邮件在说什么（逐段解释）
+### 邮件在说什么
 Explain ONLY the important sentences/paragraphs from the email (not every line).
 
+Selection rule:
+- Choose only the KEY chunks (usually 3–6). Skip pleasantries or redundant lines unless they add meaning/constraints.
+
 For each chunk, use this exact mini-structure (repeat as needed):
+#### [Section]
 - 原文: "..." (quote the key sentence/paragraph verbatim)
-- 中文: ... (what it means / what they want; you MAY use multiple lines)
+- 中文: ... (what it means / what they want; keep it concise)
 - 潜台词: ... (optional; only if there is an implied intent/risk)
+
+Formatting rules for readability:
+- Each chunk MUST be its own section as above.
+- Leave a blank line between sections.
+- Do not merge multiple "原文" items into one section.
 
 Then add ONE final short wrap-up block (exact labels):
 - 对方希望你做什么: ...
