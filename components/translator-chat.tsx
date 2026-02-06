@@ -87,7 +87,7 @@ export default function TranslatorChat() {  const [selectedModel, setSelectedMod
     stop?: () => void
     status: 'submitted' | 'streaming' | 'ready' | 'error'
     setMessages: (msgs: unknown) => void
-    sendMessage?: (msg: { text: string }, options?: { body?: Record<string, unknown> }) => unknown
+    sendMessage?: (msg: { text: string; files?: FileList }, options?: { body?: Record<string, unknown> }) => unknown
     append?: (msg: { role: 'user'; content: string }) => unknown
   }
 
@@ -117,16 +117,25 @@ export default function TranslatorChat() {  const [selectedModel, setSelectedMod
   }
   const { messages, error, stop, status, setMessages } = chat
   const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => setInput(e.target.value)
-  const handleSubmit = (e?: { preventDefault?: () => void }) => {
+  const handleSubmit = (
+    e?: { preventDefault?: () => void },
+    options?: { experimental_attachments?: FileList }
+  ) => {
     e?.preventDefault?.()
     const text = input.trim()
-    if (!text) return
-    append({ role: 'user', content: text })
+    const attachments = options?.experimental_attachments
+
+    if (!text && (!attachments || attachments.length === 0)) return
+    append({ role: 'user', content: text }, options)
     setInput("")
   }
-  const append = (msg: { role: 'user'; content: string }): unknown => {
+  const append = (
+    msg: { role: 'user'; content: string },
+    options?: { experimental_attachments?: FileList }
+  ): unknown => {
+    const files = options?.experimental_attachments
     if (typeof chat.sendMessage === 'function') return chat.sendMessage(
-      { text: msg.content },
+      { text: msg.content, files },
       { body: { model: selectedModel, scene: selectedScene, locale, thinking: thinkingEnabled } }
     )
     if (typeof chat.append === 'function') return chat.append(msg)

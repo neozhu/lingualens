@@ -6,6 +6,84 @@ import { DEFAULT_MODEL, MODELS } from "@/lib/models";
 
 export const maxDuration = 240;
 
+function normalizeUiMessages(rawMessages: unknown[]): UIMessage[] {
+  return rawMessages
+    .filter((message): message is Record<string, unknown> => !!message && typeof message === "object")
+    .map((message) => {
+      const id =
+        typeof message.id === "string" && message.id.length > 0
+          ? message.id
+          : `msg_${crypto.randomUUID()}`;
+      const role =
+        message.role === "system" || message.role === "assistant" || message.role === "user"
+          ? message.role
+          : "user";
+
+      const sourceParts = Array.isArray(message.parts) ? message.parts : [];
+      const normalizedParts = sourceParts
+        .filter((part): part is Record<string, unknown> => !!part && typeof part === "object")
+        .map((part) => {
+          if (typeof part.type !== "string") {
+            if (typeof part.text === "string") {
+              return { type: "text", text: part.text };
+            }
+            return null;
+          }
+
+          if (part.type === "text") {
+            return {
+              ...part,
+              text: typeof part.text === "string" ? part.text : "",
+            };
+          }
+
+          if (part.type === "file") {
+            const url =
+              typeof part.url === "string"
+                ? part.url
+                : typeof part.data === "string"
+                ? part.data
+                : null;
+
+            if (!url) return null;
+
+            return {
+              ...part,
+              url,
+              mediaType:
+                typeof part.mediaType === "string"
+                  ? part.mediaType
+                  : typeof part.mimeType === "string"
+                  ? part.mimeType
+                  : "application/octet-stream",
+            };
+          }
+
+          return part;
+        })
+        .filter((part): part is Record<string, unknown> => part !== null);
+
+      if (normalizedParts.length > 0) {
+        return {
+          id,
+          role,
+          parts: normalizedParts as UIMessage["parts"],
+        };
+      }
+
+      return {
+        id,
+        role,
+        parts: [
+          {
+            type: "text",
+            text: typeof message.content === "string" ? message.content : "",
+          },
+        ],
+      };
+    });
+}
+
 
 
 function getLanguageNameByLocale(locale: string): string {
@@ -93,9 +171,10 @@ export async function POST(req: Request) {
   const enableReasoning = body?.thinking === true;
   const systemPrompt = createSystemInstructions(scene, locale);
   const provider = getModelProvider(model);
-  const lastMessages = messages.length > 5
-    ? messages.slice(messages.length - 5)
-    : messages;
+  const safeMessages = Array.isArray(messages) ? normalizeUiMessages(messages) : [];
+  const lastMessages = safeMessages.length > 5
+    ? safeMessages.slice(safeMessages.length - 5)
+    : safeMessages;
 
 
 
@@ -103,7 +182,7 @@ export async function POST(req: Request) {
     model: provider,
     system: systemPrompt,
     abortSignal: req.signal,
-    messages: convertToModelMessages((lastMessages as UIMessage[])),
+    messages: convertToModelMessages(lastMessages),
     // Apply OpenAI reasoning settings when requested by client
     providerOptions: enableReasoning
       ? {

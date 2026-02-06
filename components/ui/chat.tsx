@@ -7,9 +7,10 @@ import {
   useCallback,
   useRef,
   useState,
+  type ReactNode,
   type ReactElement,
 } from "react"
-import { Square as SquareIcon, RefreshCw, Copy, Check, Brain } from "lucide-react"
+import { Square as SquareIcon, RefreshCw, Copy, Check, Brain, FileIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
@@ -48,9 +49,11 @@ import {
 import { Message as AIMessage, MessageContent } from "@/components/ai-elements/message"
 import { Response } from "@/components/ai-elements/response"
 import { MODELS } from "@/lib/models"
-import { Paperclip, Loader2Icon } from "lucide-react"
+import { Paperclip } from "lucide-react"
 import { useAudioManager } from "@/hooks/use-audio-manager"
 import { VoiceRecordingButton, TextToSpeechButton } from "@/components/audio"
+import { FilePreview } from "@/components/ui/file-preview"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 
 interface ChatPropsBase {
   handleSubmit: (
@@ -129,7 +132,6 @@ export function Chat({
 
   const [files, setFiles] = useState<File[] | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const [isOcrProcessing, setIsOcrProcessing] = useState(false)
 
   // Audio manager - completely independent from chat states
   const audioManager = useAudioManager({
@@ -249,6 +251,23 @@ export function Chat({
           }
         }}
       >
+        {files && files.length > 0 ? (
+          <div className="flex flex-wrap gap-2 border-b p-3 pb-2">
+            {files.map((file, index) => (
+              <FilePreview
+                key={`${file.name}-${file.size}-${file.lastModified}-${index}`}
+                file={file}
+                onRemove={() =>
+                  setFiles((prev) => {
+                    if (!prev) return prev
+                    const next = prev.filter((_, i) => i !== index)
+                    return next.length > 0 ? next : null
+                  })
+                }
+              />
+            ))}
+          </div>
+        ) : null}
         <PromptInputTextarea
           value={input}
           onChange={handleInputChange}
@@ -286,45 +305,33 @@ export function Chat({
               ref={fileInputRef}
               type="file"
               multiple
-              accept="image/*"
+              accept="image/*,.pdf,.txt,.md,.csv,.doc,.docx,.ppt,.pptx,.xls,.xlsx"
               className="hidden"
-              onChange={async (e) => {
+              onChange={(e) => {
                 const list = e.currentTarget.files
                 if (!list || list.length === 0) return
-                const imageFiles = Array.from(list).filter((f) => f.type.startsWith('image/'))
-                if (imageFiles.length === 0) return
-                try {
-                  setIsOcrProcessing(true)
-                  const form = new FormData()
-                  for (const f of imageFiles) form.append('images', f)
-                  const res = await fetch('/api/ocr', { method: 'POST', body: form })
-                  if (!res.ok) return
-                  const data = (await res.json()) as { text?: string }
-                  const text = (data?.text ?? '').trim()
-                  if (!text) return
-                  const sep = input && !input.endsWith('\n') ? '\n' : ''
-                  const nextValue = `${input}${sep}${text}`
-                  ;(handleInputChange as any)({ target: { value: nextValue } })
-                  setTimeout(() => {
-                    try { (handleSubmit as any)() } catch {}
-                  }, 0)
-                } finally {
-                  setIsOcrProcessing(false)
-                  // Clear the input selection so same files can be re-selected if needed
-                  if (fileInputRef.current) fileInputRef.current.value = ''
-                }
+                const selectedFiles = Array.from(list)
+                setFiles((prev) => {
+                  if (!prev || prev.length === 0) return selectedFiles
+                  const map = new Map<string, File>()
+                  for (const file of prev) {
+                    map.set(`${file.name}-${file.size}-${file.lastModified}`, file)
+                  }
+                  for (const file of selectedFiles) {
+                    map.set(`${file.name}-${file.size}-${file.lastModified}`, file)
+                  }
+                  return Array.from(map.values())
+                })
+                // Clear selection so the same file can be selected again later.
+                if (fileInputRef.current) fileInputRef.current.value = ''
               }}
             />
             <PromptInputButton
               aria-label="Attach files"
               onClick={() => fileInputRef.current?.click()}
-              disabled={isGenerating || isOcrProcessing}
+              disabled={isGenerating}
             >
-              {isOcrProcessing ? (
-                <Loader2Icon  className={cn("size-4", "animate-pulse animate-spin")} />
-              ) : (
-                <Paperclip className="size-4" />
-              )}
+              <Paperclip className="size-4" />
             </PromptInputButton>
 
             {/* Voice recording button - completely independent from chat state */}
@@ -337,7 +344,10 @@ export function Chat({
             />
 
           </PromptInputTools>
-          <PromptInputSubmit status={status} disabled={isGenerating || input === ''} />
+          <PromptInputSubmit
+            status={status}
+            disabled={isGenerating || (input.trim() === '' && (!files || files.length === 0))}
+          />
         </PromptInputToolbar>
       </PromptInput>
     </ChatContainer>
@@ -356,7 +366,52 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
     return (m as any).content ?? ''
   }
 
+  const renderUserAttachments = (m: Message): ReactNode => {
+    const parts = Array.isArray((m as any).parts) ? (m as any).parts : []
+    const files = parts.filter((p: any) => p?.type === "file" && typeof p?.url === "string")
+    if (files.length === 0) return null
+
+    return (
+      <div className="flex flex-wrap gap-2">
+        {files.map((file: any, index: number) => {
+          const key = `${file.filename ?? "file"}-${index}`
+          const isImage = typeof file.mediaType === "string" && file.mediaType.startsWith("image/")
+
+          if (isImage) {
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setPreviewImage({ url: file.url, name: file.filename || "Attachment" })}
+                aria-label={`Preview ${file.filename || "attachment image"}`}
+                className="overflow-hidden rounded-md border border-primary-foreground/30 bg-primary-foreground/10"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={file.url}
+                  alt={file.filename || "Attachment"}
+                  className="h-24 w-24 object-cover"
+                />
+              </button>
+            )
+          }
+
+          return (
+            <div
+              key={key}
+              className="flex max-w-[220px] items-center gap-2 rounded-md border border-primary-foreground/30 bg-primary-foreground/10 px-2 py-1 text-xs text-primary-foreground"
+            >
+              <FileIcon className="h-4 w-4 shrink-0 text-primary-foreground/80" />
+              <span className="truncate">{file.filename || "Attachment"}</span>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
   const [copiedByKey, setCopiedByKey] = useState<Record<string, boolean>>({})
+  const [previewImage, setPreviewImage] = useState<{ url: string; name: string } | null>(null)
   
   // Audio manager for TTS - independent from chat state
   const audioManager = useAudioManager()
@@ -389,7 +444,14 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
           <AIMessage key={key} from={from}>
             <div className="flex flex-col gap-0">
               <MessageContent>
-                {from === 'assistant' ? <Response>{text}</Response> : text}
+                {from === 'assistant' ? (
+                  <Response>{text}</Response>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    {renderUserAttachments(m)}
+                    {text ? <div>{text}</div> : null}
+                  </div>
+                )}
               </MessageContent>
               {from === 'assistant' && (
                 <Actions className="mt-1 self-start">
@@ -429,6 +491,24 @@ export function ChatMessages({ messages, append }: { messages: Message[]; append
         )})}
       </ConversationContent>
       <ConversationScrollButton />
+      <Dialog
+        open={!!previewImage}
+        onOpenChange={(open) => {
+          if (!open) setPreviewImage(null)
+        }}
+      >
+        <DialogContent className="max-w-4xl border-0 bg-transparent p-0 shadow-none" showCloseButton={false}>
+          <DialogTitle className="sr-only">{previewImage?.name || "Attachment preview"}</DialogTitle>
+          {previewImage ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={previewImage.url}
+              alt={previewImage.name}
+              className="max-h-[85vh] w-auto max-w-[90vw] rounded-lg object-contain"
+            />
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </Conversation>
   )
 }
