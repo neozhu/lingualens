@@ -3,7 +3,7 @@
 export const GEMINI_MODEL_FLASH = "gemini-3.1-flash-image-preview"
 export const GEMINI_MODEL_LITE = "gemini-2.5-flash-lite"
 export const GPT_5_MINI_MODEL = "gpt-5-mini"
-export const GPT_5_NANO_MODEL = "gpt-5.2"
+export const GPT_5_NANO_MODEL = "gpt-5.4"
 
 // Default model
 export const DEFAULT_MODEL = GEMINI_MODEL_FLASH;
