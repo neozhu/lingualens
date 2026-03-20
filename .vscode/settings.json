@@ -1,2 +1,8 @@
 {
+    "chat.tools.terminal.autoApprove": {
+        "/^Write-Host '--- \\.git\\\\\\\\logs\\\\\\\\refs\\\\\\\\heads ---'; if \\(Test-Path \\.git\\\\logs\\\\refs\\\\heads\\) \\{ Get-ChildItem \\.git\\\\logs\\\\refs\\\\heads -Force -Recurse \\| Select-Object FullName,PSIsContainer,Length,LastWriteTime \\| Format-Table -AutoSize; Write-Host '--- log file contents matching master ---'; Get-ChildItem \\.git\\\\logs\\\\refs\\\\heads -File -Recurse \\| Select-String -Pattern 'master' \\| ForEach-Object \\{ \"\\{0\\}:\\{1\\}: \\{2\\}\" -f \\$_\\.Path, \\$_\\.LineNumber, \\$_\\.Line\\.Trim\\(\\) \\} \\} else \\{ 'No \\.git\\\\logs\\\\refs\\\\heads directory' \\}$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }
