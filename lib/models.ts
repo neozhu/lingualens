@@ -1,7 +1,7 @@
 // Model constants
 
-export const GEMINI_MODEL_FLASH = "gemini-3-flash-preview"
-export const GEMINI_MODEL_LITE = "gemini-3.1-flash-lite-preview"
+export const GEMINI_MODEL_FLASH = "gemini-3.5-flash"
+export const GEMINI_MODEL_LITE = "gemini-3.1-flash-lite"
 export const GPT_5_MINI_MODEL = "gpt-5.4-mini"
 export const GPT_5_NANO_MODEL = "gpt-5.4-nano"
 
